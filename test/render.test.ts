@@ -168,3 +168,27 @@ describe('json scenes', () => {
     ).toThrow(/references figure 'ghost'/)
   })
 })
+
+describe('scene css', () => {
+  const kinded = defineFigure('k', {
+    points: { a: [0, 0], b: [10, 0] },
+    edges: [{ from: 'a', to: 'b', kind: 'road' }],
+  })
+
+  it('scopes a scene\'s own rules to that scene', () => {
+    const svg = renderSvg(
+      resolve(defineScene('town', { parts: [{ figure: kinded }], css: '.ds-line--road{stroke-width:2}' })),
+    )
+    expect(svg).toContain('svg[data-dotscene="town"]{.ds-line--road{stroke-width:2}}')
+  })
+
+  it('emits nothing extra when a scene sets no css', () => {
+    const svg = renderSvg(resolve(defineScene('town', { parts: [{ figure: kinded }] })))
+    expect(svg).not.toContain('svg[data-dotscene="town"]{.')
+  })
+
+  it('gives a kinded edge a class the scene css can reach', () => {
+    const svg = renderSvg(resolve(defineScene('town', { parts: [{ figure: kinded }] })))
+    expect(svg).toContain('class="ds-line ds-line--road"')
+  })
+})

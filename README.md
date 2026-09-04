@@ -109,7 +109,16 @@ svg.dotscene .ds-dot  { r: 2; fill: #6f9; }
 svg.dotscene .ds-line { stroke-width: 0.4; }
 ```
 
-Give an edge a `kind` and it gains a modifier class (`ds-line--soft`) to target.
+Give an edge a `kind` and it gains a modifier class (`ds-line--soft`) to target. A scene's own `css` is the place to write those rules, and it travels inside the emitted block:
+
+```ts
+defineScene('city', {
+  parts: [...],
+  css: '.ds-line--road{stroke-width:1.15}.ds-line--lot{stroke-opacity:.28}',
+})
+```
+
+Selectors are bare and get scoped to the scene, so two scenes on one page cannot style each other. Dots have no `kind`, but they carry `data-p`, so `circle[data-p^="lot"]` reaches a named group of them.
 
 ### Animation
 
@@ -153,6 +162,21 @@ handle.stop()
 `jointBetween(shoulder, hand, upperLength, forearmLength, bend)` solves the elbow for a hand you have already placed, keeping both segments their proper length. Put the hand where the scene needs it — a clasp point shared by two figures, a handle, a doorframe — and let the joint follow, rather than guessing the joint and accepting wherever the hand lands. Out of reach, the limb straightens towards the target instead of failing.
 
 Two figures of different heights only ever touch if both solve back from the same point in scene space; a hand position written into a shared pose lands somewhere else once the other figure is scaled.
+
+## Isometric scenes
+
+`isometric({ tile, squash, rise, origin })` returns a function projecting grid coordinates — tiles across, tiles down, storeys up — onto the drawing plane. Grid +x runs down-right, +y down-left, +z straight up.
+
+```ts
+const grid = isometric({ tile: 8, squash: 0.5, rise: 5 })
+const corner = grid([3, 1, 6])   // three tiles across, one down, six storeys up
+```
+
+Scenes stay two-dimensional. This is an authoring transform applied once, when a figure is written, so depth costs nothing at runtime and every other feature — poses, keyframes, the ASCII preview — works unchanged. See `scenes/city.ts`.
+
+The default `squash` of 0.5 makes a cell twice as wide as it is tall: dimetric rather than strictly isometric, but it is what the word has meant in games for decades and it keeps every edge on a clean 2:1 slope. Pass `squash: Math.tan(Math.PI / 6)` for true 30-degree isometric.
+
+Nothing hides anything else in a wireframe, so depth has to come from weight instead — see the `css` option below.
 
 ## Sizing
 

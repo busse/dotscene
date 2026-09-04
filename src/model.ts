@@ -136,6 +136,15 @@ export interface SceneSpec {
   readonly dotRadius?: number
   /** Stroke width in scene units. Defaults to a proportion of the dot radius. */
   readonly lineWidth?: number
+  /**
+   * Extra CSS for this scene, nested inside a selector for it.
+   *
+   * This is what makes an edge's `kind` useful in a block that has to stand on its own: the
+   * class is emitted either way, but without somewhere to write the rule only an outside
+   * stylesheet could reach it. Write bare selectors — `.ds-line--road { … }` — and they are
+   * scoped to this scene, so two scenes on a page cannot style each other.
+   */
+  readonly css?: string
   readonly animate?: AnimateSpec
 }
 
@@ -148,6 +157,7 @@ export interface Scene {
   readonly viewBox?: readonly [number, number, number, number]
   readonly dotRadius?: number
   readonly lineWidth?: number
+  readonly css?: string
   readonly animate?: AnimateSpec
 }
 
@@ -184,6 +194,7 @@ export const defineScene = (name: string, spec: SceneSpec): Scene => ({
   ...(spec.viewBox === undefined ? {} : { viewBox: spec.viewBox }),
   ...(spec.dotRadius === undefined ? {} : { dotRadius: spec.dotRadius }),
   ...(spec.lineWidth === undefined ? {} : { lineWidth: spec.lineWidth }),
+  ...(spec.css === undefined ? {} : { css: spec.css }),
   ...(spec.animate === undefined ? {} : { animate: spec.animate }),
 })
 

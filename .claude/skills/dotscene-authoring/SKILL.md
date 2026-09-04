@@ -103,6 +103,21 @@ Before reordering beats, write down which hand holds what at every step. A figur
 
 A gesture is a sequence, not a pose. A handshake is reach, clasp, two or three pumps with the swing damping out, then settle — one held pose reads as a freeze-frame.
 
+## Isometric scenes
+
+Author in grid coordinates, project once:
+
+```ts
+const grid = isometric({ tile: 8, squash: 0.5, rise: 5 })   // +x down-right, +y down-left, +z up
+const points = { towerNear: grid([3, 3, 0]), towerTop: grid([3, 3, 6]) }
+```
+
+- Build local `box` / `line` helpers over grid space rather than writing projected numbers.
+- For a solid-looking box, drop the far corner — always the smallest x + y — and its three edges. Seven points, nine edges, three visible faces.
+- A full ground grid is cheap: only line endpoints become dots, so twelve lines cost twenty-four dots around the rim, not a hundred in the middle.
+- Nothing can hide behind anything, so depth comes from weight. Give edges a `kind` and set it in the scene's `css`; reach their dots with `circle[data-p^="prefix"]`.
+- Set `dotRadius` explicitly when the scene mixes scales — small trees beside large buildings — since the median-edge default will size for one and swallow the other.
+
 ## Rules that matter
 
 - **y grows downward.** A point with a smaller y is higher on screen.
@@ -129,6 +144,7 @@ A gesture is a sequence, not a pose. A handshake is reach, clasp, two or three p
 | Two hands that should touch do not | Each was posed in its own local frame. Solve both from one scene point. |
 | A reaching arm is locked straight | The target is at or past full reach. Move the figures closer, or lower the target. |
 | Two walkers look like one figure mirrored | Same scale, cadence and phase. Vary all three. |
+| An isometric scene is a flat tangle of equal lines | Nothing occludes anything. Separate ground, roads and structure by `kind` and weight them in the scene's `css`. |
 | A profile figure's torso is a blob | Points within ~3 units pile up at this dot size. Spread the shoulders and hips a little; it still reads as profile. |
 | Diagonals look wrong in preview | Terminal cells are 2× taller than wide; the renderer already corrects for this. Trust the SVG. |
 

@@ -26,6 +26,7 @@ export {
   add,
   bounds,
   distance,
+  isometric,
   jointBetween,
   lerpVec,
   mirrorX,
@@ -36,7 +37,7 @@ export {
   scaleVec,
   sub,
 } from './geometry.ts'
-export type { Bounds, MirrorOptions, Ring } from './geometry.ts'
+export type { Bounds, IsometricOptions, MirrorOptions, Ring, Vec3 } from './geometry.ts'
 
 export { easings, easingFor, lerpPoints, posePoints, poseOverride } from './poses.ts'
 export type { Easing } from './poses.ts'

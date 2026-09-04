@@ -48,6 +48,8 @@ export interface ResolvedScene {
   /** Dot radius in scene units, so the same figure reads the same at any authoring scale. */
   readonly dotRadius: number
   readonly lineWidth: number
+  /** Scene-specific CSS, to be scoped to this scene by the renderer. */
+  readonly css?: string
   readonly dots: readonly ResolvedDot[]
   readonly lines: readonly ResolvedLine[]
   /** Present only for animated scenes: the cycling part and its poses in scene space. */
@@ -193,6 +195,7 @@ export const resolve = (scene: Scene): ResolvedScene => {
     viewBox,
     dotRadius,
     lineWidth: scene.lineWidth ?? round(Math.max(0.2, dotRadius * 0.45), 2),
+    ...(scene.css === undefined ? {} : { css: scene.css }),
     dots,
     lines,
     ...(animation === undefined ? {} : { animation }),

@@ -30,8 +30,13 @@ export const DEFAULT_CSS = [
  * Override from a page with a more specific selector — `svg.dotscene .ds-dot { r: 2 }` —
  * rather than by redefining the custom property, which this rule would win.
  */
-const sceneCss = (scene: ResolvedScene): string =>
-  `svg[data-dotscene="${scene.name}"]{--ds-dot-r:${scene.dotRadius};--ds-line-w:${scene.lineWidth}}`
+const sceneCss = (scene: ResolvedScene): string => {
+  const selector = `svg[data-dotscene="${scene.name}"]`
+  const sizing = `${selector}{--ds-dot-r:${scene.dotRadius};--ds-line-w:${scene.lineWidth}}`
+  // The scene's own rules go inside a nested block, so bare selectors it writes cannot
+  // reach another scene sharing the page.
+  return scene.css === undefined ? sizing : `${sizing}${selector}{${scene.css}}`
+}
 
 const escapeXml = (value: string): string =>
   value.replace(/[&<>"']/g, (char) => {

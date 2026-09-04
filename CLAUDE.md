@@ -43,6 +43,14 @@ Every command takes `--json`. Failures are structured, with `didYouMean` when a 
 3. Reuse existing figures by importing them (`import { person } from './person.ts'`) rather than redrawing.
 4. `npm test && npm run typecheck && node bin/dotscene.js check` before committing.
 
+## Isometric scenes
+
+Author in grid coordinates and project once with `isometric({ tile, squash, rise })`: +x down-right, +y down-left, +z up. The library stays 2D — this is an authoring transform, not a renderer mode, so everything else keeps working. `scenes/city.ts` is the worked example, with local `box`, `tree` and `line` helpers over grid space.
+
+- A box's far corner is always the one with the smallest x + y. Drop it and the three edges meeting it, and a transparent wireframe becomes a solid-looking box showing three faces.
+- Only a line's endpoints become dots, so a full ground grid costs two dots per line rather than one per intersection.
+- Nothing occludes anything, so depth comes from stroke weight: give edges a `kind` and set opacity and width in the scene's `css`.
+
 ## Gotchas
 
 - The viewBox spans **every pose in the animation cycle**, not just the resting one. A pose that reaches outside the rest bounds is fine; it will not clip.
@@ -50,6 +58,7 @@ Every command takes `--json`. Failures are structured, with `didYouMean` when a 
 - Poses lerp positions, not angles, so long limbs shorten slightly mid-tween. Expected; see the README.
 - **Off-stage needs an explicit `viewBox`.** Content is clipped to it, so parking a figure outside is how it enters and exits. A fitted viewBox grows to include every keyframe, and then nothing is ever off-screen.
 - **Ease only where motion starts and stops.** `easing` is per keyframe. An ease decelerates to zero at every keyframe it crosses, so easing each step of a walk makes it pulse — use `linear` for the run and ease only the first and last transitions.
+- **An edge `kind` needs the scene's `css` to do anything.** The class is emitted regardless, but a self-contained block has nowhere else to write the rule. Selectors there are bare and get scoped to the scene automatically.
 - **Two figures touch only if both solve back from one scene point.** They are different heights and scales, so a hand position written into a shared pose lands somewhere else for the other one. Convert the target into each figure's local frame and place the hand there; use `jointBetween` for the elbow so the arm bends instead of stretching straight. See `clasp` in `scenes/exchange.ts`.
 - **Reordering gestures is a hand-logistics problem, not a reordering problem.** A figure cannot shake with a hand that is holding something, so the order of beats decides which hand each item has to be in, and every change of hand needs a beat to happen in. Work out where each item lives at every step before moving anything.
 - **A gesture held as one keyframe reads as a freeze.** A handshake needs a reach, a clasp, and a couple of damped pumps; a single pose held for half a second looks like two people stopped mid-reach.

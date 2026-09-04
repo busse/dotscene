@@ -152,3 +152,42 @@ export const jointBetween = (from: Vec2, to: Vec2, lenFrom: number, lenTo: numbe
   const off = Math.sqrt(Math.max(0, lenFrom * lenFrom - along * along)) * bend
   return [from[0] + ux * along - uy * off, from[1] + uy * along + ux * off]
 }
+
+/** A point in grid space: x runs one way along the ground, y the other, z straight up. */
+export type Vec3 = readonly [number, number, number]
+
+export interface IsometricOptions {
+  /** Half the on-screen width of one grid cell. */
+  readonly tile?: number
+  /** Half-height as a fraction of half-width. 0.5 gives the classic two-wide-to-one-tall view. */
+  readonly squash?: number
+  /** Screen units of rise per unit of grid height. */
+  readonly rise?: number
+  /** Where grid (0, 0, 0) lands on screen. */
+  readonly origin?: Vec2
+}
+
+/**
+ * Project grid coordinates onto the drawing plane — the view every isometric city builder
+ * uses.
+ *
+ * Grid +x runs down and to the right, +y down and to the left, +z straight up, so a cell
+ * further from the viewer sits higher on screen. Scenes stay two-dimensional: this is an
+ * authoring transform, applied once when a figure is written, not something the renderer
+ * knows about.
+ *
+ * At the default `squash` of 0.5 a cell is twice as wide as it is tall, which is dimetric
+ * rather than strictly isometric — but it is what "isometric" has meant in games since
+ * before SimCity, and it keeps every edge on a clean 2:1 slope. Pass `squash: Math.tan(Math.PI / 6)`
+ * for a true 30-degree isometric.
+ */
+export const isometric = (options: IsometricOptions = {}): ((cell: Vec3) => Vec2) => {
+  const tile = options.tile ?? 16
+  const squash = options.squash ?? 0.5
+  const rise = options.rise ?? 10
+  const [ox, oy] = options.origin ?? [0, 0]
+  return ([x, y, z]) => [
+    round(ox + (x - y) * tile),
+    round(oy + (x + y) * tile * squash - z * rise),
+  ]
+}

@@ -1,5 +1,15 @@
 import { describe, expect, it } from 'vitest'
-import { applyTransform, bounds, jointBetween, lerpVec, mirrorX, rotateVec, round, roundVec } from '../src/geometry.ts'
+import {
+  applyTransform,
+  bounds,
+  isometric,
+  jointBetween,
+  lerpVec,
+  mirrorX,
+  rotateVec,
+  round,
+  roundVec,
+} from '../src/geometry.ts'
 
 describe('rotateVec', () => {
   it('rotates clockwise on screen, where y grows downward', () => {
@@ -84,5 +94,39 @@ describe('jointBetween', () => {
 
   it('handles a target on top of the origin without dividing by zero', () => {
     expect(round2(jointBetween([5, 5], [5, 5], 10, 10))).toEqual([15, 5])
+  })
+})
+
+describe('isometric', () => {
+  const project = isometric({ tile: 10, squash: 0.5, rise: 8 })
+
+  it('leaves the grid origin at the screen origin', () => {
+    expect(project([0, 0, 0])).toEqual([0, 0])
+  })
+
+  it('sends +x down-right and +y down-left', () => {
+    expect(project([1, 0, 0])).toEqual([10, 5])
+    expect(project([0, 1, 0])).toEqual([-10, 5])
+  })
+
+  it('sends +z straight up, with no sideways drift', () => {
+    expect(project([0, 0, 1])).toEqual([0, -8])
+    expect(project([3, 3, 2])).toEqual([0, 30 - 16])
+  })
+
+  it('puts cells with the same x+y on one screen row, which is what makes it read as depth', () => {
+    expect(project([4, 1, 0])[1]).toBe(project([1, 4, 0])[1])
+    expect(project([4, 1, 0])[0]).toBe(-project([1, 4, 0])[0])
+  })
+
+  it('keeps a cell twice as wide as it is tall at the default squash', () => {
+    const wide = isometric({ tile: 12 })
+    const [x] = wide([1, 0, 0])
+    const [, y] = wide([1, 0, 0])
+    expect(x / y).toBe(2)
+  })
+
+  it('offsets the whole grid by `origin`', () => {
+    expect(isometric({ tile: 10, origin: [100, 50] })([1, 0, 0])).toEqual([110, 55])
   })
 })
