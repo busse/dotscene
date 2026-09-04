@@ -3,9 +3,12 @@
   <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="exchange"]{--ds-dot-r:1.51;--ds-line-w:0.68}</style>
   <defs><clipPath id="ds-clip-exchange"><rect x="-110" y="-6" width="220" height="76"/></clipPath></defs>
   <g clip-path="url(#ds-clip-exchange)">
+    <g data-part="floor">
     <line class="ds-line" data-part="floor" data-a="floorL" data-b="floorR" x1="-108" y1="64" x2="108" y2="64"/>
     <circle class="ds-dot" data-part="floor" data-p="floorL" cx="-108" cy="64" r="1.51"/>
     <circle class="ds-dot" data-part="floor" data-p="floorR" cx="108" cy="64" r="1.51"/>
+    </g>
+    <g data-part="walker">
     <line class="ds-line" data-part="walker" data-a="head" data-b="neck" x1="-124" y1="6" x2="-126" y2="16"/>
     <line class="ds-line" data-part="walker" data-a="neck" data-b="chest" x1="-126" y1="16" x2="-127" y2="25"/>
     <line class="ds-line" data-part="walker" data-a="chest" data-b="hip" x1="-127" y1="25" x2="-128" y2="37"/>
@@ -37,6 +40,8 @@
     <circle class="ds-dot" data-part="walker" data-p="hipR" cx="-125" cy="39" r="1.51"/>
     <circle class="ds-dot" data-part="walker" data-p="kneeR" cx="-132" cy="51" r="1.51"/>
     <circle class="ds-dot" data-part="walker" data-p="footR" cx="-138" cy="63" r="1.51"/>
+    </g>
+    <g data-part="trader">
     <line class="ds-line" data-part="trader" data-a="head" data-b="neck" x1="132.12" y1="9.48" x2="134" y2="18.88"/>
     <line class="ds-line" data-part="trader" data-a="neck" data-b="chest" x1="134" y1="18.88" x2="134.94" y2="27.34"/>
     <line class="ds-line" data-part="trader" data-a="chest" data-b="hip" x1="134.94" y1="27.34" x2="135.88" y2="38.62"/>
@@ -68,6 +73,8 @@
     <circle class="ds-dot" data-part="trader" data-p="hipR" cx="133.06" cy="40.5" r="1.51"/>
     <circle class="ds-dot" data-part="trader" data-p="kneeR" cx="139.64" cy="51.78" r="1.51"/>
     <circle class="ds-dot" data-part="trader" data-p="footR" cx="145.28" cy="63.06" r="1.51"/>
+    </g>
+    <g data-part="bag">
     <line class="ds-line" data-part="bag" data-a="tie" data-b="neckL" x1="-119" y1="38" x2="-122" y2="41"/>
     <line class="ds-line" data-part="bag" data-a="tie" data-b="neckR" x1="-119" y1="38" x2="-116" y2="41"/>
     <line class="ds-line" data-part="bag" data-a="neckL" data-b="neckR" x1="-122" y1="41" x2="-116" y2="41"/>
@@ -83,6 +90,8 @@
     <circle class="ds-dot" data-part="bag" data-p="sideR" cx="-112" cy="47" r="1.51"/>
     <circle class="ds-dot" data-part="bag" data-p="baseL" cx="-124" cy="54" r="1.51"/>
     <circle class="ds-dot" data-part="bag" data-p="baseR" cx="-114" cy="54" r="1.51"/>
+    </g>
+    <g data-part="case">
     <line class="ds-line" data-part="case" data-a="gripL" data-b="gripR" x1="122.88" y1="38" x2="130.88" y2="38"/>
     <line class="ds-line" data-part="case" data-a="gripL" data-b="topL" x1="122.88" y1="38" x2="116.88" y2="43"/>
     <line class="ds-line" data-part="case" data-a="gripR" data-b="topR" x1="130.88" y1="38" x2="136.88" y2="43"/>
@@ -96,5 +105,6 @@
     <circle class="ds-dot" data-part="case" data-p="topR" cx="136.88" cy="43" r="1.51"/>
     <circle class="ds-dot" data-part="case" data-p="botL" cx="116.88" cy="54" r="1.51"/>
     <circle class="ds-dot" data-part="case" data-p="botR" cx="136.88" cy="54" r="1.51"/>
+    </g>
   </g>
 </svg>

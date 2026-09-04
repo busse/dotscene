@@ -3,6 +3,7 @@
   <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="driving"]{--ds-dot-r:1.47;--ds-line-w:0.66}</style>
   <defs><clipPath id="ds-clip-driving"><rect x="2" y="6" width="166" height="64"/></clipPath></defs>
   <g clip-path="url(#ds-clip-driving)">
+    <g data-part="car">
     <line class="ds-line" data-part="car" data-a="noseLow" data-b="noseHigh" x1="8" y1="58" x2="14" y2="38"/>
     <line class="ds-line" data-part="car" data-a="noseHigh" data-b="hoodFront" x1="14" y1="38" x2="34" y2="34"/>
     <line class="ds-line" data-part="car" data-a="hoodFront" data-b="screenFoot" x1="34" y1="34" x2="62" y2="31"/>
@@ -51,6 +52,8 @@
     <circle class="ds-dot" data-part="car" data-p="wheelR5" cx="119.51" cy="60.49" r="1.47"/>
     <circle class="ds-dot" data-part="car" data-p="wheelR6" cx="116" cy="52" r="1.47"/>
     <circle class="ds-dot" data-part="car" data-p="wheelR7" cx="119.51" cy="43.51" r="1.47"/>
+    </g>
+    <g data-part="driver">
     <line class="ds-line" data-part="driver" data-a="head" data-b="neck" x1="90" y1="17" x2="91" y2="26"/>
     <line class="ds-line" data-part="driver" data-a="neck" data-b="chest" x1="91" y1="26" x2="92" y2="33"/>
     <line class="ds-line" data-part="driver" data-a="chest" data-b="hip" x1="92" y1="33" x2="94" y2="42"/>
@@ -82,5 +85,6 @@
     <circle class="ds-dot" data-part="driver" data-p="hipR" cx="93" cy="44" r="1.47"/>
     <circle class="ds-dot" data-part="driver" data-p="kneeR" cx="81" cy="47" r="1.47"/>
     <circle class="ds-dot" data-part="driver" data-p="footR" cx="76" cy="57" r="1.47"/>
+    </g>
   </g>
 </svg>

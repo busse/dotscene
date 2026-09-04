@@ -67,9 +67,11 @@ describe('renderSvg', () => {
         <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="bar"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
         <defs><clipPath id="ds-clip-bar"><rect x="-1" y="-1" width="2" height="12"/></clipPath></defs>
         <g clip-path="url(#ds-clip-bar)">
+          <g data-part="bar">
           <line class="ds-line" data-part="bar" data-a="top" data-b="base" x1="0" y1="0" x2="0" y2="10"/>
           <circle class="ds-dot" data-part="bar" data-p="top" cx="0" cy="0" r="1.6"/>
           <circle class="ds-dot" data-part="bar" data-p="base" cx="0" cy="10" r="1.6"/>
+          </g>
         </g>
       </svg>"
     `)

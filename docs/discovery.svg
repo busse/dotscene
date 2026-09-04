@@ -3,6 +3,7 @@
   <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="discovery"]{--ds-dot-r:0.76;--ds-line-w:0.34}</style>
   <defs><clipPath id="ds-clip-discovery"><rect x="-52" y="-15.02" width="235" height="85.02"/></clipPath></defs>
   <g clip-path="url(#ds-clip-discovery)">
+    <g data-part="bed">
     <line class="ds-line" data-part="bed" data-a="headTop" data-b="headBot" x1="-46" y1="26" x2="-46" y2="50"/>
     <line class="ds-line" data-part="bed" data-a="headBot" data-b="footBot" x1="-46" y1="50" x2="42" y2="50"/>
     <line class="ds-line" data-part="bed" data-a="footBot" data-b="footTop" x1="42" y1="50" x2="42" y2="36"/>
@@ -17,6 +18,8 @@
     <circle class="ds-dot" data-part="bed" data-p="legF" cx="42" cy="64" r="0.76"/>
     <circle class="ds-dot" data-part="bed" data-p="pillowL" cx="-42" cy="46" r="0.76"/>
     <circle class="ds-dot" data-part="bed" data-p="pillowR" cx="-28" cy="46" r="0.76"/>
+    </g>
+    <g data-part="goldilocks">
     <line class="ds-line" data-part="goldilocks" data-a="head0" data-b="head1" x1="-40" y1="40" x2="-38.54" y2="36.46"/>
     <line class="ds-line" data-part="goldilocks" data-a="head1" data-b="head2" x1="-38.54" y1="36.46" x2="-35" y2="35"/>
     <line class="ds-line" data-part="goldilocks" data-a="head2" data-b="head3" x1="-35" y1="35" x2="-31.46" y2="36.46"/>
@@ -75,6 +78,8 @@
     <circle class="ds-dot" data-part="goldilocks" data-p="hipR" cx="-6" cy="35" r="0.76"/>
     <circle class="ds-dot" data-part="goldilocks" data-p="kneeR" cx="8" cy="32" r="0.76"/>
     <circle class="ds-dot" data-part="goldilocks" data-p="footR" cx="21" cy="30" r="0.76"/>
+    </g>
+    <g data-part="papa">
     <line class="ds-line" data-part="papa" data-a="head0" data-b="head1" x1="80" y1="-5.57" x2="85.75" y2="-3.71"/>
     <line class="ds-line" data-part="papa" data-a="head1" data-b="head2" x1="85.75" y1="-3.71" x2="89.29" y2="1.18"/>
     <line class="ds-line" data-part="papa" data-a="head2" data-b="head3" x1="89.29" y1="1.18" x2="89.29" y2="7.22"/>
@@ -163,6 +168,8 @@
     <circle class="ds-dot" data-part="papa" data-p="hipR" cx="88.05" cy="42.15" r="0.76"/>
     <circle class="ds-dot" data-part="papa" data-p="kneeR" cx="90.35" cy="53.65" r="0.76"/>
     <circle class="ds-dot" data-part="papa" data-p="footR" cx="92.65" cy="64" r="0.76"/>
+    </g>
+    <g data-part="mama">
     <line class="ds-line" data-part="mama" data-a="head0" data-b="head1" x1="128" y1="6.53" x2="132.75" y2="8.06"/>
     <line class="ds-line" data-part="mama" data-a="head1" data-b="head2" x1="132.75" y1="8.06" x2="135.68" y2="12.1"/>
     <line class="ds-line" data-part="mama" data-a="head2" data-b="head3" x1="135.68" y1="12.1" x2="135.68" y2="17.1"/>
@@ -251,6 +258,8 @@
     <circle class="ds-dot" data-part="mama" data-p="hipR" cx="134.65" cy="45.95" r="0.76"/>
     <circle class="ds-dot" data-part="mama" data-p="kneeR" cx="136.55" cy="55.45" r="0.76"/>
     <circle class="ds-dot" data-part="mama" data-p="footR" cx="138.45" cy="64" r="0.76"/>
+    </g>
+    <g data-part="baby">
     <line class="ds-line" data-part="baby" data-a="head0" data-b="head1" x1="164" y1="24.67" x2="167.25" y2="25.73"/>
     <line class="ds-line" data-part="baby" data-a="head1" data-b="head2" x1="167.25" y1="25.73" x2="169.25" y2="28.49"/>
     <line class="ds-line" data-part="baby" data-a="head2" data-b="head3" x1="169.25" y1="28.49" x2="169.25" y2="31.91"/>
@@ -339,5 +348,6 @@
     <circle class="ds-dot" data-part="baby" data-p="hipR" cx="168.55" cy="51.65" r="0.76"/>
     <circle class="ds-dot" data-part="baby" data-p="kneeR" cx="169.85" cy="58.15" r="0.76"/>
     <circle class="ds-dot" data-part="baby" data-p="footR" cx="171.15" cy="64" r="0.76"/>
+    </g>
   </g>
 </svg>

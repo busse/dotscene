@@ -44,6 +44,9 @@ export type Frame = Readonly<Record<PointId, Vec2>>
 /** One step of an animation: every moving part's points, in scene space. */
 export type SceneFrame = Readonly<Record<string, Frame>>
 
+/** Part id -> paint order at one step. */
+export type SceneDepths = Readonly<Record<string, number>>
+
 export interface FrameTiming {
   readonly duration: number
   readonly hold: number
@@ -64,7 +67,7 @@ export interface ResolvedScene {
   readonly dots: readonly ResolvedDot[]
   readonly lines: readonly ResolvedLine[]
   readonly faces: readonly ResolvedFace[]
-  /** Part ids in paint order, which is the order they were declared in. */
+  /** Part ids in paint order: by `depth` where given, otherwise declaration order. */
   readonly partOrder: readonly string[]
   /** Present only for animated scenes: the cycling part and its poses in scene space. */
   readonly animation?: ResolvedAnimation
@@ -77,6 +80,12 @@ export interface ResolvedAnimation {
   readonly frames: Readonly<Record<string, SceneFrame>>
   /** Per-keyframe pacing, so one step can linger while another snaps past. */
   readonly timings: Readonly<Record<string, FrameTiming>>
+  /**
+   * Keyframe -> every part's paint order, present only when the scene animates depth.
+   *
+   * Absent for the ordinary case, so a scene that never reorders costs nothing.
+   */
+  readonly depths?: Readonly<Record<string, SceneDepths>>
   readonly easing: EasingName
   readonly mode: AnimateMode
   /** The parts this animation moves. */
@@ -138,6 +147,9 @@ export const resolve = (scene: Scene): ResolvedScene => {
     box = box === undefined ? next : unionBounds(box, next)
   }
 
+  const baseDepth = new Map<string, number>()
+  scene.parts.forEach((part, index) => baseDepth.set(partId(part), part.depth ?? index))
+
   for (const part of scene.parts) {
     const id = partId(part)
     partOrder.push(id)
@@ -177,7 +189,11 @@ export const resolve = (scene: Scene): ResolvedScene => {
     const keyframes = expandKeyframes(scene)
     const frames: Record<string, SceneFrame> = {}
     const timings: Record<string, FrameTiming> = {}
+    const depths: Record<string, SceneDepths> = {}
     const moving = new Set<string>()
+    const reorders = keyframes.some((keyframe) =>
+      Object.values(keyframe.parts ?? {}).some((state) => state.depth !== undefined),
+    )
 
     for (const keyframe of keyframes) {
       const frame: Record<string, Frame> = {}
@@ -193,6 +209,13 @@ export const resolve = (scene: Scene): ResolvedScene => {
         grow(Object.values(framePoints))
       }
       frames[keyframe.name] = frame
+      if (reorders) {
+        // Every part, not only the moving ones: the runtime sorts the whole stack, so a
+        // partial map would leave the rest without a place in it.
+        const atStep: Record<string, number> = {}
+        for (const id of partOrder) atStep[id] = keyframe.parts?.[id]?.depth ?? baseDepth.get(id)!
+        depths[keyframe.name] = atStep
+      }
       timings[keyframe.name] = {
         duration: keyframe.duration ?? animate.duration ?? 700,
         hold: keyframe.hold ?? animate.hold ?? 900,
@@ -207,8 +230,15 @@ export const resolve = (scene: Scene): ResolvedScene => {
       easing: animate.easing ?? 'easeInOut',
       mode: animate.mode ?? 'loop',
       parts: [...moving],
+      ...(reorders ? { depths } : {}),
     }
   }
+
+  // Paint order: depth where the scene gave one, declaration order otherwise.
+  const declared = new Map(partOrder.map((id, index) => [id, index]))
+  partOrder.sort(
+    (a, b) => baseDepth.get(a)! - baseDepth.get(b)! || declared.get(a)! - declared.get(b)!,
+  )
 
   const viewBox = scene.viewBox ?? fitViewBox(box ?? bounds([]), scene.padding)
   const dotRadius = scene.dotRadius ?? defaultDotRadius(lines, viewBox)

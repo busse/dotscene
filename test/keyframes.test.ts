@@ -244,3 +244,62 @@ describe('continuous motion', () => {
     expect(atBoundary).toBeLessThan(midStep * 0.2)
   })
 })
+
+describe('animated depth', () => {
+  const chip = defineFigure('chip', { points: { a: [0, 0], b: [4, 0] }, edges: [['a', 'b']] })
+
+  const stacked = (animate: Parameters<typeof defineScene>[1]['animate']) =>
+    defineScene('stack', {
+      parts: [
+        { figure: chip, id: 'behind', depth: 0 },
+        { figure: chip, id: 'mover', depth: 1 },
+        { figure: chip, id: 'front', depth: 2, at: [10, 0] },
+      ],
+      viewBox: [0, 0, 40, 20],
+      ...(animate === undefined ? {} : { animate }),
+    })
+
+  it('paints parts in depth order rather than declaration order', () => {
+    const resolved = resolve(
+      defineScene('s', {
+        parts: [
+          { figure: chip, id: 'late', depth: 9 },
+          { figure: chip, id: 'early', depth: 1 },
+        ],
+        viewBox: [0, 0, 40, 20],
+      }),
+    )
+    expect(resolved.partOrder).toEqual(['early', 'late'])
+  })
+
+  it('falls back to declaration order when no part sets a depth', () => {
+    const resolved = resolve(
+      defineScene('s', {
+        parts: [
+          { figure: chip, id: 'first' },
+          { figure: chip, id: 'second' },
+        ],
+        viewBox: [0, 0, 40, 20],
+      }),
+    )
+    expect(resolved.partOrder).toEqual(['first', 'second'])
+  })
+
+  it('emits every part\'s depth at each step, so the runtime can sort the whole stack', () => {
+    const resolved = resolve(
+      stacked({
+        keyframes: [
+          { name: 'back', parts: { mover: { depth: 0.5 } } },
+          { name: 'through', parts: { mover: { depth: 2.5 } } },
+        ],
+      }),
+    )
+    expect(resolved.animation?.depths?.back).toEqual({ behind: 0, mover: 0.5, front: 2 })
+    expect(resolved.animation?.depths?.through).toEqual({ behind: 0, mover: 2.5, front: 2 })
+  })
+
+  it('carries no depth map at all when a scene never reorders', () => {
+    const resolved = resolve(stacked({ keyframes: [{ name: 'k', parts: { mover: { at: [1, 0] } } }] }))
+    expect(resolved.animation?.depths).toBeUndefined()
+  })
+})

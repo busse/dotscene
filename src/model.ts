@@ -91,6 +91,14 @@ export interface Part extends Transform {
   readonly figure: Figure
   /** Unique within the scene. Defaults to the figure name. */
   readonly id?: string
+  /**
+   * Paint order. Lower paints first, so higher sits in front.
+   *
+   * Defaults to the part's position in `parts`, which means declaration order is depth order
+   * until you say otherwise. Give a scene explicit depths when something has to move through
+   * the stack — a vehicle passing behind one building and in front of the next.
+   */
+  readonly depth?: number
   /** A pose name from the figure, or a standalone Pose. */
   readonly pose?: string | Pose
 }
@@ -106,6 +114,8 @@ export type AnimateMode = 'loop' | 'pingpong' | 'hover' | 'click'
  * changes — a part that stays put needs no entry at all.
  */
 export interface PartKeyframe extends Transform {
+  /** Paint order at this step, interpolated between keyframes like any other number. */
+  readonly depth?: number
   /**
    * A pose name from the figure, or a `Pose` built at runtime.
    *

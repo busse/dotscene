@@ -35,6 +35,7 @@ export const animationPayload = (resolved: ResolvedScene): string | undefined =>
     easing: animation.easing,
     mode: animation.mode,
     frames: animation.frames,
+    ...(animation.depths === undefined ? {} : { depths: animation.depths }),
   })
 }
 

@@ -313,3 +313,77 @@ describe('moving faces', () => {
     expect(face.attrs.points).toBe('10,0 11,1')
   })
 })
+
+describe('re-stacking by depth', () => {
+  /** A parent that records the order its children end up in, the way the DOM would. */
+  const stage = (parts: readonly string[]) => {
+    const order = [...parts]
+    const parent = {
+      appendChild: (child: { part: string }) => {
+        order.splice(order.indexOf(child.part), 1)
+        order.push(child.part)
+      },
+    }
+    const groups = parts.map((part) => ({
+      part,
+      parentNode: parent,
+      getAttribute: (name: string) => (name === 'data-part' ? part : null),
+    }))
+    return {
+      order,
+      svg: {
+        querySelectorAll: (selector: string) =>
+          selector.startsWith('g[') ? groups : selector.startsWith('circle') ? [] : [],
+        addEventListener: () => {},
+        removeEventListener: () => {},
+      },
+    }
+  }
+
+  const config = (depths: Record<string, Record<string, number>>): SceneConfig => ({
+    cycle: ['start', 'end'],
+    frames: { start: {}, end: {} },
+    timings: { start: { duration: 100, hold: 100 }, end: { duration: 100, hold: 100 } },
+    depths,
+    easing: 'linear',
+    mode: 'loop',
+  })
+
+  it('sorts the groups to match the depths of the frame it settles on', () => {
+    const { order, svg } = stage(['ground', 'truck', 'shed'])
+    const handle = mountScene(svg, config({
+      start: { ground: 0, truck: 1, shed: 2 },
+      end: { ground: 0, truck: 3, shed: 2 },
+    }))
+    handle.goTo('end')
+    expect(order).toEqual(['ground', 'shed', 'truck'])
+  })
+
+  it('crosses the stack partway through a transition, where the depths actually cross', () => {
+    const { order, svg } = stage(['ground', 'truck', 'shed'])
+    mountScene(svg, config({
+      start: { ground: 0, truck: 1, shed: 2 },
+      end: { ground: 0, truck: 3, shed: 2 },
+    }))
+    observed[0]!.fire(true)
+    run(140) // past the 100ms hold, a little way into the move: truck is still behind
+    expect(order).toEqual(['ground', 'truck', 'shed'])
+    run(120) // further along, the truck's depth has passed the shed's
+    expect(order).toEqual(['ground', 'shed', 'truck'])
+  })
+
+  it('never touches the DOM for a scene that does not animate depth', () => {
+    const { order, svg } = stage(['a', 'b'])
+    const bare: SceneConfig = {
+      cycle: ['one'],
+      frames: { one: {} },
+      timings: { one: { duration: 0, hold: 100 } },
+      easing: 'linear',
+      mode: 'loop',
+    }
+    mountScene(svg, bare)
+    observed[0]?.fire(true)
+    run(400)
+    expect(order).toEqual(['a', 'b'])
+  })
+})

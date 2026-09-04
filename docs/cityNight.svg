@@ -4,6 +4,7 @@
   <rect class="ds-bg" x="-80" y="-30" width="160" height="110" fill="#16181a"/>
   <defs><clipPath id="ds-clip-cityNight"><rect x="-80" y="-30" width="160" height="110"/></clipPath></defs>
   <g clip-path="url(#ds-clip-cityNight)">
+    <g data-part="cityGround">
     <line class="ds-line ds-line--ground" data-part="cityGround" data-a="plateNA" data-b="plateNB" x1="0" y1="0" x2="72" y2="36"/>
     <line class="ds-line ds-line--ground" data-part="cityGround" data-a="plateEA" data-b="plateEB" x1="72" y1="36" x2="0" y2="72"/>
     <line class="ds-line ds-line--ground" data-part="cityGround" data-a="plateSA" data-b="plateSB" x1="0" y1="72" x2="-72" y2="36"/>
@@ -64,6 +65,8 @@
     <circle class="ds-dot ds-dot--road" data-part="cityGround" data-p="roadEW1B" cx="104" cy="84" r="1.3"/>
     <circle class="ds-dot ds-dot--road" data-part="cityGround" data-p="roadEW2A" cx="-104" cy="-12" r="1.3"/>
     <circle class="ds-dot ds-dot--road" data-part="cityGround" data-p="roadEW2B" cx="96" cy="88" r="1.3"/>
+    </g>
+    <g data-part="tower">
     <polygon class="ds-face ds-face--roof" data-part="tower" data-face="towerTopFar towerTopEast towerTopNear towerTopWest" points="0,-22 16,-14 0,-6 -16,-14"/>
     <polygon class="ds-face ds-face--east" data-part="tower" data-face="towerEast towerNear towerTopNear towerTopEast" points="16,16 0,24 0,-6 16,-14"/>
     <polygon class="ds-face ds-face--south" data-part="tower" data-face="towerNear towerWest towerTopWest towerTopNear" points="0,24 -16,16 -16,-14 0,-6"/>
@@ -83,6 +86,8 @@
     <circle class="ds-dot" data-part="tower" data-p="towerTopEast" cx="16" cy="-14" r="1.3"/>
     <circle class="ds-dot" data-part="tower" data-p="towerTopNear" cx="0" cy="-6" r="1.3"/>
     <circle class="ds-dot" data-part="tower" data-p="towerTopWest" cx="-16" cy="-14" r="1.3"/>
+    </g>
+    <g data-part="truck">
     <polygon class="ds-face ds-face--roof" data-part="truck" data-face="trailerTopFar trailerTopEast trailerTopNear trailerTopWest" points="-96.96,-20.27 -87.36,-15.47 -93.44,-12.43 -103.04,-17.23"/>
     <polygon class="ds-face ds-face--east" data-part="truck" data-face="trailerEast trailerNear trailerTopNear trailerTopEast" points="-87.36,-11.82 -93.44,-8.78 -93.44,-12.43 -87.36,-15.47"/>
     <polygon class="ds-face ds-face--south" data-part="truck" data-face="trailerNear trailerWest trailerTopWest trailerTopNear" points="-93.44,-8.78 -103.04,-13.58 -103.04,-17.23 -93.44,-12.43"/>
@@ -127,6 +132,8 @@
     <circle class="ds-dot ds-dot--vehicle" data-part="truck" data-p="wheelRearB" cx="-100.64" cy="-11.28" r="1.3"/>
     <circle class="ds-dot ds-dot--vehicle" data-part="truck" data-p="wheelFrontA" cx="-91.28" cy="-7.86" r="1.3"/>
     <circle class="ds-dot ds-dot--vehicle" data-part="truck" data-p="wheelFrontB" cx="-91.28" cy="-6.76" r="1.3"/>
+    </g>
+    <g data-part="office">
     <polygon class="ds-face ds-face--roof" data-part="office" data-face="officeTopFar officeTopEast officeTopNear officeTopWest" points="40,13 56,21 40,29 24,21"/>
     <polygon class="ds-face ds-face--east" data-part="office" data-face="officeEast officeNear officeTopNear officeTopEast" points="56,36 40,44 40,29 56,21"/>
     <polygon class="ds-face ds-face--south" data-part="office" data-face="officeNear officeWest officeTopWest officeTopNear" points="40,44 24,36 24,21 40,29"/>
@@ -146,6 +153,8 @@
     <circle class="ds-dot" data-part="office" data-p="officeTopEast" cx="56" cy="21" r="1.3"/>
     <circle class="ds-dot" data-part="office" data-p="officeTopNear" cx="40" cy="29" r="1.3"/>
     <circle class="ds-dot" data-part="office" data-p="officeTopWest" cx="24" cy="21" r="1.3"/>
+    </g>
+    <g data-part="works">
     <polygon class="ds-face ds-face--roof" data-part="works" data-face="worksTopFar worksTopEast worksTopNear worksTopWest" points="-40,8 -24,16 -40,24 -56,16"/>
     <polygon class="ds-face ds-face--east" data-part="works" data-face="worksEast worksNear worksTopNear worksTopEast" points="-24,36 -40,44 -40,24 -24,16"/>
     <polygon class="ds-face ds-face--south" data-part="works" data-face="worksNear worksWest worksTopWest worksTopNear" points="-40,44 -56,36 -56,16 -40,24"/>
@@ -165,6 +174,8 @@
     <circle class="ds-dot" data-part="works" data-p="worksTopEast" cx="-24" cy="16" r="1.3"/>
     <circle class="ds-dot" data-part="works" data-p="worksTopNear" cx="-40" cy="24" r="1.3"/>
     <circle class="ds-dot" data-part="works" data-p="worksTopWest" cx="-56" cy="16" r="1.3"/>
+    </g>
+    <g data-part="park">
     <polygon class="ds-face ds-face--foliage" data-part="park" data-face="treeATop treeAC0 treeAC1" points="0,45.3 6.4,43 -6.4,43"/>
     <polygon class="ds-face ds-face--foliage" data-part="park" data-face="treeATop treeAC1 treeAC2" points="0,45.3 -6.4,43 -6.4,36.6"/>
     <polygon class="ds-face ds-face--foliage" data-part="park" data-face="treeATop treeAC2 treeAC3" points="0,45.3 -6.4,36.6 6.4,36.6"/>
@@ -222,5 +233,6 @@
     <circle class="ds-dot" data-part="park" data-p="treeCC1" cx="-18.8" cy="50.1" r="1.3"/>
     <circle class="ds-dot" data-part="park" data-p="treeCC2" cx="-18.8" cy="43.3" r="1.3"/>
     <circle class="ds-dot" data-part="park" data-p="treeCC3" cx="-5.2" cy="43.3" r="1.3"/>
+    </g>
   </g>
 </svg>

@@ -22,6 +22,8 @@ export interface SceneConfig {
   readonly cycle: readonly string[]
   readonly frames: Readonly<Record<string, SceneFrame>>
   readonly timings: Readonly<Record<string, { duration: number; hold: number; easing?: EasingName }>>
+  /** Keyframe -> part -> paint order. Absent unless the scene actually reorders. */
+  readonly depths?: Readonly<Record<string, Readonly<Record<string, number>>>>
   readonly easing: EasingName
   readonly mode: AnimateMode
 }
@@ -139,6 +141,26 @@ const paintPart = (bindings: Bindings, points: Frame): void => {
   }
 }
 
+/**
+ * Re-stack the part groups when their order changes.
+ *
+ * Depth is interpolated like any other number, so a part crosses the stack at the moment the
+ * numbers actually cross rather than at a keyframe boundary. Nothing touches the DOM unless
+ * the resulting order differs from the one already on screen — a reorder is rare and a
+ * comparison is cheap.
+ */
+const restack = (groups: Map<string, SVGGElement>, order: string[], depths: Record<string, number>): string[] => {
+  const next = [...order].sort((a, b) => (depths[a] ?? 0) - (depths[b] ?? 0))
+  if (next.every((part, index) => part === order[index])) return order
+  const parent = groups.get(next[0]!)?.parentNode
+  if (parent == null) return order
+  for (const part of next) {
+    const group = groups.get(part)
+    if (group !== undefined) parent.appendChild(group)
+  }
+  return next
+}
+
 const paint = (bindings: Map<string, Bindings>, frame: SceneFrame): void => {
   for (const part of Object.keys(frame)) {
     const bound = bindings.get(part)
@@ -168,6 +190,27 @@ const blend = (from: SceneFrame, to: SceneFrame, t: number): SceneFrame => {
 /** Attach the runtime to one already-rendered SVG. */
 export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
   const bindings = bindAll(svg)
+
+  const groups = new Map<string, SVGGElement>()
+  for (const group of svg.querySelectorAll<SVGGElement>('g[data-part]')) {
+    groups.set(group.getAttribute('data-part')!, group)
+  }
+  // The order the document already has, which is also the order to fall back to.
+  let stack = [...groups.keys()]
+  const depthsFor = (name: string): Record<string, number> | undefined =>
+    config.depths?.[name] as Record<string, number> | undefined
+
+  /** Depths blended between two keyframes, so the crossing lands where the numbers cross. */
+  const blendDepths = (from: string, to: string, t: number): Record<string, number> | undefined => {
+    const a = depthsFor(from)
+    const b = depthsFor(to)
+    if (a === undefined) return b
+    if (b === undefined) return a
+    const out: Record<string, number> = {}
+    for (const part of Object.keys(a)) out[part] = a[part]! + ((b[part] ?? a[part]!) - a[part]!) * t
+    return out
+  }
+
   const cycle = config.cycle.length > 0 ? config.cycle : Object.keys(config.frames)
   const frameFor = (index: number): SceneFrame => config.frames[cycle[index] ?? ''] ?? {}
   const timingFor = (index: number): { duration: number; hold: number; easing?: EasingName } =>
@@ -184,6 +227,8 @@ export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
     target = at
     moving = false
     paint(bindings, frameFor(at))
+    const depths = depthsFor(cycle[at] ?? '')
+    if (depths !== undefined) stack = restack(groups, stack, depths)
   }
 
   /** The next pose in the cycle, bouncing at the ends when the mode says pingpong. */
@@ -209,7 +254,10 @@ export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
         // next can snap.
         const { duration, easing } = timingFor(target)
         const t = duration <= 0 ? 1 : Math.min(1, elapsed / duration)
-        paint(bindings, blend(frameFor(index), frameFor(target), easingFor(easing ?? config.easing)(t)))
+        const eased = easingFor(easing ?? config.easing)(t)
+        paint(bindings, blend(frameFor(index), frameFor(target), eased))
+        const mixed = blendDepths(cycle[index] ?? '', cycle[target] ?? '', eased)
+        if (mixed !== undefined) stack = restack(groups, stack, mixed)
         if (t >= 1) {
           index = target
           moving = false

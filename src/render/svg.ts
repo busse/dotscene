@@ -134,6 +134,10 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
   for (const dot of scene.dots) file(dots, dot)
 
   for (const part of scene.partOrder) {
+    // One group per part, so the runtime can reorder whole parts when their depth ordering
+    // changes — a truck that goes behind one building and in front of the next.
+    content.push(`<g ${attrs([['data-part', part]])}>`)
+
     for (const face of faces.get(part) ?? []) {
       content.push(
         `<polygon ${attrs([
@@ -172,6 +176,8 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
         ])}/>`,
       )
     }
+
+    content.push('</g>')
   }
 
   body.push(`<g clip-path="url(#${escapeXml(clipId)})">`)

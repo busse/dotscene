@@ -4,6 +4,7 @@
   <rect class="ds-bg" x="-80" y="-30" width="160" height="110" fill="#fbfaf7"/>
   <defs><clipPath id="ds-clip-city"><rect x="-80" y="-30" width="160" height="110"/></clipPath></defs>
   <g clip-path="url(#ds-clip-city)">
+    <g data-part="cityGround">
     <line class="ds-line ds-line--ground" data-part="cityGround" data-a="plateNA" data-b="plateNB" x1="0" y1="0" x2="72" y2="36"/>
     <line class="ds-line ds-line--ground" data-part="cityGround" data-a="plateEA" data-b="plateEB" x1="72" y1="36" x2="0" y2="72"/>
     <line class="ds-line ds-line--ground" data-part="cityGround" data-a="plateSA" data-b="plateSB" x1="0" y1="72" x2="-72" y2="36"/>
@@ -64,6 +65,8 @@
     <circle class="ds-dot ds-dot--road" data-part="cityGround" data-p="roadEW1B" cx="104" cy="84" r="1.3"/>
     <circle class="ds-dot ds-dot--road" data-part="cityGround" data-p="roadEW2A" cx="-104" cy="-12" r="1.3"/>
     <circle class="ds-dot ds-dot--road" data-part="cityGround" data-p="roadEW2B" cx="96" cy="88" r="1.3"/>
+    </g>
+    <g data-part="tower">
     <polygon class="ds-face ds-face--roof" data-part="tower" data-face="towerTopFar towerTopEast towerTopNear towerTopWest" points="0,-22 16,-14 0,-6 -16,-14"/>
     <polygon class="ds-face ds-face--east" data-part="tower" data-face="towerEast towerNear towerTopNear towerTopEast" points="16,16 0,24 0,-6 16,-14"/>
     <polygon class="ds-face ds-face--south" data-part="tower" data-face="towerNear towerWest towerTopWest towerTopNear" points="0,24 -16,16 -16,-14 0,-6"/>
@@ -83,6 +86,8 @@
     <circle class="ds-dot" data-part="tower" data-p="towerTopEast" cx="16" cy="-14" r="1.3"/>
     <circle class="ds-dot" data-part="tower" data-p="towerTopNear" cx="0" cy="-6" r="1.3"/>
     <circle class="ds-dot" data-part="tower" data-p="towerTopWest" cx="-16" cy="-14" r="1.3"/>
+    </g>
+    <g data-part="truck">
     <polygon class="ds-face ds-face--roof" data-part="truck" data-face="trailerTopFar trailerTopEast trailerTopNear trailerTopWest" points="-96.96,-20.27 -87.36,-15.47 -93.44,-12.43 -103.04,-17.23"/>
     <polygon class="ds-face ds-face--east" data-part="truck" data-face="trailerEast trailerNear trailerTopNear trailerTopEast" points="-87.36,-11.82 -93.44,-8.78 -93.44,-12.43 -87.36,-15.47"/>
     <polygon class="ds-face ds-face--south" data-part="truck" data-face="trailerNear trailerWest trailerTopWest trailerTopNear" points="-93.44,-8.78 -103.04,-13.58 -103.04,-17.23 -93.44,-12.43"/>
@@ -127,6 +132,8 @@
     <circle class="ds-dot ds-dot--vehicle" data-part="truck" data-p="wheelRearB" cx="-100.64" cy="-11.28" r="1.3"/>
     <circle class="ds-dot ds-dot--vehicle" data-part="truck" data-p="wheelFrontA" cx="-91.28" cy="-7.86" r="1.3"/>
     <circle class="ds-dot ds-dot--vehicle" data-part="truck" data-p="wheelFrontB" cx="-91.28" cy="-6.76" r="1.3"/>
+    </g>
+    <g data-part="office">
     <polygon class="ds-face ds-face--roof" data-part="office" data-face="officeTopFar officeTopEast officeTopNear officeTopWest" points="40,13 56,21 40,29 24,21"/>
     <polygon class="ds-face ds-face--east" data-part="office" data-face="officeEast officeNear officeTopNear officeTopEast" points="56,36 40,44 40,29 56,21"/>
     <polygon class="ds-face ds-face--south" data-part="office" data-face="officeNear officeWest officeTopWest officeTopNear" points="40,44 24,36 24,21 40,29"/>
@@ -146,6 +153,8 @@
     <circle class="ds-dot" data-part="office" data-p="officeTopEast" cx="56" cy="21" r="1.3"/>
     <circle class="ds-dot" data-part="office" data-p="officeTopNear" cx="40" cy="29" r="1.3"/>
     <circle class="ds-dot" data-part="office" data-p="officeTopWest" cx="24" cy="21" r="1.3"/>
+    </g>
+    <g data-part="works">
     <polygon class="ds-face ds-face--roof" data-part="works" data-face="worksTopFar worksTopEast worksTopNear worksTopWest" points="-40,8 -24,16 -40,24 -56,16"/>
     <polygon class="ds-face ds-face--east" data-part="works" data-face="worksEast worksNear worksTopNear worksTopEast" points="-24,36 -40,44 -40,24 -24,16"/>
     <polygon class="ds-face ds-face--south" data-part="works" data-face="worksNear worksWest worksTopWest worksTopNear" points="-40,44 -56,36 -56,16 -40,24"/>
@@ -165,6 +174,8 @@
     <circle class="ds-dot" data-part="works" data-p="worksTopEast" cx="-24" cy="16" r="1.3"/>
     <circle class="ds-dot" data-part="works" data-p="worksTopNear" cx="-40" cy="24" r="1.3"/>
     <circle class="ds-dot" data-part="works" data-p="worksTopWest" cx="-56" cy="16" r="1.3"/>
+    </g>
+    <g data-part="park">
     <polygon class="ds-face ds-face--foliage" data-part="park" data-face="treeATop treeAC0 treeAC1" points="0,45.3 6.4,43 -6.4,43"/>
     <polygon class="ds-face ds-face--foliage" data-part="park" data-face="treeATop treeAC1 treeAC2" points="0,45.3 -6.4,43 -6.4,36.6"/>
     <polygon class="ds-face ds-face--foliage" data-part="park" data-face="treeATop treeAC2 treeAC3" points="0,45.3 -6.4,36.6 6.4,36.6"/>
@@ -222,6 +233,7 @@
     <circle class="ds-dot" data-part="park" data-p="treeCC1" cx="-18.8" cy="50.1" r="1.3"/>
     <circle class="ds-dot" data-part="park" data-p="treeCC2" cx="-18.8" cy="43.3" r="1.3"/>
     <circle class="ds-dot" data-part="park" data-p="treeCC3" cx="-5.2" cy="43.3" r="1.3"/>
+    </g>
   </g>
 </svg>
 <script type="application/json" data-dotscene-poses="city">{"cycle":["enter","exit"],"timings":{"enter":{"duration":0,"hold":0,"easing":"linear"},"exit":{"duration":6500,"hold":1400,"easing":"linear"}},"easing":"easeInOut","mode":"loop","frames":{"enter":{"truck":{"trailerNear":[-93.44,-8.78],"trailerEast":[-87.36,-11.82],"trailerWest":[-103.04,-13.58],"trailerTopFar":[-96.96,-20.27],"trailerTopEast":[-87.36,-15.47],"trailerTopNear":[-93.44,-12.43],"trailerTopWest":[-103.04,-17.23],"cabNear":[-88.08,-6.26],"cabEast":[-82.32,-9.14],"cabWest":[-93.28,-8.86],"cabTopFar":[-87.52,-13.74],"cabTopEast":[-82.32,-11.14],"cabTopNear":[-88.08,-8.26],"cabTopWest":[-93.28,-10.86],"wheelRearA":[-100.64,-12.38],"wheelRearB":[-100.64,-11.28],"wheelFrontA":[-91.28,-7.86],"wheelFrontB":[-91.28,-6.76]}},"exit":{"truck":{"trailerNear":[106.56,91.22],"trailerEast":[112.64,88.18],"trailerWest":[96.96,86.42],"trailerTopFar":[103.04,79.73],"trailerTopEast":[112.64,84.53],"trailerTopNear":[106.56,87.57],"trailerTopWest":[96.96,82.77],"cabNear":[111.92,93.74],"cabEast":[117.68,90.86],"cabWest":[106.72,91.14],"cabTopFar":[112.48,86.26],"cabTopEast":[117.68,88.86],"cabTopNear":[111.92,91.74],"cabTopWest":[106.72,89.14],"wheelRearA":[99.36,87.62],"wheelRearB":[99.36,88.72],"wheelFrontA":[108.72,92.14],"wheelFrontB":[108.72,93.24]}}}}</script>

@@ -3,6 +3,7 @@
   <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="bear"]{--ds-dot-r:0.84;--ds-line-w:0.38}</style>
   <defs><clipPath id="ds-clip-bear"><rect x="-22" y="-5.5" width="44" height="75.5"/></clipPath></defs>
   <g clip-path="url(#ds-clip-bear)">
+    <g data-part="bear">
     <line class="ds-line" data-part="bear" data-a="head0" data-b="head1" x1="0" y1="3.5" x2="5" y2="5.12"/>
     <line class="ds-line" data-part="bear" data-a="head1" data-b="head2" x1="5" y1="5.12" x2="8.08" y2="9.37"/>
     <line class="ds-line" data-part="bear" data-a="head2" data-b="head3" x1="8.08" y1="9.37" x2="8.08" y2="14.63"/>
@@ -91,5 +92,6 @@
     <circle class="ds-dot" data-part="bear" data-p="hipR" cx="7" cy="45" r="0.84"/>
     <circle class="ds-dot" data-part="bear" data-p="kneeR" cx="9" cy="55" r="0.84"/>
     <circle class="ds-dot" data-part="bear" data-p="footR" cx="11" cy="64" r="0.84"/>
+    </g>
   </g>
 </svg>

@@ -3,6 +3,7 @@
   <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="lamp"]{--ds-dot-r:3.2;--ds-line-w:1.44}</style>
   <defs><clipPath id="ds-clip-lamp"><rect x="-16" y="6" width="56" height="64"/></clipPath></defs>
   <g clip-path="url(#ds-clip-lamp)">
+    <g data-part="lamp">
     <line class="ds-line" data-part="lamp" data-a="baseL" data-b="baseR" x1="-10" y1="64" x2="10" y2="64"/>
     <line class="ds-line" data-part="lamp" data-a="baseL" data-b="stem" x1="-10" y1="64" x2="0" y2="62"/>
     <line class="ds-line" data-part="lamp" data-a="baseR" data-b="stem" x1="10" y1="64" x2="0" y2="62"/>
@@ -18,5 +19,6 @@
     <circle class="ds-dot" data-part="lamp" data-p="armEnd" cx="22" cy="20" r="3.2"/>
     <circle class="ds-dot" data-part="lamp" data-p="shadeTop" cx="16" cy="12" r="3.2"/>
     <circle class="ds-dot" data-part="lamp" data-p="shadeLip" cx="34" cy="26" r="3.2"/>
+    </g>
   </g>
 </svg>
