@@ -5,7 +5,7 @@
  * runtime can find and move them by point name without re-parsing the scene.
  */
 
-import type { ResolvedScene } from '../layout.ts'
+import type { ResolvedDot, ResolvedFace, ResolvedLine, ResolvedScene } from '../layout.ts'
 
 export interface SvgOptions {
   /**
@@ -22,6 +22,8 @@ export const DEFAULT_CSS = [
   '.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}',
   '.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}',
   '.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}',
+  // A face exists to hide what is behind it, so it defaults to the scene's own ground.
+  '.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}',
 ].join('')
 
 /**
@@ -32,7 +34,8 @@ export const DEFAULT_CSS = [
  */
 const sceneCss = (scene: ResolvedScene): string => {
   const selector = `svg[data-dotscene="${scene.name}"]`
-  const sizing = `${selector}{--ds-dot-r:${scene.dotRadius};--ds-line-w:${scene.lineWidth}}`
+  const ground = scene.background === undefined ? '' : `;--ds-face-fill:${scene.background}`
+  const sizing = `${selector}{--ds-dot-r:${scene.dotRadius};--ds-line-w:${scene.lineWidth}${ground}}`
   // The scene's own rules go inside a nested block, so bare selectors it writes cannot
   // reach another scene sharing the page.
   return scene.css === undefined ? sizing : `${sizing}${selector}{${scene.css}}`
@@ -115,32 +118,60 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
 
   const content: string[] = []
 
-  for (const line of scene.lines) {
-    content.push(
-      `<line ${attrs([
-        ['class', line.kind === undefined ? 'ds-line' : `ds-line ds-line--${line.kind}`],
-        ['data-part', line.part],
-        ['data-a', line.from],
-        ['data-b', line.to],
-        ['x1', line.a[0]],
-        ['y1', line.a[1]],
-        ['x2', line.b[0]],
-        ['y2', line.b[1]],
-      ])}/>`,
-    )
+  // Paint part by part rather than every line and then every dot. A part's fills go down
+  // first, then its own strokes on top of them — which is what makes a wall hide the lines
+  // of parts painted before it. Declaration order is paint order: nearer things go later.
+  const faces = new Map<string, ResolvedFace[]>()
+  const lines = new Map<string, ResolvedLine[]>()
+  const dots = new Map<string, ResolvedDot[]>()
+  const file = <T extends { part: string }>(into: Map<string, T[]>, item: T): void => {
+    const list = into.get(item.part)
+    if (list === undefined) into.set(item.part, [item])
+    else list.push(item)
   }
+  for (const face of scene.faces) file(faces, face)
+  for (const line of scene.lines) file(lines, line)
+  for (const dot of scene.dots) file(dots, dot)
 
-  for (const dot of scene.dots) {
-    content.push(
-      `<circle ${attrs([
-        ['class', dot.kind === undefined ? 'ds-dot' : `ds-dot ds-dot--${dot.kind}`],
-        ['data-part', dot.part],
-        ['data-p', dot.point],
-        ['cx', dot.at[0]],
-        ['cy', dot.at[1]],
-        ['r', scene.dotRadius],
-      ])}/>`,
-    )
+  for (const part of scene.partOrder) {
+    for (const face of faces.get(part) ?? []) {
+      content.push(
+        `<polygon ${attrs([
+          ['class', face.kind === undefined ? 'ds-face' : `ds-face ds-face--${face.kind}`],
+          ['data-part', face.part],
+          ['data-face', face.names.join(' ')],
+          ['points', face.at.map(([px, py]) => `${px},${py}`).join(' ')],
+        ])}/>`,
+      )
+    }
+
+    for (const line of lines.get(part) ?? []) {
+      content.push(
+        `<line ${attrs([
+          ['class', line.kind === undefined ? 'ds-line' : `ds-line ds-line--${line.kind}`],
+          ['data-part', line.part],
+          ['data-a', line.from],
+          ['data-b', line.to],
+          ['x1', line.a[0]],
+          ['y1', line.a[1]],
+          ['x2', line.b[0]],
+          ['y2', line.b[1]],
+        ])}/>`,
+      )
+    }
+
+    for (const dot of dots.get(part) ?? []) {
+      content.push(
+        `<circle ${attrs([
+          ['class', dot.kind === undefined ? 'ds-dot' : `ds-dot ds-dot--${dot.kind}`],
+          ['data-part', dot.part],
+          ['data-p', dot.point],
+          ['cx', dot.at[0]],
+          ['cy', dot.at[1]],
+          ['r', scene.dotRadius],
+        ])}/>`,
+      )
+    }
   }
 
   body.push(`<g clip-path="url(#${escapeXml(clipId)})">`)

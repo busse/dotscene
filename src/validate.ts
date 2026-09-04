@@ -20,6 +20,7 @@ export type IssueCode =
   | 'EMPTY_SCENE'
   | 'EMPTY_CYCLE'
   | 'AMBIGUOUS_ANIMATION'
+  | 'DEGENERATE_FACE'
 
 export interface Issue {
   readonly code: IssueCode
@@ -124,6 +125,27 @@ export const validateFigureSpec = (name: string, spec: FigureSpec): readonly Iss
           point: end,
           message: `edge [${from}, ${to}] references unknown point '${end}'`,
           ...suggest(end, names),
+        })
+      }
+    }
+  }
+
+  for (const face of spec.faces ?? []) {
+    if (face.points.length < 3) {
+      issues.push({
+        code: 'DEGENERATE_FACE',
+        figure: name,
+        message: `a face needs at least three points, got ${face.points.length}`,
+      })
+    }
+    for (const point of face.points) {
+      if (!(point in spec.points)) {
+        issues.push({
+          code: 'UNKNOWN_POINT',
+          figure: name,
+          point,
+          message: `face [${face.points.join(', ')}] references unknown point '${point}'`,
+          ...suggest(point, names),
         })
       }
     }

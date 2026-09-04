@@ -66,6 +66,7 @@ const prefersReducedMotion = (): boolean =>
 interface Bindings {
   readonly dots: readonly (readonly [string, SVGCircleElement])[]
   readonly lines: readonly (readonly [string, string, SVGLineElement])[]
+  readonly faces: readonly (readonly [readonly string[], SVGPolygonElement])[]
 }
 
 /**
@@ -92,14 +93,35 @@ const bindAll = (svg: SVGSVGElement): Map<string, Bindings> => {
     lines.set(part, list)
   }
 
+  const faces = new Map<string, (readonly [readonly string[], SVGPolygonElement])[]>()
+  for (const element of svg.querySelectorAll<SVGPolygonElement>('polygon[data-face]')) {
+    const part = element.getAttribute('data-part') ?? ''
+    const list = faces.get(part) ?? []
+    list.push([element.getAttribute('data-face')!.split(' '), element])
+    faces.set(part, list)
+  }
+
   const bindings = new Map<string, Bindings>()
-  for (const part of new Set([...dots.keys(), ...lines.keys()])) {
-    bindings.set(part, { dots: dots.get(part) ?? [], lines: lines.get(part) ?? [] })
+  for (const part of new Set([...dots.keys(), ...lines.keys(), ...faces.keys()])) {
+    bindings.set(part, {
+      dots: dots.get(part) ?? [],
+      lines: lines.get(part) ?? [],
+      faces: faces.get(part) ?? [],
+    })
   }
   return bindings
 }
 
 const paintPart = (bindings: Bindings, points: Frame): void => {
+  for (const [names, element] of bindings.faces) {
+    let path = ''
+    for (const name of names) {
+      const at = points[name]
+      if (at === undefined) continue
+      path += `${path === '' ? '' : ' '}${at[0]},${at[1]}`
+    }
+    if (path !== '') element.setAttribute('points', path)
+  }
   for (const [name, element] of bindings.dots) {
     const at = points[name]
     if (at === undefined) continue

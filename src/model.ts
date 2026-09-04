@@ -22,6 +22,21 @@ export interface Edge {
   readonly kind?: string
 }
 
+/**
+ * A filled polygon, named by the points around its rim.
+ *
+ * Faces are what let a scene occlude: a wall painted over what is behind it hides those
+ * lines, which a wireframe cannot do. Parts paint in declaration order, so put nearer things
+ * later — see the note on draw order in the README.
+ */
+export interface FaceSpec {
+  /** Point names in order around the rim. Three or more. */
+  readonly points: readonly PointId[]
+  readonly kind?: string
+}
+
+export type Face = FaceSpec
+
 export type PointMap = Readonly<Record<PointId, Vec2>>
 
 export type PoseOverride = Readonly<Partial<Record<PointId, Vec2>>>
@@ -30,6 +45,8 @@ export interface FigureSpec {
   /** Rest positions, in the figure's own local coordinate space (y grows downward). */
   readonly points: PointMap
   readonly edges: readonly EdgeSpec[]
+  /** Filled polygons, painted under this figure's own edges. */
+  readonly faces?: readonly FaceSpec[]
   /**
    * Role labels for points, mirroring an edge's `kind`.
    *
@@ -48,6 +65,7 @@ export interface Figure {
   readonly name: string
   readonly points: PointMap
   readonly edges: readonly Edge[]
+  readonly faces: readonly Face[]
   readonly pointKinds: Readonly<Record<PointId, string>>
   readonly poses: Readonly<Record<string, PoseOverride>>
   readonly title?: string
@@ -189,6 +207,7 @@ export const defineFigure = (name: string, spec: FigureSpec): Figure => {
     name,
     points: spec.points,
     edges: spec.edges.map(normalizeEdge),
+    faces: spec.faces ?? [],
     pointKinds: spec.pointKinds ?? {},
     poses: spec.poses ?? {},
     ...(spec.title === undefined ? {} : { title: spec.title }),

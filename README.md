@@ -180,7 +180,17 @@ Scenes stay two-dimensional. This is an authoring transform applied once, when a
 
 The default `squash` of 0.5 makes a cell twice as wide as it is tall: dimetric rather than strictly isometric, but it is what the word has meant in games for decades and it keeps every edge on a clean 2:1 slope. Pass `squash: Math.tan(Math.PI / 6)` for true 30-degree isometric.
 
-Nothing hides anything else in a wireframe, so depth has to come from weight instead — see the `css` option below.
+### Solid surfaces
+
+A figure can declare `faces` — filled polygons named by the points around their rim — which is how a scene occludes. A face is painted under its own figure's strokes, and **parts paint in the order they are declared**, so a wall painted later covers the grid lines, roads and vehicles painted before it. Order the parts back to front: in this projection depth is x + y, larger being nearer.
+
+```ts
+faces: [{ points: ['topFar', 'topEast', 'topNear', 'topWest'], kind: 'roof' }]
+```
+
+A face defaults to the scene's `background`, since its job is to hide what is behind it; give it a `kind` and its own fill to shade the sides of a solid. Faces move with the figure, so an animated part keeps its walls.
+
+Depth can also come from weight alone where solids would be too heavy — see the `css` option below.
 
 ## Sizing
 

@@ -64,7 +64,7 @@ describe('renderSvg', () => {
     expect(svg).toMatchInlineSnapshot(`
       "<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="bar" viewBox="-1 -1 2 12" role="img">
         <title>A bar</title>
-        <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="bar"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
+        <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="bar"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
         <defs><clipPath id="ds-clip-bar"><rect x="-1" y="-1" width="2" height="12"/></clipPath></defs>
         <g clip-path="url(#ds-clip-bar)">
           <line class="ds-line" data-part="bar" data-a="top" data-b="base" x1="0" y1="0" x2="0" y2="10"/>
@@ -227,5 +227,64 @@ describe('roles and ground', () => {
 
   it('leaves the ground alone when a scene does not ask for one', () => {
     expect(renderSvg(resolve(defineScene('s', { parts: [{ figure: roled }] })))).not.toContain('ds-bg')
+  })
+})
+
+describe('faces and paint order', () => {
+  const walled = defineFigure('walled', {
+    points: { a: [0, 0], b: [10, 0], c: [10, 10], d: [0, 10] },
+    edges: [['a', 'b'], ['b', 'c']],
+    faces: [{ points: ['a', 'b', 'c', 'd'], kind: 'wall' }],
+  })
+  const flat = defineFigure('flat', {
+    points: { p: [-5, 5], q: [15, 5] },
+    edges: [['p', 'q']],
+  })
+
+  it('emits a face as a polygon carrying the names of its rim', () => {
+    const svg = renderSvg(resolve(defineScene('s', { parts: [{ figure: walled }] })))
+    expect(svg).toContain('<polygon class="ds-face ds-face--wall" data-part="walled" data-face="a b c d"')
+    expect(svg).toContain('points="0,0 10,0 10,10 0,10"')
+  })
+
+  it('paints a part\'s faces under that part\'s own strokes', () => {
+    const svg = renderSvg(resolve(defineScene('s', { parts: [{ figure: walled }] })))
+    expect(svg.indexOf('<polygon')).toBeLessThan(svg.indexOf('<line'))
+  })
+
+  it('paints parts in declaration order, which is what lets a wall hide what is behind it', () => {
+    const svg = renderSvg(
+      resolve(defineScene('s', { parts: [{ figure: flat }, { figure: walled }] })),
+    )
+    // The flat part's line is emitted before the wall's polygon, so the wall covers it.
+    expect(svg.indexOf('data-part="flat"')).toBeLessThan(svg.indexOf('<polygon'))
+  })
+
+  it('keeps a dot above its own part\'s lines', () => {
+    const svg = renderSvg(resolve(defineScene('s', { parts: [{ figure: walled }] })))
+    expect(svg.indexOf('<line')).toBeLessThan(svg.indexOf('<circle'))
+  })
+
+  it('takes the face fill from the scene\'s own ground, so a wall hides rather than reveals', () => {
+    const svg = renderSvg(resolve(defineScene('s', { parts: [{ figure: walled }], background: '#fbfaf7' })))
+    expect(svg).toContain('--ds-face-fill:#fbfaf7')
+  })
+
+  it('rejects a face with fewer than three points', () => {
+    expect(() =>
+      defineFigure('x', { points: { a: [0, 0], b: [1, 1] }, edges: [], faces: [{ points: ['a', 'b'] }] }),
+    ).toThrow(/at least three points/)
+  })
+
+  it('rejects a face naming a point that does not exist, and suggests the real one', () => {
+    let caught: unknown
+    try {
+      defineFigure('x', { points: { top: [0, 0], mid: [1, 1], base: [2, 2] }, edges: [], faces: [{ points: ['top', 'mid', 'bse'] }] })
+    } catch (error) {
+      caught = error
+    }
+    const issue = (caught as { issues: readonly { code: string; didYouMean?: string }[] }).issues[0]
+    expect(issue?.code).toBe('UNKNOWN_POINT')
+    expect(issue?.didYouMean).toBe('base')
   })
 })

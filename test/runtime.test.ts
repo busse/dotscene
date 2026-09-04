@@ -56,7 +56,8 @@ const fakeSvg = () => {
     dots,
     line,
     listeners,
-    querySelectorAll: (selector: string) => (selector.startsWith('circle') ? Object.values(dots) : [line]),
+    querySelectorAll: (selector: string) =>
+      selector.startsWith('circle') ? Object.values(dots) : selector.startsWith('polygon') ? [] : [line],
     addEventListener: (type: string, handler: () => void) => {
       ;(listeners[type] ??= []).push(handler)
     },
@@ -235,7 +236,8 @@ describe('multi-part scenes', () => {
     return {
       walker,
       bag,
-      querySelectorAll: (selector: string) => (selector.startsWith('circle') ? [walker, bag] : [line]),
+      querySelectorAll: (selector: string) =>
+        selector.startsWith('circle') ? [walker, bag] : selector.startsWith('polygon') ? [] : [line],
       addEventListener: () => {},
       removeEventListener: () => {},
     }
@@ -284,5 +286,30 @@ describe('multi-part scenes', () => {
     // `start` — which takes no time at all, so the position snaps rather than sliding back.
     run(280)
     expect(svg.walker.attrs.cx).toBe('0')
+  })
+})
+
+describe('moving faces', () => {
+  it('moves a polygon\'s rim along with the points it is named for', () => {
+    const dot = element({ 'data-p': 'a', 'data-part': 'bar' })
+    const face = element({ 'data-face': 'a b', 'data-part': 'bar', points: '0,0 1,1' })
+    const svg = {
+      querySelectorAll: (selector: string) =>
+        selector.startsWith('circle') ? [dot] : selector.startsWith('polygon') ? [face] : [],
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    }
+    const handle = mountScene(svg, {
+      cycle: ['start', 'end'],
+      frames: {
+        start: { bar: { a: [0, 0], b: [1, 1] } },
+        end: { bar: { a: [10, 0], b: [11, 1] } },
+      },
+      timings: { start: { duration: 100, hold: 100 }, end: { duration: 100, hold: 100 } },
+      easing: 'linear',
+      mode: 'loop',
+    })
+    handle.goTo('end')
+    expect(face.attrs.points).toBe('10,0 11,1')
   })
 })

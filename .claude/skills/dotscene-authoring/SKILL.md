@@ -115,7 +115,8 @@ const points = { towerNear: grid([3, 3, 0]), towerTop: grid([3, 3, 6]) }
 - Build local `box` / `line` helpers over grid space rather than writing projected numbers.
 - For a solid-looking box, drop the far corner — always the smallest x + y — and its three edges. Seven points, nine edges, three visible faces.
 - A full ground grid is cheap: only line endpoints become dots, so twelve lines cost twenty-four dots around the rim, not a hundred in the middle.
-- Nothing can hide behind anything, so depth comes from weight. Give edges a `kind` and points a `pointKinds` entry, then style `ds-line--x` and `ds-dot--x` in the scene's `css`.
+- To make something solid, give the figure `faces` — polygons named by their rim points — and order the parts back to front, because parts paint in declaration order. Depth is x + y, larger nearer. Verify the overlaps rather than trusting the depth key: one number per part only works while nothing straddles another thing's span.
+- Without faces, nothing hides behind anything, so depth comes from weight. Give edges a `kind` and points a `pointKinds` entry, then style `ds-line--x` and `ds-dot--x` in the scene's `css`.
 - Naming areas: the plate's corners land top/right/bottom/left, so its edges are the upper-left, upper-right, lower-right and lower-left. A road at constant `gy` runs upper-left to lower-right. Prefer landmarks ("the park lot") or raw grid coordinates over compass words.
 - A figure moves across the grid by translating the part — the projection is affine, so `grid([gx, gy, 0])` is both the cell and the offset to it. No per-frame pose needed for something that only slides.
 - Set `dotRadius` explicitly when the scene mixes scales — small trees beside large buildings — since the median-edge default will size for one and swallow the other.
@@ -154,6 +155,8 @@ Never invent a hex value to fill a gap. If a scene needs distinctions the palett
 | Two hands that should touch do not | Each was posed in its own local frame. Solve both from one scene point. |
 | A reaching arm is locked straight | The target is at or past full reach. Move the figures closer, or lower the target. |
 | Two walkers look like one figure mirrored | Same scale, cadence and phase. Vary all three. |
+| Lines show through a building | The figure has no `faces`. Add them, and check the part order — a wall only hides what was painted before it. |
+| A wall hides something it should be behind | Its part is declared too late. Order parts back to front by x + y. |
 | An isometric scene is a flat tangle of equal lines | Nothing occludes anything. Separate ground, roads and structure by `kind` and weight them in the scene's `css`. |
 | A profile figure's torso is a blob | Points within ~3 units pile up at this dot size. Spread the shoulders and hips a little; it still reads as profile. |
 | Diagonals look wrong in preview | Terminal cells are 2× taller than wide; the renderer already corrects for this. Trust the SVG. |

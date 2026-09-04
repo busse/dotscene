@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="lamp" viewBox="-16 6 56 64" role="img">
   <title>A desk lamp</title>
-  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="lamp"]{--ds-dot-r:3.2;--ds-line-w:1.44}</style>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="lamp"]{--ds-dot-r:3.2;--ds-line-w:1.44}</style>
   <defs><clipPath id="ds-clip-lamp"><rect x="-16" y="6" width="56" height="64"/></clipPath></defs>
   <g clip-path="url(#ds-clip-lamp)">
     <line class="ds-line" data-part="lamp" data-a="baseL" data-b="baseR" x1="-10" y1="64" x2="10" y2="64"/>

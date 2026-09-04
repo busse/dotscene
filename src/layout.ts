@@ -28,6 +28,14 @@ export interface ResolvedLine {
   readonly kind?: string
 }
 
+export interface ResolvedFace {
+  readonly part: string
+  /** Point names around the rim, kept so the runtime can move the polygon. */
+  readonly names: readonly PointId[]
+  readonly at: readonly Vec2[]
+  readonly kind?: string
+}
+
 export type ViewBox = readonly [number, number, number, number]
 
 /** Scene-space positions for one part, keyed by point name. */
@@ -55,6 +63,9 @@ export interface ResolvedScene {
   readonly background?: string
   readonly dots: readonly ResolvedDot[]
   readonly lines: readonly ResolvedLine[]
+  readonly faces: readonly ResolvedFace[]
+  /** Part ids in paint order, which is the order they were declared in. */
+  readonly partOrder: readonly string[]
   /** Present only for animated scenes: the cycling part and its poses in scene space. */
   readonly animation?: ResolvedAnimation
 }
@@ -118,6 +129,8 @@ export const resolve = (scene: Scene): ResolvedScene => {
 
   const dots: ResolvedDot[] = []
   const lines: ResolvedLine[] = []
+  const faces: ResolvedFace[] = []
+  const partOrder: string[] = []
   let box: Bounds | undefined
 
   const grow = (points: Iterable<Vec2>): void => {
@@ -127,8 +140,15 @@ export const resolve = (scene: Scene): ResolvedScene => {
 
   for (const part of scene.parts) {
     const id = partId(part)
+    partOrder.push(id)
     const points = partPoints(part, undefined)
     grow(Object.values(points))
+
+    for (const face of part.figure.faces) {
+      const at = face.points.map((name) => points[name]).filter((p): p is Vec2 => p !== undefined)
+      if (at.length < 3) continue
+      faces.push({ part: id, names: face.points, at, ...(face.kind === undefined ? {} : { kind: face.kind }) })
+    }
 
     for (const line of part.figure.edges) {
       const a = points[line.from]
@@ -203,6 +223,8 @@ export const resolve = (scene: Scene): ResolvedScene => {
     ...(scene.background === undefined ? {} : { background: scene.background }),
     dots,
     lines,
+    faces,
+    partOrder,
     ...(animation === undefined ? {} : { animation }),
   }
 }

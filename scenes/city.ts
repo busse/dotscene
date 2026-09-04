@@ -13,6 +13,7 @@ const grid = isometric({ tile: 8, squash: 0.5, rise: 5 })
 interface Shape {
   readonly points: Readonly<Record<string, Vec2>>
   readonly edges: readonly (readonly [string, string])[]
+  readonly faces?: readonly { readonly points: readonly string[]; readonly kind?: string }[]
 }
 
 /**
@@ -47,6 +48,13 @@ const box = (prefix: string, from: Vec2, to: Vec2, height: number, base = 0): Sh
       [`${prefix}TopNear`, `${prefix}TopWest`],
       [`${prefix}TopWest`, `${prefix}TopFar`],
     ],
+    // The same three faces the visible edges bound: roof, and the two walls turned towards
+    // the viewer. They are what stops the ground grid showing through the building.
+    faces: [
+      { points: [`${prefix}TopFar`, `${prefix}TopEast`, `${prefix}TopNear`, `${prefix}TopWest`], kind: 'roof' },
+      { points: [`${prefix}East`, `${prefix}Near`, `${prefix}TopNear`, `${prefix}TopEast`], kind: 'east' },
+      { points: [`${prefix}Near`, `${prefix}West`, `${prefix}TopWest`, `${prefix}TopNear`], kind: 'south' },
+    ],
   }
 }
 
@@ -72,6 +80,10 @@ const tree = (prefix: string, [x, y]: Vec2, height = 1.7, spread = 1.15): Shape 
       ...canopy.map((_unused, i) => [`${prefix}Top`, `${prefix}C${i}`] as const),
       ...canopy.map((_unused, i) => [`${prefix}C${i}`, `${prefix}C${(i + 1) % 4}`] as const),
     ],
+    faces: canopy.map((_unused, i) => ({
+      points: [`${prefix}Top`, `${prefix}C${i}`, `${prefix}C${(i + 1) % 4}`],
+      kind: 'foliage',
+    })),
   }
 }
 
@@ -88,7 +100,27 @@ const line = (name: string, from: Vec2, to: Vec2): Shape =>
 const merge = (...shapes: readonly Shape[]): Shape => ({
   points: Object.assign({}, ...shapes.map((s) => s.points)),
   edges: shapes.flatMap((s) => s.edges),
+  faces: shapes.flatMap((s) => s.faces ?? []),
 })
+
+/**
+ * Label every point in a shape with one role, so a scene can colour by what a thing *is*
+ * rather than by matching point names.
+ */
+const kindsFor = (shape: Shape, kind: string): Record<string, string> =>
+  Object.fromEntries(Object.keys(shape.points).map((name) => [name, kind]))
+
+/** Turn a shape into a figure, with every point carrying one role. */
+const figureOf = (name: string, shape: Shape, title: string, kind?: string) =>
+  defineFigure(name, {
+    title,
+    points: shape.points,
+    edges: shape.edges,
+    faces: shape.faces ?? [],
+    ...(kind === undefined
+      ? {}
+      : { pointKinds: Object.fromEntries(Object.keys(shape.points).map((n) => [n, kind])) }),
+  })
 
 // The block: a road cross splitting nine by nine into four four-by-four lots, three
 // buildings of different heights, and a park in the fourth.
@@ -126,18 +158,43 @@ const roads = merge(
   line('roadEW2', [ROAD_FROM, 5], [ROAD_TO, 5]),
 )
 
-const buildings = merge(
-  box('tower', [1, 1], [3, 3], 6),
-  box('office', [6, 1], [8, 3], 3),
-  box('works', [1, 6], [3, 8], 4),
-)
+/**
+ * Everything is its own part now, because parts paint in declaration order and that order is
+ * what does the hiding. Ground first, then each solid from the back of the scene forwards:
+ * a wall painted late covers the grid lines, roads and vehicle painted before it.
+ *
+ * Depth in this projection is x + y. The tower's nearest corner is at 6, the truck's lane is
+ * at 4.5 rising to 21.5 as it drives, the office and works sit at 11, the park at 13 to 16.
+ * The truck therefore passes behind the works building and in front of nothing — checked,
+ * not assumed — so one fixed order holds for the whole journey.
+ */
+export const cityGround = defineFigure('cityGround', {
+  title: 'Ground, lots and roads',
+  points: { ...plate.points, ...lots.points, ...roads.points },
+  edges: [
+    ...plate.edges.map(([from, to]) => ({ from, to, kind: 'ground' })),
+    ...lots.edges.map(([from, to]) => ({ from, to, kind: 'lot' })),
+    ...roads.edges.map(([from, to]) => ({ from, to, kind: 'road' })),
+  ],
+  pointKinds: {
+    ...kindsFor(plate, 'ground'),
+    ...kindsFor(lots, 'lot'),
+    ...kindsFor(roads, 'road'),
+  },
+})
 
-// Spread across the lot rather than clustered: a canopy is nearly two tiles wide, so trees
-// any closer than that merge into one thicket.
-const park = merge(
-  tree('treeA', [6.6, 6.6], 1.5, 0.8),
-  tree('treeB', [8.2, 7.4], 1.2, 0.7),
-  tree('treeC', [6.9, 8.4], 1.8, 0.85),
+export const tower = figureOf('tower', box('tower', [1, 1], [3, 3], 6), 'A tower')
+export const office = figureOf('office', box('office', [6, 1], [8, 3], 3), 'An office')
+export const works = figureOf('works', box('works', [1, 6], [3, 8], 4), 'A works')
+
+export const park = figureOf(
+  'park',
+  merge(
+    tree('treeA', [6.6, 6.6], 1.5, 0.8),
+    tree('treeB', [8.2, 7.4], 1.2, 0.7),
+    tree('treeC', [6.9, 8.4], 1.8, 0.85),
+  ),
+  'A park',
 )
 
 /**
@@ -145,7 +202,8 @@ const park = merge(
  *
  * That works because the projection is affine: shifting a figure by whole cells in grid
  * space is exactly a shift in screen space, so `grid([gx, gy, 0])` doubles as the offset to
- * place it there. No per-frame pose needed — the truck is one figure that slides.
+ * place it there. No per-frame pose needed — the truck is one figure that slides, faces and
+ * all, because the runtime moves a polygon's rim the same way it moves a line's ends.
  *
  * Authored nose-first along +x, which is the direction it drives.
  */
@@ -159,35 +217,15 @@ const truckShape = merge(
 export const truck = defineFigure('truck', {
   title: 'A truck',
   points: truckShape.points,
+  edges: truckShape.edges.map(([from, to]) => ({ from, to, kind: 'vehicle' })),
+  faces: truckShape.faces ?? [],
   // Its own role, so its dots can be smaller: a vehicle's panels are shorter than a
   // building's walls, and dots sized for the buildings turn it into a blob.
   pointKinds: Object.fromEntries(Object.keys(truckShape.points).map((name) => [name, 'vehicle'])),
-  edges: truckShape.edges.map(([from, to]) => ({ from, to, kind: 'vehicle' })),
 })
 
 /** Where the truck sits when it is `gx` cells along the east–west road. */
 const alongRoad = (gx: number): Vec2 => grid([gx, ROAD_LANE, 0])
-
-/**
- * Label every point in a shape with one role, so a scene can colour by what a thing *is*
- * rather than by matching point names.
- */
-const kindsFor = (shape: Shape, kind: string): Record<string, string> =>
-  Object.fromEntries(Object.keys(shape.points).map((name) => [name, kind]))
-
-export const block = defineFigure('block', {
-  title: 'Nine tiles square',
-  points: { ...plate.points, ...lots.points, ...roads.points, ...buildings.points, ...park.points },
-  // Buildings and trees carry no role: they are the content, and take the scene's ink.
-  pointKinds: { ...kindsFor(plate, 'ground'), ...kindsFor(lots, 'lot'), ...kindsFor(roads, 'road') },
-  edges: [
-    ...plate.edges.map(([from, to]) => ({ from, to, kind: 'ground' })),
-    ...lots.edges.map(([from, to]) => ({ from, to, kind: 'lot' })),
-    ...roads.edges.map(([from, to]) => ({ from, to, kind: 'road' })),
-    ...buildings.edges,
-    ...park.edges,
-  ],
-})
 
 /**
  * Non-photo blue is the pencil a draughtsman laid out with, because the reproduction camera
@@ -207,8 +245,18 @@ export const block = defineFigure('block', {
  * Literal hex, never custom properties: a standalone .svg, an `<img src>` or a rasterised
  * PNG inherits nothing from a page.
  */
-const roles = (ink: string, lot: string, ground: string, road: string): string =>
+const roles = (
+  ink: string,
+  lot: string,
+  ground: string,
+  road: string,
+  faces: { readonly roof: string; readonly east: string; readonly south: string; readonly foliage: string },
+): string =>
   [
+    `.ds-face--roof{fill:${faces.roof}}`,
+    `.ds-face--east{fill:${faces.east}}`,
+    `.ds-face--south{fill:${faces.south}}`,
+    `.ds-face--foliage{fill:${faces.foliage}}`,
     `.ds-line{stroke:${ink}}`,
     `.ds-dot{fill:${ink}}`,
     `.ds-line--lot{stroke:${lot}}`,
@@ -223,8 +271,12 @@ const roles = (ink: string, lot: string, ground: string, road: string): string =
 
 const layout = {
   parts: [
-    { figure: block },
+    { figure: cityGround },
+    { figure: tower },
     { figure: truck, id: 'truck', at: alongRoad(-8) },
+    { figure: office },
+    { figure: works },
+    { figure: park },
   ],
   // Explicit, because the roads deliberately overrun the block: a fitted box would zoom out
   // to include them and there would be no off-frame left to arrive from.
@@ -256,7 +308,14 @@ export const scene = defineScene('city', {
   title: 'A city block, nine tiles square',
   ...layout,
   background: '#fbfaf7', // gray-050, paper
-  css: roles('#1d2021', '#a4dded', '#1b7f9f', '#0b6580'),
+  // Walls take three neutral steps so a solid reads as having form: roof lightest, then the
+  // two visible walls. All from the ramp — gray-000, gray-100, gray-200.
+  css: roles('#1d2021', '#a4dded', '#1b7f9f', '#0b6580', {
+    roof: '#ffffff',
+    east: '#f2f1ec',
+    south: '#e6e4dd',
+    foliage: '#f2f1ec',
+  }),
 })
 
 /**
@@ -270,5 +329,12 @@ export const night = defineScene('cityNight', {
   title: 'A city block, nine tiles square — dark',
   ...layout,
   background: '#16181a', // gray-950
-  css: roles('#edebe6', '#33383b', '#3d9fbf', '#a4dded'),
+  // The same three steps, taken up from the ground rather than down from paper, so a wall
+  // never matches the ground it stands on: gray-700, gray-800, gray-900.
+  css: roles('#edebe6', '#33383b', '#3d9fbf', '#a4dded', {
+    roof: '#3b4042',
+    east: '#262a2c',
+    south: '#1d2021',
+    foliage: '#262a2c',
+  }),
 })
