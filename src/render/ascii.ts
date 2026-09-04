@@ -25,9 +25,16 @@ const DOT = '·'
 const CROSS = '┼'
 const LINE_CHARS = new Set(['─', '│', '╲', '╱', CROSS])
 
-const lineChar = (dc: number, dr: number): string => {
+/**
+ * Pick the glyph matching the stroke's *visual* angle.
+ *
+ * Grid rows are shorter than columns are wide, so row deltas are scaled back up by the cell
+ * aspect first — otherwise a line that looks 45 degrees on screen would be drawn with the
+ * horizontal glyph.
+ */
+const lineChar = (dc: number, dr: number, charAspect: number): string => {
   const adc = Math.abs(dc)
-  const adr = Math.abs(dr)
+  const adr = Math.abs(dr) * charAspect
   if (adr < adc * 0.5) return '─'
   if (adc < adr * 0.5) return '│'
   return dc > 0 === dr > 0 ? '╲' : '╱'
@@ -62,7 +69,7 @@ export const renderAscii = (scene: ResolvedScene, options: AsciiOptions = {}): s
     const [c1, r1] = toGrid(line.b)
     const dc = c1 - c0
     const dr = r1 - r0
-    const char = lineChar(dc, dr)
+    const char = lineChar(dc, dr, charAspect)
     // One step per cell of the dominant axis: dense enough to leave no gaps, sparse
     // enough not to double up glyphs on a diagonal.
     const steps = Math.max(1, Math.ceil(Math.max(Math.abs(dc), Math.abs(dr))))
