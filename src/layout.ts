@@ -6,7 +6,7 @@
  * than on markup.
  */
 
-import type { AnimateMode, EasingName, Keyframe, Part, PointId, Scene, Vec2 } from './model.ts'
+import type { AnimateMode, EasingName, Keyframe, Part, PointId, Pose, Scene, Vec2 } from './model.ts'
 import { partId } from './model.ts'
 import { applyTransform, bounds, distance, padBounds, round, roundVec, unionBounds, type Bounds } from './geometry.ts'
 import { posePoints } from './poses.ts'
@@ -68,7 +68,7 @@ export interface ResolvedAnimation {
 }
 
 /** Scene-space points for a part under a given pose. */
-export const partPoints = (part: Part, pose: string | undefined): Record<PointId, Vec2> => {
+export const partPoints = (part: Part, pose: string | Pose | undefined): Record<PointId, Vec2> => {
   const local = posePoints(part.figure, pose ?? part.pose)
   const out: Record<PointId, Vec2> = {}
   for (const [name, at] of Object.entries(local)) {

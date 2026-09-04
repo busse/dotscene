@@ -1,5 +1,15 @@
 import { describe, expect, it } from 'vitest'
-import { atKeyframe, compile, defineFigure, defineScene, easings, resolve } from '../src/index.ts'
+import {
+  atKeyframe,
+  compile,
+  defineFigure,
+  definePose,
+  defineScene,
+  easings,
+  lerpPoints,
+  posePoints,
+  resolve,
+} from '../src/index.ts'
 import { validateScene } from '../src/validate.ts'
 
 const bar = defineFigure('bar', {
@@ -107,6 +117,43 @@ describe('keyframe validation', () => {
   it('rejects an animate block that sets neither', () => {
     const issues = validateScene(twoPart({}))
     expect(issues.map((issue) => issue.code)).toContain('EMPTY_CYCLE')
+  })
+})
+
+describe('computed poses', () => {
+  it('accepts a Pose object in a keyframe, not only a pose name', () => {
+    const halfway = definePose(bar, 'halfway', lerpPoints(posePoints(bar, undefined), posePoints(bar, 'tip'), 0.5))
+    const resolved = resolve(twoPart({ keyframes: [{ name: 'k', parts: { a: { pose: halfway } } }] }))
+    // Halfway between the rest position (top at x 0) and `tip` (top at x 4).
+    expect(resolved.animation?.frames.k?.a?.top).toEqual([2, 0])
+  })
+
+  it('validates a computed pose at build time, not at keyframe time', () => {
+    expect(() => definePose(bar, 'bad', { nope: [0, 0] })).toThrow(/unknown point 'nope'/)
+    // A valid one raises no scene-level issue, since it was already checked.
+    const ok = definePose(bar, 'ok', { top: [1, 1] })
+    expect(validateScene(twoPart({ keyframes: [{ name: 'k', parts: { a: { pose: ok } } }] }))).toEqual([])
+  })
+
+  it('keeps a foot planted at every phase between two poses, not just at the named ones', () => {
+    // A leg whose foot runs from +10 to -10 across a half-stride while the body advances 10
+    // holds one world position throughout — the property a walk cycle depends on.
+    const leg = defineFigure('leg', {
+      points: { hip: [0, 0], foot: [10, 20] },
+      edges: [['hip', 'foot']],
+      poses: { front: { foot: [10, 20] }, back: { foot: [-10, 20] } },
+    })
+    for (const t of [0, 0.25, 0.5, 0.75, 1]) {
+      const mid = definePose(leg, `p${t}`, lerpPoints(posePoints(leg, 'front'), posePoints(leg, 'back'), t))
+      const resolved = resolve(
+        defineScene('s', {
+          parts: [{ figure: leg, id: 'l' }],
+          viewBox: [0, 0, 100, 40],
+          animate: { keyframes: [{ name: 'k', parts: { l: { at: [t * 20, 0], pose: mid } } }] },
+        }),
+      )
+      expect(resolved.animation?.frames.k?.l?.foot?.[0]).toBeCloseTo(10, 6)
+    }
   })
 })
 

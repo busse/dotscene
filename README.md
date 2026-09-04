@@ -134,6 +134,8 @@ animate: {
 
 Fields a keyframe leaves out fall back to the part's own declaration, and a part no keyframe mentions never moves. `duration` is the time to transition *into* a step, so setting it to `0` makes that step a hard cut — which is how a loop wraps without sliding everything backwards across the stage.
 
+A keyframe's `pose` can be a computed `Pose` rather than a name, which frees a figure from the keyframe grid — build one with `lerpPoints` to catch it at any point between two poses. That is how two figures on one shared timeline can walk at different cadences instead of marching in lockstep.
+
 Each keyframe can set its own `easing`. Continuous travel wants `linear` on every step, easing only where the motion genuinely starts and stops: an ease brings velocity to zero at *every* keyframe it passes through, which is what makes a run of steps pulse instead of flow.
 
 To have figures walk on and off, give the scene an explicit `viewBox` and park them outside it; content is clipped to the viewBox, so off-stage is genuinely invisible.

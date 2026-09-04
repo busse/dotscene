@@ -80,7 +80,14 @@ export type AnimateMode = 'loop' | 'pingpong' | 'hover' | 'click'
  * changes — a part that stays put needs no entry at all.
  */
 export interface PartKeyframe extends Transform {
-  readonly pose?: string
+  /**
+   * A pose name from the figure, or a `Pose` built at runtime.
+   *
+   * The second form is what lets a scene place a figure at an arbitrary point between two
+   * poses — a gait phase halfway through a stride, say — instead of being limited to the
+   * poses that happen to be named.
+   */
+  readonly pose?: string | Pose
 }
 
 /** One step of a staged animation: where every moving part is, and how long it lingers. */

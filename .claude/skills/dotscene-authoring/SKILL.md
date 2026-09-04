@@ -72,6 +72,16 @@ Four poses, and one number that ties them to the scene.
 - Author the cycle facing `+x` and use `flipX` on the part to walk the other way, rather than writing a mirrored set.
 - Give every walk keyframe `easing: 'linear'` and `hold: 0`. Ease only the first and last.
 
+### Two walkers should not look like one mirrored
+
+They share a keyframe grid, so vary them per figure: `scale` (height and stride move together), gait `rate` in half-strides per keyframe (cadence), and the starting phase (which foot is down). For a phase that does not land on the grid, build the pose:
+
+```ts
+const pose = definePose(person, label, lerpPoints(posePoints(person, 'stepA'), posePoints(person, 'passA'), t))
+```
+
+A keyframe's `pose` takes that object directly. Planting still holds at every fractional phase, because the foot's local x moves linearly while the body advances.
+
 Check it by reading the resolved frames, not by eye: the planted foot's world x should repeat across three consecutive frames.
 
 ```sh
@@ -100,6 +110,7 @@ node bin/dotscene.js inspect <scene> --json | grep -o '"footL":\[[^]]*\]'
 | An extended arm looks stretched | The hand is further from the shoulder than the arm is long — about 20 units on the person module. |
 | A walk looks jerky | Every keyframe is easing. Use `linear` for the run of steps. |
 | Feet skate along the ground | The distance travelled per keyframe does not match the stride baked into the contact poses. |
+| Two walkers look like one figure mirrored | Same scale, cadence and phase. Vary all three. |
 | A profile figure's torso is a blob | Points within ~3 units pile up at this dot size. Spread the shoulders and hips a little; it still reads as profile. |
 | Diagonals look wrong in preview | Terminal cells are 2× taller than wide; the renderer already corrects for this. Trust the SVG. |
 

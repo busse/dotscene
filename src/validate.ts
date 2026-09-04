@@ -233,7 +233,8 @@ export const validateScene = (scene: Scene): readonly Issue[] => {
             })
             continue
           }
-          if (state.pose !== undefined && !(state.pose in part.figure.poses)) {
+          // A computed Pose was already validated when it was built; only a name needs checking.
+          if (typeof state.pose === 'string' && !(state.pose in part.figure.poses)) {
             issues.push({
               code: 'UNKNOWN_POSE',
               scene: scene.name,

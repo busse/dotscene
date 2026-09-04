@@ -1,4 +1,13 @@
-import { defineFigure, defineScene, type Keyframe } from 'dotscene'
+import {
+  defineFigure,
+  definePose,
+  defineScene,
+  lerpPoints,
+  posePoints,
+  type Keyframe,
+  type Pose,
+  type Vec2,
+} from 'dotscene'
 import { person } from './person.ts'
 
 /** A sack of money, hanging from its tie at the origin so it sits wherever a hand is. */
@@ -53,75 +62,153 @@ export const floor = defineFigure('floor', {
   edges: [['floorL', 'floorR']],
 })
 
-// The figures always mirror each other, so one x describes both: the walker sits at +x and
-// the trader at -x. STRIDE is the distance the body covers between one foot landing and the
-// other, and it has to match the foot separation in `person`'s stepA/stepB poses exactly —
-// that is what keeps the planted foot from sliding along the ground.
-const STRIDE = 20
-/** Milliseconds per half-stride. 20 units every 190ms is about 1.4 m/s at this scale. */
-const HALF_MS = 190
+const FLOOR = 64
+/** Half a stride, in a figure's own units. Must match the foot separation in stepA/stepB. */
+const HALF = 10
+const CYCLE = ['stepA', 'passA', 'stepB', 'passB'] as const
 
 const MEET = 30
 const SHAKE = 24
-const HAND = 12
-const HAND_Y = 35
-/** Where the hanging hand is in the walk poses — lower at contact, because the body dips. */
-const WALK_HAND_X = 9
-const WALK_HAND_Y = { contact: 38, pass: 35 } as const
 
-const rightHand = (x: number): readonly [number, number] => [x + HAND, HAND_Y]
-const leftHand = (x: number): readonly [number, number] => [x - HAND, HAND_Y]
+/**
+ * The figure at an arbitrary point in the gait cycle, phase counted in half-strides.
+ *
+ * Interpolating between the four named poses is what frees each figure from the keyframe
+ * grid: two people can then be caught at different points in their stride at the same
+ * instant, and walk at different cadences, instead of marching in lockstep.
+ *
+ * Planting survives it. A foot's local x runs linearly from +HALF to -HALF across a
+ * half-stride while the body advances HALF, so the foot holds one world position at every
+ * phase in between, not just at the sampled ones.
+ */
+const gaitPose = (() => {
+  const cache = new Map<string, Pose>()
+  return (phase: number): Pose => {
+    const wrapped = ((phase % 4) + 4) % 4
+    const key = wrapped.toFixed(3)
+    const cached = cache.get(key)
+    if (cached !== undefined) return cached
+    const index = Math.floor(wrapped)
+    const points = lerpPoints(
+      posePoints(person, CYCLE[index]!),
+      posePoints(person, CYCLE[(index + 1) % 4]!),
+      wrapped - index,
+    )
+    const pose = definePose(person, `gait${key}`, points)
+    cache.set(key, pose)
+    return pose
+  }
+})()
+
+/**
+ * A point on a scaled figure, in scene space.
+ *
+ * Scaling happens about the origin, so a figure drawn with its feet at y = FLOOR lifts off
+ * the ground unless it is pushed back down by `FLOOR * (1 - scale)`. Everything hanging off
+ * that figure — the bag, the briefcase — has to ride the same offset.
+ */
+const place = (x: number, local: Vec2, scale: number, flipX: boolean): Vec2 => [
+  Math.round((x + (flipX ? -local[0] : local[0]) * scale) * 100) / 100,
+  Math.round((local[1] * scale + FLOOR * (1 - scale)) * 100) / 100,
+]
+
+/** A point from one of the standing poses, so items track the hand rather than a guess. */
+const handOf = (pose: string, point: 'handL' | 'handR'): Vec2 => posePoints(person, pose)[point]!
+
+/**
+ * One person walking.
+ *
+ * `rate` is half-strides per keyframe — the cadence. `scale` sets both height and stride, so
+ * a shorter figure covers less ground per step. `startPhase` decides which foot is down when
+ * the scene opens. Between them, two movers on one shared timeline stop looking like one
+ * figure mirrored.
+ */
+interface Mover {
+  readonly id: 'walker' | 'trader'
+  readonly carries: 'bag' | 'case'
+  readonly scale: number
+  readonly flipX: boolean
+  readonly dir: 1 | -1
+  readonly from: number
+  readonly rate: number
+  readonly startPhase: number
+}
+
+const TRADER_SCALE = 0.94
+/** The trader is shorter and takes quicker, shorter steps — and starts mid-swing, so the
+ * two never plant a foot on the same beat. */
+const TRADER_RATE = 1.14
+const TRADER_PHASE = 1.3
+
+const advance = (m: Mover): number => m.dir * m.rate * HALF * m.scale
+
+const moverParts = (m: Mover, i: number) => {
+  const x = Math.round((m.from + advance(m) * i) * 100) / 100
+  const pose = gaitPose(m.startPhase + i * m.rate)
+  return {
+    [m.id]: {
+      at: [x, Math.round(FLOOR * (1 - m.scale) * 100) / 100] as Vec2,
+      pose,
+      flipX: m.flipX,
+      scale: m.scale,
+    },
+    // The carried thing hangs off the arm that is not swinging, read straight from the
+    // interpolated pose so it stays in the hand through the body's bob.
+    [m.carries]: { at: place(x, pose.points.handR!, m.scale, m.flipX) },
+  }
+}
 
 interface WalkOptions {
   readonly tag: string
-  /** The walker's x at the start and end. The trader mirrors it. */
-  readonly from: number
-  readonly to: number
-  readonly steps: number
-  readonly walkerCarries: 'bag' | 'case'
-  readonly traderCarries: 'bag' | 'case'
-  /** Easing for the transition into the first frame — where the walk starts or resets. */
+  readonly samples: number
+  readonly movers: readonly Mover[]
   readonly leadIn?: Keyframe['easing']
   readonly leadInMs?: number
 }
 
+/** Milliseconds per keyframe. One walker half-stride every 190ms is about 1.4 m/s here. */
+const HALF_MS = 190
+
 /**
- * Generate one leg of the journey as contact/pass keyframes.
+ * Generate a leg of the journey.
  *
- * Every frame is `linear` with no hold: easing each step would make the walk pulse, since
- * an ease brings the body to a stop at every keyframe it passes through.
+ * Every frame is `linear` with no hold: easing each step would make the walk pulse, since an
+ * ease brings the body to a stop at every keyframe it passes through.
  */
-const walk = ({ tag, from, to, steps, walkerCarries, traderCarries, leadIn, leadInMs }: WalkOptions): Keyframe[] => {
-  const frames: Keyframe[] = []
-  const half = (to - from) / (steps * 2)
+const walk = ({ tag, samples, movers, leadIn, leadInMs }: WalkOptions): Keyframe[] =>
+  Array.from({ length: samples + 1 }, (_unused, i) => ({
+    name: `${tag}${i}`,
+    duration: i === 0 ? (leadInMs ?? HALF_MS) : HALF_MS,
+    hold: 0,
+    easing: i === 0 && leadIn !== undefined ? leadIn : ('linear' as const),
+    parts: Object.assign({}, ...movers.map((m) => moverParts(m, i))),
+  }))
 
-  for (let i = 0; i <= steps * 2; i++) {
-    const x = Math.round((from + half * i) * 100) / 100
-    const contact = i % 2 === 0
-    const phase = Math.floor(i / 2) % 2 === 0 ? 'A' : 'B'
-    const pose = `${contact ? 'step' : 'pass'}${phase}`
-    const handY = contact ? WALK_HAND_Y.contact : WALK_HAND_Y.pass
-    const first = i === 0
+const IN_SAMPLES = 10
+const OUT_SAMPLES = 16
 
-    const items = {
-      [walkerCarries]: { at: [x + WALK_HAND_X, handY] as const },
-      [traderCarries]: { at: [-x - WALK_HAND_X, handY] as const },
-    }
-
-    frames.push({
-      name: `${tag}${i}`,
-      duration: first ? (leadInMs ?? HALF_MS) : HALF_MS,
-      hold: 0,
-      ...(first && leadIn !== undefined ? { easing: leadIn } : { easing: 'linear' as const }),
-      parts: {
-        walker: { at: [x, 0], pose, flipX: false },
-        trader: { at: [-x, 0], pose, flipX: true },
-        ...items,
-      },
-    })
-  }
-  return frames
+const walkerIn: Mover = {
+  id: 'walker',
+  carries: 'bag',
+  scale: 1,
+  flipX: false,
+  dir: 1,
+  from: -MEET - IN_SAMPLES * HALF,
+  rate: 1,
+  startPhase: 0,
 }
+const traderIn: Mover = {
+  id: 'trader',
+  carries: 'case',
+  scale: TRADER_SCALE,
+  flipX: true,
+  dir: -1,
+  from: MEET + IN_SAMPLES * TRADER_RATE * HALF * TRADER_SCALE,
+  rate: TRADER_RATE,
+  startPhase: TRADER_PHASE,
+}
+const walkerOut: Mover = { ...walkerIn, carries: 'case', from: -SHAKE, startPhase: 0 }
+const traderOut: Mover = { ...traderIn, carries: 'bag', from: SHAKE, startPhase: TRADER_PHASE }
 
 /**
  * Two people meet, trade a bag of money for a briefcase, shake on it and walk on.
@@ -141,23 +228,27 @@ export const scene = defineScene('exchange', {
   viewBox: [-110, -6, 220, 76],
   parts: [
     { figure: floor },
-    { figure: person, id: 'walker', pose: 'stepA', at: [-150, 0] },
-    { figure: person, id: 'trader', pose: 'stepA', at: [150, 0], flipX: true },
-    { figure: moneybag, id: 'bag', at: [-141, 38] },
-    { figure: briefcase, id: 'case', at: [141, 38] },
+    { figure: person, id: 'walker', pose: 'stepA', at: [walkerIn.from, 0] },
+    {
+      figure: person,
+      id: 'trader',
+      pose: 'stepA',
+      at: [traderIn.from, FLOOR * (1 - TRADER_SCALE)],
+      scale: TRADER_SCALE,
+      flipX: true,
+    },
+    { figure: moneybag, id: 'bag', at: [walkerIn.from + 9, 38] },
+    { figure: briefcase, id: 'case', at: [traderIn.from - 9, 38] },
   ],
   animate: {
     mode: 'loop',
     easing: 'easeInOut',
     keyframes: [
-      // In: six strides from off-stage to arm's length. The first frame is the loop's cut.
+      // In: from off-stage to arm's length. The first frame is the loop's cut.
       ...walk({
         tag: 'in',
-        from: -150,
-        to: -MEET,
-        steps: 6,
-        walkerCarries: 'bag',
-        traderCarries: 'case',
+        samples: IN_SAMPLES,
+        movers: [walkerIn, traderIn],
         leadIn: 'linear',
         leadInMs: 0,
       }),
@@ -168,10 +259,10 @@ export const scene = defineScene('exchange', {
         hold: 350,
         easing: 'easeOut',
         parts: {
-          walker: { at: [-MEET, 0], pose: 'holdR', flipX: false },
-          trader: { at: [MEET, 0], pose: 'holdL', flipX: false },
-          bag: { at: rightHand(-MEET) },
-          case: { at: leftHand(MEET) },
+          walker: { at: [-MEET, 0], pose: 'holdR', flipX: false, scale: 1 },
+          trader: { at: [MEET, FLOOR * (1 - TRADER_SCALE)], pose: 'holdL', flipX: false, scale: TRADER_SCALE },
+          bag: { at: place(-MEET, handOf('holdR', 'handR'), 1, false) },
+          case: { at: place(MEET, handOf('holdL', 'handL'), TRADER_SCALE, false) },
         },
       },
       {
@@ -179,22 +270,22 @@ export const scene = defineScene('exchange', {
         duration: 560,
         hold: 260,
         parts: {
-          walker: { at: [-MEET, 0], pose: 'offerR', flipX: false },
-          trader: { at: [MEET, 0], pose: 'offerL', flipX: false },
-          bag: { at: [-5, 23] },
-          case: { at: [5, 23] },
+          walker: { at: [-MEET, 0], pose: 'offerR', flipX: false, scale: 1 },
+          trader: { at: [MEET, FLOOR * (1 - TRADER_SCALE)], pose: 'offerL', flipX: false, scale: TRADER_SCALE },
+          bag: { at: place(-MEET, handOf('offerR', 'handR'), 1, false) },
+          case: { at: place(MEET, handOf('offerL', 'handL'), TRADER_SCALE, false) },
         },
       },
       {
-        // The exchange itself: arms stay out, the two items cross.
+        // The exchange itself: arms stay out, the two items cross into the other hand.
         name: 'swap',
         duration: 520,
         hold: 260,
         parts: {
-          walker: { at: [-MEET, 0], pose: 'offerR', flipX: false },
-          trader: { at: [MEET, 0], pose: 'offerL', flipX: false },
-          bag: { at: [5, 23] },
-          case: { at: [-5, 23] },
+          walker: { at: [-MEET, 0], pose: 'offerR', flipX: false, scale: 1 },
+          trader: { at: [MEET, FLOOR * (1 - TRADER_SCALE)], pose: 'offerL', flipX: false, scale: TRADER_SCALE },
+          bag: { at: place(MEET, handOf('offerL', 'handL'), TRADER_SCALE, false) },
+          case: { at: place(-MEET, handOf('offerR', 'handR'), 1, false) },
         },
       },
       {
@@ -203,10 +294,10 @@ export const scene = defineScene('exchange', {
         duration: 460,
         hold: 220,
         parts: {
-          walker: { at: [-MEET, 0], pose: 'holdL', flipX: false },
-          trader: { at: [MEET, 0], pose: 'holdR', flipX: false },
-          case: { at: leftHand(-MEET) },
-          bag: { at: rightHand(MEET) },
+          walker: { at: [-MEET, 0], pose: 'holdL', flipX: false, scale: 1 },
+          trader: { at: [MEET, FLOOR * (1 - TRADER_SCALE)], pose: 'holdR', flipX: false, scale: TRADER_SCALE },
+          case: { at: place(-MEET, handOf('holdL', 'handL'), 1, false) },
+          bag: { at: place(MEET, handOf('holdR', 'handR'), TRADER_SCALE, false) },
         },
       },
       {
@@ -214,21 +305,17 @@ export const scene = defineScene('exchange', {
         duration: 460,
         hold: 620,
         parts: {
-          walker: { at: [-SHAKE, 0], pose: 'shakeR', flipX: false },
-          trader: { at: [SHAKE, 0], pose: 'shakeL', flipX: false },
-          case: { at: leftHand(-SHAKE) },
-          bag: { at: rightHand(SHAKE) },
+          walker: { at: [-SHAKE, 0], pose: 'shakeR', flipX: false, scale: 1 },
+          trader: { at: [SHAKE, FLOOR * (1 - TRADER_SCALE)], pose: 'shakeL', flipX: false, scale: TRADER_SCALE },
+          case: { at: place(-SHAKE, handOf('shakeR', 'handL'), 1, false) },
+          bag: { at: place(SHAKE, handOf('shakeL', 'handR'), TRADER_SCALE, false) },
         },
       },
-      // Out: eight strides past each other and off the far sides, each carrying what they
-      // were handed. The first frame turns them back into profile and starts them moving.
+      // Out: past each other and off the far sides, each carrying what they were handed.
       ...walk({
         tag: 'out',
-        from: -SHAKE,
-        to: 136,
-        steps: 8,
-        walkerCarries: 'case',
-        traderCarries: 'bag',
+        samples: OUT_SAMPLES,
+        movers: [walkerOut, traderOut],
         leadIn: 'easeIn',
         leadInMs: 420,
       }),
