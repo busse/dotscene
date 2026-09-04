@@ -99,6 +99,8 @@ const elbow = jointBetween(shoulder, local, upperLength, forearmLength, bend)
 
 Place the hand on the target and solve the elbow, never the reverse. Check the result: the distance between the two hands should be 0, and shoulder-to-hand should be comfortably inside the arm's length so the elbow bends rather than locking straight.
 
+Before reordering beats, write down which hand holds what at every step. A figure cannot shake with an occupied hand, so the order dictates the hand logistics, and each change of hand costs a beat. Folding one into a movement you already have — swinging a bag across as you come to a stop — is cheaper and reads better than a beat that exists only to move an object.
+
 A gesture is a sequence, not a pose. A handshake is reach, clasp, two or three pumps with the swing damping out, then settle — one held pose reads as a freeze-frame.
 
 ## Rules that matter
@@ -123,6 +125,7 @@ A gesture is a sequence, not a pose. A handshake is reach, clasp, two or three p
 | An extended arm looks stretched | The hand is further from the shoulder than the arm is long — about 20 units on the person module. |
 | A walk looks jerky | Every keyframe is easing. Use `linear` for the run of steps. |
 | Feet skate along the ground | The distance travelled per keyframe does not match the stride baked into the contact poses. |
+| An item is in the hand a figure needs for a gesture | The beat order forces it. Add a beat that moves it, or fold the move into the transition before. |
 | Two hands that should touch do not | Each was posed in its own local frame. Solve both from one scene point. |
 | A reaching arm is locked straight | The target is at or past full reach. Move the figures closer, or lower the target. |
 | Two walkers look like one figure mirrored | Same scale, cadence and phase. Vary all three. |
