@@ -83,7 +83,7 @@ Useful flags: `--pose <name>`, `--poses`, `--width <n>`, `--labels`, `--json`, `
 
 ## Output
 
-`dotscene build` writes to `dist/`: one `.svg` and one `.html` per scene, a `dotscene.css`, the gallery at `index.html`, and `dotscene.min.js` when any scene animates.
+`dotscene build` writes to `docs/`: one `.svg` and one `.html` per scene, a `dotscene.css`, the gallery at `index.html`, and `dotscene.min.js` when any scene animates. That path is committed rather than ignored, because GitHub Pages serves the gallery straight from it — point Pages at the `main` branch, `/docs` folder. Use `--out` for somewhere else.
 
 The emitted block carries its own point labels, which is how the runtime moves things without rebuilding a scene graph:
 
@@ -141,5 +141,5 @@ Scenes live in `scenes/` as either TypeScript (typed, with helpers like `mirrorX
 npm install
 npm test          # vitest
 npm run typecheck # tsc --noEmit
-npm run build     # -> dist/
+npm run build     # -> docs/ (committed; GitHub Pages serves it)
 ```

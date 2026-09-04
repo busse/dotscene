@@ -48,6 +48,7 @@ Every command takes `--json`. Failures are structured, with `didYouMean` when a 
 - Poses lerp positions, not angles, so long limbs shorten slightly mid-tween. Expected; see the README.
 - Two files must not export scenes with the same name — `loadScenes` rejects it rather than picking one.
 - Output is byte-stable by design (2-decimal rounding, fixed ordering). A noisy `git diff` after a rebuild means something actually changed.
+- `docs/` is build output but **is committed** — GitHub Pages serves the gallery from it. Rebuild and commit it alongside any scene change; never hand-edit a file in there.
 
 ## Style
 

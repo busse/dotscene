@@ -14,8 +14,7 @@
   },
   "files": [
     "src",
-    "bin",
-    "dist"
+    "bin"
   ],
   "scripts": {
     "test": "vitest run",

@@ -38,7 +38,7 @@ Options
   --poses           preview every pose in turn
   --width <n>       preview width in characters (default: 44)
   --labels          annotate preview dots with their point names
-  --out <path>      build output directory (default: dist)
+  --out <path>      build output directory (default: docs, served by GitHub Pages)
   --help            this message
 `
 
@@ -278,6 +278,12 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
     written.push(relative(process.cwd(), svgFile), relative(process.cwd(), htmlFile))
   }
 
+  // GitHub Pages runs Jekyll over the directory unless told not to; the build output is
+  // already final, so opt out rather than letting it be reprocessed.
+  const pagesMarker = resolvePath(options.out, '.nojekyll')
+  await writeFile(pagesMarker, '')
+  written.push(relative(process.cwd(), pagesMarker))
+
   const cssFile = resolvePath(options.out, 'dotscene.css')
   await writeFile(cssFile, `${DEFAULT_CSS}\n`)
   written.push(relative(process.cwd(), cssFile))
@@ -313,7 +319,7 @@ export const run = async (argv: readonly string[]): Promise<void> => {
       poses: { type: 'boolean', default: false },
       width: { type: 'string', default: '44' },
       labels: { type: 'boolean', default: false },
-      out: { type: 'string', default: 'dist' },
+      out: { type: 'string', default: 'docs' },
       help: { type: 'boolean', default: false },
     },
   })
