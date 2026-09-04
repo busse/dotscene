@@ -1,4 +1,4 @@
-import { defineFigure, defineScene } from '../src/index.ts'
+import { defineFigure, defineScene } from 'dotscene'
 import { person } from './person.ts'
 
 /** Ground line at y = 0, dipping into a trench. Extends past the figure on both sides. */

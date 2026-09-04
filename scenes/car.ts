@@ -1,4 +1,4 @@
-import { defineFigure, defineScene, ring } from '../src/index.ts'
+import { defineFigure, defineScene, ring } from 'dotscene'
 
 const front = ring('wheelF', [40, 52], 12, 8)
 const rear = ring('wheelR', [128, 52], 12, 8)

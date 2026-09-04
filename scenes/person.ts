@@ -1,4 +1,4 @@
-import { defineFigure, defineScene, mirrorX } from '../src/index.ts'
+import { defineFigure, defineScene, mirrorX } from 'dotscene'
 
 const left = {
   shoulderL: [-7, 15],

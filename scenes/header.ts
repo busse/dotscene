@@ -1,4 +1,4 @@
-import { defineScene } from '../src/index.ts'
+import { defineScene } from 'dotscene'
 import { person } from './person.ts'
 
 /**
