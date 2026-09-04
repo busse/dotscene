@@ -13,7 +13,7 @@ import { dirname, relative, resolve as resolvePath } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { compile } from './compile.ts'
 import { resolve } from './layout.ts'
-import { partId, withPose, type Scene } from './model.ts'
+import { atKeyframe, partId, withPose, type Scene } from './model.ts'
 import { renderAscii } from './render/ascii.ts'
 import { loadScenes, type LoadedScene } from './load.ts'
 import { sceneToJson } from './serialize.ts'
@@ -80,12 +80,26 @@ const requireScene = (scenes: Map<string, LoadedScene>, name: string | undefined
   return found
 }
 
-/** Every pose name reachable in a scene, in declaration order, deduplicated. */
-const scenePoses = (scene: Scene): readonly string[] => {
+/**
+ * The names worth stepping through for a scene: its keyframes if it is staged, otherwise
+ * every pose its figures define.
+ */
+const sceneSteps = (scene: Scene): readonly string[] => {
+  const keyframes = scene.animate?.keyframes
+  if (keyframes !== undefined) return keyframes.map((keyframe) => keyframe.name)
   const names = new Set<string>()
   for (const part of scene.parts) for (const pose of Object.keys(part.figure.poses)) names.add(pose)
   return [...names]
 }
+
+/**
+ * Stage a scene at a named step. A keyframe name wins over a pose name, so previewing a
+ * staged animation shows the whole tableau rather than one part changing shape in place.
+ */
+const staged = (scene: Scene, name: string): Scene =>
+  scene.animate?.keyframes?.some((keyframe) => keyframe.name === name) === true
+    ? atKeyframe(scene, name)
+    : withPose(scene, name)
 
 const cmdList = (scenes: Map<string, LoadedScene>, options: Options): void => {
   const rows = [...scenes.values()].map(({ scene, file }) => ({
@@ -93,7 +107,7 @@ const cmdList = (scenes: Map<string, LoadedScene>, options: Options): void => {
     file: relative(process.cwd(), file),
     title: scene.title,
     parts: scene.parts.map(partId),
-    poses: scenePoses(scene),
+    poses: sceneSteps(scene),
     animated: scene.animate !== undefined,
   }))
 
@@ -113,7 +127,7 @@ const cmdList = (scenes: Map<string, LoadedScene>, options: Options): void => {
 }
 
 const cmdInspect = (loaded: LoadedScene, options: Options): void => {
-  const scene = options.pose === undefined ? loaded.scene : withPose(loaded.scene, options.pose)
+  const scene = options.pose === undefined ? loaded.scene : staged(loaded.scene, options.pose)
   const resolved = resolve(scene)
 
   if (options.json) {
@@ -161,19 +175,22 @@ const cmdInspect = (loaded: LoadedScene, options: Options): void => {
   }
   if (resolved.animation !== undefined) {
     const anim = resolved.animation
-    process.stdout.write(
-      `\n  animation  part '${anim.part}', cycle ${anim.cycle.join(' -> ')}, ${anim.duration}ms over ${anim.hold}ms hold, ${anim.mode}\n`,
-    )
+    process.stdout.write(`\n  animation  ${anim.mode}, ${anim.easing}, moving ${anim.parts.join(', ')}\n`)
+    for (const name of anim.cycle) {
+      const timing = anim.timings[name]!
+      const movers = Object.keys(anim.frames[name] ?? {})
+      process.stdout.write(
+        `    ${name.padEnd(12)} ${timing.duration}ms in, ${timing.hold}ms hold   [${movers.join(', ')}]\n`,
+      )
+    }
   }
 }
 
 const cmdPreview = (loaded: LoadedScene, options: Options): void => {
-  const names = options.poses
-    ? (loaded.scene.animate?.cycle ?? scenePoses(loaded.scene))
-    : [options.pose ?? '']
+  const names = options.poses ? (loaded.scene.animate?.cycle ?? sceneSteps(loaded.scene)) : [options.pose ?? '']
 
   const frames = names.map((pose) => {
-    const scene = pose === '' ? loaded.scene : withPose(loaded.scene, pose)
+    const scene = pose === '' ? loaded.scene : staged(loaded.scene, pose)
     return {
       pose: pose === '' ? undefined : pose,
       art: renderAscii(resolve(scene), { width: options.width, labels: options.labels }),

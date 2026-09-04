@@ -1,9 +1,11 @@
 /** Public API. */
 
-export { defineFigure, definePose, defineScene, partId, withPose } from './model.ts'
+export { atKeyframe, defineFigure, definePose, defineScene, partId, withPose } from './model.ts'
 export type {
   AnimateMode,
   AnimateSpec,
+  Keyframe,
+  PartKeyframe,
   EasingName,
   Edge,
   EdgeSpec,

@@ -80,8 +80,25 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
   if (titled) body.push(`<title>${escapeXml(scene.title!)}</title>`)
   if (options.styles !== false) body.push(`<style>${DEFAULT_CSS}${sceneCss(scene)}</style>`)
 
+  // Clip to the viewBox. A browser clips to the *viewport*, not the viewBox, so under the
+  // default `preserveAspectRatio` a container with a different aspect ratio letterboxes —
+  // and anything the scene parked outside the viewBox shows up in the letterbox bars. A
+  // staged scene relies on off-stage being invisible, and this is also what makes the SVG
+  // agree with the ASCII renderer, which has always clipped.
+  const clipId = `ds-clip-${scene.name}`
+  body.push(
+    `<defs><clipPath id="${escapeXml(clipId)}"><rect ${attrs([
+      ['x', x],
+      ['y', y],
+      ['width', width],
+      ['height', height],
+    ])}/></clipPath></defs>`,
+  )
+
+  const content: string[] = []
+
   for (const line of scene.lines) {
-    body.push(
+    content.push(
       `<line ${attrs([
         ['class', line.kind === undefined ? 'ds-line' : `ds-line ds-line--${line.kind}`],
         ['data-part', line.part],
@@ -96,7 +113,7 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
   }
 
   for (const dot of scene.dots) {
-    body.push(
+    content.push(
       `<circle ${attrs([
         ['class', 'ds-dot'],
         ['data-part', dot.part],
@@ -107,6 +124,10 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
       ])}/>`,
     )
   }
+
+  body.push(`<g clip-path="url(#${escapeXml(clipId)})">`)
+  for (const row of content) body.push(`${indent}${row}`)
+  body.push('</g>')
 
   return [open, ...body.map((row) => `${indent}${row}`), '</svg>'].join('\n')
 }

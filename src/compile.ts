@@ -30,10 +30,8 @@ export const animationPayload = (resolved: ResolvedScene): string | undefined =>
   const animation = resolved.animation
   if (animation === undefined) return undefined
   return JSON.stringify({
-    part: animation.part,
     cycle: animation.cycle,
-    duration: animation.duration,
-    hold: animation.hold,
+    timings: animation.timings,
     easing: animation.easing,
     mode: animation.mode,
     frames: animation.frames,

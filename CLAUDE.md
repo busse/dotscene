@@ -7,6 +7,7 @@ Illustrations built from named points and the edges between them. Read this befo
 - **Figure** — `defineFigure(name, { points, edges, poses?, title? })`. Points are `{ name: [x, y] }` in the figure's own space, **y grows downward**. Edges are `['a', 'b']` pairs, or `{ from, to, kind }` when a stroke needs its own style class.
 - **Pose** — a *partial* override of a figure's points, declared in `poses`. Omitted points keep their rest position.
 - **Scene** — `defineScene(name, { parts, title?, animate?, padding?, viewBox?, dotRadius?, lineWidth? })`. A part is `{ figure, id?, at?, scale?, rotate?, flipX?, pose? }`.
+- **Animation** — `animate.cycle` for one part running through its poses; `animate.keyframes` when several parts move, or when a part travels as well as poses. A keyframe is `{ name, parts: { <id>: { at?, scale?, rotate?, flipX?, pose? } }, duration?, hold? }`; omitted fields fall back to the part's declaration, and an unmentioned part stays put.
 
 Point names are the contract. Keep them stable across poses — that is what makes tweening work.
 
@@ -24,7 +25,8 @@ Never guess at coordinates. After every edit:
 ```sh
 node bin/dotscene.js preview <scene> --width 44        # look at it
 node bin/dotscene.js preview <scene> --pose <name>     # one pose
-node bin/dotscene.js preview <scene> --poses           # every pose in the cycle
+node bin/dotscene.js preview <scene> --poses           # step the whole cycle
+node bin/dotscene.js preview <scene> --pose <keyframe> # one step of a staged animation
 node bin/dotscene.js preview <scene> --labels          # name the dots
 node bin/dotscene.js inspect <scene> --json            # current state as data
 node bin/dotscene.js check                             # validate, exit 1 on issues
@@ -46,6 +48,8 @@ Every command takes `--json`. Failures are structured, with `didYouMean` when a 
 - The viewBox spans **every pose in the animation cycle**, not just the resting one. A pose that reaches outside the rest bounds is fine; it will not clip.
 - Dot radius comes from the scene's median edge length. A part scaled far down inside a large scene will look cramped — fix the authoring scale, do not fight it with `dotRadius`.
 - Poses lerp positions, not angles, so long limbs shorten slightly mid-tween. Expected; see the README.
+- **Off-stage needs an explicit `viewBox`.** Content is clipped to it, so parking a figure outside is how it enters and exits. A fitted viewBox grows to include every keyframe, and then nothing is ever off-screen.
+- **A loop's wrap is a tween like any other.** If the last keyframe is on the opposite side from the first, give the first `duration: 0` so the reset is a cut instead of everything sliding backwards in full view.
 - **Scaling moves a floor anchor.** Props are drawn with the floor at y = 64, and `scale` multiplies about the origin — so a chair at `scale: 0.7` ends up floating. Offset it by `64 * (1 - scale)` to put its feet back down, or `36 * (1 - scale)` for something that belongs on the tabletop.
 - **`mirrorX` matches an `L` suffix, not an `L` anywhere.** Name bilateral points `hair1L` / `hair1R`, not `hairL1` — the latter silently produces no mirror and then fails validation on the edges.
 - A rigid sub-assembly built with `ring` (a head, a wheel) is expensive to move in a pose, since every point needs an override. Prefer moving the whole part with `at` / `rotate`, and keep poses to the limbs.

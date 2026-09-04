@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="exchange" viewBox="-110 -6 220 76" role="img">
+  <title>Two people trade a bag of money for a briefcase</title>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="exchange"]{--ds-dot-r:1.44;--ds-line-w:0.65}</style>
+  <defs><clipPath id="ds-clip-exchange"><rect x="-110" y="-6" width="220" height="76"/></clipPath></defs>
+  <g clip-path="url(#ds-clip-exchange)">
+    <line class="ds-line" data-part="floor" data-a="floorL" data-b="floorR" x1="-108" y1="64" x2="108" y2="64"/>
+    <line class="ds-line" data-part="walker" data-a="head" data-b="neck" x1="-150" y1="3" x2="-150" y2="13"/>
+    <line class="ds-line" data-part="walker" data-a="neck" data-b="chest" x1="-150" y1="13" x2="-150" y2="22"/>
+    <line class="ds-line" data-part="walker" data-a="chest" data-b="hip" x1="-150" y1="22" x2="-150" y2="34"/>
+    <line class="ds-line" data-part="walker" data-a="neck" data-b="shoulderL" x1="-150" y1="13" x2="-157" y2="15"/>
+    <line class="ds-line" data-part="walker" data-a="neck" data-b="shoulderR" x1="-150" y1="13" x2="-143" y2="15"/>
+    <line class="ds-line" data-part="walker" data-a="shoulderL" data-b="elbowL" x1="-157" y1="15" x2="-160" y2="25"/>
+    <line class="ds-line" data-part="walker" data-a="elbowL" data-b="handL" x1="-160" y1="25" x2="-158" y2="32"/>
+    <line class="ds-line" data-part="walker" data-a="shoulderR" data-b="elbowR" x1="-143" y1="15" x2="-138" y2="26"/>
+    <line class="ds-line" data-part="walker" data-a="elbowR" data-b="handR" x1="-138" y1="26" x2="-138" y2="35"/>
+    <line class="ds-line" data-part="walker" data-a="hip" data-b="hipL" x1="-150" y1="34" x2="-155" y2="36"/>
+    <line class="ds-line" data-part="walker" data-a="hip" data-b="hipR" x1="-150" y1="34" x2="-145" y2="36"/>
+    <line class="ds-line" data-part="walker" data-a="hipL" data-b="kneeL" x1="-155" y1="36" x2="-161" y2="47"/>
+    <line class="ds-line" data-part="walker" data-a="kneeL" data-b="footL" x1="-161" y1="47" x2="-166" y2="61"/>
+    <line class="ds-line" data-part="walker" data-a="hipR" data-b="kneeR" x1="-145" y1="36" x2="-146" y2="51"/>
+    <line class="ds-line" data-part="walker" data-a="kneeR" data-b="footR" x1="-146" y1="51" x2="-143" y2="64"/>
+    <line class="ds-line" data-part="trader" data-a="head" data-b="neck" x1="150" y1="3" x2="150" y2="13"/>
+    <line class="ds-line" data-part="trader" data-a="neck" data-b="chest" x1="150" y1="13" x2="150" y2="22"/>
+    <line class="ds-line" data-part="trader" data-a="chest" data-b="hip" x1="150" y1="22" x2="150" y2="34"/>
+    <line class="ds-line" data-part="trader" data-a="neck" data-b="shoulderL" x1="150" y1="13" x2="143" y2="15"/>
+    <line class="ds-line" data-part="trader" data-a="neck" data-b="shoulderR" x1="150" y1="13" x2="157" y2="15"/>
+    <line class="ds-line" data-part="trader" data-a="shoulderL" data-b="elbowL" x1="143" y1="15" x2="138" y2="26"/>
+    <line class="ds-line" data-part="trader" data-a="elbowL" data-b="handL" x1="138" y1="26" x2="138" y2="35"/>
+    <line class="ds-line" data-part="trader" data-a="shoulderR" data-b="elbowR" x1="157" y1="15" x2="160" y2="25"/>
+    <line class="ds-line" data-part="trader" data-a="elbowR" data-b="handR" x1="160" y1="25" x2="158" y2="32"/>
+    <line class="ds-line" data-part="trader" data-a="hip" data-b="hipL" x1="150" y1="34" x2="145" y2="36"/>
+    <line class="ds-line" data-part="trader" data-a="hip" data-b="hipR" x1="150" y1="34" x2="155" y2="36"/>
+    <line class="ds-line" data-part="trader" data-a="hipL" data-b="kneeL" x1="145" y1="36" x2="139" y2="47"/>
+    <line class="ds-line" data-part="trader" data-a="kneeL" data-b="footL" x1="139" y1="47" x2="134" y2="61"/>
+    <line class="ds-line" data-part="trader" data-a="hipR" data-b="kneeR" x1="155" y1="36" x2="154" y2="51"/>
+    <line class="ds-line" data-part="trader" data-a="kneeR" data-b="footR" x1="154" y1="51" x2="157" y2="64"/>
+    <line class="ds-line" data-part="bag" data-a="tie" data-b="neckL" x1="-138" y1="35" x2="-141" y2="38"/>
+    <line class="ds-line" data-part="bag" data-a="tie" data-b="neckR" x1="-138" y1="35" x2="-135" y2="38"/>
+    <line class="ds-line" data-part="bag" data-a="neckL" data-b="neckR" x1="-141" y1="38" x2="-135" y2="38"/>
+    <line class="ds-line" data-part="bag" data-a="neckL" data-b="sideL" x1="-141" y1="38" x2="-145" y2="44"/>
+    <line class="ds-line" data-part="bag" data-a="sideL" data-b="baseL" x1="-145" y1="44" x2="-143" y2="51"/>
+    <line class="ds-line" data-part="bag" data-a="baseL" data-b="baseR" x1="-143" y1="51" x2="-133" y2="51"/>
+    <line class="ds-line" data-part="bag" data-a="baseR" data-b="sideR" x1="-133" y1="51" x2="-131" y2="44"/>
+    <line class="ds-line" data-part="bag" data-a="sideR" data-b="neckR" x1="-131" y1="44" x2="-135" y2="38"/>
+    <line class="ds-line" data-part="case" data-a="gripL" data-b="gripR" x1="134" y1="35" x2="142" y2="35"/>
+    <line class="ds-line" data-part="case" data-a="gripL" data-b="topL" x1="134" y1="35" x2="128" y2="40"/>
+    <line class="ds-line" data-part="case" data-a="gripR" data-b="topR" x1="142" y1="35" x2="148" y2="40"/>
+    <line class="ds-line" data-part="case" data-a="topL" data-b="topR" x1="128" y1="40" x2="148" y2="40"/>
+    <line class="ds-line" data-part="case" data-a="topL" data-b="botL" x1="128" y1="40" x2="128" y2="51"/>
+    <line class="ds-line" data-part="case" data-a="botL" data-b="botR" x1="128" y1="51" x2="148" y2="51"/>
+    <line class="ds-line" data-part="case" data-a="botR" data-b="topR" x1="148" y1="51" x2="148" y2="40"/>
+    <circle class="ds-dot" data-part="floor" data-p="floorL" cx="-108" cy="64" r="1.44"/>
+    <circle class="ds-dot" data-part="floor" data-p="floorR" cx="108" cy="64" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="head" cx="-150" cy="3" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="neck" cx="-150" cy="13" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="chest" cx="-150" cy="22" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="hip" cx="-150" cy="34" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="shoulderL" cx="-157" cy="15" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="elbowL" cx="-160" cy="25" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="handL" cx="-158" cy="32" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="hipL" cx="-155" cy="36" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="kneeL" cx="-161" cy="47" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="footL" cx="-166" cy="61" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="shoulderR" cx="-143" cy="15" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="elbowR" cx="-138" cy="26" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="handR" cx="-138" cy="35" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="hipR" cx="-145" cy="36" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="kneeR" cx="-146" cy="51" r="1.44"/>
+    <circle class="ds-dot" data-part="walker" data-p="footR" cx="-143" cy="64" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="head" cx="150" cy="3" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="neck" cx="150" cy="13" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="chest" cx="150" cy="22" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="hip" cx="150" cy="34" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="shoulderL" cx="143" cy="15" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="elbowL" cx="138" cy="26" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="handL" cx="138" cy="35" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="hipL" cx="145" cy="36" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="kneeL" cx="139" cy="47" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="footL" cx="134" cy="61" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="shoulderR" cx="157" cy="15" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="elbowR" cx="160" cy="25" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="handR" cx="158" cy="32" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="hipR" cx="155" cy="36" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="kneeR" cx="154" cy="51" r="1.44"/>
+    <circle class="ds-dot" data-part="trader" data-p="footR" cx="157" cy="64" r="1.44"/>
+    <circle class="ds-dot" data-part="bag" data-p="tie" cx="-138" cy="35" r="1.44"/>
+    <circle class="ds-dot" data-part="bag" data-p="neckL" cx="-141" cy="38" r="1.44"/>
+    <circle class="ds-dot" data-part="bag" data-p="neckR" cx="-135" cy="38" r="1.44"/>
+    <circle class="ds-dot" data-part="bag" data-p="sideL" cx="-145" cy="44" r="1.44"/>
+    <circle class="ds-dot" data-part="bag" data-p="sideR" cx="-131" cy="44" r="1.44"/>
+    <circle class="ds-dot" data-part="bag" data-p="baseL" cx="-143" cy="51" r="1.44"/>
+    <circle class="ds-dot" data-part="bag" data-p="baseR" cx="-133" cy="51" r="1.44"/>
+    <circle class="ds-dot" data-part="case" data-p="gripL" cx="134" cy="35" r="1.44"/>
+    <circle class="ds-dot" data-part="case" data-p="gripR" cx="142" cy="35" r="1.44"/>
+    <circle class="ds-dot" data-part="case" data-p="topL" cx="128" cy="40" r="1.44"/>
+    <circle class="ds-dot" data-part="case" data-p="topR" cx="148" cy="40" r="1.44"/>
+    <circle class="ds-dot" data-part="case" data-p="botL" cx="128" cy="51" r="1.44"/>
+    <circle class="ds-dot" data-part="case" data-p="botR" cx="148" cy="51" r="1.44"/>
+  </g>
+</svg>

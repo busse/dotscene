@@ -41,6 +41,27 @@ export const scene = defineScene('thing', {
 })
 ```
 
+## Staging several parts at once
+
+`animate.cycle` moves one part. When two figures and the things they carry all move, use `keyframes` — each step says where every moving part is and what pose it holds:
+
+```ts
+animate: {
+  mode: 'loop',
+  keyframes: [
+    { name: 'empty', duration: 0, hold: 400,
+      parts: { walker: { at: [-150, 0], pose: 'walkCarryA' }, bag: { at: [-138, 35] } } },
+    { name: 'meet', duration: 700, hold: 500,
+      parts: { walker: { at: [-30, 0], pose: 'holdR' }, bag: { at: [-18, 35] } } },
+  ],
+}
+```
+
+- Omitted fields fall back to the part's declaration; a part no keyframe names never moves.
+- `duration` is the time to move *into* that step — `0` makes it a hard cut.
+- Preview one step with `preview <scene> --pose <keyframe>`, or step them all with `--poses`.
+- A prop that rides in a hand is its own part: give it the hand's position at every keyframe. Compute those from a named constant rather than retyping coordinates.
+
 ## Rules that matter
 
 - **y grows downward.** A point with a smaller y is higher on screen.
@@ -58,6 +79,9 @@ export const scene = defineScene('thing', {
 | A limb reads as a blob | The part is scaled far down inside a large scene. Fix the authoring scale, not `dotRadius`. |
 | A pose clips at the edge | It will not — the viewBox spans every pose in the cycle. Look for a wrong coordinate instead. |
 | A limb shortens mid-tween | Expected. Poses lerp positions, not joint angles. |
+| A figure meant to be off-stage is visible | The scene needs an explicit `viewBox`; a fitted one grows to include it. |
+| Everything slides backwards when the loop wraps | Give the first keyframe `duration: 0` so the reset cuts. |
+| An extended arm looks stretched | The hand is further from the shoulder than the arm is long — about 20 units on the person module. |
 | Diagonals look wrong in preview | Terminal cells are 2× taller than wide; the renderer already corrects for this. Trust the SVG. |
 
 ## Before finishing

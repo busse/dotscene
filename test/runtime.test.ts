@@ -70,15 +70,19 @@ const fakeSvg = () => {
   return svg
 }
 
+/** Wrap a part's points in the scene-frame shape the compiler emits. */
+const forBar = (points: Record<string, readonly [number, number]>) => ({ bar: points })
+
+const timing = (names: readonly string[], duration = 100, hold = 100) =>
+  Object.fromEntries(names.map((name) => [name, { duration, hold }]))
+
 const config = (overrides: Partial<SceneConfig> = {}): SceneConfig => ({
-  part: 'bar',
   cycle: ['a', 'b'],
   frames: {
-    a: { top: [0, 0], base: [0, 10] },
-    b: { top: [10, 0], base: [0, 10] },
+    a: forBar({ top: [0, 0], base: [0, 10] }),
+    b: forBar({ top: [10, 0], base: [0, 10] }),
   },
-  duration: 100,
-  hold: 100,
+  timings: timing(['a', 'b']),
   easing: 'linear',
   mode: 'loop',
   ...overrides,
@@ -180,10 +184,11 @@ describe('mount', () => {
       mode: 'pingpong',
       cycle: ['a', 'b', 'c'],
       frames: {
-        a: { top: [0, 0], base: [0, 10] },
-        b: { top: [10, 0], base: [0, 10] },
-        c: { top: [20, 0], base: [0, 10] },
+        a: forBar({ top: [0, 0], base: [0, 10] }),
+        b: forBar({ top: [10, 0], base: [0, 10] }),
+        c: forBar({ top: [20, 0], base: [0, 10] }),
       },
+      timings: timing(['a', 'b', 'c']),
     })
     mountScene(svg, three)
     observed[0]!.fire(true)
@@ -216,7 +221,68 @@ describe('mount', () => {
 
   it('leaves points the frames do not mention where they are', () => {
     const svg = fakeSvg()
-    mountScene(svg, config({ frames: { a: { top: [3, 3] }, b: { top: [9, 3] } } }))
+    mountScene(svg, config({ frames: { a: forBar({ top: [3, 3] }), b: forBar({ top: [9, 3] }) } }))
     expect(svg.dots.base.attrs.cy).toBe('10')
+  })
+})
+
+describe('multi-part scenes', () => {
+  /** Two parts that move independently, the shape a staged animation produces. */
+  const twoPartSvg = () => {
+    const walker = element({ 'data-p': 'head', 'data-part': 'walker', cx: '0', cy: '0' })
+    const bag = element({ 'data-p': 'tie', 'data-part': 'bag', cx: '0', cy: '0' })
+    const line = element({ 'data-a': 'head', 'data-b': 'head', 'data-part': 'walker' })
+    return {
+      walker,
+      bag,
+      querySelectorAll: (selector: string) => (selector.startsWith('circle') ? [walker, bag] : [line]),
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    }
+  }
+
+  const twoPartConfig: SceneConfig = {
+    cycle: ['start', 'end'],
+    frames: {
+      start: { walker: { head: [0, 0] }, bag: { tie: [10, 0] } },
+      end: { walker: { head: [100, 0] }, bag: { tie: [110, 0] } },
+    },
+    timings: { start: { duration: 100, hold: 100 }, end: { duration: 100, hold: 100 } },
+    easing: 'linear',
+    mode: 'loop',
+  }
+
+  it('moves each part to its own position in the frame', () => {
+    const svg = twoPartSvg()
+    const handle = mountScene(svg, twoPartConfig)
+    handle.goTo('end')
+    expect(svg.walker.attrs.cx).toBe('100')
+    expect(svg.bag.attrs.cx).toBe('110')
+  })
+
+  it('interpolates the parts independently', () => {
+    const svg = twoPartSvg()
+    mountScene(svg, twoPartConfig)
+    observed[0]!.fire(true)
+    run(160)
+    const walkerAt = Number(svg.walker.attrs.cx)
+    const bagAt = Number(svg.bag.attrs.cx)
+    expect(walkerAt).toBeGreaterThan(0)
+    expect(walkerAt).toBeLessThan(100)
+    // The bag keeps its 10-unit offset the whole way across.
+    expect(bagAt - walkerAt).toBeCloseTo(10, 5)
+  })
+
+  it('cuts instantly into a keyframe whose duration is zero', () => {
+    const svg = twoPartSvg()
+    mountScene(svg, {
+      ...twoPartConfig,
+      timings: { start: { duration: 0, hold: 100 }, end: { duration: 100, hold: 0 } },
+    })
+    observed[0]!.fire(true)
+    // 100ms hold at `start`, 100ms moving to `end`, no hold there, then the wrap into
+    // `start` — which takes no time at all, so the position snaps rather than sliding back.
+    run(280)
+    expect(svg.walker.attrs.cx).toBe('0')
   })
 })

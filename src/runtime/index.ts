@@ -12,12 +12,16 @@
 import type { AnimateMode, EasingName, Vec2 } from '../model.ts'
 import { easingFor } from '../poses.ts'
 
+/** One part's points at one keyframe. */
+export type Frame = Readonly<Record<string, Vec2>>
+
+/** Every moving part at one keyframe, keyed by part id. */
+export type SceneFrame = Readonly<Record<string, Frame>>
+
 export interface SceneConfig {
-  readonly part: string
   readonly cycle: readonly string[]
-  readonly frames: Readonly<Record<string, Readonly<Record<string, Vec2>>>>
-  readonly duration: number
-  readonly hold: number
+  readonly frames: Readonly<Record<string, SceneFrame>>
+  readonly timings: Readonly<Record<string, { duration: number; hold: number }>>
   readonly easing: EasingName
   readonly mode: AnimateMode
 }
@@ -64,26 +68,38 @@ interface Bindings {
   readonly lines: readonly (readonly [string, string, SVGLineElement])[]
 }
 
-const bind = (svg: SVGSVGElement, part: string): Bindings => {
-  const mine = (element: Element): boolean => {
-    const owner = element.getAttribute('data-part')
-    return owner === null || owner === part
-  }
+/**
+ * Index every element in the scene by the part it belongs to.
+ *
+ * An element with no `data-part` is filed under `''`, which is what a hand-written SVG or an
+ * older single-part build looks like — those still animate as long as the frame is keyed to
+ * match.
+ */
+const bindAll = (svg: SVGSVGElement): Map<string, Bindings> => {
+  const dots = new Map<string, (readonly [string, SVGCircleElement])[]>()
+  const lines = new Map<string, (readonly [string, string, SVGLineElement])[]>()
 
-  const dots: (readonly [string, SVGCircleElement])[] = []
   for (const element of svg.querySelectorAll<SVGCircleElement>('circle[data-p]')) {
-    if (mine(element)) dots.push([element.getAttribute('data-p')!, element])
+    const part = element.getAttribute('data-part') ?? ''
+    const list = dots.get(part) ?? []
+    list.push([element.getAttribute('data-p')!, element])
+    dots.set(part, list)
   }
-
-  const lines: (readonly [string, string, SVGLineElement])[] = []
   for (const element of svg.querySelectorAll<SVGLineElement>('line[data-a][data-b]')) {
-    if (mine(element)) lines.push([element.getAttribute('data-a')!, element.getAttribute('data-b')!, element])
+    const part = element.getAttribute('data-part') ?? ''
+    const list = lines.get(part) ?? []
+    list.push([element.getAttribute('data-a')!, element.getAttribute('data-b')!, element])
+    lines.set(part, list)
   }
 
-  return { dots, lines }
+  const bindings = new Map<string, Bindings>()
+  for (const part of new Set([...dots.keys(), ...lines.keys()])) {
+    bindings.set(part, { dots: dots.get(part) ?? [], lines: lines.get(part) ?? [] })
+  }
+  return bindings
 }
 
-const paint = (bindings: Bindings, points: Readonly<Record<string, Vec2>>): void => {
+const paintPart = (bindings: Bindings, points: Frame): void => {
   for (const [name, element] of bindings.dots) {
     const at = points[name]
     if (at === undefined) continue
@@ -101,11 +117,14 @@ const paint = (bindings: Bindings, points: Readonly<Record<string, Vec2>>): void
   }
 }
 
-const blend = (
-  from: Readonly<Record<string, Vec2>>,
-  to: Readonly<Record<string, Vec2>>,
-  t: number,
-): Record<string, Vec2> => {
+const paint = (bindings: Map<string, Bindings>, frame: SceneFrame): void => {
+  for (const part of Object.keys(frame)) {
+    const bound = bindings.get(part)
+    if (bound !== undefined) paintPart(bound, frame[part]!)
+  }
+}
+
+const blendFrame = (from: Frame, to: Frame, t: number): Frame => {
   const out: Record<string, Vec2> = {}
   for (const name of Object.keys(from)) {
     const a = from[name]!
@@ -115,12 +134,23 @@ const blend = (
   return out
 }
 
+/** Interpolate every moving part between two keyframes. A part absent from `to` holds still. */
+const blend = (from: SceneFrame, to: SceneFrame, t: number): SceneFrame => {
+  const out: Record<string, Frame> = {}
+  for (const part of Object.keys(from)) {
+    out[part] = blendFrame(from[part]!, to[part] ?? from[part]!, t)
+  }
+  return out
+}
+
 /** Attach the runtime to one already-rendered SVG. */
 export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
-  const bindings = bind(svg, config.part)
+  const bindings = bindAll(svg)
   const ease = easingFor(config.easing)
   const cycle = config.cycle.length > 0 ? config.cycle : Object.keys(config.frames)
-  const frameFor = (index: number): Readonly<Record<string, Vec2>> => config.frames[cycle[index] ?? '']  ?? {}
+  const frameFor = (index: number): SceneFrame => config.frames[cycle[index] ?? ''] ?? {}
+  const timingFor = (index: number): { duration: number; hold: number } =>
+    config.timings?.[cycle[index] ?? ''] ?? { duration: 700, hold: 900 }
 
   let index = 0
   let target = 0
@@ -154,7 +184,10 @@ export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
     tick: (now) => {
       const elapsed = now - markedAt
       if (moving) {
-        const t = config.duration <= 0 ? 1 : Math.min(1, elapsed / config.duration)
+        // Pacing belongs to the keyframe being moved INTO, so one step can linger and the
+        // next can snap.
+        const { duration } = timingFor(target)
+        const t = duration <= 0 ? 1 : Math.min(1, elapsed / duration)
         paint(bindings, blend(frameFor(index), frameFor(target), ease(t)))
         if (t >= 1) {
           index = target
@@ -165,7 +198,7 @@ export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
       }
       // Held at a pose. Automatic modes move on once the hold expires; the interactive
       // modes wait for the next pointer event instead.
-      if ((config.mode === 'loop' || config.mode === 'pingpong') && elapsed >= config.hold) {
+      if ((config.mode === 'loop' || config.mode === 'pingpong') && elapsed >= timingFor(index).hold) {
         beginMove(advance(), now)
       }
     },

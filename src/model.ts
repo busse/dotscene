@@ -73,14 +73,39 @@ export type EasingName = 'linear' | 'easeIn' | 'easeOut' | 'easeInOut'
 
 export type AnimateMode = 'loop' | 'pingpong' | 'hover' | 'click'
 
-export interface AnimateSpec {
-  /** Which part cycles. Defaults to the scene's only part. */
-  readonly part?: string
-  /** Pose names to cycle through, in order. */
-  readonly cycle: readonly string[]
-  /** Milliseconds per transition. */
+/**
+ * What one part is doing during one keyframe.
+ *
+ * Fields left out fall back to the part's own declaration, so a keyframe only states what
+ * changes — a part that stays put needs no entry at all.
+ */
+export interface PartKeyframe extends Transform {
+  readonly pose?: string
+}
+
+/** One step of a staged animation: where every moving part is, and how long it lingers. */
+export interface Keyframe {
+  readonly name: string
+  readonly parts?: Readonly<Record<string, PartKeyframe>>
+  /** Milliseconds to transition into this keyframe. Falls back to `animate.duration`. */
   readonly duration?: number
-  /** Milliseconds held at each pose before the next transition. */
+  /** Milliseconds held here before moving on. Falls back to `animate.hold`. */
+  readonly hold?: number
+}
+
+export interface AnimateSpec {
+  /** Single-part shorthand: which part cycles. Defaults to the scene's only part. */
+  readonly part?: string
+  /** Single-part shorthand: pose names to cycle through, in order. */
+  readonly cycle?: readonly string[]
+  /**
+   * Staged animation: every part's pose and position at each step. Use this instead of
+   * `cycle` when more than one part moves, or when a part travels as well as poses.
+   */
+  readonly keyframes?: readonly Keyframe[]
+  /** Default milliseconds per transition. */
+  readonly duration?: number
+  /** Default milliseconds held at each step. */
   readonly hold?: number
   readonly easing?: EasingName
   readonly mode?: AnimateMode
@@ -150,6 +175,24 @@ export const defineScene = (name: string, spec: SceneSpec): Scene => ({
 
 /** The id a part is addressed by: its explicit `id`, else the figure's name. */
 export const partId = (part: Part): string => part.id ?? part.figure.name
+
+/**
+ * A copy of the scene staged at one keyframe — every part where that step puts it.
+ *
+ * This is what lets `dotscene preview --pose <keyframe>` show a step of a staged animation
+ * as a still, so a multi-part animation stays correctable from the terminal.
+ */
+export const atKeyframe = (scene: Scene, name: string): Scene => {
+  const keyframe = scene.animate?.keyframes?.find((candidate) => candidate.name === name)
+  if (keyframe === undefined) return scene
+  return {
+    ...scene,
+    parts: scene.parts.map((part) => {
+      const state = keyframe.parts?.[partId(part)]
+      return state === undefined ? part : { ...part, ...state }
+    }),
+  }
+}
 
 /**
  * A copy of the scene with one part put into a named pose.

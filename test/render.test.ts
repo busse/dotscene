@@ -44,7 +44,7 @@ describe('resolve', () => {
     const resolved = resolve(
       defineScene('s', { parts: [{ figure: bar, at: [5, 5] }], animate: { cycle: ['tip'] } }),
     )
-    expect(resolved.animation?.frames.tip).toEqual({ top: [9, 5], base: [5, 15] })
+    expect(resolved.animation?.frames.tip?.bar).toEqual({ top: [9, 5], base: [5, 15] })
   })
 
   it('names the part it animates even when the scene has several', () => {
@@ -54,7 +54,7 @@ describe('resolve', () => {
         animate: { part: 'second', cycle: ['tip'] },
       }),
     )
-    expect(resolved.animation?.part).toBe('second')
+    expect(resolved.animation?.parts).toEqual(['second'])
   })
 })
 
@@ -65,9 +65,12 @@ describe('renderSvg', () => {
       "<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="bar" viewBox="-1 -1 2 12" role="img">
         <title>A bar</title>
         <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="bar"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
-        <line class="ds-line" data-part="bar" data-a="top" data-b="base" x1="0" y1="0" x2="0" y2="10"/>
-        <circle class="ds-dot" data-part="bar" data-p="top" cx="0" cy="0" r="1.6"/>
-        <circle class="ds-dot" data-part="bar" data-p="base" cx="0" cy="10" r="1.6"/>
+        <defs><clipPath id="ds-clip-bar"><rect x="-1" y="-1" width="2" height="12"/></clipPath></defs>
+        <g clip-path="url(#ds-clip-bar)">
+          <line class="ds-line" data-part="bar" data-a="top" data-b="base" x1="0" y1="0" x2="0" y2="10"/>
+          <circle class="ds-dot" data-part="bar" data-p="top" cx="0" cy="0" r="1.6"/>
+          <circle class="ds-dot" data-part="bar" data-p="base" cx="0" cy="10" r="1.6"/>
+        </g>
       </svg>"
     `)
   })
@@ -88,6 +91,26 @@ describe('renderSvg', () => {
     const dashed = defineFigure('d', { points: { a: [0, 0], b: [5, 0] }, edges: [{ from: 'a', to: 'b', kind: 'soft' }] })
     const svg = renderSvg(resolve(defineScene('d', { parts: [{ figure: dashed }] })))
     expect(svg).toContain('class="ds-line ds-line--soft"')
+  })
+
+  it('clips content to the viewBox, so anything staged off-screen stays off-screen', () => {
+    const wide = defineScene('stage', {
+      parts: [{ figure: bar, at: [500, 0] }],
+      viewBox: [0, 0, 100, 20],
+    })
+    const svg = renderSvg(resolve(wide))
+    expect(svg).toContain('<clipPath id="ds-clip-stage"><rect x="0" y="0" width="100" height="20"/></clipPath>')
+    expect(svg).toContain('<g clip-path="url(#ds-clip-stage)">')
+    // The off-stage geometry is still emitted — the runtime needs it to animate — but the
+    // clip is what keeps it invisible until a keyframe walks it on.
+    expect(svg).toContain('cx="500"')
+  })
+
+  it('names the clip after the scene so two scenes on one page do not collide', () => {
+    const a = renderSvg(resolve(defineScene('one', { parts: [{ figure: bar }] })))
+    const b = renderSvg(resolve(defineScene('two', { parts: [{ figure: bar }] })))
+    expect(a).toContain('ds-clip-one')
+    expect(b).toContain('ds-clip-two')
   })
 
   it('is byte-stable across renders', () => {

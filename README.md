@@ -113,6 +113,29 @@ Give an edge a `kind` and it gains a modifier class (`ds-line--soft`) to target.
 
 ### Animation
 
+Two forms. `cycle` is the shorthand for one part running through its own poses:
+
+```ts
+animate: { cycle: ['idle', 'wave', 'lean'], duration: 700, hold: 900 }
+```
+
+`keyframes` stages the whole scene — every moving part's pose *and* position at each step, with per-step pacing:
+
+```ts
+animate: {
+  keyframes: [
+    { name: 'empty',  duration: 0, hold: 400,
+      parts: { walker: { at: [-150, 0], pose: 'walkCarryA' }, bag: { at: [-138, 35] } } },
+    { name: 'meet',   duration: 700, hold: 500,
+      parts: { walker: { at: [-30, 0], pose: 'holdR' },       bag: { at: [-18, 35] } } },
+  ],
+}
+```
+
+Fields a keyframe leaves out fall back to the part's own declaration, and a part no keyframe mentions never moves. `duration` is the time to transition *into* a step, so setting it to `0` makes that step a hard cut — which is how a loop wraps without sliding everything backwards across the stage.
+
+To have figures walk on and off, give the scene an explicit `viewBox` and park them outside it; content is clipped to the viewBox, so off-stage is genuinely invisible.
+
 `animate.mode` is `loop`, `pingpong`, `hover`, or `click`. One `requestAnimationFrame` loop drives every scene on the page, scenes pause while scrolled out of view, and `prefers-reduced-motion: reduce` holds the first pose without ever starting. The runtime is exposed as `window.dotscene` for manual control:
 
 ```js

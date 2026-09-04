@@ -19,6 +19,7 @@ export type IssueCode =
   | 'UNKNOWN_PART'
   | 'EMPTY_SCENE'
   | 'EMPTY_CYCLE'
+  | 'AMBIGUOUS_ANIMATION'
 
 export interface Issue {
   readonly code: IssueCode
@@ -28,6 +29,7 @@ export interface Issue {
   readonly scene?: string
   readonly pose?: string
   readonly part?: string
+  readonly keyframe?: string
   readonly point?: PointId
   readonly edge?: readonly [PointId, PointId]
   /** Nearest valid name, when the issue looks like a typo. */
@@ -203,41 +205,91 @@ export const validateScene = (scene: Scene): readonly Issue[] => {
 
   const animate = scene.animate
   if (animate !== undefined) {
-    const target = animate.part ?? (scene.parts.length === 1 ? partId(scene.parts[0]!) : undefined)
-    if (target === undefined) {
+    const ids = scene.parts.map(partId)
+
+    if (animate.keyframes !== undefined && animate.cycle !== undefined) {
       issues.push({
-        code: 'UNKNOWN_PART',
+        code: 'AMBIGUOUS_ANIMATION',
         scene: scene.name,
-        message: `scene '${scene.name}' has ${scene.parts.length} parts, so \`animate.part\` must name which one cycles`,
+        message: '`animate` sets both `cycle` and `keyframes` — keep one; `cycle` is shorthand for the single-part case',
       })
-    } else {
-      const part = scene.parts.find((candidate) => partId(candidate) === target)
-      if (part === undefined) {
-        issues.push({
-          code: 'UNKNOWN_PART',
-          scene: scene.name,
-          part: target,
-          message: `\`animate.part\` names '${target}', which is not a part of this scene`,
-          ...suggest(target, scene.parts.map(partId)),
-        })
-      } else {
-        if (animate.cycle.length === 0) {
-          issues.push({ code: 'EMPTY_CYCLE', scene: scene.name, part: target, message: `\`animate.cycle\` is empty` })
-        }
-        for (const poseName of animate.cycle) {
-          if (!(poseName in part.figure.poses)) {
+    }
+
+    if (animate.keyframes !== undefined) {
+      if (animate.keyframes.length === 0) {
+        issues.push({ code: 'EMPTY_CYCLE', scene: scene.name, message: '`animate.keyframes` is empty' })
+      }
+      for (const keyframe of animate.keyframes) {
+        for (const [id, state] of Object.entries(keyframe.parts ?? {})) {
+          const part = scene.parts.find((candidate) => partId(candidate) === id)
+          if (part === undefined) {
+            issues.push({
+              code: 'UNKNOWN_PART',
+              scene: scene.name,
+              keyframe: keyframe.name,
+              part: id,
+              message: `keyframe '${keyframe.name}' moves '${id}', which is not a part of this scene`,
+              ...suggest(id, ids),
+            })
+            continue
+          }
+          if (state.pose !== undefined && !(state.pose in part.figure.poses)) {
             issues.push({
               code: 'UNKNOWN_POSE',
               scene: scene.name,
-              part: target,
+              keyframe: keyframe.name,
+              part: id,
               figure: part.figure.name,
-              pose: poseName,
-              message: `\`animate.cycle\` names pose '${poseName}', which figure '${part.figure.name}' does not define`,
-              ...suggest(poseName, Object.keys(part.figure.poses)),
+              pose: state.pose,
+              message: `keyframe '${keyframe.name}' puts '${id}' in pose '${state.pose}', which figure '${part.figure.name}' does not define`,
+              ...suggest(state.pose, Object.keys(part.figure.poses)),
             })
           }
         }
       }
+    } else if (animate.cycle !== undefined) {
+      const target = animate.part ?? (scene.parts.length === 1 ? partId(scene.parts[0]!) : undefined)
+      if (target === undefined) {
+        issues.push({
+          code: 'UNKNOWN_PART',
+          scene: scene.name,
+          message: `scene '${scene.name}' has ${scene.parts.length} parts, so \`animate\` needs \`part\` (or use \`keyframes\`)`,
+        })
+      } else {
+        const part = scene.parts.find((candidate) => partId(candidate) === target)
+        if (part === undefined) {
+          issues.push({
+            code: 'UNKNOWN_PART',
+            scene: scene.name,
+            part: target,
+            message: `\`animate.part\` names '${target}', which is not a part of this scene`,
+            ...suggest(target, ids),
+          })
+        } else {
+          if (animate.cycle.length === 0) {
+            issues.push({ code: 'EMPTY_CYCLE', scene: scene.name, part: target, message: '`animate.cycle` is empty' })
+          }
+          for (const poseName of animate.cycle) {
+            if (!(poseName in part.figure.poses)) {
+              issues.push({
+                code: 'UNKNOWN_POSE',
+                scene: scene.name,
+                part: target,
+                figure: part.figure.name,
+                pose: poseName,
+                message: `\`animate.cycle\` names pose '${poseName}', which figure '${part.figure.name}' does not define`,
+                ...suggest(poseName, Object.keys(part.figure.poses)),
+              })
+            }
+          }
+        }
+      }
+    } else {
+      issues.push({
+        code: 'EMPTY_CYCLE',
+        scene: scene.name,
+        message: '`animate` needs either `cycle` (one part) or `keyframes` (several)',
+      })
     }
   }
 

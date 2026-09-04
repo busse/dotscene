@@ -85,6 +85,40 @@ export const person = defineFigure('person', {
       kneeR: [8, 50],
       footR: [12, 63],
     },
+    /**
+     * Walking and hand-off poses. `Carry` holds an item in the right hand, `Hold` in the
+     * left — so two figures facing each other can each keep the item on the inner side.
+     * A/B are opposite halves of the stride.
+     */
+    walkCarryA: {
+      kneeL: [-11, 47], footL: [-16, 61], kneeR: [4, 51], footR: [7, 64],
+      elbowR: [12, 26], handR: [12, 35],
+      elbowL: [-10, 25], handL: [-8, 32],
+    },
+    walkCarryB: {
+      kneeL: [-4, 51], footL: [-7, 64], kneeR: [11, 47], footR: [16, 61],
+      elbowR: [12, 26], handR: [12, 35],
+      elbowL: [-15, 25], handL: [-19, 31],
+    },
+    walkHoldA: {
+      kneeL: [-11, 47], footL: [-16, 61], kneeR: [4, 51], footR: [7, 64],
+      elbowL: [-12, 26], handL: [-12, 35],
+      elbowR: [10, 25], handR: [8, 32],
+    },
+    walkHoldB: {
+      kneeL: [-4, 51], footL: [-7, 64], kneeR: [11, 47], footR: [16, 61],
+      elbowL: [-12, 26], handL: [-12, 35],
+      elbowR: [15, 25], handR: [19, 31],
+    },
+    /** Standing still with something in one hand. */
+    holdR: { elbowR: [12, 26], handR: [12, 35] },
+    holdL: { elbowL: [-12, 26], handL: [-12, 35] },
+    /** Arm out at chest height, offering what it holds. */
+    offerR: { elbowR: [17, 19], handR: [25, 23] },
+    offerL: { elbowL: [-17, 19], handL: [-25, 23] },
+    /** Shaking with one hand while the other keeps hold of something. */
+    shakeR: { elbowR: [15, 23], handR: [23, 28], elbowL: [-12, 26], handL: [-12, 35] },
+    shakeL: { elbowL: [-15, 23], handL: [-23, 28], elbowR: [12, 26], handR: [12, 35] },
     lean: {
       head: [-3, 4],
       neck: [-2, 13],

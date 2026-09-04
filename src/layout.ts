@@ -6,7 +6,7 @@
  * than on markup.
  */
 
-import type { AnimateMode, EasingName, Part, PointId, Scene, Vec2 } from './model.ts'
+import type { AnimateMode, EasingName, Keyframe, Part, PointId, Scene, Vec2 } from './model.ts'
 import { partId } from './model.ts'
 import { applyTransform, bounds, distance, padBounds, round, roundVec, unionBounds, type Bounds } from './geometry.ts'
 import { posePoints } from './poses.ts'
@@ -29,8 +29,16 @@ export interface ResolvedLine {
 
 export type ViewBox = readonly [number, number, number, number]
 
-/** Scene-space positions for one pose of one part, keyed by point name. */
+/** Scene-space positions for one part, keyed by point name. */
 export type Frame = Readonly<Record<PointId, Vec2>>
+
+/** One step of an animation: every moving part's points, in scene space. */
+export type SceneFrame = Readonly<Record<string, Frame>>
+
+export interface FrameTiming {
+  readonly duration: number
+  readonly hold: number
+}
 
 export interface ResolvedScene {
   readonly name: string
@@ -46,13 +54,16 @@ export interface ResolvedScene {
 }
 
 export interface ResolvedAnimation {
-  readonly part: string
+  /** Keyframe names, in playing order. */
   readonly cycle: readonly string[]
-  readonly frames: Readonly<Record<string, Frame>>
-  readonly duration: number
-  readonly hold: number
+  /** Keyframe name -> part id -> point name -> position. */
+  readonly frames: Readonly<Record<string, SceneFrame>>
+  /** Per-keyframe pacing, so one step can linger while another snaps past. */
+  readonly timings: Readonly<Record<string, FrameTiming>>
   readonly easing: EasingName
   readonly mode: AnimateMode
+  /** The parts this animation moves. */
+  readonly parts: readonly string[]
 }
 
 /** Scene-space points for a part under a given pose. */
@@ -65,12 +76,28 @@ export const partPoints = (part: Part, pose: string | undefined): Record<PointId
   return out
 }
 
-/** The part a scene's `animate` block targets, resolved from an explicit id or a lone part. */
-const animatedPart = (scene: Scene): Part | undefined => {
+/** The part the single-part `cycle` shorthand targets: an explicit id, or a lone part. */
+export const animatedPart = (scene: Scene): Part | undefined => {
   const animate = scene.animate
   if (animate === undefined) return undefined
   const target = animate.part ?? (scene.parts.length === 1 ? partId(scene.parts[0]!) : undefined)
   return scene.parts.find((part) => partId(part) === target)
+}
+
+/**
+ * Normalize both animation forms into keyframes.
+ *
+ * `cycle` is shorthand for the common case of one part running through its own poses; it
+ * expands to a keyframe per pose so everything downstream has a single shape to handle.
+ */
+const expandKeyframes = (scene: Scene): readonly Keyframe[] => {
+  const animate = scene.animate
+  if (animate === undefined) return []
+  if (animate.keyframes !== undefined) return animate.keyframes
+  const target = animatedPart(scene)
+  if (target === undefined || animate.cycle === undefined) return []
+  const id = partId(target)
+  return animate.cycle.map((pose) => ({ name: pose, parts: { [id]: { pose } } }))
 }
 
 /**
@@ -117,24 +144,41 @@ export const resolve = (scene: Scene): ResolvedScene => {
   }
 
   const animate = scene.animate
-  const target = animatedPart(scene)
   let animation: ResolvedAnimation | undefined
 
-  if (animate !== undefined && target !== undefined) {
-    const frames: Record<string, Frame> = {}
-    for (const poseName of animate.cycle) {
-      const framePoints = partPoints(target, poseName)
-      frames[poseName] = framePoints
-      grow(Object.values(framePoints))
+  if (animate !== undefined) {
+    const keyframes = expandKeyframes(scene)
+    const frames: Record<string, SceneFrame> = {}
+    const timings: Record<string, FrameTiming> = {}
+    const moving = new Set<string>()
+
+    for (const keyframe of keyframes) {
+      const frame: Record<string, Frame> = {}
+      for (const part of scene.parts) {
+        const id = partId(part)
+        const state = keyframe.parts?.[id]
+        if (state === undefined) continue
+        // Fields the keyframe omits fall back to the part's own declaration.
+        const posed: Part = { ...part, ...state }
+        const framePoints = partPoints(posed, state.pose)
+        frame[id] = framePoints
+        moving.add(id)
+        grow(Object.values(framePoints))
+      }
+      frames[keyframe.name] = frame
+      timings[keyframe.name] = {
+        duration: keyframe.duration ?? animate.duration ?? 700,
+        hold: keyframe.hold ?? animate.hold ?? 900,
+      }
     }
+
     animation = {
-      part: partId(target),
-      cycle: animate.cycle,
+      cycle: keyframes.map((keyframe) => keyframe.name),
       frames,
-      duration: animate.duration ?? 700,
-      hold: animate.hold ?? 900,
+      timings,
       easing: animate.easing ?? 'easeInOut',
       mode: animate.mode ?? 'loop',
+      parts: [...moving],
     }
   }
 
