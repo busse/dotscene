@@ -91,6 +91,13 @@ export interface Keyframe {
   readonly duration?: number
   /** Milliseconds held here before moving on. Falls back to `animate.hold`. */
   readonly hold?: number
+  /**
+   * Easing for the transition into this keyframe. Falls back to `animate.easing`.
+   *
+   * Continuous motion wants `linear` on every step of the run and easing only where it
+   * actually starts or stops — an ease on each step makes travel pulse.
+   */
+  readonly easing?: EasingName
 }
 
 export interface AnimateSpec {

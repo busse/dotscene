@@ -27,7 +27,7 @@ describe('compile', () => {
     const payload = JSON.parse(out.html.match(/data-dotscene-poses="bar">(.*?)<\/script>/s)![1]!)
     expect(payload.frames.tip.bar).toEqual({ top: [4, 0], base: [0, 10] })
     expect(payload.mode).toBe('loop')
-    expect(payload.timings.tip).toEqual({ duration: 700, hold: 900 })
+    expect(payload.timings.tip).toEqual({ duration: 700, hold: 900, easing: 'easeInOut' })
   })
 
   it('produces identical output on repeated runs', () => {

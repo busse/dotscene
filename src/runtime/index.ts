@@ -21,7 +21,7 @@ export type SceneFrame = Readonly<Record<string, Frame>>
 export interface SceneConfig {
   readonly cycle: readonly string[]
   readonly frames: Readonly<Record<string, SceneFrame>>
-  readonly timings: Readonly<Record<string, { duration: number; hold: number }>>
+  readonly timings: Readonly<Record<string, { duration: number; hold: number; easing?: EasingName }>>
   readonly easing: EasingName
   readonly mode: AnimateMode
 }
@@ -146,10 +146,9 @@ const blend = (from: SceneFrame, to: SceneFrame, t: number): SceneFrame => {
 /** Attach the runtime to one already-rendered SVG. */
 export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
   const bindings = bindAll(svg)
-  const ease = easingFor(config.easing)
   const cycle = config.cycle.length > 0 ? config.cycle : Object.keys(config.frames)
   const frameFor = (index: number): SceneFrame => config.frames[cycle[index] ?? ''] ?? {}
-  const timingFor = (index: number): { duration: number; hold: number } =>
+  const timingFor = (index: number): { duration: number; hold: number; easing?: EasingName } =>
     config.timings?.[cycle[index] ?? ''] ?? { duration: 700, hold: 900 }
 
   let index = 0
@@ -186,9 +185,9 @@ export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
       if (moving) {
         // Pacing belongs to the keyframe being moved INTO, so one step can linger and the
         // next can snap.
-        const { duration } = timingFor(target)
+        const { duration, easing } = timingFor(target)
         const t = duration <= 0 ? 1 : Math.min(1, elapsed / duration)
-        paint(bindings, blend(frameFor(index), frameFor(target), ease(t)))
+        paint(bindings, blend(frameFor(index), frameFor(target), easingFor(easing ?? config.easing)(t)))
         if (t >= 1) {
           index = target
           moving = false

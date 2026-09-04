@@ -134,6 +134,8 @@ animate: {
 
 Fields a keyframe leaves out fall back to the part's own declaration, and a part no keyframe mentions never moves. `duration` is the time to transition *into* a step, so setting it to `0` makes that step a hard cut — which is how a loop wraps without sliding everything backwards across the stage.
 
+Each keyframe can set its own `easing`. Continuous travel wants `linear` on every step, easing only where the motion genuinely starts and stops: an ease brings velocity to zero at *every* keyframe it passes through, which is what makes a run of steps pulse instead of flow.
+
 To have figures walk on and off, give the scene an explicit `viewBox` and park them outside it; content is clipped to the viewBox, so off-stage is genuinely invisible.
 
 `animate.mode` is `loop`, `pingpong`, `hover`, or `click`. One `requestAnimationFrame` loop drives every scene on the page, scenes pause while scrolled out of view, and `prefers-reduced-motion: reduce` holds the first pose without ever starting. The runtime is exposed as `window.dotscene` for manual control:

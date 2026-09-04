@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { atKeyframe, compile, defineFigure, defineScene, resolve } from '../src/index.ts'
+import { atKeyframe, compile, defineFigure, defineScene, easings, resolve } from '../src/index.ts'
 import { validateScene } from '../src/validate.ts'
 
 const bar = defineFigure('bar', {
@@ -61,9 +61,23 @@ describe('keyframes', () => {
       }),
     )
     expect(resolved.animation?.timings).toEqual({
-      cut: { duration: 0, hold: 100 },
-      slow: { duration: 400, hold: 800 },
+      cut: { duration: 0, hold: 100, easing: 'easeInOut' },
+      slow: { duration: 400, hold: 800, easing: 'easeInOut' },
     })
+  })
+
+  it('lets a keyframe choose its own easing, so a run of steps can stay linear', () => {
+    const resolved = resolve(
+      twoPart({
+        easing: 'easeInOut',
+        keyframes: [
+          { name: 'stride', easing: 'linear', parts: { a: {} } },
+          { name: 'arrive', parts: { a: {} } },
+        ],
+      }),
+    )
+    expect(resolved.animation?.timings.stride?.easing).toBe('linear')
+    expect(resolved.animation?.timings.arrive?.easing).toBe('easeInOut')
   })
 
   it('still accepts the single-part cycle shorthand', () => {
@@ -119,5 +133,67 @@ describe('compiled payload', () => {
     const payload = JSON.parse(out.html.match(/data-dotscene-poses="s">(.*?)<\/script>/s)![1]!)
     expect(payload.frames.k.a.top).toEqual([1, 0])
     expect(payload.frames.k.b.top).toEqual([2, 0])
+  })
+})
+
+describe('continuous motion', () => {
+  const walker = defineFigure('walker', {
+    points: { foot: [0, 10], hip: [0, 0] },
+    edges: [['hip', 'foot']],
+  })
+
+  /** Position of a part at time `ms` into the cycle, the way the runtime computes it. */
+  const track = (animation: NonNullable<ReturnType<typeof resolve>['animation']>, ms: number): number => {
+    let clock = 0
+    for (let i = 1; i < animation.cycle.length; i++) {
+      const name = animation.cycle[i]!
+      const { duration, easing } = animation.timings[name]!
+      if (ms <= clock + duration) {
+        const t = duration === 0 ? 1 : (ms - clock) / duration
+        const eased = easings[easing](t)
+        const from = animation.frames[animation.cycle[i - 1]!]!.p!.hip![0]
+        const to = animation.frames[name]!.p!.hip![0]
+        return from + (to - from) * eased
+      }
+      clock += duration + animation.timings[name]!.hold
+    }
+    return animation.frames[animation.cycle.at(-1)!]!.p!.hip![0]
+  }
+
+  const run = (easing: 'linear' | 'easeInOut') =>
+    resolve(
+      defineScene('run', {
+        parts: [{ figure: walker, id: 'p' }],
+        viewBox: [0, 0, 100, 20],
+        animate: {
+          keyframes: [0, 10, 20, 30].map((x) => ({
+            name: `k${x}`,
+            at: undefined,
+            duration: 100,
+            hold: 0,
+            easing,
+            parts: { p: { at: [x, 0] as const } },
+          })),
+        },
+      }),
+    ).animation!
+
+  it('moves at a constant speed through a run of equal linear keyframes', () => {
+    const animation = run('linear')
+    // Sample either side of the keyframe boundary at 100ms. Equal speed across it is what
+    // makes a walk read as continuous rather than as a series of lunges.
+    const before = track(animation, 90) - track(animation, 80)
+    const across = track(animation, 105) - track(animation, 95)
+    const after = track(animation, 190) - track(animation, 180)
+    expect(across).toBeCloseTo(before, 4)
+    expect(after).toBeCloseTo(before, 4)
+  })
+
+  it('stalls at every boundary when each step eases, which is the jerk to avoid', () => {
+    const animation = run('easeInOut')
+    const midStep = track(animation, 55) - track(animation, 45)
+    const atBoundary = track(animation, 103) - track(animation, 97)
+    // Speed at the keyframe collapses towards zero, so the figure visibly stops and restarts.
+    expect(atBoundary).toBeLessThan(midStep * 0.2)
   })
 })

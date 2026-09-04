@@ -38,6 +38,7 @@ export type SceneFrame = Readonly<Record<string, Frame>>
 export interface FrameTiming {
   readonly duration: number
   readonly hold: number
+  readonly easing: EasingName
 }
 
 export interface ResolvedScene {
@@ -169,6 +170,7 @@ export const resolve = (scene: Scene): ResolvedScene => {
       timings[keyframe.name] = {
         duration: keyframe.duration ?? animate.duration ?? 700,
         hold: keyframe.hold ?? animate.hold ?? 900,
+        easing: keyframe.easing ?? animate.easing ?? 'easeInOut',
       }
     }
 

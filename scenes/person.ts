@@ -86,29 +86,53 @@ export const person = defineFigure('person', {
       footR: [12, 63],
     },
     /**
-     * Walking and hand-off poses. `Carry` holds an item in the right hand, `Hold` in the
-     * left — so two figures facing each other can each keep the item on the inner side.
-     * A/B are opposite halves of the stride.
+     * A four-phase walk cycle in profile, facing +x. Use `flipX` on the part to walk the
+     * other way rather than authoring a mirrored set.
+     *
+     * Two things make this read as walking rather than skating. The planted foot sits
+     * exactly half a stride ahead of the hip at contact and half a stride behind at the
+     * next contact, so if the scene advances the figure by one STRIDE between contacts the
+     * foot stays put on the ground while the body travels over it. And the body drops 3
+     * units at contact — a leg reaching 11 units forward cannot also be 28 units long — so
+     * the bob is a consequence of the geometry, not a decoration.
+     *
+     * The right arm hangs to carry something; the left swings in opposition to the legs.
      */
-    walkCarryA: {
-      kneeL: [-11, 47], footL: [-16, 61], kneeR: [4, 51], footR: [7, 64],
-      elbowR: [12, 26], handR: [12, 35],
-      elbowL: [-10, 25], handL: [-8, 32],
+    stepA: {
+      head: [4, 6], neck: [2, 16], chest: [1, 25], hip: [0, 37],
+      shoulderL: [-3, 19], shoulderR: [3, 18],
+      hipL: [-3, 39], hipR: [3, 39],
+      kneeL: [6, 51], footL: [10, 64],
+      kneeR: [-4, 51], footR: [-10, 63],
+      elbowL: [-8, 27], handL: [-11, 35],
+      elbowR: [7, 28], handR: [9, 38],
     },
-    walkCarryB: {
-      kneeL: [-4, 51], footL: [-7, 64], kneeR: [11, 47], footR: [16, 61],
-      elbowR: [12, 26], handR: [12, 35],
-      elbowL: [-15, 25], handL: [-19, 31],
+    passA: {
+      head: [4, 3], neck: [2, 13], chest: [1, 22], hip: [0, 34],
+      shoulderL: [-3, 16], shoulderR: [3, 15],
+      hipL: [-3, 36], hipR: [3, 36],
+      kneeL: [-2, 50], footL: [0, 64],
+      kneeR: [8, 47], footR: [5, 59],
+      elbowL: [-5, 25], handL: [-7, 34],
+      elbowR: [7, 25], handR: [9, 35],
     },
-    walkHoldA: {
-      kneeL: [-11, 47], footL: [-16, 61], kneeR: [4, 51], footR: [7, 64],
-      elbowL: [-12, 26], handL: [-12, 35],
-      elbowR: [10, 25], handR: [8, 32],
+    stepB: {
+      head: [4, 6], neck: [2, 16], chest: [1, 25], hip: [0, 37],
+      shoulderL: [-3, 19], shoulderR: [3, 18],
+      hipL: [-3, 39], hipR: [3, 39],
+      kneeR: [6, 51], footR: [10, 64],
+      kneeL: [-4, 51], footL: [-10, 63],
+      elbowL: [1, 26], handL: [4, 33],
+      elbowR: [7, 28], handR: [9, 38],
     },
-    walkHoldB: {
-      kneeL: [-4, 51], footL: [-7, 64], kneeR: [11, 47], footR: [16, 61],
-      elbowL: [-12, 26], handL: [-12, 35],
-      elbowR: [15, 25], handR: [19, 31],
+    passB: {
+      head: [4, 3], neck: [2, 13], chest: [1, 22], hip: [0, 34],
+      shoulderL: [-3, 16], shoulderR: [3, 15],
+      hipL: [-3, 36], hipR: [3, 36],
+      kneeR: [2, 50], footR: [0, 64],
+      kneeL: [8, 47], footL: [5, 59],
+      elbowL: [-3, 25], handL: [-4, 34],
+      elbowR: [7, 25], handR: [9, 35],
     },
     /** Standing still with something in one hand. */
     holdR: { elbowR: [12, 26], handR: [12, 35] },
