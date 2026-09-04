@@ -45,7 +45,9 @@ Every command takes `--json`. Failures are structured, with `didYouMean` when a 
 
 ## Isometric scenes
 
-Author in grid coordinates and project once with `isometric({ tile, squash, rise })`: +x down-right, +y down-left, +z up. The library stays 2D — this is an authoring transform, not a renderer mode, so everything else keeps working. `scenes/city.ts` is the worked example, with local `box`, `tree` and `line` helpers over grid space.
+Author in grid coordinates and project once with `isometric({ tile, squash, rise })`: +x down-right, +y down-left, +z up.
+
+**Naming areas.** Screen words and grid words disagree here, so say which you mean. In `scenes/city.ts` the plate's four *corners* land at the top, right, bottom and left of the frame, which makes its four *edges* the upper-left, upper-right, lower-right and lower-left. So the east–west road (constant `gy`, running along +x) enters through the upper-left edge and leaves through the lower-right; the other road runs upper-right to lower-left. The lots read as the top lot (tower), right lot (office), left lot (works) and bottom lot (park). Landmarks — "the park lot", "the tower's road" — beat compass words, and grid coordinates beat both. The library stays 2D — this is an authoring transform, not a renderer mode, so everything else keeps working. `scenes/city.ts` is the worked example, with local `box`, `tree` and `line` helpers over grid space.
 
 - A box's far corner is always the one with the smallest x + y. Drop it and the three edges meeting it, and a transparent wireframe becomes a solid-looking box showing three faces.
 - Only a line's endpoints become dots, so a full ground grid costs two dots per line rather than one per intersection.

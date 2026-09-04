@@ -116,6 +116,8 @@ const points = { towerNear: grid([3, 3, 0]), towerTop: grid([3, 3, 6]) }
 - For a solid-looking box, drop the far corner — always the smallest x + y — and its three edges. Seven points, nine edges, three visible faces.
 - A full ground grid is cheap: only line endpoints become dots, so twelve lines cost twenty-four dots around the rim, not a hundred in the middle.
 - Nothing can hide behind anything, so depth comes from weight. Give edges a `kind` and points a `pointKinds` entry, then style `ds-line--x` and `ds-dot--x` in the scene's `css`.
+- Naming areas: the plate's corners land top/right/bottom/left, so its edges are the upper-left, upper-right, lower-right and lower-left. A road at constant `gy` runs upper-left to lower-right. Prefer landmarks ("the park lot") or raw grid coordinates over compass words.
+- A figure moves across the grid by translating the part — the projection is affine, so `grid([gx, gy, 0])` is both the cell and the offset to it. No per-frame pose needed for something that only slides.
 - Set `dotRadius` explicitly when the scene mixes scales — small trees beside large buildings — since the median-edge default will size for one and swallow the other.
 
 ## Matching a site's palette

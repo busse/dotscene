@@ -22,15 +22,15 @@ interface Shape {
  * always the one with the smallest x + y — the highest on screen — so dropping it turns a
  * transparent wireframe into a solid-looking box showing its three visible faces.
  */
-const box = (prefix: string, from: Vec2, to: Vec2, height: number): Shape => {
+const box = (prefix: string, from: Vec2, to: Vec2, height: number, base = 0): Shape => {
   const [x0, y0] = from
   const [x1, y1] = to
   const at = (cell: Vec3) => grid(cell)
   return {
     points: {
-      [`${prefix}Near`]: at([x1, y1, 0]),
-      [`${prefix}East`]: at([x1, y0, 0]),
-      [`${prefix}West`]: at([x0, y1, 0]),
+      [`${prefix}Near`]: at([x1, y1, base]),
+      [`${prefix}East`]: at([x1, y0, base]),
+      [`${prefix}West`]: at([x0, y1, base]),
       [`${prefix}TopFar`]: at([x0, y0, height]),
       [`${prefix}TopEast`]: at([x1, y0, height]),
       [`${prefix}TopNear`]: at([x1, y1, height]),
@@ -75,11 +75,15 @@ const tree = (prefix: string, [x, y]: Vec2, height = 1.7, spread = 1.15): Shape 
   }
 }
 
-/** A straight run on the ground, corner to corner in grid coordinates. */
-const line = (name: string, from: Vec2, to: Vec2): Shape => ({
-  points: { [`${name}A`]: grid([from[0], from[1], 0]), [`${name}B`]: grid([to[0], to[1], 0]) },
+/** A straight run between two cells, at any height. */
+const edge3 = (name: string, from: Vec3, to: Vec3): Shape => ({
+  points: { [`${name}A`]: grid(from), [`${name}B`]: grid(to) },
   edges: [[`${name}A`, `${name}B`]],
 })
+
+/** A straight run on the ground, corner to corner in grid coordinates. */
+const line = (name: string, from: Vec2, to: Vec2): Shape =>
+  edge3(name, [from[0], from[1], 0], [to[0], to[1], 0])
 
 const merge = (...shapes: readonly Shape[]): Shape => ({
   points: Object.assign({}, ...shapes.map((s) => s.points)),
@@ -105,11 +109,21 @@ const lots = merge(
   ]),
 )
 
+/**
+ * Roads run well past the block and are cropped by the viewBox, so they read as continuing
+ * into the neighbouring blocks — and so a vehicle can arrive from off-frame rather than
+ * appearing out of nothing at the boundary.
+ */
+const ROAD_FROM = -8
+const ROAD_TO = 17
+/** Down the middle of the east–west carriageway, between the gy = 4 and gy = 5 kerbs. */
+const ROAD_LANE = 4.5
+
 const roads = merge(
-  line('roadNS1', [4, 0], [4, 9]),
-  line('roadNS2', [5, 0], [5, 9]),
-  line('roadEW1', [0, 4], [9, 4]),
-  line('roadEW2', [0, 5], [9, 5]),
+  line('roadNS1', [4, ROAD_FROM], [4, ROAD_TO]),
+  line('roadNS2', [5, ROAD_FROM], [5, ROAD_TO]),
+  line('roadEW1', [ROAD_FROM, 4], [ROAD_TO, 4]),
+  line('roadEW2', [ROAD_FROM, 5], [ROAD_TO, 5]),
 )
 
 const buildings = merge(
@@ -125,6 +139,34 @@ const park = merge(
   tree('treeB', [8.2, 7.4], 1.2, 0.7),
   tree('treeC', [6.9, 8.4], 1.8, 0.85),
 )
+
+/**
+ * A truck, drawn at the grid origin and moved by translating the part.
+ *
+ * That works because the projection is affine: shifting a figure by whole cells in grid
+ * space is exactly a shift in screen space, so `grid([gx, gy, 0])` doubles as the offset to
+ * place it there. No per-frame pose needed — the truck is one figure that slides.
+ *
+ * Authored nose-first along +x, which is the direction it drives.
+ */
+const truckShape = merge(
+  box('trailer', [0, -0.38], [1.2, 0.38], 0.95, 0.22),
+  box('cab', [1.2, -0.36], [1.85, 0.36], 0.62, 0.22),
+  edge3('wheelRear', [0.3, 0.38, 0.22], [0.3, 0.38, 0]),
+  edge3('wheelFront', [1.45, 0.36, 0.22], [1.45, 0.36, 0]),
+)
+
+export const truck = defineFigure('truck', {
+  title: 'A truck',
+  points: truckShape.points,
+  // Its own role, so its dots can be smaller: a vehicle's panels are shorter than a
+  // building's walls, and dots sized for the buildings turn it into a blob.
+  pointKinds: Object.fromEntries(Object.keys(truckShape.points).map((name) => [name, 'vehicle'])),
+  edges: truckShape.edges.map(([from, to]) => ({ from, to, kind: 'vehicle' })),
+})
+
+/** Where the truck sits when it is `gx` cells along the east–west road. */
+const alongRoad = (gx: number): Vec2 => grid([gx, ROAD_LANE, 0])
 
 /**
  * Label every point in a shape with one role, so a scene can colour by what a thing *is*
@@ -175,15 +217,39 @@ const roles = (ink: string, lot: string, ground: string, road: string): string =
     `.ds-dot--ground{fill:${ground};r:.85}`,
     `.ds-line--road{stroke:${road};stroke-width:1.15}`,
     `.ds-dot--road{fill:${road};r:1}`,
+    `.ds-line--vehicle{stroke:${ink};stroke-width:.5}`,
+    `.ds-dot--vehicle{fill:${ink};r:.75}`,
   ].join('')
 
 const layout = {
-  parts: [{ figure: block }],
+  parts: [
+    { figure: block },
+    { figure: truck, id: 'truck', at: alongRoad(-8) },
+  ],
+  // Explicit, because the roads deliberately overrun the block: a fitted box would zoom out
+  // to include them and there would be no off-frame left to arrive from.
+  viewBox: [-80, -30, 160, 110],
   padding: 8,
   // The tree edges are far shorter than the buildings', so the median-edge default sizes
   // dots for the buildings and swallows the park. Set it against the smaller detail.
   dotRadius: 1.3,
   lineWidth: 0.6,
+  /**
+   * The truck crosses the block on the east–west road, entering through the upper-left edge
+   * and leaving through the lower-right.
+   *
+   * Two keyframes is the whole animation. A linear tween between them *is* constant speed,
+   * so intermediate frames would add bytes and change nothing; the only reason the exchange
+   * scene needs thirty-nine is that its figures change shape as they move. The hold at the
+   * far end leaves the street empty for a beat before the cut sends it round again.
+   */
+  animate: {
+    mode: 'loop',
+    keyframes: [
+      { name: 'enter', duration: 0, hold: 0, easing: 'linear', parts: { truck: { at: alongRoad(-8) } } },
+      { name: 'exit', duration: 6500, hold: 1400, easing: 'linear', parts: { truck: { at: alongRoad(17) } } },
+    ],
+  },
 } as const
 
 export const scene = defineScene('city', {
