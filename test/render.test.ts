@@ -64,10 +64,10 @@ describe('renderSvg', () => {
     expect(svg).toMatchInlineSnapshot(`
       "<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="bar" viewBox="-1 -1 2 12" role="img">
         <title>A bar</title>
-        <style>.dotscene{--ds-dot-r:2.5;--ds-line-w:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}</style>
+        <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="bar"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
         <line class="ds-line" data-part="bar" data-a="top" data-b="base" x1="0" y1="0" x2="0" y2="10"/>
-        <circle class="ds-dot" data-part="bar" data-p="top" cx="0" cy="0" r="2.5"/>
-        <circle class="ds-dot" data-part="bar" data-p="base" cx="0" cy="10" r="2.5"/>
+        <circle class="ds-dot" data-part="bar" data-p="top" cx="0" cy="0" r="1.6"/>
+        <circle class="ds-dot" data-part="bar" data-p="base" cx="0" cy="10" r="1.6"/>
       </svg>"
     `)
   })

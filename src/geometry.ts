@@ -100,3 +100,26 @@ export const mirrorX = (points: PointMap, options: MirrorOptions = {}): PointMap
   }
   return mirrored
 }
+
+export interface Ring {
+  readonly points: PointMap
+  readonly edges: readonly (readonly [string, string])[]
+}
+
+/**
+ * A closed ring of evenly spaced points — wheels, hubs, anything round.
+ *
+ * Returns both the points and the edges closing the loop, so a figure spec can spread one in
+ * without hand-writing eight coordinates and eight pairs.
+ */
+export const ring = (prefix: string, center: Vec2, radius: number, count = 8, startDegrees = -90): Ring => {
+  const points: Record<string, Vec2> = {}
+  const edges: (readonly [string, string])[] = []
+  for (let i = 0; i < count; i++) {
+    const degrees = startDegrees + (360 / count) * i
+    const radians = (degrees * Math.PI) / 180
+    points[`${prefix}${i}`] = roundVec([center[0] + Math.cos(radians) * radius, center[1] + Math.sin(radians) * radius])
+    edges.push([`${prefix}${i}`, `${prefix}${(i + 1) % count}`])
+  }
+  return { points, edges }
+}

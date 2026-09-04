@@ -93,6 +93,10 @@ export interface SceneSpec {
   readonly viewBox?: readonly [number, number, number, number]
   /** Scene units of breathing room around the content bounds. Default 6. */
   readonly padding?: number
+  /** Dot radius in scene units. Defaults to a proportion of the viewBox — see `resolve`. */
+  readonly dotRadius?: number
+  /** Stroke width in scene units. Defaults to a proportion of the dot radius. */
+  readonly lineWidth?: number
   readonly animate?: AnimateSpec
 }
 
@@ -103,6 +107,8 @@ export interface Scene {
   readonly padding: number
   readonly title?: string
   readonly viewBox?: readonly [number, number, number, number]
+  readonly dotRadius?: number
+  readonly lineWidth?: number
   readonly animate?: AnimateSpec
 }
 
@@ -137,6 +143,8 @@ export const defineScene = (name: string, spec: SceneSpec): Scene => ({
   padding: spec.padding ?? 6,
   ...(spec.title === undefined ? {} : { title: spec.title }),
   ...(spec.viewBox === undefined ? {} : { viewBox: spec.viewBox }),
+  ...(spec.dotRadius === undefined ? {} : { dotRadius: spec.dotRadius }),
+  ...(spec.lineWidth === undefined ? {} : { lineWidth: spec.lineWidth }),
   ...(spec.animate === undefined ? {} : { animate: spec.animate }),
 })
 

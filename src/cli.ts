@@ -9,12 +9,16 @@
 
 import { parseArgs } from 'node:util'
 import { writeFile, mkdir } from 'node:fs/promises'
-import { relative, resolve as resolvePath } from 'node:path'
+import { dirname, relative, resolve as resolvePath } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { compile } from './compile.ts'
 import { resolve } from './layout.ts'
 import { partId, withPose, type Scene } from './model.ts'
 import { renderAscii } from './render/ascii.ts'
 import { loadScenes, type LoadedScene } from './load.ts'
 import { sceneToJson } from './serialize.ts'
+import { renderGallery } from './site.ts'
+import { DEFAULT_CSS } from './render/svg.ts'
 import { isIssueError, validateScene, type Issue } from './validate.ts'
 
 const USAGE = `dotscene — constellation-style scene illustrations
@@ -234,6 +238,70 @@ const cmdNew = async (name: string | undefined, options: Options): Promise<void>
   else process.stdout.write(`created ${path}\n  next: dotscene preview ${name}\n`)
 }
 
+
+/**
+ * Bundle the browser runtime.
+ *
+ * esbuild is a dev dependency, so it is imported here rather than at module load — the
+ * read-only commands must keep working in an install that never builds.
+ */
+const bundleRuntime = async (outfile: string): Promise<number> => {
+  const { build } = await import('esbuild')
+  const entry = resolvePath(dirname(fileURLToPath(import.meta.url)), 'runtime/index.ts')
+  const result = await build({
+    entryPoints: [entry],
+    outfile,
+    bundle: true,
+    minify: true,
+    format: 'iife',
+    // Exposed as a global so a page can drive a scene by hand — goTo, stop, or mount
+    // something it rendered itself.
+    globalName: 'dotscene',
+    target: 'es2020',
+    legalComments: 'none',
+    metafile: true,
+  })
+  return Object.values(result.metafile.outputs)[0]?.bytes ?? 0
+}
+
+const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Promise<void> => {
+  await mkdir(options.out, { recursive: true })
+
+  const compiled = [...scenes.values()].map(({ scene }) => compile(scene))
+  const written: string[] = []
+
+  for (const entry of compiled) {
+    const svgFile = resolvePath(options.out, `${entry.name}.svg`)
+    const htmlFile = resolvePath(options.out, `${entry.name}.html`)
+    await writeFile(svgFile, `${entry.svg}\n`)
+    await writeFile(htmlFile, `${entry.html}\n`)
+    written.push(relative(process.cwd(), svgFile), relative(process.cwd(), htmlFile))
+  }
+
+  const cssFile = resolvePath(options.out, 'dotscene.css')
+  await writeFile(cssFile, `${DEFAULT_CSS}\n`)
+  written.push(relative(process.cwd(), cssFile))
+
+  const galleryFile = resolvePath(options.out, 'index.html')
+  await writeFile(galleryFile, renderGallery(compiled))
+  written.push(relative(process.cwd(), galleryFile))
+
+  let runtimeBytes = 0
+  if (compiled.some((entry) => entry.animated)) {
+    const runtimeFile = resolvePath(options.out, 'dotscene.min.js')
+    runtimeBytes = await bundleRuntime(runtimeFile)
+    written.push(relative(process.cwd(), runtimeFile))
+  }
+
+  if (options.json) {
+    process.stdout.write(`${JSON.stringify({ ok: true, files: written, runtimeBytes }, null, 2)}\n`)
+    return
+  }
+  process.stdout.write(`built ${compiled.length} scene(s) into ${options.out}/\n`)
+  for (const file of written) process.stdout.write(`  ${file}\n`)
+  if (runtimeBytes > 0) process.stdout.write(`  runtime: ${runtimeBytes} bytes minified\n`)
+}
+
 export const run = async (argv: readonly string[]): Promise<void> => {
   const { values, positionals } = parseArgs({
     args: [...argv],
@@ -282,6 +350,8 @@ export const run = async (argv: readonly string[]): Promise<void> => {
       return cmdPreview(requireScene(scenes, target, options.json), options)
     case 'check':
       return cmdCheck(scenes, options)
+    case 'build':
+      return cmdBuild(scenes, options)
     default:
       fail(`unknown command '${command}'. Run \`dotscene --help\`.`, options.json)
   }

@@ -19,10 +19,19 @@ export interface SvgOptions {
 
 /** Default look, kept at low specificity so page CSS can override any of it. */
 export const DEFAULT_CSS = [
-  '.dotscene{--ds-dot-r:2.5;--ds-line-w:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}',
+  '.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}',
   '.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}',
   '.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}',
 ].join('')
+
+/**
+ * Per-scene sizing, scoped to this scene's data attribute.
+ *
+ * Override from a page with a more specific selector — `svg.dotscene .ds-dot { r: 2 }` —
+ * rather than by redefining the custom property, which this rule would win.
+ */
+const sceneCss = (scene: ResolvedScene): string =>
+  `svg[data-dotscene="${scene.name}"]{--ds-dot-r:${scene.dotRadius};--ds-line-w:${scene.lineWidth}}`
 
 const escapeXml = (value: string): string =>
   value.replace(/[&<>"']/g, (char) => {
@@ -69,7 +78,7 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
 
   const body: string[] = []
   if (titled) body.push(`<title>${escapeXml(scene.title!)}</title>`)
-  if (options.styles !== false) body.push(`<style>${DEFAULT_CSS}</style>`)
+  if (options.styles !== false) body.push(`<style>${DEFAULT_CSS}${sceneCss(scene)}</style>`)
 
   for (const line of scene.lines) {
     body.push(
@@ -94,7 +103,7 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
         ['data-p', dot.point],
         ['cx', dot.at[0]],
         ['cy', dot.at[1]],
-        ['r', 2.5],
+        ['r', scene.dotRadius],
       ])}/>`,
     )
   }

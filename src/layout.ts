@@ -8,7 +8,7 @@
 
 import type { AnimateMode, EasingName, Part, PointId, Scene, Vec2 } from './model.ts'
 import { partId } from './model.ts'
-import { applyTransform, bounds, padBounds, roundVec, unionBounds, type Bounds } from './geometry.ts'
+import { applyTransform, bounds, distance, padBounds, round, roundVec, unionBounds, type Bounds } from './geometry.ts'
 import { posePoints } from './poses.ts'
 import { issueError, validateScene } from './validate.ts'
 
@@ -36,6 +36,9 @@ export interface ResolvedScene {
   readonly name: string
   readonly title?: string
   readonly viewBox: ViewBox
+  /** Dot radius in scene units, so the same figure reads the same at any authoring scale. */
+  readonly dotRadius: number
+  readonly lineWidth: number
   readonly dots: readonly ResolvedDot[]
   readonly lines: readonly ResolvedLine[]
   /** Present only for animated scenes: the cycling part and its poses in scene space. */
@@ -136,15 +139,33 @@ export const resolve = (scene: Scene): ResolvedScene => {
   }
 
   const viewBox = scene.viewBox ?? fitViewBox(box ?? bounds([]), scene.padding)
+  const dotRadius = scene.dotRadius ?? defaultDotRadius(lines, viewBox)
 
   return {
     name: scene.name,
     ...(scene.title === undefined ? {} : { title: scene.title }),
     viewBox,
+    dotRadius,
+    lineWidth: scene.lineWidth ?? round(Math.max(0.2, dotRadius * 0.45), 2),
     dots,
     lines,
     ...(animation === undefined ? {} : { animation }),
   }
+}
+
+/**
+ * Dots sized from the scene's own detail level, not from fixed units.
+ *
+ * The basis is the median edge length rather than the viewBox: a wide scene can still hold
+ * fine detail — a driver inside a car — and sizing dots off the overall extent turns that
+ * detail into a blob. The median tracks the strokes the dots actually sit on, so a figure
+ * reads the same alone as it does composed into something larger.
+ */
+const defaultDotRadius = (lines: readonly ResolvedLine[], viewBox: ViewBox): number => {
+  if (lines.length === 0) return round(Math.max(0.4, Math.max(viewBox[2], viewBox[3]) * 0.02), 2)
+  const lengths = lines.map((line) => distance(line.a, line.b)).sort((a, b) => a - b)
+  const median = lengths[Math.floor(lengths.length / 2)] ?? 1
+  return round(Math.max(0.4, median * 0.16), 2)
 }
 
 const fitViewBox = (box: Bounds, padding: number): ViewBox => {
