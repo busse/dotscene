@@ -1,0 +1,340 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="discovery" viewBox="-52 -15.02 235 85.02" role="img">
+  <title>Someone has been sleeping in my bed</title>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="discovery"]{--ds-dot-r:0.76;--ds-line-w:0.34}</style>
+  <line class="ds-line" data-part="bed" data-a="headTop" data-b="headBot" x1="-46" y1="26" x2="-46" y2="50"/>
+  <line class="ds-line" data-part="bed" data-a="headBot" data-b="footBot" x1="-46" y1="50" x2="42" y2="50"/>
+  <line class="ds-line" data-part="bed" data-a="footBot" data-b="footTop" x1="42" y1="50" x2="42" y2="36"/>
+  <line class="ds-line" data-part="bed" data-a="headBot" data-b="legB" x1="-46" y1="50" x2="-46" y2="64"/>
+  <line class="ds-line" data-part="bed" data-a="footBot" data-b="legF" x1="42" y1="50" x2="42" y2="64"/>
+  <line class="ds-line" data-part="bed" data-a="pillowL" data-b="pillowR" x1="-42" y1="46" x2="-28" y2="46"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head0" data-b="head1" x1="-40" y1="40" x2="-38.54" y2="36.46"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head1" data-b="head2" x1="-38.54" y1="36.46" x2="-35" y2="35"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head2" data-b="head3" x1="-35" y1="35" x2="-31.46" y2="36.46"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head3" data-b="head4" x1="-31.46" y1="36.46" x2="-30" y2="40"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head4" data-b="head5" x1="-30" y1="40" x2="-31.46" y2="43.54"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head5" data-b="head6" x1="-31.46" y1="43.54" x2="-35" y2="45"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head6" data-b="head7" x1="-35" y1="45" x2="-38.54" y2="43.54"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head7" data-b="head0" x1="-38.54" y1="43.54" x2="-40" y2="40"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hair1L" data-b="hair2L" x1="-40" y1="47" x2="-32" y2="51"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hair2L" data-b="hair3L" x1="-32" y1="51" x2="-25" y2="50"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hair1L" data-b="head7" x1="-40" y1="47" x2="-38.54" y2="43.54"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hair1R" data-b="hair2R" x1="-40" y1="33" x2="-31" y2="31"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hair2R" data-b="hair3R" x1="-31" y1="31" x2="-24" y2="33"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hair1R" data-b="head1" x1="-40" y1="33" x2="-38.54" y2="36.46"/>
+  <line class="ds-line" data-part="goldilocks" data-a="head4" data-b="neck" x1="-30" y1="40" x2="-28" y2="40"/>
+  <line class="ds-line" data-part="goldilocks" data-a="neck" data-b="chest" x1="-28" y1="40" x2="-20" y2="40"/>
+  <line class="ds-line" data-part="goldilocks" data-a="chest" data-b="hip" x1="-20" y1="40" x2="-8" y2="40"/>
+  <line class="ds-line" data-part="goldilocks" data-a="neck" data-b="shoulderL" x1="-28" y1="40" x2="-23" y2="47"/>
+  <line class="ds-line" data-part="goldilocks" data-a="neck" data-b="shoulderR" x1="-28" y1="40" x2="-23" y2="33"/>
+  <line class="ds-line" data-part="goldilocks" data-a="shoulderL" data-b="elbowL" x1="-23" y1="47" x2="-14" y2="47"/>
+  <line class="ds-line" data-part="goldilocks" data-a="elbowL" data-b="handL" x1="-14" y1="47" x2="-6" y2="45"/>
+  <line class="ds-line" data-part="goldilocks" data-a="shoulderR" data-b="elbowR" x1="-23" y1="33" x2="-14" y2="33"/>
+  <line class="ds-line" data-part="goldilocks" data-a="elbowR" data-b="handR" x1="-14" y1="33" x2="-6" y2="35"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hip" data-b="hipL" x1="-8" y1="40" x2="-6" y2="45"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hip" data-b="hipR" x1="-8" y1="40" x2="-6" y2="35"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hipL" data-b="kneeL" x1="-6" y1="45" x2="8" y2="48"/>
+  <line class="ds-line" data-part="goldilocks" data-a="kneeL" data-b="footL" x1="8" y1="48" x2="21" y2="46"/>
+  <line class="ds-line" data-part="goldilocks" data-a="hipR" data-b="kneeR" x1="-6" y1="35" x2="8" y2="32"/>
+  <line class="ds-line" data-part="goldilocks" data-a="kneeR" data-b="footR" x1="8" y1="32" x2="21" y2="30"/>
+  <line class="ds-line" data-part="papa" data-a="head0" data-b="head1" x1="80" y1="-5.57" x2="85.75" y2="-3.71"/>
+  <line class="ds-line" data-part="papa" data-a="head1" data-b="head2" x1="85.75" y1="-3.71" x2="89.29" y2="1.18"/>
+  <line class="ds-line" data-part="papa" data-a="head2" data-b="head3" x1="89.29" y1="1.18" x2="89.29" y2="7.22"/>
+  <line class="ds-line" data-part="papa" data-a="head3" data-b="head4" x1="89.29" y1="7.22" x2="85.75" y2="12.11"/>
+  <line class="ds-line" data-part="papa" data-a="head4" data-b="head5" x1="85.75" y1="12.11" x2="80" y2="13.98"/>
+  <line class="ds-line" data-part="papa" data-a="head5" data-b="head6" x1="80" y1="13.98" x2="74.25" y2="12.11"/>
+  <line class="ds-line" data-part="papa" data-a="head6" data-b="head7" x1="74.25" y1="12.11" x2="70.71" y2="7.22"/>
+  <line class="ds-line" data-part="papa" data-a="head7" data-b="head8" x1="70.71" y1="7.22" x2="70.71" y2="1.18"/>
+  <line class="ds-line" data-part="papa" data-a="head8" data-b="head9" x1="70.71" y1="1.18" x2="74.25" y2="-3.71"/>
+  <line class="ds-line" data-part="papa" data-a="head9" data-b="head0" x1="74.25" y1="-3.71" x2="80" y2="-5.57"/>
+  <line class="ds-line" data-part="papa" data-a="earL0" data-b="earL1" x1="71.95" y1="-9.02" x2="74.94" y2="-7.3"/>
+  <line class="ds-line" data-part="papa" data-a="earL1" data-b="earL2" x1="74.94" y1="-7.3" x2="74.94" y2="-3.85"/>
+  <line class="ds-line" data-part="papa" data-a="earL2" data-b="earL3" x1="74.94" y1="-3.85" x2="71.95" y2="-2.12"/>
+  <line class="ds-line" data-part="papa" data-a="earL3" data-b="earL4" x1="71.95" y1="-2.12" x2="68.96" y2="-3.85"/>
+  <line class="ds-line" data-part="papa" data-a="earL4" data-b="earL5" x1="68.96" y1="-3.85" x2="68.96" y2="-7.3"/>
+  <line class="ds-line" data-part="papa" data-a="earL5" data-b="earL0" x1="68.96" y1="-7.3" x2="71.95" y2="-9.02"/>
+  <line class="ds-line" data-part="papa" data-a="earR0" data-b="earR1" x1="88.05" y1="-9.02" x2="91.04" y2="-7.3"/>
+  <line class="ds-line" data-part="papa" data-a="earR1" data-b="earR2" x1="91.04" y1="-7.3" x2="91.04" y2="-3.85"/>
+  <line class="ds-line" data-part="papa" data-a="earR2" data-b="earR3" x1="91.04" y1="-3.85" x2="88.05" y2="-2.12"/>
+  <line class="ds-line" data-part="papa" data-a="earR3" data-b="earR4" x1="88.05" y1="-2.12" x2="85.06" y2="-3.85"/>
+  <line class="ds-line" data-part="papa" data-a="earR4" data-b="earR5" x1="85.06" y1="-3.85" x2="85.06" y2="-7.3"/>
+  <line class="ds-line" data-part="papa" data-a="earR5" data-b="earR0" x1="85.06" y1="-7.3" x2="88.05" y2="-9.02"/>
+  <line class="ds-line" data-part="papa" data-a="snout0" data-b="snout1" x1="80" y1="5.35" x2="82.99" y2="7.08"/>
+  <line class="ds-line" data-part="papa" data-a="snout1" data-b="snout2" x1="82.99" y1="7.08" x2="82.99" y2="10.53"/>
+  <line class="ds-line" data-part="papa" data-a="snout2" data-b="snout3" x1="82.99" y1="10.53" x2="80" y2="12.25"/>
+  <line class="ds-line" data-part="papa" data-a="snout3" data-b="snout4" x1="80" y1="12.25" x2="77.01" y2="10.53"/>
+  <line class="ds-line" data-part="papa" data-a="snout4" data-b="snout5" x1="77.01" y1="10.53" x2="77.01" y2="7.08"/>
+  <line class="ds-line" data-part="papa" data-a="snout5" data-b="snout0" x1="77.01" y1="7.08" x2="80" y2="5.35"/>
+  <line class="ds-line" data-part="papa" data-a="earL3" data-b="head8" x1="71.95" y1="-2.12" x2="70.71" y2="1.18"/>
+  <line class="ds-line" data-part="papa" data-a="earR4" data-b="head1" x1="85.06" y1="-3.85" x2="85.75" y2="-3.71"/>
+  <line class="ds-line" data-part="papa" data-a="head5" data-b="neck" x1="80" y1="13.98" x2="80" y2="20.3"/>
+  <line class="ds-line" data-part="papa" data-a="neck" data-b="chest" x1="80" y1="20.3" x2="80" y2="29.5"/>
+  <line class="ds-line" data-part="papa" data-a="chest" data-b="hip" x1="80" y1="29.5" x2="80" y2="41"/>
+  <line class="ds-line" data-part="papa" data-a="neck" data-b="shoulderL" x1="80" y1="20.3" x2="67.35" y2="22.6"/>
+  <line class="ds-line" data-part="papa" data-a="neck" data-b="shoulderR" x1="80" y1="20.3" x2="92.65" y2="22.6"/>
+  <line class="ds-line" data-part="papa" data-a="shoulderL" data-b="elbowL" x1="67.35" y1="22.6" x2="59.3" y2="24.9"/>
+  <line class="ds-line" data-part="papa" data-a="elbowL" data-b="pawL" x1="59.3" y1="24.9" x2="57" y2="13.4"/>
+  <line class="ds-line" data-part="papa" data-a="shoulderR" data-b="elbowR" x1="92.65" y1="22.6" x2="100.7" y2="24.9"/>
+  <line class="ds-line" data-part="papa" data-a="elbowR" data-b="pawR" x1="100.7" y1="24.9" x2="103" y2="13.4"/>
+  <line class="ds-line" data-part="papa" data-a="hip" data-b="hipL" x1="80" y1="41" x2="71.95" y2="42.15"/>
+  <line class="ds-line" data-part="papa" data-a="hip" data-b="hipR" x1="80" y1="41" x2="88.05" y2="42.15"/>
+  <line class="ds-line" data-part="papa" data-a="hipL" data-b="kneeL" x1="71.95" y1="42.15" x2="69.65" y2="53.65"/>
+  <line class="ds-line" data-part="papa" data-a="kneeL" data-b="footL" x1="69.65" y1="53.65" x2="67.35" y2="64"/>
+  <line class="ds-line" data-part="papa" data-a="hipR" data-b="kneeR" x1="88.05" y1="42.15" x2="90.35" y2="53.65"/>
+  <line class="ds-line" data-part="papa" data-a="kneeR" data-b="footR" x1="90.35" y1="53.65" x2="92.65" y2="64"/>
+  <line class="ds-line" data-part="mama" data-a="head0" data-b="head1" x1="128" y1="6.53" x2="132.75" y2="8.06"/>
+  <line class="ds-line" data-part="mama" data-a="head1" data-b="head2" x1="132.75" y1="8.06" x2="135.68" y2="12.1"/>
+  <line class="ds-line" data-part="mama" data-a="head2" data-b="head3" x1="135.68" y1="12.1" x2="135.68" y2="17.1"/>
+  <line class="ds-line" data-part="mama" data-a="head3" data-b="head4" x1="135.68" y1="17.1" x2="132.75" y2="21.14"/>
+  <line class="ds-line" data-part="mama" data-a="head4" data-b="head5" x1="132.75" y1="21.14" x2="128" y2="22.68"/>
+  <line class="ds-line" data-part="mama" data-a="head5" data-b="head6" x1="128" y1="22.68" x2="123.25" y2="21.14"/>
+  <line class="ds-line" data-part="mama" data-a="head6" data-b="head7" x1="123.25" y1="21.14" x2="120.32" y2="17.1"/>
+  <line class="ds-line" data-part="mama" data-a="head7" data-b="head8" x1="120.32" y1="17.1" x2="120.32" y2="12.1"/>
+  <line class="ds-line" data-part="mama" data-a="head8" data-b="head9" x1="120.32" y1="12.1" x2="123.25" y2="8.06"/>
+  <line class="ds-line" data-part="mama" data-a="head9" data-b="head0" x1="123.25" y1="8.06" x2="128" y2="6.53"/>
+  <line class="ds-line" data-part="mama" data-a="earL0" data-b="earL1" x1="121.35" y1="3.68" x2="123.82" y2="5.1"/>
+  <line class="ds-line" data-part="mama" data-a="earL1" data-b="earL2" x1="123.82" y1="5.1" x2="123.82" y2="7.95"/>
+  <line class="ds-line" data-part="mama" data-a="earL2" data-b="earL3" x1="123.82" y1="7.95" x2="121.35" y2="9.38"/>
+  <line class="ds-line" data-part="mama" data-a="earL3" data-b="earL4" x1="121.35" y1="9.38" x2="118.88" y2="7.95"/>
+  <line class="ds-line" data-part="mama" data-a="earL4" data-b="earL5" x1="118.88" y1="7.95" x2="118.88" y2="5.1"/>
+  <line class="ds-line" data-part="mama" data-a="earL5" data-b="earL0" x1="118.88" y1="5.1" x2="121.35" y2="3.68"/>
+  <line class="ds-line" data-part="mama" data-a="earR0" data-b="earR1" x1="134.65" y1="3.68" x2="137.12" y2="5.1"/>
+  <line class="ds-line" data-part="mama" data-a="earR1" data-b="earR2" x1="137.12" y1="5.1" x2="137.12" y2="7.95"/>
+  <line class="ds-line" data-part="mama" data-a="earR2" data-b="earR3" x1="137.12" y1="7.95" x2="134.65" y2="9.38"/>
+  <line class="ds-line" data-part="mama" data-a="earR3" data-b="earR4" x1="134.65" y1="9.38" x2="132.18" y2="7.95"/>
+  <line class="ds-line" data-part="mama" data-a="earR4" data-b="earR5" x1="132.18" y1="7.95" x2="132.18" y2="5.1"/>
+  <line class="ds-line" data-part="mama" data-a="earR5" data-b="earR0" x1="132.18" y1="5.1" x2="134.65" y2="3.68"/>
+  <line class="ds-line" data-part="mama" data-a="snout0" data-b="snout1" x1="128" y1="15.55" x2="130.47" y2="16.98"/>
+  <line class="ds-line" data-part="mama" data-a="snout1" data-b="snout2" x1="130.47" y1="16.98" x2="130.47" y2="19.83"/>
+  <line class="ds-line" data-part="mama" data-a="snout2" data-b="snout3" x1="130.47" y1="19.83" x2="128" y2="21.25"/>
+  <line class="ds-line" data-part="mama" data-a="snout3" data-b="snout4" x1="128" y1="21.25" x2="125.53" y2="19.83"/>
+  <line class="ds-line" data-part="mama" data-a="snout4" data-b="snout5" x1="125.53" y1="19.83" x2="125.53" y2="16.98"/>
+  <line class="ds-line" data-part="mama" data-a="snout5" data-b="snout0" x1="125.53" y1="16.98" x2="128" y2="15.55"/>
+  <line class="ds-line" data-part="mama" data-a="earL3" data-b="head8" x1="121.35" y1="9.38" x2="120.32" y2="12.1"/>
+  <line class="ds-line" data-part="mama" data-a="earR4" data-b="head1" x1="132.18" y1="7.95" x2="132.75" y2="8.06"/>
+  <line class="ds-line" data-part="mama" data-a="head5" data-b="neck" x1="128" y1="22.68" x2="128" y2="27.9"/>
+  <line class="ds-line" data-part="mama" data-a="neck" data-b="chest" x1="128" y1="27.9" x2="128" y2="35.5"/>
+  <line class="ds-line" data-part="mama" data-a="chest" data-b="hip" x1="128" y1="35.5" x2="128" y2="45"/>
+  <line class="ds-line" data-part="mama" data-a="neck" data-b="shoulderL" x1="128" y1="27.9" x2="117.55" y2="29.8"/>
+  <line class="ds-line" data-part="mama" data-a="neck" data-b="shoulderR" x1="128" y1="27.9" x2="138.45" y2="29.8"/>
+  <line class="ds-line" data-part="mama" data-a="shoulderL" data-b="elbowL" x1="117.55" y1="29.8" x2="110.9" y2="31.7"/>
+  <line class="ds-line" data-part="mama" data-a="elbowL" data-b="pawL" x1="110.9" y1="31.7" x2="109" y2="22.2"/>
+  <line class="ds-line" data-part="mama" data-a="shoulderR" data-b="elbowR" x1="138.45" y1="29.8" x2="145.1" y2="31.7"/>
+  <line class="ds-line" data-part="mama" data-a="elbowR" data-b="pawR" x1="145.1" y1="31.7" x2="147" y2="22.2"/>
+  <line class="ds-line" data-part="mama" data-a="hip" data-b="hipL" x1="128" y1="45" x2="121.35" y2="45.95"/>
+  <line class="ds-line" data-part="mama" data-a="hip" data-b="hipR" x1="128" y1="45" x2="134.65" y2="45.95"/>
+  <line class="ds-line" data-part="mama" data-a="hipL" data-b="kneeL" x1="121.35" y1="45.95" x2="119.45" y2="55.45"/>
+  <line class="ds-line" data-part="mama" data-a="kneeL" data-b="footL" x1="119.45" y1="55.45" x2="117.55" y2="64"/>
+  <line class="ds-line" data-part="mama" data-a="hipR" data-b="kneeR" x1="134.65" y1="45.95" x2="136.55" y2="55.45"/>
+  <line class="ds-line" data-part="mama" data-a="kneeR" data-b="footR" x1="136.55" y1="55.45" x2="138.45" y2="64"/>
+  <line class="ds-line" data-part="baby" data-a="head0" data-b="head1" x1="164" y1="24.67" x2="167.25" y2="25.73"/>
+  <line class="ds-line" data-part="baby" data-a="head1" data-b="head2" x1="167.25" y1="25.73" x2="169.25" y2="28.49"/>
+  <line class="ds-line" data-part="baby" data-a="head2" data-b="head3" x1="169.25" y1="28.49" x2="169.25" y2="31.91"/>
+  <line class="ds-line" data-part="baby" data-a="head3" data-b="head4" x1="169.25" y1="31.91" x2="167.25" y2="34.67"/>
+  <line class="ds-line" data-part="baby" data-a="head4" data-b="head5" x1="167.25" y1="34.67" x2="164" y2="35.73"/>
+  <line class="ds-line" data-part="baby" data-a="head5" data-b="head6" x1="164" y1="35.73" x2="160.75" y2="34.67"/>
+  <line class="ds-line" data-part="baby" data-a="head6" data-b="head7" x1="160.75" y1="34.67" x2="158.75" y2="31.91"/>
+  <line class="ds-line" data-part="baby" data-a="head7" data-b="head8" x1="158.75" y1="31.91" x2="158.75" y2="28.49"/>
+  <line class="ds-line" data-part="baby" data-a="head8" data-b="head9" x1="158.75" y1="28.49" x2="160.75" y2="25.73"/>
+  <line class="ds-line" data-part="baby" data-a="head9" data-b="head0" x1="160.75" y1="25.73" x2="164" y2="24.67"/>
+  <line class="ds-line" data-part="baby" data-a="earL0" data-b="earL1" x1="159.45" y1="22.73" x2="161.14" y2="23.7"/>
+  <line class="ds-line" data-part="baby" data-a="earL1" data-b="earL2" x1="161.14" y1="23.7" x2="161.14" y2="25.65"/>
+  <line class="ds-line" data-part="baby" data-a="earL2" data-b="earL3" x1="161.14" y1="25.65" x2="159.45" y2="26.63"/>
+  <line class="ds-line" data-part="baby" data-a="earL3" data-b="earL4" x1="159.45" y1="26.63" x2="157.76" y2="25.65"/>
+  <line class="ds-line" data-part="baby" data-a="earL4" data-b="earL5" x1="157.76" y1="25.65" x2="157.76" y2="23.7"/>
+  <line class="ds-line" data-part="baby" data-a="earL5" data-b="earL0" x1="157.76" y1="23.7" x2="159.45" y2="22.73"/>
+  <line class="ds-line" data-part="baby" data-a="earR0" data-b="earR1" x1="168.55" y1="22.73" x2="170.24" y2="23.7"/>
+  <line class="ds-line" data-part="baby" data-a="earR1" data-b="earR2" x1="170.24" y1="23.7" x2="170.24" y2="25.65"/>
+  <line class="ds-line" data-part="baby" data-a="earR2" data-b="earR3" x1="170.24" y1="25.65" x2="168.55" y2="26.63"/>
+  <line class="ds-line" data-part="baby" data-a="earR3" data-b="earR4" x1="168.55" y1="26.63" x2="166.86" y2="25.65"/>
+  <line class="ds-line" data-part="baby" data-a="earR4" data-b="earR5" x1="166.86" y1="25.65" x2="166.86" y2="23.7"/>
+  <line class="ds-line" data-part="baby" data-a="earR5" data-b="earR0" x1="166.86" y1="23.7" x2="168.55" y2="22.73"/>
+  <line class="ds-line" data-part="baby" data-a="snout0" data-b="snout1" x1="164" y1="30.85" x2="165.69" y2="31.83"/>
+  <line class="ds-line" data-part="baby" data-a="snout1" data-b="snout2" x1="165.69" y1="31.83" x2="165.69" y2="33.78"/>
+  <line class="ds-line" data-part="baby" data-a="snout2" data-b="snout3" x1="165.69" y1="33.78" x2="164" y2="34.75"/>
+  <line class="ds-line" data-part="baby" data-a="snout3" data-b="snout4" x1="164" y1="34.75" x2="162.31" y2="33.78"/>
+  <line class="ds-line" data-part="baby" data-a="snout4" data-b="snout5" x1="162.31" y1="33.78" x2="162.31" y2="31.83"/>
+  <line class="ds-line" data-part="baby" data-a="snout5" data-b="snout0" x1="162.31" y1="31.83" x2="164" y2="30.85"/>
+  <line class="ds-line" data-part="baby" data-a="earL3" data-b="head8" x1="159.45" y1="26.63" x2="158.75" y2="28.49"/>
+  <line class="ds-line" data-part="baby" data-a="earR4" data-b="head1" x1="166.86" y1="25.65" x2="167.25" y2="25.73"/>
+  <line class="ds-line" data-part="baby" data-a="head5" data-b="neck" x1="164" y1="35.73" x2="164" y2="39.3"/>
+  <line class="ds-line" data-part="baby" data-a="neck" data-b="chest" x1="164" y1="39.3" x2="164" y2="44.5"/>
+  <line class="ds-line" data-part="baby" data-a="chest" data-b="hip" x1="164" y1="44.5" x2="164" y2="51"/>
+  <line class="ds-line" data-part="baby" data-a="neck" data-b="shoulderL" x1="164" y1="39.3" x2="156.85" y2="40.6"/>
+  <line class="ds-line" data-part="baby" data-a="neck" data-b="shoulderR" x1="164" y1="39.3" x2="171.15" y2="40.6"/>
+  <line class="ds-line" data-part="baby" data-a="shoulderL" data-b="elbowL" x1="156.85" y1="40.6" x2="152.3" y2="41.9"/>
+  <line class="ds-line" data-part="baby" data-a="elbowL" data-b="pawL" x1="152.3" y1="41.9" x2="151" y2="35.4"/>
+  <line class="ds-line" data-part="baby" data-a="shoulderR" data-b="elbowR" x1="171.15" y1="40.6" x2="175.7" y2="41.9"/>
+  <line class="ds-line" data-part="baby" data-a="elbowR" data-b="pawR" x1="175.7" y1="41.9" x2="177" y2="35.4"/>
+  <line class="ds-line" data-part="baby" data-a="hip" data-b="hipL" x1="164" y1="51" x2="159.45" y2="51.65"/>
+  <line class="ds-line" data-part="baby" data-a="hip" data-b="hipR" x1="164" y1="51" x2="168.55" y2="51.65"/>
+  <line class="ds-line" data-part="baby" data-a="hipL" data-b="kneeL" x1="159.45" y1="51.65" x2="158.15" y2="58.15"/>
+  <line class="ds-line" data-part="baby" data-a="kneeL" data-b="footL" x1="158.15" y1="58.15" x2="156.85" y2="64"/>
+  <line class="ds-line" data-part="baby" data-a="hipR" data-b="kneeR" x1="168.55" y1="51.65" x2="169.85" y2="58.15"/>
+  <line class="ds-line" data-part="baby" data-a="kneeR" data-b="footR" x1="169.85" y1="58.15" x2="171.15" y2="64"/>
+  <circle class="ds-dot" data-part="bed" data-p="headTop" cx="-46" cy="26" r="0.76"/>
+  <circle class="ds-dot" data-part="bed" data-p="headBot" cx="-46" cy="50" r="0.76"/>
+  <circle class="ds-dot" data-part="bed" data-p="footTop" cx="42" cy="36" r="0.76"/>
+  <circle class="ds-dot" data-part="bed" data-p="footBot" cx="42" cy="50" r="0.76"/>
+  <circle class="ds-dot" data-part="bed" data-p="legB" cx="-46" cy="64" r="0.76"/>
+  <circle class="ds-dot" data-part="bed" data-p="legF" cx="42" cy="64" r="0.76"/>
+  <circle class="ds-dot" data-part="bed" data-p="pillowL" cx="-42" cy="46" r="0.76"/>
+  <circle class="ds-dot" data-part="bed" data-p="pillowR" cx="-28" cy="46" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="head0" cx="-40" cy="40" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="head1" cx="-38.54" cy="36.46" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="head2" cx="-35" cy="35" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="head3" cx="-31.46" cy="36.46" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="head4" cx="-30" cy="40" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="head5" cx="-31.46" cy="43.54" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="head6" cx="-35" cy="45" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="head7" cx="-38.54" cy="43.54" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="neck" cx="-28" cy="40" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="chest" cx="-20" cy="40" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hip" cx="-8" cy="40" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hair1L" cx="-40" cy="47" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hair2L" cx="-32" cy="51" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hair3L" cx="-25" cy="50" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="shoulderL" cx="-23" cy="47" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="elbowL" cx="-14" cy="47" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="handL" cx="-6" cy="45" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hipL" cx="-6" cy="45" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="kneeL" cx="8" cy="48" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="footL" cx="21" cy="46" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hair1R" cx="-40" cy="33" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hair2R" cx="-31" cy="31" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hair3R" cx="-24" cy="33" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="shoulderR" cx="-23" cy="33" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="elbowR" cx="-14" cy="33" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="handR" cx="-6" cy="35" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="hipR" cx="-6" cy="35" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="kneeR" cx="8" cy="32" r="0.76"/>
+  <circle class="ds-dot" data-part="goldilocks" data-p="footR" cx="21" cy="30" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head0" cx="80" cy="-5.57" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head1" cx="85.75" cy="-3.71" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head2" cx="89.29" cy="1.18" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head3" cx="89.29" cy="7.22" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head4" cx="85.75" cy="12.11" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head5" cx="80" cy="13.98" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head6" cx="74.25" cy="12.11" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head7" cx="70.71" cy="7.22" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head8" cx="70.71" cy="1.18" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="head9" cx="74.25" cy="-3.71" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earL0" cx="71.95" cy="-9.02" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earL1" cx="74.94" cy="-7.3" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earL2" cx="74.94" cy="-3.85" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earL3" cx="71.95" cy="-2.12" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earL4" cx="68.96" cy="-3.85" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earL5" cx="68.96" cy="-7.3" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earR0" cx="88.05" cy="-9.02" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earR1" cx="91.04" cy="-7.3" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earR2" cx="91.04" cy="-3.85" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earR3" cx="88.05" cy="-2.12" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earR4" cx="85.06" cy="-3.85" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="earR5" cx="85.06" cy="-7.3" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="snout0" cx="80" cy="5.35" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="snout1" cx="82.99" cy="7.08" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="snout2" cx="82.99" cy="10.53" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="snout3" cx="80" cy="12.25" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="snout4" cx="77.01" cy="10.53" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="snout5" cx="77.01" cy="7.08" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="neck" cx="80" cy="20.3" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="chest" cx="80" cy="29.5" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="hip" cx="80" cy="41" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="shoulderL" cx="67.35" cy="22.6" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="elbowL" cx="59.3" cy="24.9" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="pawL" cx="57" cy="13.4" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="hipL" cx="71.95" cy="42.15" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="kneeL" cx="69.65" cy="53.65" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="footL" cx="67.35" cy="64" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="shoulderR" cx="92.65" cy="22.6" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="elbowR" cx="100.7" cy="24.9" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="pawR" cx="103" cy="13.4" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="hipR" cx="88.05" cy="42.15" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="kneeR" cx="90.35" cy="53.65" r="0.76"/>
+  <circle class="ds-dot" data-part="papa" data-p="footR" cx="92.65" cy="64" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head0" cx="128" cy="6.53" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head1" cx="132.75" cy="8.06" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head2" cx="135.68" cy="12.1" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head3" cx="135.68" cy="17.1" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head4" cx="132.75" cy="21.14" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head5" cx="128" cy="22.68" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head6" cx="123.25" cy="21.14" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head7" cx="120.32" cy="17.1" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head8" cx="120.32" cy="12.1" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="head9" cx="123.25" cy="8.06" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earL0" cx="121.35" cy="3.68" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earL1" cx="123.82" cy="5.1" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earL2" cx="123.82" cy="7.95" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earL3" cx="121.35" cy="9.38" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earL4" cx="118.88" cy="7.95" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earL5" cx="118.88" cy="5.1" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earR0" cx="134.65" cy="3.68" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earR1" cx="137.12" cy="5.1" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earR2" cx="137.12" cy="7.95" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earR3" cx="134.65" cy="9.38" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earR4" cx="132.18" cy="7.95" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="earR5" cx="132.18" cy="5.1" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="snout0" cx="128" cy="15.55" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="snout1" cx="130.47" cy="16.98" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="snout2" cx="130.47" cy="19.83" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="snout3" cx="128" cy="21.25" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="snout4" cx="125.53" cy="19.83" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="snout5" cx="125.53" cy="16.98" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="neck" cx="128" cy="27.9" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="chest" cx="128" cy="35.5" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="hip" cx="128" cy="45" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="shoulderL" cx="117.55" cy="29.8" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="elbowL" cx="110.9" cy="31.7" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="pawL" cx="109" cy="22.2" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="hipL" cx="121.35" cy="45.95" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="kneeL" cx="119.45" cy="55.45" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="footL" cx="117.55" cy="64" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="shoulderR" cx="138.45" cy="29.8" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="elbowR" cx="145.1" cy="31.7" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="pawR" cx="147" cy="22.2" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="hipR" cx="134.65" cy="45.95" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="kneeR" cx="136.55" cy="55.45" r="0.76"/>
+  <circle class="ds-dot" data-part="mama" data-p="footR" cx="138.45" cy="64" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head0" cx="164" cy="24.67" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head1" cx="167.25" cy="25.73" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head2" cx="169.25" cy="28.49" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head3" cx="169.25" cy="31.91" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head4" cx="167.25" cy="34.67" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head5" cx="164" cy="35.73" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head6" cx="160.75" cy="34.67" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head7" cx="158.75" cy="31.91" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head8" cx="158.75" cy="28.49" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="head9" cx="160.75" cy="25.73" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earL0" cx="159.45" cy="22.73" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earL1" cx="161.14" cy="23.7" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earL2" cx="161.14" cy="25.65" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earL3" cx="159.45" cy="26.63" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earL4" cx="157.76" cy="25.65" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earL5" cx="157.76" cy="23.7" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earR0" cx="168.55" cy="22.73" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earR1" cx="170.24" cy="23.7" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earR2" cx="170.24" cy="25.65" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earR3" cx="168.55" cy="26.63" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earR4" cx="166.86" cy="25.65" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="earR5" cx="166.86" cy="23.7" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="snout0" cx="164" cy="30.85" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="snout1" cx="165.69" cy="31.83" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="snout2" cx="165.69" cy="33.78" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="snout3" cx="164" cy="34.75" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="snout4" cx="162.31" cy="33.78" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="snout5" cx="162.31" cy="31.83" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="neck" cx="164" cy="39.3" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="chest" cx="164" cy="44.5" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="hip" cx="164" cy="51" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="shoulderL" cx="156.85" cy="40.6" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="elbowL" cx="152.3" cy="41.9" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="pawL" cx="151" cy="35.4" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="hipL" cx="159.45" cy="51.65" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="kneeL" cx="158.15" cy="58.15" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="footL" cx="156.85" cy="64" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="shoulderR" cx="171.15" cy="40.6" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="elbowR" cx="175.7" cy="41.9" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="pawR" cx="177" cy="35.4" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="hipR" cx="168.55" cy="51.65" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="kneeR" cx="169.85" cy="58.15" r="0.76"/>
+  <circle class="ds-dot" data-part="baby" data-p="footR" cx="171.15" cy="64" r="0.76"/>
+</svg>

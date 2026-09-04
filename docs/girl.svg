@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="girl" viewBox="-19 -4 38 74" role="img">
+  <title>Goldilocks</title>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="girl"]{--ds-dot-r:1.16;--ds-line-w:0.52}</style>
+  <line class="ds-line" data-part="girl" data-a="head0" data-b="head1" x1="0" y1="2" x2="3.54" y2="3.46"/>
+  <line class="ds-line" data-part="girl" data-a="head1" data-b="head2" x1="3.54" y1="3.46" x2="5" y2="7"/>
+  <line class="ds-line" data-part="girl" data-a="head2" data-b="head3" x1="5" y1="7" x2="3.54" y2="10.54"/>
+  <line class="ds-line" data-part="girl" data-a="head3" data-b="head4" x1="3.54" y1="10.54" x2="0" y2="12"/>
+  <line class="ds-line" data-part="girl" data-a="head4" data-b="head5" x1="0" y1="12" x2="-3.54" y2="10.54"/>
+  <line class="ds-line" data-part="girl" data-a="head5" data-b="head6" x1="-3.54" y1="10.54" x2="-5" y2="7"/>
+  <line class="ds-line" data-part="girl" data-a="head6" data-b="head7" x1="-5" y1="7" x2="-3.54" y2="3.46"/>
+  <line class="ds-line" data-part="girl" data-a="head7" data-b="head0" x1="-3.54" y1="3.46" x2="0" y2="2"/>
+  <line class="ds-line" data-part="girl" data-a="hair1L" data-b="hair2L" x1="-7" y1="2" x2="-9" y2="11"/>
+  <line class="ds-line" data-part="girl" data-a="hair2L" data-b="hair3L" x1="-9" y1="11" x2="-7" y2="18"/>
+  <line class="ds-line" data-part="girl" data-a="hair1L" data-b="head7" x1="-7" y1="2" x2="-3.54" y2="3.46"/>
+  <line class="ds-line" data-part="girl" data-a="hair1R" data-b="hair2R" x1="7" y1="2" x2="9" y2="11"/>
+  <line class="ds-line" data-part="girl" data-a="hair2R" data-b="hair3R" x1="9" y1="11" x2="7" y2="18"/>
+  <line class="ds-line" data-part="girl" data-a="hair1R" data-b="head1" x1="7" y1="2" x2="3.54" y2="3.46"/>
+  <line class="ds-line" data-part="girl" data-a="head4" data-b="neck" x1="0" y1="12" x2="0" y2="14"/>
+  <line class="ds-line" data-part="girl" data-a="neck" data-b="chest" x1="0" y1="14" x2="0" y2="22"/>
+  <line class="ds-line" data-part="girl" data-a="chest" data-b="hip" x1="0" y1="22" x2="0" y2="34"/>
+  <line class="ds-line" data-part="girl" data-a="neck" data-b="shoulderL" x1="0" y1="14" x2="-7" y2="19"/>
+  <line class="ds-line" data-part="girl" data-a="neck" data-b="shoulderR" x1="0" y1="14" x2="7" y2="19"/>
+  <line class="ds-line" data-part="girl" data-a="shoulderL" data-b="elbowL" x1="-7" y1="19" x2="-11" y2="28"/>
+  <line class="ds-line" data-part="girl" data-a="elbowL" data-b="handL" x1="-11" y1="28" x2="-13" y2="37"/>
+  <line class="ds-line" data-part="girl" data-a="shoulderR" data-b="elbowR" x1="7" y1="19" x2="11" y2="28"/>
+  <line class="ds-line" data-part="girl" data-a="elbowR" data-b="handR" x1="11" y1="28" x2="13" y2="37"/>
+  <line class="ds-line" data-part="girl" data-a="hip" data-b="hipL" x1="0" y1="34" x2="-5" y2="36"/>
+  <line class="ds-line" data-part="girl" data-a="hip" data-b="hipR" x1="0" y1="34" x2="5" y2="36"/>
+  <line class="ds-line" data-part="girl" data-a="hipL" data-b="kneeL" x1="-5" y1="36" x2="-6" y2="50"/>
+  <line class="ds-line" data-part="girl" data-a="kneeL" data-b="footL" x1="-6" y1="50" x2="-8" y2="64"/>
+  <line class="ds-line" data-part="girl" data-a="hipR" data-b="kneeR" x1="5" y1="36" x2="6" y2="50"/>
+  <line class="ds-line" data-part="girl" data-a="kneeR" data-b="footR" x1="6" y1="50" x2="8" y2="64"/>
+  <circle class="ds-dot" data-part="girl" data-p="head0" cx="0" cy="2" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="head1" cx="3.54" cy="3.46" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="head2" cx="5" cy="7" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="head3" cx="3.54" cy="10.54" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="head4" cx="0" cy="12" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="head5" cx="-3.54" cy="10.54" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="head6" cx="-5" cy="7" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="head7" cx="-3.54" cy="3.46" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="neck" cx="0" cy="14" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="chest" cx="0" cy="22" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hip" cx="0" cy="34" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hair1L" cx="-7" cy="2" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hair2L" cx="-9" cy="11" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hair3L" cx="-7" cy="18" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="shoulderL" cx="-7" cy="19" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="elbowL" cx="-11" cy="28" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="handL" cx="-13" cy="37" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hipL" cx="-5" cy="36" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="kneeL" cx="-6" cy="50" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="footL" cx="-8" cy="64" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hair1R" cx="7" cy="2" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hair2R" cx="9" cy="11" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hair3R" cx="7" cy="18" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="shoulderR" cx="7" cy="19" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="elbowR" cx="11" cy="28" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="handR" cx="13" cy="37" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="hipR" cx="5" cy="36" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="kneeR" cx="6" cy="50" r="1.16"/>
+  <circle class="ds-dot" data-part="girl" data-p="footR" cx="8" cy="64" r="1.16"/>
+</svg>

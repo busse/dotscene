@@ -46,6 +46,9 @@ Every command takes `--json`. Failures are structured, with `didYouMean` when a 
 - The viewBox spans **every pose in the animation cycle**, not just the resting one. A pose that reaches outside the rest bounds is fine; it will not clip.
 - Dot radius comes from the scene's median edge length. A part scaled far down inside a large scene will look cramped — fix the authoring scale, do not fight it with `dotRadius`.
 - Poses lerp positions, not angles, so long limbs shorten slightly mid-tween. Expected; see the README.
+- **Scaling moves a floor anchor.** Props are drawn with the floor at y = 64, and `scale` multiplies about the origin — so a chair at `scale: 0.7` ends up floating. Offset it by `64 * (1 - scale)` to put its feet back down, or `36 * (1 - scale)` for something that belongs on the tabletop.
+- **`mirrorX` matches an `L` suffix, not an `L` anywhere.** Name bilateral points `hair1L` / `hair1R`, not `hairL1` — the latter silently produces no mirror and then fails validation on the edges.
+- A rigid sub-assembly built with `ring` (a head, a wheel) is expensive to move in a pose, since every point needs an override. Prefer moving the whole part with `at` / `rotate`, and keep poses to the limbs.
 - Two files must not export scenes with the same name — `loadScenes` rejects it rather than picking one.
 - Output is byte-stable by design (2-decimal rounding, fixed ordering). A noisy `git diff` after a rebuild means something actually changed.
 - `docs/` is build output but **is committed** — GitHub Pages serves the gallery from it. Rebuild and commit it alongside any scene change; never hand-edit a file in there.
