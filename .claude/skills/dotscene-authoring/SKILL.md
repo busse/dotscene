@@ -88,6 +88,19 @@ Check it by reading the resolved frames, not by eye: the planted foot's world x 
 node bin/dotscene.js inspect <scene> --json | grep -o '"footL":\[[^]]*\]'
 ```
 
+## Making two figures touch
+
+Hands meet only if both figures solve back from the same point in scene space — writing a hand position into a shared pose puts it somewhere else once the other figure is scaled.
+
+```ts
+const local = [(target[0] - x) / scale, (target[1] - FLOOR * (1 - scale)) / scale]
+const elbow = jointBetween(shoulder, local, upperLength, forearmLength, bend)
+```
+
+Place the hand on the target and solve the elbow, never the reverse. Check the result: the distance between the two hands should be 0, and shoulder-to-hand should be comfortably inside the arm's length so the elbow bends rather than locking straight.
+
+A gesture is a sequence, not a pose. A handshake is reach, clasp, two or three pumps with the swing damping out, then settle — one held pose reads as a freeze-frame.
+
 ## Rules that matter
 
 - **y grows downward.** A point with a smaller y is higher on screen.
@@ -110,6 +123,8 @@ node bin/dotscene.js inspect <scene> --json | grep -o '"footL":\[[^]]*\]'
 | An extended arm looks stretched | The hand is further from the shoulder than the arm is long — about 20 units on the person module. |
 | A walk looks jerky | Every keyframe is easing. Use `linear` for the run of steps. |
 | Feet skate along the ground | The distance travelled per keyframe does not match the stride baked into the contact poses. |
+| Two hands that should touch do not | Each was posed in its own local frame. Solve both from one scene point. |
+| A reaching arm is locked straight | The target is at or past full reach. Move the figures closer, or lower the target. |
 | Two walkers look like one figure mirrored | Same scale, cadence and phase. Vary all three. |
 | A profile figure's torso is a blob | Points within ~3 units pile up at this dot size. Spread the shoulders and hips a little; it still reads as profile. |
 | Diagonals look wrong in preview | Terminal cells are 2× taller than wide; the renderer already corrects for this. Trust the SVG. |

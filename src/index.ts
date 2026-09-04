@@ -22,7 +22,20 @@ export type {
   Vec2,
 } from './model.ts'
 
-export { add, bounds, distance, lerpVec, mirrorX, ring, rotateVec, round, roundVec, scaleVec, sub } from './geometry.ts'
+export {
+  add,
+  bounds,
+  distance,
+  jointBetween,
+  lerpVec,
+  mirrorX,
+  ring,
+  rotateVec,
+  round,
+  roundVec,
+  scaleVec,
+  sub,
+} from './geometry.ts'
 export type { Bounds, MirrorOptions, Ring } from './geometry.ts'
 
 export { easings, easingFor, lerpPoints, posePoints, poseOverride } from './poses.ts'

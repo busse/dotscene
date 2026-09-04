@@ -2,6 +2,8 @@ import {
   defineFigure,
   definePose,
   defineScene,
+  distance,
+  jointBetween,
   lerpPoints,
   posePoints,
   type Keyframe,
@@ -67,8 +69,27 @@ const FLOOR = 64
 const HALF = 10
 const CYCLE = ['stepA', 'passA', 'stepB', 'passB'] as const
 
-const MEET = 30
-const SHAKE = 24
+// Close enough that the offered hands nearly touch, so the items pass hand to hand rather
+// than floating across a gap — and close enough that stepping in to shake is a shuffle
+// rather than a 12-unit glide with the legs held still.
+const MEET = 23
+// Close enough that a handshake is a bend of the elbow rather than a lunge: the clasp is
+// 18 units from each figure's centre, against an arm that reaches about 20 from the shoulder.
+const SHAKE = 18
+/**
+ * Where the two hands actually meet, in scene space. Both figures solve back from it.
+ *
+ * Roughly elbow height. Lower than this and the solved elbow has to drop past the hip for
+ * the forearm to reach back up, which reads as a scoop rather than a handshake.
+ */
+const CLASP: Vec2 = [0, 27]
+
+const TRADER_SCALE = 0.94
+/** The trader is shorter and takes quicker, shorter steps — and starts mid-swing, so the
+ * two never plant a foot on the same beat. */
+const TRADER_RATE = 1.14
+const TRADER_PHASE = 1.3
+
 
 /**
  * The figure at an arbitrary point in the gait cycle, phase counted in half-strides.
@@ -112,6 +133,79 @@ const place = (x: number, local: Vec2, scale: number, flipX: boolean): Vec2 => [
   Math.round((local[1] * scale + FLOOR * (1 - scale)) * 100) / 100,
 ]
 
+/** The figure's own arm segment lengths, so a solved elbow matches how it is drawn. */
+const ARM = {
+  upper: distance(person.points.shoulderR!, person.points.elbowR!),
+  fore: distance(person.points.elbowR!, person.points.handR!),
+}
+
+/** A scene point expressed in the local frame of an unflipped part at `x` with `scale`. */
+const toLocal = (world: Vec2, x: number, scale: number): Vec2 => [
+  (world[0] - x) / scale,
+  (world[1] - FLOOR * (1 - scale)) / scale,
+]
+
+/**
+ * A figure reaching one hand to a point in the scene, elbow solved rather than guessed.
+ *
+ * Both figures in a handshake are given the same world target, which is the only way their
+ * hands actually meet — they are different heights and scales, so a hand position that looks
+ * right written into a shared pose lands somewhere else for the other one.
+ *
+ * `lean` tips the upper body towards the other person; the carrying arm rides along with it
+ * so it stays attached to the shoulder.
+ */
+const reachPose = (label: string, side: 'R' | 'L', target: Vec2, x: number, scale: number, lean: number): Pose => {
+  const base = posePoints(person, side === 'R' ? 'holdL' : 'holdR')
+  const other = side === 'R' ? 'L' : 'R'
+  const tip = (point: Vec2, amount: number): Vec2 => [point[0] + lean * amount, point[1]]
+
+  const shoulder = tip(base[`shoulder${side}`]!, 0.8)
+  const hand = toLocal(target, x, scale)
+
+  return definePose(person, label, {
+    ...base,
+    head: tip(base.head!, 1.3),
+    neck: tip(base.neck!, 1),
+    chest: tip(base.chest!, 0.6),
+    [`shoulder${side}`]: shoulder,
+    [`shoulder${other}`]: tip(base[`shoulder${other}`]!, 0.8),
+    [`elbow${other}`]: tip(base[`elbow${other}`]!, 0.8),
+    [`hand${other}`]: tip(base[`hand${other}`]!, 0.8),
+    // The elbow bows down and away from the body, the way a shaking arm hangs.
+    [`elbow${side}`]: jointBetween(shoulder, hand, ARM.upper, ARM.fore, side === 'R' ? 1 : -1),
+    [`hand${side}`]: hand,
+  })
+}
+
+const TRADER_Y = FLOOR * (1 - TRADER_SCALE)
+
+/**
+ * One beat of the handshake: both figures reaching the same clasp point.
+ *
+ * Passing separate targets covers the approach, before their hands have met.
+ */
+const clasp = (
+  name: string,
+  target: Vec2 | { readonly walker: Vec2; readonly trader: Vec2 },
+  timing: { duration: number; hold: number; easing?: Keyframe['easing'] },
+): Keyframe => {
+  const walkerTarget = 'walker' in target ? target.walker : target
+  const traderTarget = 'walker' in target ? target.trader : target
+  const walkerPose = reachPose(`${name}W`, 'R', walkerTarget, -SHAKE, 1, 2)
+  const traderPose = reachPose(`${name}T`, 'L', traderTarget, SHAKE, TRADER_SCALE, -2)
+  return {
+    name,
+    ...timing,
+    parts: {
+      walker: { at: [-SHAKE, 0], pose: walkerPose, flipX: false, scale: 1 },
+      trader: { at: [SHAKE, TRADER_Y], pose: traderPose, flipX: false, scale: TRADER_SCALE },
+      case: { at: place(-SHAKE, walkerPose.points.handL!, 1, false) },
+      bag: { at: place(SHAKE, traderPose.points.handR!, TRADER_SCALE, false) },
+    },
+  }
+}
+
 /** A point from one of the standing poses, so items track the hand rather than a guess. */
 const handOf = (pose: string, point: 'handL' | 'handR'): Vec2 => posePoints(person, pose)[point]!
 
@@ -133,12 +227,6 @@ interface Mover {
   readonly rate: number
   readonly startPhase: number
 }
-
-const TRADER_SCALE = 0.94
-/** The trader is shorter and takes quicker, shorter steps — and starts mid-swing, so the
- * two never plant a foot on the same beat. */
-const TRADER_RATE = 1.14
-const TRADER_PHASE = 1.3
 
 const advance = (m: Mover): number => m.dir * m.rate * HALF * m.scale
 
@@ -184,7 +272,7 @@ const walk = ({ tag, samples, movers, leadIn, leadInMs }: WalkOptions): Keyframe
     parts: Object.assign({}, ...movers.map((m) => moverParts(m, i))),
   }))
 
-const IN_SAMPLES = 10
+const IN_SAMPLES = 11
 const OUT_SAMPLES = 16
 
 const walkerIn: Mover = {
@@ -300,17 +388,18 @@ export const scene = defineScene('exchange', {
           bag: { at: place(MEET, handOf('holdR', 'handR'), TRADER_SCALE, false) },
         },
       },
-      {
-        name: 'shake',
-        duration: 460,
-        hold: 620,
-        parts: {
-          walker: { at: [-SHAKE, 0], pose: 'shakeR', flipX: false, scale: 1 },
-          trader: { at: [SHAKE, FLOOR * (1 - TRADER_SCALE)], pose: 'shakeL', flipX: false, scale: TRADER_SCALE },
-          case: { at: place(-SHAKE, handOf('shakeR', 'handL'), 1, false) },
-          bag: { at: place(SHAKE, handOf('shakeL', 'handR'), TRADER_SCALE, false) },
-        },
-      },
+      // The handshake. They step in, meet, pump three times with the swing damping out,
+      // and settle — a single held pose reads as two people frozen mid-reach.
+      clasp(
+        'reach',
+        { walker: [-7, 26], trader: [7, 27.5] },
+        { duration: 420, hold: 60, easing: 'easeOut' },
+      ),
+      clasp('clasp', CLASP, { duration: 240, hold: 140 }),
+      clasp('pumpDown', [0, 29.5], { duration: 170, hold: 0, easing: 'easeInOut' }),
+      clasp('pumpUp', [0, 24.5], { duration: 180, hold: 0, easing: 'easeInOut' }),
+      clasp('pumpDown2', [0, 28.5], { duration: 170, hold: 0, easing: 'easeInOut' }),
+      clasp('settle', [0, 26.5], { duration: 190, hold: 380, easing: 'easeOut' }),
       // Out: past each other and off the far sides, each carrying what they were handed.
       ...walk({
         tag: 'out',

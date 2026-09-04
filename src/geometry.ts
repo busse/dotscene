@@ -123,3 +123,32 @@ export const ring = (prefix: string, center: Vec2, radius: number, count = 8, st
   }
   return { points, edges }
 }
+
+/**
+ * The middle joint of a two-bone limb — the elbow between a shoulder and a hand, or the
+ * knee between a hip and a foot.
+ *
+ * Placing a hand where a scene needs it and solving for the elbow keeps a limb's segments
+ * their proper length, instead of the straight, over-extended look you get from guessing
+ * the joint and letting the hand fall where it may. `bend` selects which of the two
+ * solutions to take: the joint sits on one side of the shoulder-to-hand line or the other.
+ *
+ * When the target is out of reach the limb simply straightens towards it, which is what a
+ * real arm does rather than failing.
+ */
+export const jointBetween = (from: Vec2, to: Vec2, lenFrom: number, lenTo: number, bend: 1 | -1 = 1): Vec2 => {
+  const span = distance(from, to)
+  if (span === 0) return [from[0] + lenFrom, from[1]]
+
+  const ux = (to[0] - from[0]) / span
+  const uy = (to[1] - from[1]) / span
+
+  // Out of reach, or so close the limb folds past itself: straighten along the line.
+  if (span >= lenFrom + lenTo || span <= Math.abs(lenFrom - lenTo)) {
+    return [from[0] + ux * lenFrom, from[1] + uy * lenFrom]
+  }
+
+  const along = (lenFrom * lenFrom - lenTo * lenTo + span * span) / (2 * span)
+  const off = Math.sqrt(Math.max(0, lenFrom * lenFrom - along * along)) * bend
+  return [from[0] + ux * along - uy * off, from[1] + uy * along + ux * off]
+}

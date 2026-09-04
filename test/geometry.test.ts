@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyTransform, bounds, lerpVec, mirrorX, rotateVec, round, roundVec } from '../src/geometry.ts'
+import { applyTransform, bounds, jointBetween, lerpVec, mirrorX, rotateVec, round, roundVec } from '../src/geometry.ts'
 
 describe('rotateVec', () => {
   it('rotates clockwise on screen, where y grows downward', () => {
@@ -54,5 +54,35 @@ describe('lerpVec', () => {
 describe('mirrorX', () => {
   it('ignores points without the source suffix', () => {
     expect(mirrorX({ hip: [0, 30] })).toEqual({})
+  })
+})
+
+describe('jointBetween', () => {
+  const round2 = (v: readonly [number, number]) => [Math.round(v[0] * 100) / 100, Math.round(v[1] * 100) / 100]
+
+  it('keeps both segments at their given length', () => {
+    const joint = jointBetween([0, 0], [12, 0], 10, 10)
+    expect(Math.hypot(joint[0], joint[1])).toBeCloseTo(10, 6)
+    expect(Math.hypot(joint[0] - 12, joint[1])).toBeCloseTo(10, 6)
+  })
+
+  it('puts the joint on the side that `bend` selects', () => {
+    const up = jointBetween([0, 0], [12, 0], 10, 10, -1)
+    const down = jointBetween([0, 0], [12, 0], 10, 10, 1)
+    expect(up[1]).toBeLessThan(0)
+    expect(down[1]).toBeGreaterThan(0)
+    expect(up[0]).toBeCloseTo(down[0], 6)
+  })
+
+  it('straightens towards a target it cannot reach, rather than failing', () => {
+    expect(round2(jointBetween([0, 0], [100, 0], 10, 10))).toEqual([10, 0])
+  })
+
+  it('straightens when the target is inside the fold of the limb', () => {
+    expect(round2(jointBetween([0, 0], [1, 0], 10, 3))).toEqual([10, 0])
+  })
+
+  it('handles a target on top of the origin without dividing by zero', () => {
+    expect(round2(jointBetween([5, 5], [5, 5], 10, 10))).toEqual([15, 5])
   })
 })

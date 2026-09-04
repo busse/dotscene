@@ -148,6 +148,12 @@ handle.goTo('wave')
 handle.stop()
 ```
 
+## Reaching for a point
+
+`jointBetween(shoulder, hand, upperLength, forearmLength, bend)` solves the elbow for a hand you have already placed, keeping both segments their proper length. Put the hand where the scene needs it — a clasp point shared by two figures, a handle, a doorframe — and let the joint follow, rather than guessing the joint and accepting wherever the hand lands. Out of reach, the limb straightens towards the target instead of failing.
+
+Two figures of different heights only ever touch if both solve back from the same point in scene space; a hand position written into a shared pose lands somewhere else once the other figure is scaled.
+
 ## Sizing
 
 Dot radius and stroke width derive from the scene's **median edge length**, so a figure looks the same drawn alone as it does composed into something larger. Set `dotRadius` / `lineWidth` on a scene to override.
