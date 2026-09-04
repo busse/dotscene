@@ -30,6 +30,13 @@ export interface FigureSpec {
   /** Rest positions, in the figure's own local coordinate space (y grows downward). */
   readonly points: PointMap
   readonly edges: readonly EdgeSpec[]
+  /**
+   * Role labels for points, mirroring an edge's `kind`.
+   *
+   * A dot gains a `ds-dot--<kind>` class, which is what lets a scene colour by role —
+   * structure against content — rather than by matching point names.
+   */
+  readonly pointKinds?: Readonly<Record<PointId, string>>
   /** Named poses, each a partial override of `points`. */
   readonly poses?: Readonly<Record<string, PoseOverride>>
   /** Human-readable description, used for the SVG <title>. */
@@ -41,6 +48,7 @@ export interface Figure {
   readonly name: string
   readonly points: PointMap
   readonly edges: readonly Edge[]
+  readonly pointKinds: Readonly<Record<PointId, string>>
   readonly poses: Readonly<Record<string, PoseOverride>>
   readonly title?: string
 }
@@ -145,6 +153,14 @@ export interface SceneSpec {
    * scoped to this scene, so two scenes on a page cannot style each other.
    */
   readonly css?: string
+  /**
+   * Fill for a rect covering the whole viewBox.
+   *
+   * Worth setting whenever a scene will be used as a standalone `.svg`, an `<img src>`, or
+   * rasterised: none of those inherit a page's background, and assuming white is how a
+   * carefully chosen paper colour gets lost.
+   */
+  readonly background?: string
   readonly animate?: AnimateSpec
 }
 
@@ -158,6 +174,7 @@ export interface Scene {
   readonly dotRadius?: number
   readonly lineWidth?: number
   readonly css?: string
+  readonly background?: string
   readonly animate?: AnimateSpec
 }
 
@@ -172,6 +189,7 @@ export const defineFigure = (name: string, spec: FigureSpec): Figure => {
     name,
     points: spec.points,
     edges: spec.edges.map(normalizeEdge),
+    pointKinds: spec.pointKinds ?? {},
     poses: spec.poses ?? {},
     ...(spec.title === undefined ? {} : { title: spec.title }),
   }
@@ -195,6 +213,7 @@ export const defineScene = (name: string, spec: SceneSpec): Scene => ({
   ...(spec.dotRadius === undefined ? {} : { dotRadius: spec.dotRadius }),
   ...(spec.lineWidth === undefined ? {} : { lineWidth: spec.lineWidth }),
   ...(spec.css === undefined ? {} : { css: spec.css }),
+  ...(spec.background === undefined ? {} : { background: spec.background }),
   ...(spec.animate === undefined ? {} : { animate: spec.animate }),
 })
 

@@ -16,6 +16,7 @@ export interface ResolvedDot {
   readonly part: string
   readonly point: PointId
   readonly at: Vec2
+  readonly kind?: string
 }
 
 export interface ResolvedLine {
@@ -50,6 +51,8 @@ export interface ResolvedScene {
   readonly lineWidth: number
   /** Scene-specific CSS, to be scoped to this scene by the renderer. */
   readonly css?: string
+  /** Fill for a rect covering the viewBox, for scenes used outside a styled page. */
+  readonly background?: string
   readonly dots: readonly ResolvedDot[]
   readonly lines: readonly ResolvedLine[]
   /** Present only for animated scenes: the cycling part and its poses in scene space. */
@@ -142,7 +145,8 @@ export const resolve = (scene: Scene): ResolvedScene => {
     }
 
     for (const [point, at] of Object.entries(points)) {
-      dots.push({ part: id, point, at })
+      const kind = part.figure.pointKinds[point]
+      dots.push({ part: id, point, at, ...(kind === undefined ? {} : { kind }) })
     }
   }
 
@@ -196,6 +200,7 @@ export const resolve = (scene: Scene): ResolvedScene => {
     dotRadius,
     lineWidth: scene.lineWidth ?? round(Math.max(0.2, dotRadius * 0.45), 2),
     ...(scene.css === undefined ? {} : { css: scene.css }),
+    ...(scene.background === undefined ? {} : { background: scene.background }),
     dots,
     lines,
     ...(animation === undefined ? {} : { animation }),

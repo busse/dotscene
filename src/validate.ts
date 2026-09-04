@@ -129,6 +129,18 @@ export const validateFigureSpec = (name: string, spec: FigureSpec): readonly Iss
     }
   }
 
+  for (const point of Object.keys(spec.pointKinds ?? {})) {
+    if (!(point in spec.points)) {
+      issues.push({
+        code: 'UNKNOWN_POINT',
+        figure: name,
+        point,
+        message: `pointKinds labels unknown point '${point}'`,
+        ...suggest(point, names),
+      })
+    }
+  }
+
   for (const [poseName, override] of Object.entries(spec.poses ?? {})) {
     issues.push(...validateOverrideAgainst(name, names, poseName, override))
   }

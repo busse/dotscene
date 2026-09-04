@@ -115,8 +115,16 @@ const points = { towerNear: grid([3, 3, 0]), towerTop: grid([3, 3, 6]) }
 - Build local `box` / `line` helpers over grid space rather than writing projected numbers.
 - For a solid-looking box, drop the far corner — always the smallest x + y — and its three edges. Seven points, nine edges, three visible faces.
 - A full ground grid is cheap: only line endpoints become dots, so twelve lines cost twenty-four dots around the rim, not a hundred in the middle.
-- Nothing can hide behind anything, so depth comes from weight. Give edges a `kind` and set it in the scene's `css`; reach their dots with `circle[data-p^="prefix"]`.
+- Nothing can hide behind anything, so depth comes from weight. Give edges a `kind` and points a `pointKinds` entry, then style `ds-line--x` and `ds-dot--x` in the scene's `css`.
 - Set `dotRadius` explicitly when the scene mixes scales — small trees beside large buildings — since the median-edge default will size for one and swallow the other.
+
+## Matching a site's palette
+
+Write literal hex in the scene's `css` and set its `background`. Do not lean on `currentColor` or custom properties inheriting: a standalone `.svg`, an `<img src>` or a rasterised PNG gets neither.
+
+Assign roles first, then colours — `kind` on edges, `pointKinds` on points — so the mapping is declarative. If a palette's roles invert on dark, emit two scenes over one figure (`city` / `cityNight`), not one file hoping to cover both.
+
+Never invent a hex value to fill a gap. If a scene needs distinctions the palette has no colours for — a categorical series rather than a hierarchy — say so rather than improvising.
 
 ## Rules that matter
 

@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="city" viewBox="-80 -30 160 110" role="img">
-  <title>A city block, nine tiles square</title>
-  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="city"]{--ds-dot-r:1.3;--ds-line-w:0.6}svg[data-dotscene="city"]{.ds-line{stroke:#1d2021}.ds-dot{fill:#1d2021}.ds-line--lot{stroke:#a4dded}.ds-dot--lot{fill:#a4dded;r:.55}.ds-line--ground{stroke:#1b7f9f}.ds-dot--ground{fill:#1b7f9f;r:.85}.ds-line--road{stroke:#0b6580;stroke-width:1.15}.ds-dot--road{fill:#0b6580;r:1}}</style>
-  <rect class="ds-bg" x="-80" y="-30" width="160" height="110" fill="#fbfaf7"/>
-  <defs><clipPath id="ds-clip-city"><rect x="-80" y="-30" width="160" height="110"/></clipPath></defs>
-  <g clip-path="url(#ds-clip-city)">
+<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="cityNight" viewBox="-80 -30 160 110" role="img">
+  <title>A city block, nine tiles square — dark</title>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}svg[data-dotscene="cityNight"]{--ds-dot-r:1.3;--ds-line-w:0.6}svg[data-dotscene="cityNight"]{.ds-line{stroke:#edebe6}.ds-dot{fill:#edebe6}.ds-line--lot{stroke:#33383b}.ds-dot--lot{fill:#33383b;r:.55}.ds-line--ground{stroke:#3d9fbf}.ds-dot--ground{fill:#3d9fbf;r:.85}.ds-line--road{stroke:#a4dded;stroke-width:1.15}.ds-dot--road{fill:#a4dded;r:1}}</style>
+  <rect class="ds-bg" x="-80" y="-30" width="160" height="110" fill="#16181a"/>
+  <defs><clipPath id="ds-clip-cityNight"><rect x="-80" y="-30" width="160" height="110"/></clipPath></defs>
+  <g clip-path="url(#ds-clip-cityNight)">
     <line class="ds-line ds-line--ground" data-part="block" data-a="plateNA" data-b="plateNB" x1="0" y1="0" x2="72" y2="36"/>
     <line class="ds-line ds-line--ground" data-part="block" data-a="plateEA" data-b="plateEB" x1="72" y1="36" x2="0" y2="72"/>
     <line class="ds-line ds-line--ground" data-part="block" data-a="plateSA" data-b="plateSB" x1="0" y1="72" x2="-72" y2="36"/>

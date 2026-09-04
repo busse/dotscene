@@ -90,6 +90,19 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
   // and anything the scene parked outside the viewBox shows up in the letterbox bars. A
   // staged scene relies on off-stage being invisible, and this is also what makes the SVG
   // agree with the ASCII renderer, which has always clipped.
+  if (scene.background !== undefined) {
+    body.push(
+      `<rect ${attrs([
+        ['class', 'ds-bg'],
+        ['x', x],
+        ['y', y],
+        ['width', width],
+        ['height', height],
+        ['fill', scene.background],
+      ])}/>`,
+    )
+  }
+
   const clipId = `ds-clip-${scene.name}`
   body.push(
     `<defs><clipPath id="${escapeXml(clipId)}"><rect ${attrs([
@@ -120,7 +133,7 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
   for (const dot of scene.dots) {
     content.push(
       `<circle ${attrs([
-        ['class', 'ds-dot'],
+        ['class', dot.kind === undefined ? 'ds-dot' : `ds-dot ds-dot--${dot.kind}`],
         ['data-part', dot.part],
         ['data-p', dot.point],
         ['cx', dot.at[0]],

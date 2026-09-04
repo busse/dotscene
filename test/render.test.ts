@@ -192,3 +192,40 @@ describe('scene css', () => {
     expect(svg).toContain('class="ds-line ds-line--road"')
   })
 })
+
+describe('roles and ground', () => {
+  const roled = defineFigure('r', {
+    points: { hub: [0, 0], rim: [10, 0] },
+    pointKinds: { hub: 'ink' },
+    edges: [{ from: 'hub', to: 'rim', kind: 'guide' }],
+  })
+
+  it('gives a labelled dot a class to colour by role', () => {
+    const svg = renderSvg(resolve(defineScene('s', { parts: [{ figure: roled }] })))
+    expect(svg).toContain('class="ds-dot ds-dot--ink"')
+    expect(svg).toContain('class="ds-dot" data-part="r" data-p="rim"')
+  })
+
+  it('rejects a role label on a point that does not exist, and suggests the real one', () => {
+    let caught: unknown
+    try {
+      defineFigure('r', { points: { hub: [0, 0] }, edges: [], pointKinds: { hubb: 'ink' } })
+    } catch (error) {
+      caught = error
+    }
+    const [issue] = (caught as { issues: readonly { code: string; didYouMean?: string }[] }).issues
+    expect(issue?.code).toBe('UNKNOWN_POINT')
+    expect(issue?.didYouMean).toBe('hub')
+  })
+
+  it('paints an explicit ground covering the viewBox, for files no page will style', () => {
+    const svg = renderSvg(
+      resolve(defineScene('s', { parts: [{ figure: roled }], viewBox: [0, 0, 40, 20], background: '#fbfaf7' })),
+    )
+    expect(svg).toContain('<rect class="ds-bg" x="0" y="0" width="40" height="20" fill="#fbfaf7"/>')
+  })
+
+  it('leaves the ground alone when a scene does not ask for one', () => {
+    expect(renderSvg(resolve(defineScene('s', { parts: [{ figure: roled }] })))).not.toContain('ds-bg')
+  })
+})

@@ -126,9 +126,18 @@ const park = merge(
   tree('treeC', [6.9, 8.4], 1.8, 0.85),
 )
 
+/**
+ * Label every point in a shape with one role, so a scene can colour by what a thing *is*
+ * rather than by matching point names.
+ */
+const kindsFor = (shape: Shape, kind: string): Record<string, string> =>
+  Object.fromEntries(Object.keys(shape.points).map((name) => [name, kind]))
+
 export const block = defineFigure('block', {
   title: 'Nine tiles square',
   points: { ...plate.points, ...lots.points, ...roads.points, ...buildings.points, ...park.points },
+  // Buildings and trees carry no role: they are the content, and take the scene's ink.
+  pointKinds: { ...kindsFor(plate, 'ground'), ...kindsFor(lots, 'lot'), ...kindsFor(roads, 'road') },
   edges: [
     ...plate.edges.map(([from, to]) => ({ from, to, kind: 'ground' })),
     ...lots.edges.map(([from, to]) => ({ from, to, kind: 'lot' })),
@@ -138,23 +147,62 @@ export const block = defineFigure('block', {
   ],
 })
 
-export const scene = defineScene('city', {
-  title: 'A city block, nine tiles square',
+/**
+ * Non-photo blue is the pencil a draughtsman laid out with, because the reproduction camera
+ * could not see it: structure in blue, content inked in black on top. This block is that
+ * drawing — the lot grid is the layout underlay, the buildings are what was inked.
+ *
+ * So the roles map straight onto the ramp. The lot grid is npb-300, which is 1.42:1 on
+ * paper and *should* be barely there. The plate boundary and the roads have to be resolved,
+ * so they step darker to npb-600 and npb-700, the lightest blues the system allows to carry
+ * meaning. Everything standing up is gray-900 ink at 15.71:1.
+ *
+ * Hierarchy here is not carried by lightness alone — the roads are also the heaviest stroke,
+ * and structure dots are smaller than ink ones — so it survives greyscale and colour-blind
+ * readers, and blue never outweighs the content it sits under. This scene needs no categorical
+ * colours: its three ground roles are a hierarchy, not a series.
+ *
+ * Literal hex, never custom properties: a standalone .svg, an `<img src>` or a rasterised
+ * PNG inherits nothing from a page.
+ */
+const roles = (ink: string, lot: string, ground: string, road: string): string =>
+  [
+    `.ds-line{stroke:${ink}}`,
+    `.ds-dot{fill:${ink}}`,
+    `.ds-line--lot{stroke:${lot}}`,
+    `.ds-dot--lot{fill:${lot};r:.55}`,
+    `.ds-line--ground{stroke:${ground}}`,
+    `.ds-dot--ground{fill:${ground};r:.85}`,
+    `.ds-line--road{stroke:${road};stroke-width:1.15}`,
+    `.ds-dot--road{fill:${road};r:1}`,
+  ].join('')
+
+const layout = {
   parts: [{ figure: block }],
   padding: 8,
   // The tree edges are far shorter than the buildings', so the median-edge default sizes
   // dots for the buildings and swallows the park. Set it against the smaller detail.
   dotRadius: 1.3,
   lineWidth: 0.6,
-  // Depth in a wireframe has to come from weight, since nothing can be hidden behind
-  // anything: the ground recedes, the roads come forward, and the lot grid is faint enough
-  // to read as texture. Lot dots are matched to their lines by name — every lot point is
-  // called `lot…`, and only line endpoints become dots, so this reaches all of them.
-  css: [
-    '.ds-line--lot{stroke-opacity:.28}',
-    '.ds-line--ground{stroke-opacity:.55}',
-    '.ds-line--road{stroke-width:1.15;stroke-opacity:.9}',
-    'circle[data-p^="lot"]{r:.55;fill-opacity:.35}',
-    'circle[data-p^="plate"]{fill-opacity:.6}',
-  ].join(''),
+} as const
+
+export const scene = defineScene('city', {
+  title: 'A city block, nine tiles square',
+  ...layout,
+  background: '#fbfaf7', // gray-050, paper
+  css: roles('#1d2021', '#a4dded', '#1b7f9f', '#0b6580'),
+})
+
+/**
+ * The dark variant, emitted as its own file rather than hoping one works on both.
+ *
+ * The roles invert: ink becomes #edebe6, and npb-300 — unreadable on paper — is the legible
+ * blue here at 11.99:1, so it takes the roads. The lot grid drops to the dark hairline, and
+ * the boundary steps back down the ramp to npb-500 so it still sits between the two.
+ */
+export const night = defineScene('cityNight', {
+  title: 'A city block, nine tiles square — dark',
+  ...layout,
+  background: '#16181a', // gray-950
+  css: roles('#edebe6', '#33383b', '#3d9fbf', '#a4dded'),
 })

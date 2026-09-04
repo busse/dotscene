@@ -109,7 +109,7 @@ svg.dotscene .ds-dot  { r: 2; fill: #6f9; }
 svg.dotscene .ds-line { stroke-width: 0.4; }
 ```
 
-Give an edge a `kind` and it gains a modifier class (`ds-line--soft`) to target. A scene's own `css` is the place to write those rules, and it travels inside the emitted block:
+Give an edge a `kind`, or a point a role in `pointKinds`, and it gains a modifier class — `ds-line--soft`, `ds-dot--soft` — to target. A scene's own `css` is the place to write those rules, and it travels inside the emitted block:
 
 ```ts
 defineScene('city', {
@@ -118,7 +118,11 @@ defineScene('city', {
 })
 ```
 
-Selectors are bare and get scoped to the scene, so two scenes on one page cannot style each other. Dots have no `kind`, but they carry `data-p`, so `circle[data-p^="lot"]` reaches a named group of them.
+Selectors are bare and get scoped to the scene, so two scenes on one page cannot style each other.
+
+### Matching a site's palette
+
+Set `background` and write literal hex in `css` rather than leaning on `currentColor`: a standalone `.svg`, an `<img src>`, or a rasterised PNG inherits nothing from the page it lands on. Where a palette's roles invert between light and dark, emit two scenes over one figure rather than hoping a single file covers both — see `city` and `cityNight` in `scenes/city.ts`, which share every point and differ only in `background` and `css`.
 
 ### Animation
 
