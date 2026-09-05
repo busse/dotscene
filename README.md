@@ -193,6 +193,34 @@ handle.stop()
 
 Two figures of different heights only ever touch if both solve back from the same point in scene space; a hand position written into a shared pose lands somewhere else once the other figure is scaled.
 
+## Using the hero animation on a site
+
+`dotscene build` emits `docs/ediHero.html` — a self-contained block carrying both palettes, so
+one copy serves a page with a theme toggle. For Jekyll:
+
+```sh
+cp docs/ediHero.html    _includes/edi-hero.html
+cp docs/dotscene.min.js assets/js/
+```
+
+```liquid
+<div class="hero">
+  {% include edi-hero.html %}
+  <div class="hero__copy"><h1>Freight moves. Data moves first.</h1></div>
+</div>
+<script src="{{ '/assets/js/dotscene.min.js' | relative_url }}" defer></script>
+```
+
+The block ships with a `<script src="./dotscene.min.js">` tag pointing at its own directory;
+either drop the runtime beside the include or strip that line and load it yourself, as above.
+One runtime serves every scene on the page.
+
+Size it with CSS — the SVG is `width: 100%; height: auto` and its own ground colour comes with
+it. `prefers-reduced-motion: reduce` holds the first frame and never starts the loop.
+
+`docs/ediHeroNight.html` is a fixed-dark twin, for a standalone `.svg` or an `<img>` where no
+page CSS can reach in. See `scenes/edi/README.md` for what to edit to change what.
+
 ## Isometric scenes
 
 `isometric({ tile, squash, rise, origin })` returns a function projecting grid coordinates — tiles across, tiles down, storeys up — onto the drawing plane. Grid +x runs down-right, +y down-left, +z straight up.

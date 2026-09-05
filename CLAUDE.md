@@ -58,6 +58,17 @@ Author in grid coordinates and project once with `isometric({ tile, squash, rise
 - Roads want to run along the grid axes, with L-turns between waypoints. A diagonal path cannot carry a grid-aligned solid, so anything driving along it reads as a crate sliding sideways.
 - Nothing occludes anything, so depth comes from stroke weight: give edges a `kind` and set opacity and width in the scene's `css`.
 
+## The EDI hero
+
+`scenes/edi/` is the largest thing here — a twelve-act EDI lifecycle composed into one looping
+hero background. `scenes/edi/README.md` is the map: what to edit to change what, the act list,
+and the invariants the tests enforce. Read it before touching anything in that folder.
+
+- **A depth map costs more than geometry if sent per keyframe.** Emit the stack once and only
+  what a step changes. For thirty-eight parts that was the difference between 130 kB and 4.6 kB.
+- **A gallery of everything cannot also play everything.** Scenes over about 90 kB are shown as
+  images linking to their own page; under that they embed and animate in place.
+
 ## Gotchas
 
 - The viewBox spans **every pose in the animation cycle**, not just the resting one. A pose that reaches outside the rest bounds is fine; it will not clip.

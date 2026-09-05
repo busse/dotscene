@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { animationPayload, resolve } from '../src/index.ts'
+import { animationPayload, renderSvg, resolve } from '../src/index.ts'
 import { composed, placements, scene, heroNight, seam } from '../scenes/edi/hero.ts'
 import { acts } from '../scenes/edi/acts/index.ts'
 
@@ -54,5 +54,30 @@ describe('the hero', () => {
     const names = placements.map((p) => p.act.name)
     expect(names).toEqual([...new Set(names)])
     expect(names).toHaveLength(acts.length + 1) // + the settle beat that holds the tail
+  })
+})
+
+describe('the embeddable block', () => {
+  it('carries both palettes, so one copy serves a themed page', () => {
+    const svg = renderSvg(resolve(scene))
+    // Light is the plain case; dark rides along behind both of the states a themed page has.
+    expect(svg).toContain('#1d2021') // gray-900 ink, light
+    expect(svg).toContain('#edebe6') // ink, dark
+    expect(svg).toContain('@media (prefers-color-scheme: dark)')
+    expect(svg).toContain(':root[data-theme="dark"] &')
+  })
+
+  it('scopes the dark override to itself, so it cannot restyle another scene', () => {
+    const svg = renderSvg(resolve(scene))
+    const style = svg.slice(svg.indexOf('<style>'), svg.indexOf('</style>'))
+    // Everything the scene adds lives inside its own nested block.
+    expect(style).toContain('svg[data-dotscene="ediHero"]{')
+    expect(style.indexOf('@media (prefers-color-scheme: dark)')).toBeGreaterThan(
+      style.indexOf('svg[data-dotscene="ediHero"]{'),
+    )
+  })
+
+  it('repaints its own ground in dark, since a rect fill is an attribute', () => {
+    expect(renderSvg(resolve(scene))).toContain('.ds-bg{fill:#16181a}')
   })
 })

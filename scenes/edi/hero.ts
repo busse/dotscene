@@ -15,7 +15,7 @@ import { compose, defineScene, loopGaps, type Act } from 'dotscene'
 import { acts } from './acts/index.ts'
 import { along } from './route.ts'
 import { HERO_VIEWBOX } from './projection.ts'
-import { css, night, paper, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
+import { css, night, paper, themedCss, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
 import { rigPart, stageParts } from './stage.ts'
 
 /** When the first rig leaves. The paperwork before it has to fit in here. */
@@ -87,13 +87,18 @@ const layout = {
   animate: { mode: 'loop', keyframes: composed.keyframes },
 } as const
 
+/**
+ * The one to embed. Carries both palettes, so a page with a theme toggle needs one copy of
+ * a payload that is mostly geometry rather than two.
+ */
 export const scene = defineScene('ediHero', {
   title: 'An EDI lifecycle, end to end',
   ...layout,
   background: GROUND_PAPER,
-  css: css(paper),
+  css: themedCss(paper, night),
 })
 
+/** Fixed dark, for a standalone file or an `<img>` — neither can be reached by page CSS. */
 export const heroNight = defineScene('ediHeroNight', {
   title: 'An EDI lifecycle, end to end — dark',
   ...layout,

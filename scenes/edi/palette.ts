@@ -52,6 +52,9 @@ export const night: Roles = {
 export const GROUND_PAPER = '#fbfaf7'
 export const GROUND_NIGHT = '#16181a'
 
+/** The ground each palette paints, as a rule the dark override can restate. */
+const groundOf = (r: Roles) => (r === night ? GROUND_NIGHT : GROUND_PAPER)
+
 /** The scene's own stylesheet: literal hex, because a standalone file inherits nothing. */
 export const css = (r: Roles): string =>
   [
@@ -78,3 +81,24 @@ export const css = (r: Roles): string =>
     `.ds-line--tether{stroke:${r.net};stroke-width:.35;stroke-opacity:.4}`,
     `.ds-dot--tether{fill:${r.net};r:.35;fill-opacity:.5}`,
   ].join('')
+
+/**
+ * Both palettes in one block, for a scene that will sit inline on a themed page.
+ *
+ * A standalone `.svg` or an `<img>` still wants two files, which is why `css` exists on its
+ * own — nothing outside the file can reach in and restyle it. But a block pasted into a page
+ * with a theme toggle is a different problem: shipping both variants doubles a payload that
+ * is mostly geometry, and the site can only pick one at build time anyway.
+ *
+ * So the dark roles ride along as overrides, in the three states a themed page actually has:
+ * no stamp and a dark OS, and an explicit stamp either way. Written as nested rules, so they
+ * stay scoped to this scene and cannot reach another on the same page.
+ */
+export const themedCss = (light: Roles, dark: Roles): string => {
+  const overrides = `${css(dark)}.ds-bg{fill:${groundOf(dark)}}--ds-face-fill:${groundOf(dark)};`
+  return [
+    css(light),
+    `@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) &{${overrides}}}`,
+    `:root[data-theme="dark"] &{${overrides}}`,
+  ].join('')
+}
