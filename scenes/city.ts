@@ -1,4 +1,5 @@
 import { defineFigure, defineScene, isometric, type Vec2, type Vec3 } from 'dotscene'
+import { figureOf, isoKit, merge, tag, type Shape } from './iso.ts'
 
 /**
  * A nine-by-nine city block, drawn in the view every isometric city builder uses.
@@ -8,55 +9,8 @@ import { defineFigure, defineScene, isometric, type Vec2, type Vec3 } from 'dots
  * `isometric` is an authoring transform, not a renderer mode. That is the whole trick, and
  * it means depth costs nothing at runtime.
  */
-const grid = isometric({ tile: 8, squash: 0.5, rise: 5 })
-
-interface Shape {
-  readonly points: Readonly<Record<string, Vec2>>
-  readonly edges: readonly (readonly [string, string])[]
-  readonly faces?: readonly { readonly points: readonly string[]; readonly kind?: string }[]
-}
-
-/**
- * A rectangular building, from one grid corner to another, `height` storeys tall.
- *
- * The far corner and the three edges meeting it are left out. In this view that corner is
- * always the one with the smallest x + y — the highest on screen — so dropping it turns a
- * transparent wireframe into a solid-looking box showing its three visible faces.
- */
-const box = (prefix: string, from: Vec2, to: Vec2, height: number, base = 0): Shape => {
-  const [x0, y0] = from
-  const [x1, y1] = to
-  const at = (cell: Vec3) => grid(cell)
-  return {
-    points: {
-      [`${prefix}Near`]: at([x1, y1, base]),
-      [`${prefix}East`]: at([x1, y0, base]),
-      [`${prefix}West`]: at([x0, y1, base]),
-      [`${prefix}TopFar`]: at([x0, y0, height]),
-      [`${prefix}TopEast`]: at([x1, y0, height]),
-      [`${prefix}TopNear`]: at([x1, y1, height]),
-      [`${prefix}TopWest`]: at([x0, y1, height]),
-    },
-    edges: [
-      [`${prefix}East`, `${prefix}Near`],
-      [`${prefix}Near`, `${prefix}West`],
-      [`${prefix}East`, `${prefix}TopEast`],
-      [`${prefix}Near`, `${prefix}TopNear`],
-      [`${prefix}West`, `${prefix}TopWest`],
-      [`${prefix}TopFar`, `${prefix}TopEast`],
-      [`${prefix}TopEast`, `${prefix}TopNear`],
-      [`${prefix}TopNear`, `${prefix}TopWest`],
-      [`${prefix}TopWest`, `${prefix}TopFar`],
-    ],
-    // The same three faces the visible edges bound: roof, and the two walls turned towards
-    // the viewer. They are what stops the ground grid showing through the building.
-    faces: [
-      { points: [`${prefix}TopFar`, `${prefix}TopEast`, `${prefix}TopNear`, `${prefix}TopWest`], kind: 'roof' },
-      { points: [`${prefix}East`, `${prefix}Near`, `${prefix}TopNear`, `${prefix}TopEast`], kind: 'east' },
-      { points: [`${prefix}Near`, `${prefix}West`, `${prefix}TopWest`, `${prefix}TopNear`], kind: 'south' },
-    ],
-  }
-}
+const kit = isoKit(isometric({ tile: 8, squash: 0.5, rise: 5 }))
+const { at: grid, box, edge: edge3, line } = kit
 
 /** A tree: a trunk, and a canopy of four points splayed around its top. */
 const tree = (prefix: string, [x, y]: Vec2, height = 1.7, spread = 1.15): Shape => {
@@ -86,41 +40,6 @@ const tree = (prefix: string, [x, y]: Vec2, height = 1.7, spread = 1.15): Shape 
     })),
   }
 }
-
-/** A straight run between two cells, at any height. */
-const edge3 = (name: string, from: Vec3, to: Vec3): Shape => ({
-  points: { [`${name}A`]: grid(from), [`${name}B`]: grid(to) },
-  edges: [[`${name}A`, `${name}B`]],
-})
-
-/** A straight run on the ground, corner to corner in grid coordinates. */
-const line = (name: string, from: Vec2, to: Vec2): Shape =>
-  edge3(name, [from[0], from[1], 0], [to[0], to[1], 0])
-
-const merge = (...shapes: readonly Shape[]): Shape => ({
-  points: Object.assign({}, ...shapes.map((s) => s.points)),
-  edges: shapes.flatMap((s) => s.edges),
-  faces: shapes.flatMap((s) => s.faces ?? []),
-})
-
-/**
- * Label every point in a shape with one role, so a scene can colour by what a thing *is*
- * rather than by matching point names.
- */
-const kindsFor = (shape: Shape, kind: string): Record<string, string> =>
-  Object.fromEntries(Object.keys(shape.points).map((name) => [name, kind]))
-
-/** Turn a shape into a figure, with every point carrying one role. */
-const figureOf = (name: string, shape: Shape, title: string, kind?: string) =>
-  defineFigure(name, {
-    title,
-    points: shape.points,
-    edges: shape.edges,
-    faces: shape.faces ?? [],
-    ...(kind === undefined
-      ? {}
-      : { pointKinds: Object.fromEntries(Object.keys(shape.points).map((n) => [n, kind])) }),
-  })
 
 // The block: a road cross splitting nine by nine into four four-by-four lots, three
 // buildings of different heights, and a park in the fourth.
@@ -168,20 +87,11 @@ const roads = merge(
  * The truck therefore passes behind the works building and in front of nothing — checked,
  * not assumed — so one fixed order holds for the whole journey.
  */
-export const cityGround = defineFigure('cityGround', {
-  title: 'Ground, lots and roads',
-  points: { ...plate.points, ...lots.points, ...roads.points },
-  edges: [
-    ...plate.edges.map(([from, to]) => ({ from, to, kind: 'ground' })),
-    ...lots.edges.map(([from, to]) => ({ from, to, kind: 'lot' })),
-    ...roads.edges.map(([from, to]) => ({ from, to, kind: 'road' })),
-  ],
-  pointKinds: {
-    ...kindsFor(plate, 'ground'),
-    ...kindsFor(lots, 'lot'),
-    ...kindsFor(roads, 'road'),
-  },
-})
+export const cityGround = figureOf(
+  'cityGround',
+  merge(tag(plate, 'ground'), tag(lots, 'lot'), tag(roads, 'road')),
+  'Ground, lots and roads',
+)
 
 export const tower = figureOf('tower', box('tower', [1, 1], [3, 3], 6), 'A tower')
 export const office = figureOf('office', box('office', [6, 1], [8, 3], 3), 'An office')
@@ -214,15 +124,9 @@ const truckShape = merge(
   edge3('wheelFront', [1.45, 0.36, 0.22], [1.45, 0.36, 0]),
 )
 
-export const truck = defineFigure('truck', {
-  title: 'A truck',
-  points: truckShape.points,
-  edges: truckShape.edges.map(([from, to]) => ({ from, to, kind: 'vehicle' })),
-  faces: truckShape.faces ?? [],
-  // Its own role, so its dots can be smaller: a vehicle's panels are shorter than a
-  // building's walls, and dots sized for the buildings turn it into a blob.
-  pointKinds: Object.fromEntries(Object.keys(truckShape.points).map((name) => [name, 'vehicle'])),
-})
+// Its own role, so its dots can be smaller: a vehicle's panels are shorter than a
+// building's walls, and dots sized for the buildings turn it into a blob.
+export const truck = figureOf('truck', tag(truckShape, 'vehicle'), 'A truck')
 
 /** Where the truck sits when it is `gx` cells along the east–west road. */
 const alongRoad = (gx: number): Vec2 => grid([gx, ROAD_LANE, 0])

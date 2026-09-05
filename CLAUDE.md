@@ -45,6 +45,8 @@ Every command takes `--json`. Failures are structured, with `didYouMean` when a 
 
 ## Isometric scenes
 
+`scenes/iso.ts` holds the shared kit — `Shape`, `merge`, `tag`, `figureOf`, and `isoKit(project)` giving `box`, `pad`, `edge` and `line` bound to a projection. Both the city and the EDI scenes build on it; add primitives there rather than forking them.
+
 Author in grid coordinates and project once with `isometric({ tile, squash, rise })`: +x down-right, +y down-left, +z up.
 
 **Naming areas.** Screen words and grid words disagree here, so say which you mean. In `scenes/city.ts` the plate's four *corners* land at the top, right, bottom and left of the frame, which makes its four *edges* the upper-left, upper-right, lower-right and lower-left. So the east–west road (constant `gy`, running along +x) enters through the upper-left edge and leaves through the lower-right; the other road runs upper-right to lower-left. The lots read as the top lot (tower), right lot (office), left lot (works) and bottom lot (park). Landmarks — "the park lot", "the tower's road" — beat compass words, and grid coordinates beat both. The library stays 2D — this is an authoring transform, not a renderer mode, so everything else keeps working. `scenes/city.ts` is the worked example, with local `box`, `tree` and `line` helpers over grid space.
@@ -52,6 +54,8 @@ Author in grid coordinates and project once with `isometric({ tile, squash, rise
 - A box's far corner is always the one with the smallest x + y. Drop it and the three edges meeting it, and a transparent wireframe becomes a solid-looking box showing three faces.
 - **Solids need `faces`, and paint order does the hiding.** Parts paint in declaration order, so list them back to front — depth is x + y, larger nearer. A face is painted under its own figure's strokes and defaults to the scene's `background`. Check what actually overlaps before settling an order: a single depth key per part is only correct while nothing straddles another thing's span.
 - Only a line's endpoints become dots, so a full ground grid costs two dots per line rather than one per intersection.
+- **A footprint of w by d projects to `(w + d) * tile` across the screen**, because both axes run diagonally. Pick dimensions from the screen width they produce, not from how the number reads — a shed that sounds six wide is eighty units across.
+- Roads want to run along the grid axes, with L-turns between waypoints. A diagonal path cannot carry a grid-aligned solid, so anything driving along it reads as a crate sliding sideways.
 - Nothing occludes anything, so depth comes from stroke weight: give edges a `kind` and set opacity and width in the scene's `css`.
 
 ## Gotchas

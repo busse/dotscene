@@ -128,7 +128,9 @@ const grid = isometric({ tile: 8, squash: 0.5, rise: 5 })   // +x down-right, +y
 const points = { towerNear: grid([3, 3, 0]), towerTop: grid([3, 3, 6]) }
 ```
 
-- Build local `box` / `line` helpers over grid space rather than writing projected numbers.
+- Use `scenes/iso.ts` — `isoKit(project)` gives `box`, `pad`, `edge`, `line`; `tag` gives a sub-shape its role; `merge` combines them. Do not rewrite these per scene.
+- A footprint of w by d is `(w + d) * tile` wide on screen, since both axes run diagonally. Size things by the screen width they produce.
+- Roads should follow the grid axes with L-turns. Nothing grid-aligned can sit convincingly on a diagonal path.
 - For a solid-looking box, drop the far corner — always the smallest x + y — and its three edges. Seven points, nine edges, three visible faces.
 - A full ground grid is cheap: only line endpoints become dots, so twelve lines cost twenty-four dots around the rim, not a hundred in the middle.
 - To make something solid, give the figure `faces` — polygons named by their rim points — and order the parts back to front, because parts paint in declaration order. Depth is x + y, larger nearer. Verify the overlaps rather than trusting the depth key: one number per part only works while nothing straddles another thing's span.

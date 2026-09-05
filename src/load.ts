@@ -1,6 +1,7 @@
 /** Discovering and loading scene files from a directory. */
 
 import { readdir, readFile } from 'node:fs/promises'
+import type { Dirent } from 'node:fs'
 import { join, resolve as resolvePath } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import type { Scene } from './model.ts'
@@ -15,19 +16,35 @@ export interface LoadedScene {
 const isScene = (value: unknown): value is Scene =>
   typeof value === 'object' && value !== null && (value as { kind?: unknown }).kind === 'scene'
 
-/** Scene files, sorted, so every command reports in a stable order. */
+/**
+ * Scene files, sorted, so every command reports in a stable order.
+ *
+ * Walks subdirectories: a scene of any size wants its pieces in a folder, and a module that
+ * exports no scene simply contributes none.
+ */
 export const findSceneFiles = async (dir: string): Promise<readonly string[]> => {
-  let entries: string[]
+  let entries: Dirent[]
   try {
-    entries = await readdir(dir)
+    entries = await readdir(dir, { withFileTypes: true })
   } catch {
     return []
   }
-  return entries
+  const here = entries
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name)
     .filter((name) => name.endsWith('.ts') || name.endsWith('.json'))
     .filter((name) => !name.endsWith('.test.ts') && !name.endsWith('.d.ts'))
     .sort()
     .map((name) => resolvePath(join(dir, name)))
+
+  const nested = entries
+    .filter((entry) => entry.isDirectory() && !entry.name.startsWith('.') && entry.name !== 'node_modules')
+    .map((entry) => entry.name)
+    .sort()
+
+  const below: string[] = []
+  for (const name of nested) below.push(...(await findSceneFiles(join(dir, name))))
+  return [...here, ...below]
 }
 
 /** Every scene exported by one file. A TypeScript module may export more than one. */
