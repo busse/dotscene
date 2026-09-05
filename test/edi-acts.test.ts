@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { acts } from '../scenes/edi/acts/index.ts'
 import { compose, resolve } from '../src/index.ts'
+import { PARKED } from '../scenes/edi/tokens.ts'
 
 describe('the acts', () => {
   it('covers the lifecycle end to end', () => {
@@ -46,18 +47,31 @@ describe('the acts', () => {
     expect(() => compose(placed)).not.toThrow()
   })
 
-  it('flies every message from one node to another, arcing on the way', () => {
+  it('parks every message off-frame at both ends of its flight', () => {
     for (const act of acts) {
       for (const part of act.parts) {
         const moves = act.act.beats
           .filter((b) => b.parts[part.id!] !== undefined)
           .map((b) => b.parts[part.id!]!.at!)
-        expect(moves.length).toBeGreaterThanOrEqual(5)
-        // The last hop parks it off-frame; before that it should have risen off the straight
-        // line between its ends, which is what makes it an arc rather than a slide.
-        const flight = moves.slice(0, -1)
+        expect(moves[0]).toEqual(PARKED)
+        expect(moves.at(-1)).toEqual(PARKED)
+      }
+    }
+  })
+
+  it('arcs on the way rather than sliding straight across', () => {
+    for (const act of acts) {
+      for (const part of act.parts) {
+        // Only the flight itself: the parked beats at either end sit a thousand units away
+        // and would swamp any average taken across them.
+        const flight = act.act.beats
+          .filter((b) => b.parts[part.id!] !== undefined)
+          .map((b) => b.parts[part.id!]!.at!)
+          .filter((p) => p[0] !== PARKED[0])
+        expect(flight.length).toBeGreaterThanOrEqual(5)
         const midY = flight[Math.floor(flight.length / 2)]![1]
         const straight = (flight[0]![1] + flight.at(-1)![1]) / 2
+        // Bowed upward — on screen, up is a smaller y.
         expect(midY).toBeLessThan(straight)
       }
     }
