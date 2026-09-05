@@ -21,6 +21,7 @@ export type IssueCode =
   | 'EMPTY_CYCLE'
   | 'AMBIGUOUS_ANIMATION'
   | 'DEGENERATE_FACE'
+  | 'ACT_OVERLAP'
 
 export interface Issue {
   readonly code: IssueCode
@@ -30,6 +31,7 @@ export interface Issue {
   readonly scene?: string
   readonly pose?: string
   readonly part?: string
+  readonly act?: string
   readonly keyframe?: string
   readonly point?: PointId
   readonly edge?: readonly [PointId, PointId]

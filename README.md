@@ -124,6 +124,32 @@ Selectors are bare and get scoped to the scene, so two scenes on one page cannot
 
 Set `background` and write literal hex in `css` rather than leaning on `currentColor`: a standalone `.svg`, an `<img src>`, or a rasterised PNG inherits nothing from the page it lands on. Where a palette's roles invert between light and dark, emit two scenes over one figure rather than hoping a single file covers both — see `city` and `cityNight` in `scenes/city.ts`, which share every point and differ only in `background` and `css`.
 
+### Composing overlapping acts
+
+A keyframe is one global instant, so splicing keyframe arrays end to end can only show one thing at a time. For an animation with several things happening at once, `compose` bakes independently-authored *acts* onto a single timeline:
+
+```ts
+const tender: Act = {
+  name: '204',
+  beats: [
+    { at: 0,    parts: { token: { at: shipper } } },
+    { at: 1800, parts: { token: { at: carrier } }, easing: 'easeInOut' },
+  ],
+}
+
+const { keyframes, duration } = compose([
+  { act: tender, at: 0 },
+  { act: pickup, at: 1200 },   // overlaps — both are in flight together
+], { parts: scene.parts })
+```
+
+Each act keeps its own clock; `at` places it on the shared one. Two rules make the result correct, and both are the sort of thing that is invisible until the animation looks wrong:
+
+- **Anything mid-move is resampled** at instants other acts asked for. A part missing from a keyframe is not repainted, so without this it would freeze and then jump.
+- **Eased segments are subdivided** and baked, because the runtime only ever walks straight lines between keyframes. An act can therefore use any easing at no runtime cost. Linear segments are left alone, so nothing pays for easing it does not use.
+
+A part is only present in keyframes inside its own span, which parks a token off-frame between flights for free. Two acts moving the same part at overlapping times is rejected as an authoring mistake; touching end to end is how a part is handed on. `loopGaps` names anything that does not end where it started, which is what makes a loop's seam invisible.
+
 ### Animation
 
 Two forms. `cycle` is the shorthand for one part running through its own poses:

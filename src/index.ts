@@ -45,6 +45,9 @@ export type { Easing } from './poses.ts'
 export { partPoints, resolve } from './layout.ts'
 export type { Frame, ResolvedAnimation, ResolvedDot, ResolvedLine, ResolvedScene, ViewBox } from './layout.ts'
 
+export { compose, loopGaps } from './compose.ts'
+export type { Act, Beat, Composed, ComposeOptions, Placement } from './compose.ts'
+
 export { animationPayload, compile } from './compile.ts'
 export type { CompiledScene, CompileOptions } from './compile.ts'
 

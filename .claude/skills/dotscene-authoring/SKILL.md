@@ -41,6 +41,22 @@ export const scene = defineScene('thing', {
 })
 ```
 
+## Several things happening at once
+
+`animate.keyframes` is one global timeline, so two acts spliced end to end play in sequence, never together. For overlap, author each act as beats on its own clock and let `compose` bake them down:
+
+```ts
+const { keyframes } = compose(
+  [{ act: tender, at: 0 }, { act: pickup, at: 1200 }],
+  { parts: scene.parts },
+)
+```
+
+- A part is only in keyframes inside its own span, so park it off-frame at each end and it costs nothing between flights.
+- Give a beat an `easing` and it is subdivided and baked; leave it linear and it stays two keyframes.
+- Pass `parts` so a resample landing inside a pose change interpolates the pose rather than snapping it.
+- `loopGaps` names anything not ending where it started — run it on anything meant to loop.
+
 ## Staging several parts at once
 
 `animate.cycle` moves one part. When two figures and the things they carry all move, use `keyframes` — each step says where every moving part is and what pose it holds:
@@ -154,6 +170,8 @@ Never invent a hex value to fill a gap. If a scene needs distinctions the palett
 | An item is in the hand a figure needs for a gesture | The beat order forces it. Add a beat that moves it, or fold the move into the transition before. |
 | Two hands that should touch do not | Each was posed in its own local frame. Solve both from one scene point. |
 | A reaching arm is locked straight | The target is at or past full reach. Move the figures closer, or lower the target. |
+| Something freezes then jumps mid-animation | It was absent from keyframes another act created. Compose rather than concatenate, so it gets resampled. |
+| An easing has no visible effect | The runtime walks straight lines. Bake it — `compose` subdivides an eased segment. |
 | Two walkers look like one figure mirrored | Same scale, cadence and phase. Vary all three. |
 | Lines show through a building | The figure has no `faces`. Add them, and check the part order — a wall only hides what was painted before it. |
 | A wall hides something it should be behind | Its part is declared too late. Order parts back to front by x + y. |
