@@ -13,7 +13,9 @@ Scenes are named points and the edges between them. You cannot get coordinates r
 node bin/dotscene.js preview <scene> --width 44
 ```
 
-Read the ASCII output as the drawing. It runs over the same resolved geometry as the SVG, so what reads correctly there renders correctly in a browser. Adjust coordinates, preview again. Add `--labels` when you need to know which dot is which, `--pose <name>` for one pose, `--poses` to step the whole cycle.
+Read the ASCII output as the drawing. It runs over the same resolved geometry as the SVG, so what reads correctly there renders correctly in a browser. Adjust coordinates, preview again. Add `--labels` when you need to know which dot is which, `--pose <name>` for one pose, `--poses` to step the whole cycle, `--at <ms>` for an animation at one instant (camera included — the same sampler the browser runs), `--every <ms>` for a flipbook of the whole lap.
+
+For a long animation, hold a frame in the browser: `dotscene.scenes.get(name).pause()` then `.seek(ms)`. Pausing is sticky, so a screenshot tool that scrolls will not restart it.
 
 Then `node bin/dotscene.js check` — issues come back structured, with `didYouMean` on likely typos.
 
@@ -43,19 +45,26 @@ export const scene = defineScene('thing', {
 
 ## Several things happening at once
 
-`animate.keyframes` is one global timeline, so two acts spliced end to end play in sequence, never together. For overlap, author each act as beats on its own clock and let `compose` bake them down:
+`animate.keyframes` is one global timeline, so two acts spliced end to end play in sequence, never together. For overlap, author each act as beats on its own clock and let `compose` place them:
 
 ```ts
-const { keyframes } = compose(
-  [{ act: tender, at: 0 }, { act: pickup, at: 1200 }],
-  { parts: scene.parts },
-)
+const { keyframes } = compose([{ act: tender, at: 0 }, { act: pickup, at: 1200 }])
 ```
 
-- A part is only in keyframes inside its own span, so park it off-frame at each end and it costs nothing between flights.
-- Give a beat an `easing` and it is subdivided and baked; leave it linear and it stays two keyframes.
-- Pass `parts` so a resample landing inside a pose change interpolates the pose rather than snapping it.
-- `loopGaps` names anything not ending where it started — run it on anything meant to loop.
+- Keyframes are sparse: a part is only in keyframes its own act asked for, and the runtime interpolates it between those. Nothing is resampled and nothing is baked.
+- A beat's `easing` is carried by its keyframe; when two beats share an instant with different easings, each part carries its own. Ease freely.
+- A beat may carry `camera: { at, width }`; the camera is a track like any part, and two acts moving it at once is an error.
+- Enter and leave with `opacity` beats rather than parking off-frame. A part invisible at both ends of the lap is exempt from the seam check.
+- `loopGaps(composed, parts)` names anything whose last state differs from its opening state — run it on anything meant to loop.
+
+## The camera
+
+Give the scene `camera: { at, width, aspect }` and keyframes or beats a `camera`. Height follows from the aspect, so a move only ever pans and zooms. `animate.sizing: 'screen'` keeps dots and strokes a constant pixel size as it zooms; write the scene's own radii as `calc(.5 * var(--ds-zoom))` so they follow.
+
+- Never let the camera rest: a hold is a slow push or a drift.
+- Ease into and out of a move; run a tracking shot linear between the corners a vehicle turns, on the vehicle's own clock, so the two never fight.
+- Aim at the altitude of the subject. Things in the air are far above the things that send them.
+- Check every shot with `preview --at`; a message that has flown out of the top of the frame is the commonest mistake.
 
 ## Staging several parts at once
 
@@ -134,6 +143,7 @@ const points = { towerNear: grid([3, 3, 0]), towerTop: grid([3, 3, 6]) }
 - For a solid-looking box, drop the far corner — always the smallest x + y — and its three edges. Seven points, nine edges, three visible faces.
 - A full ground grid is cheap: only line endpoints become dots, so twelve lines cost twenty-four dots around the rim, not a hundred in the middle.
 - To make something solid, give the figure `faces` — polygons named by their rim points — and order the parts back to front, because parts paint in declaration order. Depth is x + y, larger nearer. Verify the overlaps rather than trusting the depth key: one number per part only works while nothing straddles another thing's span.
+- A compound figure — a shed with a taller block behind it — needs `layers` to occlude itself; `merge` gives one per shape merged, listed back to front. `tone(shape, 'blue')` re-kinds a solid's faces so one building can wear a colour.
 - Without faces, nothing hides behind anything, so depth comes from weight. Give edges a `kind` and points a `pointKinds` entry, then style `ds-line--x` and `ds-dot--x` in the scene's `css`.
 - Naming areas: the plate's corners land top/right/bottom/left, so its edges are the upper-left, upper-right, lower-right and lower-left. A road at constant `gy` runs upper-left to lower-right. Prefer landmarks ("the park lot") or raw grid coordinates over compass words.
 - A figure moves across the grid by translating the part — the projection is affine, so `grid([gx, gy, 0])` is both the cell and the offset to it. No per-frame pose needed for something that only slides.
@@ -172,8 +182,12 @@ Never invent a hex value to fill a gap. If a scene needs distinctions the palett
 | An item is in the hand a figure needs for a gesture | The beat order forces it. Add a beat that moves it, or fold the move into the transition before. |
 | Two hands that should touch do not | Each was posed in its own local frame. Solve both from one scene point. |
 | A reaching arm is locked straight | The target is at or past full reach. Move the figures closer, or lower the target. |
-| Something freezes then jumps mid-animation | It was absent from keyframes another act created. Compose rather than concatenate, so it gets resampled. |
-| An easing has no visible effect | The runtime walks straight lines. Bake it — `compose` subdivides an eased segment. |
+| Something snaps into its first keyframe | Its declared position is far from its first beat. Declare it where the first beat will find it. |
+| Something is not where `--pose <keyframe>` shows it in the browser | Read the same instant with `--at`; a keyframe name is only that keyframe's arrival. |
+| A message is invisible while the camera follows it | It is above the frame: arcs bow up to sixty units. Frame the masts, not the yard. |
+| The frame you paused is not the frame you asked for | An older runtime restarted on scroll. `pause()` is sticky now; use it before `seek()`. |
+| A `.svg` file shows an XML error | A raw `&` in its stylesheet. The compiler escapes the file's CSS; do not hand-edit a `docs/` file. |
+| A far block's edges show through a near shed | One figure, no `layers`. Build it with `merge` back to front. |
 | Two walkers look like one figure mirrored | Same scale, cadence and phase. Vary all three. |
 | Lines show through a building | The figure has no `faces`. Add them, and check the part order — a wall only hides what was painted before it. |
 | A wall hides something it should be behind | Its part is declared too late. Order parts back to front by x + y. |

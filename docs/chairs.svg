@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="chairs" viewBox="-93.6 7 174.89999999999998 64" role="img">
   <title>Someone has been sitting in my chair</title>
-  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="chairs"]{--ds-dot-r:1.38;--ds-line-w:0.62}</style>
-  <defs><clipPath id="ds-clip-chairs"><rect x="-93.6" y="7" width="174.89999999999998" height="64"/></clipPath></defs>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="chairs"]{--ds-dot-r:1.38;--ds-line-w:0.62}</style>
+  <defs><clipPath id="ds-clip-chairs"><rect class="ds-clip" x="-93.6" y="7" width="174.89999999999998" height="64"/></clipPath></defs>
   <g clip-path="url(#ds-clip-chairs)">
     <g data-part="chairPapa">
     <line class="ds-line" data-part="chairPapa" data-a="railTopB" data-b="railTopF" x1="-87.6" y1="20.8" x2="-79.2" y2="20.8"/>

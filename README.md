@@ -1,6 +1,6 @@
 # dotscene
 
-Illustrations made of dots and lines — the look of a graph view, but drawn on purpose. A person, a car, a person *driving* a car, all built the way you'd draw a constellation.
+Illustrations made of dots and lines — the look of a graph view, but drawn on purpose. A person, a car, a person *driving* a car, all built the way you'd draw a constellation. And, when they move, a camera to watch them with.
 
 ```
 person · wave
@@ -26,7 +26,7 @@ person · wave
           ·           ·
 ```
 
-Scenes compile to a self-contained block you paste onto a page. Static scenes are plain SVG with **zero JavaScript**. Animated ones add a 1.3 kB runtime that tweens between poses.
+Scenes compile to a self-contained block you paste onto a page. Static scenes are plain SVG with **zero JavaScript**. Animated ones add a 9 kB runtime that plays a timeline: every moving part, the paint order, each part's opacity, and the camera.
 
 ## The idea
 
@@ -57,11 +57,13 @@ The whole point is that you can see what you drew without opening a browser:
 
 ```
 $ dotscene preview person --pose wave --labels
+$ dotscene preview ediHero --at 24500          # the animation at 24.5 s, camera and all
+$ dotscene preview ediHero --every 5000        # a flipbook of the whole lap
 $ dotscene inspect person --json
 $ dotscene check
 ```
 
-`check` exits non-zero and reports issues as data, with a suggestion when something looks like a typo:
+`preview --at` runs the same sampler the browser runtime uses over the same resolved geometry, so a frame that reads correctly in the terminal is the frame the page will show. `check` exits non-zero and reports issues as data, with a suggestion when something looks like a typo:
 
 ```json
 { "code": "UNKNOWN_POINT", "figure": "person", "edge": ["neck", "hnadR"],
@@ -73,13 +75,13 @@ $ dotscene check
 | | |
 |---|---|
 | `dotscene list` | every scene, with its poses |
-| `dotscene inspect <scene>` | points, edges, poses, viewBox |
+| `dotscene inspect <scene>` | points, edges, poses, viewBox, timeline |
 | `dotscene preview <scene>` | render to the terminal as text |
 | `dotscene check` | validate everything, exit 1 on issues |
 | `dotscene new <name>` | scaffold a scene file |
 | `dotscene build` | emit SVG, pasteable HTML, gallery, runtime |
 
-Useful flags: `--pose <name>`, `--poses`, `--width <n>`, `--labels`, `--json`, `--dir <path>`, `--out <path>`.
+Useful flags: `--pose <name>`, `--poses`, `--at <ms>`, `--every <ms>`, `--width <n>`, `--labels`, `--json`, `--dir <path>`, `--out <path>`.
 
 ## Output
 
@@ -91,12 +93,16 @@ The emitted block carries its own point labels, which is how the runtime moves t
 <svg class="dotscene" data-dotscene="header" viewBox="-24 -3 48 73" role="img">
   <title>A person cycling through poses</title>
   <style>/* defaults, overridable */</style>
-  <line class="ds-line" data-a="neck" data-b="hip" x1="0" y1="13" x2="0" y2="34"/>
-  <circle class="ds-dot" data-p="head" cx="0" cy="3" r="1.6"/>
+  <g data-part="person">
+    <line class="ds-line" data-a="neck" data-b="hip" x1="0" y1="13" x2="0" y2="34"/>
+    <circle class="ds-dot" data-p="head" cx="0" cy="3" r="1.6"/>
+  </g>
 </svg>
 <script type="application/json" data-dotscene-poses="header">{"cycle":["idle","wave"],…}</script>
 <script src="./dotscene.min.js" defer></script>
 ```
+
+The `.svg` file and the block differ in one thing: the file's stylesheet is XML-escaped, because a standalone SVG is parsed as XML and a themed scene's nesting `&` would be a fatal error there, while inside an HTML page a `<style>` is raw text and the same `&` must stay literal.
 
 Dots and lines default to `currentColor`, so a scene inherits the surrounding text colour in light and dark alike.
 
@@ -120,35 +126,11 @@ defineScene('city', {
 
 Selectors are bare and get scoped to the scene, so two scenes on one page cannot style each other.
 
+Sizes are written against `--ds-zoom`, which the runtime sets as the camera moves for a scene with `sizing: 'screen'`. Write a radius as `calc(.5 * var(--ds-zoom))` and a push-in leaves it the same size on the page — a pen line stays a pen line however close the drawing is held.
+
 ### Matching a site's palette
 
-Set `background` and write literal hex in `css` rather than leaning on `currentColor`: a standalone `.svg`, an `<img src>`, or a rasterised PNG inherits nothing from the page it lands on. Where a palette's roles invert between light and dark, emit two scenes over one figure rather than hoping a single file covers both — see `city` and `cityNight` in `scenes/city.ts`, which share every point and differ only in `background` and `css`.
-
-### Composing overlapping acts
-
-A keyframe is one global instant, so splicing keyframe arrays end to end can only show one thing at a time. For an animation with several things happening at once, `compose` bakes independently-authored *acts* onto a single timeline:
-
-```ts
-const tender: Act = {
-  name: '204',
-  beats: [
-    { at: 0,    parts: { token: { at: shipper } } },
-    { at: 1800, parts: { token: { at: carrier } }, easing: 'easeInOut' },
-  ],
-}
-
-const { keyframes, duration } = compose([
-  { act: tender, at: 0 },
-  { act: pickup, at: 1200 },   // overlaps — both are in flight together
-], { parts: scene.parts })
-```
-
-Each act keeps its own clock; `at` places it on the shared one. Two rules make the result correct, and both are the sort of thing that is invisible until the animation looks wrong:
-
-- **Anything mid-move is resampled** at instants other acts asked for. A part missing from a keyframe is not repainted, so without this it would freeze and then jump.
-- **Eased segments are subdivided** and baked, because the runtime only ever walks straight lines between keyframes. An act can therefore use any easing at no runtime cost. Linear segments are left alone, so nothing pays for easing it does not use.
-
-A part is only present in keyframes inside its own span, which parks a token off-frame between flights for free. Two acts moving the same part at overlapping times is rejected as an authoring mistake; touching end to end is how a part is handed on. `loopGaps` names anything that does not end where it started, which is what makes a loop's seam invisible.
+Set `background` and write literal hex in `css` rather than leaning on `currentColor`: a standalone `.svg`, an `<img src>`, or a rasterised PNG inherits nothing from the page it lands on. Where a palette's roles invert between light and dark, emit two scenes over one figure rather than hoping a single file covers both — see `city` and `cityNight` in `scenes/city.ts`, which share every point and differ only in `background` and `css`. For a block that sits inline on a themed page, `themedCss` in `scenes/edi/palette.ts` carries both palettes in one copy.
 
 ### Animation
 
@@ -158,34 +140,60 @@ Two forms. `cycle` is the shorthand for one part running through its own poses:
 animate: { cycle: ['idle', 'wave', 'lean'], duration: 700, hold: 900 }
 ```
 
-`keyframes` stages the whole scene — every moving part's pose *and* position at each step, with per-step pacing:
+`keyframes` stages the whole scene — each step says where the parts it moves are, and how the camera is framed:
 
 ```ts
 animate: {
   keyframes: [
     { name: 'empty',  duration: 0, hold: 400,
-      parts: { walker: { at: [-150, 0], pose: 'walkCarryA' }, bag: { at: [-138, 35] } } },
+      parts: { walker: { at: [-150, 0], pose: 'walkCarryA' }, bag: { at: [-138, 35], opacity: 0 } } },
     { name: 'meet',   duration: 700, hold: 500,
-      parts: { walker: { at: [-30, 0], pose: 'holdR' },       bag: { at: [-18, 35] } } },
+      parts: { walker: { at: [-30, 0], pose: 'holdR' },       bag: { at: [-18, 35], opacity: 1 } },
+      camera: { at: [-24, 30], width: 120 } },
   ],
 }
 ```
 
-Fields a keyframe leaves out fall back to the part's own declaration, and a part no keyframe mentions never moves. `duration` is the time to transition *into* a step, so setting it to `0` makes that step a hard cut — which is how a loop wraps without sliding everything backwards across the stage.
+**Keyframes are sparse.** A part that a keyframe leaves out is not frozen there; it is interpolated between the keyframes that *do* mention it, eased by the keyframe it is heading into. So a keyframe only has to name what it changes, and a scene with forty moving parts costs what actually happens rather than forty parts times every instant. Before its first keyframe a part holds where the scene declared it, and travels from there during the transition into that keyframe; after its last it holds; and in a loop the wrap carries it back to its opening state over the first keyframe's `duration` — set that to `0` and the wrap is a cut.
 
-A keyframe's `pose` can be a computed `Pose` rather than a name, which frees a figure from the keyframe grid — build one with `lerpPoints` to catch it at any point between two poses. That is how two figures on one shared timeline can walk at different cadences instead of marching in lockstep.
+A part's state is `at`, `scale`, `rotate`, `flipX`, `pose`, `depth` (paint order, interpolated, so a truck crosses behind a building where the numbers cross) and `opacity` (interpolated, so a thing appears and vanishes by fading rather than by teleporting off-frame). A keyframe's `pose` can be a computed `Pose` rather than a name — build one with `lerpPoints` to catch a figure at any point between two poses, which is how two walkers on one timeline keep different cadences.
 
-Each keyframe can set its own `easing`. Continuous travel wants `linear` on every step, easing only where the motion genuinely starts and stops: an ease brings velocity to zero at *every* keyframe it passes through, which is what makes a run of steps pulse instead of flow.
+A keyframe's `easing` applies to every part arriving at it; a part that wants a different one carries its own `easing` on its state. Continuous travel wants `linear` on every step, easing only where the motion genuinely starts and stops: an ease brings velocity to zero at *every* keyframe it passes through, which is what makes a run of steps pulse instead of flow.
 
-To have figures walk on and off, give the scene an explicit `viewBox` and park them outside it; content is clipped to the viewBox, so off-stage is genuinely invisible.
+**The camera** is a track like any other. Give the scene a resting `camera: { at, width, aspect }` and any keyframe a `camera: { at?, width? }`, and the viewBox pans and zooms between them; height follows from the aspect so the frame never changes shape. `sizing: 'screen'` keeps dots and strokes a constant size on the page as the camera moves. A scene with a camera is framed by it; `viewBox` then only describes the stage.
 
-`animate.mode` is `loop`, `pingpong`, `hover`, or `click`. One `requestAnimationFrame` loop drives every scene on the page, scenes pause while scrolled out of view, and `prefers-reduced-motion: reduce` holds the first pose without ever starting. The runtime is exposed as `window.dotscene` for manual control:
+`animate.mode` is `loop`, `pingpong`, `hover`, or `click`. One `requestAnimationFrame` loop drives every scene on the page, scenes pause while scrolled out of view, and `prefers-reduced-motion: reduce` holds the first frame without ever starting. The runtime is exposed as `window.dotscene`, and every mounted scene is in `dotscene.scenes` by name:
 
 ```js
-const handle = dotscene.mount(svg, config)
-handle.goTo('wave')
-handle.stop()
+const hero = dotscene.scenes.get('ediHero')
+hero.pause()          // sticky: scrolling does not restart it
+hero.seek(24500)      // paint the frame at 24.5 s
+hero.play()
+hero.time()           // where the clock is
+hero.duration         // one lap, in ms
 ```
+
+### Composing overlapping acts
+
+A keyframe is one global instant, so splicing keyframe arrays end to end can only show one thing at a time. For an animation with several things happening at once, `compose` places independently-authored *acts* on a single timeline:
+
+```ts
+const tender: Act = {
+  name: '204',
+  beats: [
+    { at: 0,    parts: { token: { at: shipper, opacity: 0 } } },
+    { at: 300,  parts: { token: { at: shipper, opacity: 1 } }, easing: 'easeOut' },
+    { at: 1800, parts: { token: { at: carrier } }, camera: { at: carrier, width: 240 }, easing: 'easeInOut' },
+  ],
+}
+
+const { keyframes, duration } = compose([
+  { act: tender, at: 0 },
+  { act: pickup, at: 1200 },   // overlaps — both are in flight together
+])
+```
+
+Each act keeps its own clock; `at` places it on the shared one. Nothing is resampled and nothing is baked: a beat's easing is written onto its keyframe, and when two beats land on the same instant wanting different easings each part carries its own. Two acts moving the same part — or the camera — at overlapping times is rejected as an authoring mistake; touching end to end is how a part is handed on. `loopGaps(composed, parts)` names anything whose last state differs from its opening state, which is what makes a loop's seam invisible; a part invisible at both ends is exempt.
 
 ## Reaching for a point
 
@@ -195,8 +203,7 @@ Two figures of different heights only ever touch if both solve back from the sam
 
 ## Using the hero animation on a site
 
-`dotscene build` emits `docs/ediHero.html` — a self-contained block carrying both palettes, so
-one copy serves a page with a theme toggle. For Jekyll:
+`dotscene build` emits `docs/ediHero.html` — a self-contained block carrying both palettes, so one copy serves a page with a theme toggle. For Jekyll:
 
 ```sh
 cp docs/ediHero.html    _includes/edi-hero.html
@@ -211,15 +218,11 @@ cp docs/dotscene.min.js assets/js/
 <script src="{{ '/assets/js/dotscene.min.js' | relative_url }}" defer></script>
 ```
 
-The block ships with a `<script src="./dotscene.min.js">` tag pointing at its own directory;
-either drop the runtime beside the include or strip that line and load it yourself, as above.
-One runtime serves every scene on the page.
+The block ships with a `<script src="./dotscene.min.js">` tag pointing at its own directory; either drop the runtime beside the include or strip that line and load it yourself, as above. One runtime serves every scene on the page.
 
-Size it with CSS — the SVG is `width: 100%; height: auto` and its own ground colour comes with
-it. `prefers-reduced-motion: reduce` holds the first frame and never starts the loop.
+Size it with CSS — the SVG is `width: 100%; height: auto` at a 2.4:1 aspect, and its own ground colour comes with it. `prefers-reduced-motion: reduce` holds the establishing shot and never starts the loop. The lower right of the frame is quiet by design; that is where the copy goes.
 
-`docs/ediHeroNight.html` is a fixed-dark twin, for a standalone `.svg` or an `<img>` where no
-page CSS can reach in. See `scenes/edi/README.md` for what to edit to change what.
+`docs/ediHeroNight.html` is a fixed-dark twin, for a standalone `.svg` or an `<img>` where no page CSS can reach in. See `scenes/edi/README.md` for what to edit to change what.
 
 ## Isometric scenes
 
@@ -230,13 +233,13 @@ const grid = isometric({ tile: 8, squash: 0.5, rise: 5 })
 const corner = grid([3, 1, 6])   // three tiles across, one down, six storeys up
 ```
 
-Scenes stay two-dimensional. This is an authoring transform applied once, when a figure is written, so depth costs nothing at runtime and every other feature — poses, keyframes, the ASCII preview — works unchanged. See `scenes/city.ts`.
+Scenes stay two-dimensional. This is an authoring transform applied once, when a figure is written, so depth costs nothing at runtime and every other feature — poses, keyframes, the ASCII preview — works unchanged. See `scenes/city.ts`, and `scenes/iso.ts` for the shared kit.
 
 The default `squash` of 0.5 makes a cell twice as wide as it is tall: dimetric rather than strictly isometric, but it is what the word has meant in games for decades and it keeps every edge on a clean 2:1 slope. Pass `squash: Math.tan(Math.PI / 6)` for true 30-degree isometric.
 
 ### Solid surfaces
 
-A figure can declare `faces` — filled polygons named by the points around their rim — which is how a scene occludes. A face is painted under its own figure's strokes, and **parts paint in the order they are declared**, so a wall painted later covers the grid lines, roads and vehicles painted before it. Order the parts back to front: in this projection depth is x + y, larger being nearer.
+A figure can declare `faces` — filled polygons named by the points around their rim — which is how a scene occludes. A face is painted under its own figure's strokes, and **parts paint in depth order**, so a wall painted later covers the grid lines, roads and vehicles painted before it. Give parts a `depth` — in this projection `x + y`, larger being nearer — or order them back to front.
 
 ```ts
 faces: [{ points: ['topFar', 'topEast', 'topNear', 'topWest'], kind: 'roof' }]
@@ -244,7 +247,7 @@ faces: [{ points: ['topFar', 'topEast', 'topNear', 'topWest'], kind: 'roof' }]
 
 A face defaults to the scene's `background`, since its job is to hide what is behind it; give it a `kind` and its own fill to shade the sides of a solid. Faces move with the figure, so an animated part keeps its walls.
 
-Depth can also come from weight alone where solids would be too heavy — see the `css` option below.
+Inside one figure, faces paint first, then lines, then dots — so a compound figure would draw a far solid's edges across a near solid's walls. `layers` fix that: groups of point names painted solid by solid, back to front. `merge` in `scenes/iso.ts` records one layer per shape merged, so `merge(farBlock, nearShed)` paints correctly without any more work.
 
 ## Sizing
 

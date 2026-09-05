@@ -6,8 +6,10 @@ Illustrations built from named points and the edges between them. Read this befo
 
 - **Figure** — `defineFigure(name, { points, edges, poses?, title? })`. Points are `{ name: [x, y] }` in the figure's own space, **y grows downward**. Edges are `['a', 'b']` pairs, or `{ from, to, kind }` when a stroke needs its own style class.
 - **Pose** — a *partial* override of a figure's points, declared in `poses`. Omitted points keep their rest position.
-- **Scene** — `defineScene(name, { parts, title?, animate?, padding?, viewBox?, dotRadius?, lineWidth? })`. A part is `{ figure, id?, at?, scale?, rotate?, flipX?, pose? }`.
-- **Animation** — `animate.cycle` for one part running through its poses; `animate.keyframes` when several parts move, or when a part travels as well as poses. A keyframe is `{ name, parts: { <id>: { at?, scale?, rotate?, flipX?, pose? } }, duration?, hold? }`; omitted fields fall back to the part's declaration, and an unmentioned part stays put.
+- **Scene** — `defineScene(name, { parts, title?, animate?, padding?, viewBox?, camera?, dotRadius?, lineWidth?, css?, background? })`. A part is `{ figure, id?, at?, scale?, rotate?, flipX?, pose?, depth?, opacity? }`.
+- **Animation** — `animate.cycle` for one part running through its poses; `animate.keyframes` when several parts move, or when a part travels as well as poses. A keyframe is `{ name, parts: { <id>: { at?, scale?, rotate?, flipX?, pose?, depth?, opacity?, easing? } }, camera?: { at?, width? }, duration?, hold?, easing? }`; omitted fields fall back to the part's declaration. **Keyframes are sparse**: a part a keyframe leaves out is interpolated between the keyframes that mention it, not frozen. Only name what changes.
+- **Camera** — a scene's `camera: { at, width, aspect }` is the resting frame; a keyframe's `camera` moves it. `animate.sizing: 'screen'` keeps dots and strokes a constant size on the page as it zooms.
+- **Layers** — inside a figure, faces paint, then lines, then dots; `layers` (groups of point names, back to front) paint a compound figure solid by solid instead. `merge` in `scenes/iso.ts` records one layer per shape merged.
 
 Point names are the contract. Keep them stable across poses — that is what makes tweening work.
 
@@ -27,12 +29,14 @@ node bin/dotscene.js preview <scene> --width 44        # look at it
 node bin/dotscene.js preview <scene> --pose <name>     # one pose
 node bin/dotscene.js preview <scene> --poses           # step the whole cycle
 node bin/dotscene.js preview <scene> --pose <keyframe> # one step of a staged animation
+node bin/dotscene.js preview <scene> --at 12500        # the animation at an instant, camera and all
+node bin/dotscene.js preview <scene> --every 2000      # a flipbook of the whole lap
 node bin/dotscene.js preview <scene> --labels          # name the dots
 node bin/dotscene.js inspect <scene> --json            # current state as data
 node bin/dotscene.js check                             # validate, exit 1 on issues
 ```
 
-The ASCII preview runs over the same resolved geometry as the SVG, so if it reads correctly there it will render correctly in a browser. Correct a figure from the preview rather than from the numbers.
+The ASCII preview runs over the same resolved geometry as the SVG, and `--at` runs the same sampler as the browser runtime, so if it reads correctly there it will render correctly in a browser. Correct a figure from the preview rather than from the numbers. In a browser, `dotscene.scenes.get(name)` gives `pause()` (sticky), `seek(ms)`, `play()` and `time()` — the way to hold a frame and look at it.
 
 Every command takes `--json`. Failures are structured, with `didYouMean` when a name looks like a typo — read the issue rather than re-deriving the problem.
 
@@ -60,12 +64,16 @@ Author in grid coordinates and project once with `isometric({ tile, squash, rise
 
 ## The EDI hero
 
-`scenes/edi/` is the largest thing here — a twelve-act EDI lifecycle composed into one looping
-hero background. `scenes/edi/README.md` is the map: what to edit to change what, the act list,
-and the invariants the tests enforce. Read it before touching anything in that folder.
+`scenes/edi/` is the largest thing here — a twelve-act EDI lifecycle with a prologue, ambient
+life, a camera script and a reset, composed into one looping hero background. `scenes/edi/README.md`
+is the map: what to edit to change what, the act list, and the rules the tests enforce. Read it
+before touching anything in that folder. Figures live in `scenes/edi/figures/`, the layout in
+`world.ts`, the staging helpers in `acts/kit.ts`, the shot list in `acts/camera.ts`.
 
-- **A depth map costs more than geometry if sent per keyframe.** Emit the stack once and only
-  what a step changes. For thirty-eight parts that was the difference between 130 kB and 4.6 kB.
+- **Payload is proportional to what happens, not to the cast.** Sparse keyframes, flat
+  coordinate arrays against a per-part point table, per-part easing instead of baked samples,
+  and a depth/opacity map that sends the stack once. The hero is ~1300 keyframes and under
+  400 kB; restating every part at every instant was 1.7 MB.
 - **A gallery of everything cannot also play everything.** Scenes over about 90 kB are shown as
   images linking to their own page; under that they embed and animate in place.
 
@@ -74,15 +82,20 @@ and the invariants the tests enforce. Read it before touching anything in that f
 - The viewBox spans **every pose in the animation cycle**, not just the resting one. A pose that reaches outside the rest bounds is fine; it will not clip.
 - Dot radius comes from the scene's median edge length. A part scaled far down inside a large scene will look cramped — fix the authoring scale, do not fight it with `dotRadius`.
 - Poses lerp positions, not angles, so long limbs shorten slightly mid-tween. Expected; see the README.
-- **Off-stage needs an explicit `viewBox`.** Content is clipped to it, so parking a figure outside is how it enters and exits. A fitted viewBox grows to include every keyframe, and then nothing is ever off-screen.
-- **Ease only where motion starts and stops.** `easing` is per keyframe. An ease decelerates to zero at every keyframe it crosses, so easing each step of a walk makes it pulse — use `linear` for the run and ease only the first and last transitions.
+- **Enter and leave by fading, not by parking.** `opacity` is a keyframe field and interpolates; a thing that must appear or vanish fades. Parking off-frame still works, and needs an explicit `viewBox` or `camera` so a fitted box does not grow to include it.
+- **Ease only where motion starts and stops.** `easing` is per keyframe, and a part can carry its own. An ease decelerates to zero at every keyframe it crosses, so easing each step of a walk makes it pulse — use `linear` for the run and ease only the first and last transitions.
+- **Messages fly above the things that send them.** An arc bows up to sixty units over its endpoints. A shot about a message is framed on the masts and the sky; a shot about freight is framed on a dock. Aim the camera at the altitude of the thing you want seen, and check with `preview --at`.
+- **A paused scene is paused.** The runtime's `pause()` is sticky against the intersection observer; without that, every screenshot tool that scrolls restarts the clock and the frame you inspect is not the frame you asked for.
+- **A standalone `.svg` is XML.** The compiler escapes the stylesheet in the `.svg` file and leaves it raw in the block, because a nesting `&` is fatal in one and required in the other. Validate with `xmllint --noout docs/<scene>.svg` after touching the renderer's CSS.
 - **Match a palette with literal hex, not `currentColor`.** A standalone `.svg`, an `<img src>` or a rasterised PNG inherits nothing from a page. Set the scene's `background` too — assuming white is how a chosen paper colour gets lost. When a palette's roles invert on dark, emit a second scene over the same figure rather than one file for both.
 - **Colour by role, not by name.** Give edges a `kind` and points a `pointKinds` entry, then style the `ds-line--x` / `ds-dot--x` classes. Matching point-name prefixes works but breaks silently on a rename.
 - **An edge `kind` needs the scene's `css` to do anything.** The class is emitted regardless, but a self-contained block has nowhere else to write the rule. Selectors there are bare and get scoped to the scene automatically.
 - **Two figures touch only if both solve back from one scene point.** They are different heights and scales, so a hand position written into a shared pose lands somewhere else for the other one. Convert the target into each figure's local frame and place the hand there; use `jointBetween` for the elbow so the arm bends instead of stretching straight. See `clasp` in `scenes/exchange.ts`.
 - **Reordering gestures is a hand-logistics problem, not a reordering problem.** A figure cannot shake with a hand that is holding something, so the order of beats decides which hand each item has to be in, and every change of hand needs a beat to happen in. Work out where each item lives at every step before moving anything.
 - **A gesture held as one keyframe reads as a freeze.** A handshake needs a reach, a clasp, and a couple of damped pumps; a single pose held for half a second looks like two people stopped mid-reach.
-- **Several things at once means `compose`, not concatenation.** Splicing keyframe arrays shows one thing at a time. Acts declare beats on their own clock and `compose` places them on a shared timeline, resampling whatever is mid-move and baking eased segments into samples. Two acts moving one part at overlapping times throws; touching end to end is the hand-off.
+- **Several things at once means `compose`, not concatenation.** Splicing keyframe arrays shows one thing at a time. Acts declare beats on their own clock and `compose` places them on a shared timeline. Nothing is resampled or baked: keyframes are sparse and the runtime interpolates each part between its own mentions, easing per part. Two acts moving one part — or the camera — at overlapping times throws; touching end to end is the hand-off. Run `loopGaps(composed, parts)` on anything meant to loop.
+- **A track's first mention is a glide, not a snap.** A part travels from where the scene declared it into its first keyframe over the transition preceding that keyframe. Declare parts where their first beat will find them, and a first beat that "establishes" a position costs nothing.
+- **A compound figure needs `layers` to occlude itself.** Without them a far block's edges draw across the near shed's walls, because a figure paints all its faces before any of its lines. `merge` gives one layer per shape; list shapes back to front.
 - **Two figures on one timeline will march in lockstep unless you break it.** They share a keyframe grid, so give each its own `scale` (height and stride together), gait `rate` (cadence), and starting phase. A keyframe's `pose` accepts a computed `Pose`, so a figure can sit anywhere between two named poses rather than only on the grid — see `gaitPose` in `scenes/exchange.ts`.
 - **A travelling figure must advance exactly one stride per contact keyframe.** The stride has to equal the foot separation in the contact poses, or the planted foot slides along the ground and the figure reads as skating. See `STRIDE` in `scenes/exchange.ts` and `stepA`/`stepB` in `scenes/person.ts`.
 - **A loop's wrap is a tween like any other.** If the last keyframe is on the opposite side from the first, give the first `duration: 0` so the reset is a cut instead of everything sliding backwards in full view.
