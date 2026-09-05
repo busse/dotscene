@@ -71,6 +71,31 @@ export const segments: readonly Segment[] = stops
 
 const TOTAL = segments.reduce((sum, s) => sum + s.length, 0)
 
+/**
+ * The route parameter at every segment join, plus 0 and 1.
+ *
+ * Position and depth both vary linearly *within* a straight run, so a vehicle only needs a
+ * keyframe where the road turns. Sampling uniformly instead is both less accurate and much
+ * heavier — this is what keeps the rig cheap.
+ */
+export const joins: readonly number[] = (() => {
+  const marks: number[] = [0]
+  let run = 0
+  for (const seg of segments) {
+    run += seg.length
+    marks.push(run / TOTAL)
+  }
+  return marks
+})()
+
+/** The joins strictly inside a stretch of route, in order of travel. */
+export const joinsBetween = (from: number, to: number): readonly number[] => {
+  const low = Math.min(from, to)
+  const high = Math.max(from, to)
+  const inside = joins.filter((j) => j > low + 1e-9 && j < high - 1e-9)
+  return from <= to ? inside : [...inside].reverse()
+}
+
 export interface OnRoute {
   readonly at: Vec2
   /** Paint order: grid x + y, the same number that decides how far up the frame it is. */

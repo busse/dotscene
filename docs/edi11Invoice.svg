@@ -1,0 +1,1158 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="edi11Invoice" viewBox="-190 -78 380 132" role="img">
+  <title>210 — freight invoice</title>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="edi11Invoice"]{--ds-dot-r:0.95;--ds-line-w:0.45;--ds-face-fill:#fbfaf7}svg[data-dotscene="edi11Invoice"]{.ds-face--roof{fill:#ffffff}.ds-face--east{fill:#f2f1ec}.ds-face--south{fill:#e6e4dd}.ds-face--apron{fill:#fbfaf7}.ds-line{stroke:#1d2021}.ds-dot{fill:#1d2021}.ds-line--lot{stroke:#a4dded}.ds-dot--lot{fill:#a4dded;r:.5}.ds-line--ground{stroke:#1b7f9f}.ds-dot--ground{fill:#1b7f9f;r:.7}.ds-line--road{stroke:#0b6580;stroke-width:.85}.ds-dot--road{fill:#0b6580;r:.9}.ds-line--net{stroke:#1b7f9f;stroke-width:.4;stroke-opacity:.75}.ds-dot--net{fill:#1b7f9f;r:.6}.ds-line--node{stroke:#0b6580;stroke-width:.7}.ds-dot--node{fill:#0b6580;r:1.2}.ds-line--vehicle{stroke:#1d2021;stroke-width:.4}.ds-dot--vehicle{fill:#1d2021;r:.55}.ds-line--token{stroke:#0b6580;stroke-width:.4}.ds-dot--token{fill:#0b6580;r:.5}.ds-line--tether{stroke:#1b7f9f;stroke-width:.35;stroke-opacity:.4}.ds-dot--tether{fill:#1b7f9f;r:.35;fill-opacity:.5}}</style>
+  <rect class="ds-bg" x="-190" y="-78" width="380" height="132" fill="#fbfaf7"/>
+  <defs><clipPath id="ds-clip-edi11Invoice"><rect x="-190" y="-78" width="380" height="132"/></clipPath></defs>
+  <g clip-path="url(#ds-clip-edi11Invoice)">
+    <g data-part="ediRoad">
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb0FA" data-b="kerb0FB" x1="-219.6" y1="5.8" x2="-199.6" y2="15.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb0NA" data-b="kerb0NB" x1="-228.4" y1="10.2" x2="-208.4" y2="20.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb1FA" data-b="kerb1FB" x1="-208.4" y1="15.8" x2="-148.4" y2="-14.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb1NA" data-b="kerb1NB" x1="-199.6" y1="20.2" x2="-139.6" y2="-9.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb2FA" data-b="kerb2FB" x1="-139.6" y1="-14.2" x2="-71.6" y2="19.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb2NA" data-b="kerb2NB" x1="-148.4" y1="-9.8" x2="-80.4" y2="24.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb3FA" data-b="kerb3FB" x1="-80.4" y1="19.8" x2="-84.4" y2="21.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb3NA" data-b="kerb3NB" x1="-71.6" y1="24.2" x2="-75.6" y2="26.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb4FA" data-b="kerb4FB" x1="-75.6" y1="21.8" x2="-87.6" y2="15.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb4NA" data-b="kerb4NB" x1="-84.4" y1="26.2" x2="-96.4" y2="20.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb5FA" data-b="kerb5FB" x1="-96.4" y1="15.8" x2="-20.4" y2="-22.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb5NA" data-b="kerb5NB" x1="-87.6" y1="20.2" x2="-11.6" y2="-17.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb6FA" data-b="kerb6FB" x1="-11.6" y1="-22.2" x2="56.4" y2="11.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb6NA" data-b="kerb6NB" x1="-20.4" y1="-17.8" x2="47.6" y2="16.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb7FA" data-b="kerb7FB" x1="47.6" y1="11.8" x2="35.6" y2="17.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb7NA" data-b="kerb7NB" x1="56.4" y1="16.2" x2="44.4" y2="22.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb8FA" data-b="kerb8FB" x1="44.4" y1="17.8" x2="40.4" y2="15.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb8NA" data-b="kerb8NB" x1="35.6" y1="22.2" x2="31.6" y2="20.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb9FA" data-b="kerb9FB" x1="31.6" y1="15.8" x2="99.6" y2="-18.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb9NA" data-b="kerb9NB" x1="40.4" y1="20.2" x2="108.4" y2="-13.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb10FA" data-b="kerb10FB" x1="108.4" y1="-18.2" x2="164.4" y2="9.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb10NA" data-b="kerb10NB" x1="99.6" y1="-13.8" x2="155.6" y2="14.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb11FA" data-b="kerb11FB" x1="155.6" y1="9.8" x2="147.6" y2="13.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb11NA" data-b="kerb11NB" x1="164.4" y1="14.2" x2="156.4" y2="18.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb12FA" data-b="kerb12FB" x1="156.4" y1="13.8" x2="176.4" y2="23.8"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb12NA" data-b="kerb12NB" x1="147.6" y1="18.2" x2="167.6" y2="28.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb13FA" data-b="kerb13FB" x1="167.6" y1="23.8" x2="219.6" y2="-2.2"/>
+    <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb13NA" data-b="kerb13NB" x1="176.4" y1="28.2" x2="228.4" y2="2.2"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb0FA" cx="-219.6" cy="5.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb0FB" cx="-199.6" cy="15.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb0NA" cx="-228.4" cy="10.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb0NB" cx="-208.4" cy="20.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb1FA" cx="-208.4" cy="15.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb1FB" cx="-148.4" cy="-14.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb1NA" cx="-199.6" cy="20.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb1NB" cx="-139.6" cy="-9.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb2FA" cx="-139.6" cy="-14.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb2FB" cx="-71.6" cy="19.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb2NA" cx="-148.4" cy="-9.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb2NB" cx="-80.4" cy="24.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb3FA" cx="-80.4" cy="19.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb3FB" cx="-84.4" cy="21.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb3NA" cx="-71.6" cy="24.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb3NB" cx="-75.6" cy="26.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb4FA" cx="-75.6" cy="21.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb4FB" cx="-87.6" cy="15.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb4NA" cx="-84.4" cy="26.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb4NB" cx="-96.4" cy="20.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb5FA" cx="-96.4" cy="15.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb5FB" cx="-20.4" cy="-22.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb5NA" cx="-87.6" cy="20.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb5NB" cx="-11.6" cy="-17.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb6FA" cx="-11.6" cy="-22.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb6FB" cx="56.4" cy="11.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb6NA" cx="-20.4" cy="-17.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb6NB" cx="47.6" cy="16.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb7FA" cx="47.6" cy="11.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb7FB" cx="35.6" cy="17.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb7NA" cx="56.4" cy="16.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb7NB" cx="44.4" cy="22.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb8FA" cx="44.4" cy="17.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb8FB" cx="40.4" cy="15.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb8NA" cx="35.6" cy="22.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb8NB" cx="31.6" cy="20.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb9FA" cx="31.6" cy="15.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb9FB" cx="99.6" cy="-18.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb9NA" cx="40.4" cy="20.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb9NB" cx="108.4" cy="-13.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb10FA" cx="108.4" cy="-18.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb10FB" cx="164.4" cy="9.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb10NA" cx="99.6" cy="-13.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb10NB" cx="155.6" cy="14.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb11FA" cx="155.6" cy="9.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb11FB" cx="147.6" cy="13.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb11NA" cx="164.4" cy="14.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb11NB" cx="156.4" cy="18.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb12FA" cx="156.4" cy="13.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb12FB" cx="176.4" cy="23.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb12NA" cx="147.6" cy="18.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb12NB" cx="167.6" cy="28.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb13FA" cx="167.6" cy="23.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb13FB" cx="219.6" cy="-2.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb13NA" cx="176.4" cy="28.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--road" data-part="ediRoad" data-p="kerb13NB" cx="228.4" cy="2.2" r="0.95"/>
+    </g>
+    <g data-part="ediTethers">
+    <line class="ds-line ds-line--tether" data-part="ediTethers" data-a="tethershipperA" data-b="tethershipperB" x1="-144" y1="-50" x2="-144" y2="-12"/>
+    <line class="ds-line ds-line--tether" data-part="ediTethers" data-a="tetheroriginTermA" data-b="tetheroriginTermB" x1="-80" y1="-14" x2="-80" y2="24"/>
+    <line class="ds-line ds-line--tether" data-part="ediTethers" data-a="tetherrelayA" data-b="tetherrelayB" x1="-16" y1="-58" x2="-16" y2="-20"/>
+    <line class="ds-line ds-line--tether" data-part="ediTethers" data-a="tetherhubA" data-b="tetherhubB" x1="40" y1="-18" x2="40" y2="20"/>
+    <line class="ds-line ds-line--tether" data-part="ediTethers" data-a="tetherdestTermA" data-b="tetherdestTermB" x1="104" y1="-54" x2="104" y2="-16"/>
+    <line class="ds-line ds-line--tether" data-part="ediTethers" data-a="tetherconsigneeA" data-b="tetherconsigneeB" x1="152" y1="-22" x2="152" y2="16"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tethershipperA" cx="-144" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tethershipperB" cx="-144" cy="-12" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetheroriginTermA" cx="-80" cy="-14" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetheroriginTermB" cx="-80" cy="24" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetherrelayA" cx="-16" cy="-58" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetherrelayB" cx="-16" cy="-20" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetherhubA" cx="40" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetherhubB" cx="40" cy="20" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetherdestTermA" cx="104" cy="-54" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetherdestTermB" cx="104" cy="-16" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetherconsigneeA" cx="152" cy="-22" r="0.95"/>
+    <circle class="ds-dot ds-dot--tether" data-part="ediTethers" data-p="tetherconsigneeB" cx="152" cy="16" r="0.95"/>
+    </g>
+    <g data-part="relayBack">
+    <polygon class="ds-face ds-face--roof" data-part="relayBack" data-face="relayHutTopFar relayHutTopEast relayHutTopNear relayHutTopWest" points="-28.4,-57.4 -17.2,-51.8 -26,-47.4 -37.2,-53"/>
+    <polygon class="ds-face ds-face--east" data-part="relayBack" data-face="relayHutEast relayHutNear relayHutTopNear relayHutTopEast" points="-17.2,-43.8 -26,-39.4 -26,-47.4 -17.2,-51.8"/>
+    <polygon class="ds-face ds-face--south" data-part="relayBack" data-face="relayHutNear relayHutWest relayHutTopWest relayHutTopNear" points="-26,-39.4 -37.2,-45 -37.2,-53 -26,-47.4"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutEast" data-b="relayHutNear" x1="-17.2" y1="-43.8" x2="-26" y2="-39.4"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutNear" data-b="relayHutWest" x1="-26" y1="-39.4" x2="-37.2" y2="-45"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutEast" data-b="relayHutTopEast" x1="-17.2" y1="-43.8" x2="-17.2" y2="-51.8"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutNear" data-b="relayHutTopNear" x1="-26" y1="-39.4" x2="-26" y2="-47.4"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutWest" data-b="relayHutTopWest" x1="-37.2" y1="-45" x2="-37.2" y2="-53"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutTopFar" data-b="relayHutTopEast" x1="-28.4" y1="-57.4" x2="-17.2" y2="-51.8"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutTopEast" data-b="relayHutTopNear" x1="-17.2" y1="-51.8" x2="-26" y2="-47.4"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutTopNear" data-b="relayHutTopWest" x1="-26" y1="-47.4" x2="-37.2" y2="-53"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayHutTopWest" data-b="relayHutTopFar" x1="-37.2" y1="-53" x2="-28.4" y2="-57.4"/>
+    <line class="ds-line" data-part="relayBack" data-a="relayMastA" data-b="relayMastB" x1="-4.8" y1="-44.4" x2="-4.8" y2="-66"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayHutNear" cx="-26" cy="-39.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayHutEast" cx="-17.2" cy="-43.8" r="0.95"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayHutWest" cx="-37.2" cy="-45" r="0.95"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayHutTopFar" cx="-28.4" cy="-57.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayHutTopEast" cx="-17.2" cy="-51.8" r="0.95"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayHutTopNear" cx="-26" cy="-47.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayHutTopWest" cx="-37.2" cy="-53" r="0.95"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayMastA" cx="-4.8" cy="-44.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayBack" data-p="relayMastB" cx="-4.8" cy="-66" r="0.95"/>
+    </g>
+    <g data-part="destTermBack">
+    <polygon class="ds-face ds-face--roof" data-part="destTermBack" data-face="dtShedTopFar dtShedTopEast dtShedTopNear dtShedTopWest" points="93.2,-70.2 128.4,-52.6 114.8,-45.8 79.6,-63.4"/>
+    <polygon class="ds-face ds-face--east" data-part="destTermBack" data-face="dtShedEast dtShedNear dtShedTopNear dtShedTopEast" points="128.4,-40.6 114.8,-33.8 114.8,-45.8 128.4,-52.6"/>
+    <polygon class="ds-face ds-face--south" data-part="destTermBack" data-face="dtShedNear dtShedWest dtShedTopWest dtShedTopNear" points="114.8,-33.8 79.6,-51.4 79.6,-63.4 114.8,-45.8"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedEast" data-b="dtShedNear" x1="128.4" y1="-40.6" x2="114.8" y2="-33.8"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedNear" data-b="dtShedWest" x1="114.8" y1="-33.8" x2="79.6" y2="-51.4"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedEast" data-b="dtShedTopEast" x1="128.4" y1="-40.6" x2="128.4" y2="-52.6"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedNear" data-b="dtShedTopNear" x1="114.8" y1="-33.8" x2="114.8" y2="-45.8"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedWest" data-b="dtShedTopWest" x1="79.6" y1="-51.4" x2="79.6" y2="-63.4"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedTopFar" data-b="dtShedTopEast" x1="93.2" y1="-70.2" x2="128.4" y2="-52.6"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedTopEast" data-b="dtShedTopNear" x1="128.4" y1="-52.6" x2="114.8" y2="-45.8"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedTopNear" data-b="dtShedTopWest" x1="114.8" y1="-45.8" x2="79.6" y2="-63.4"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtShedTopWest" data-b="dtShedTopFar" x1="79.6" y1="-63.4" x2="93.2" y2="-70.2"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtDoor0A" data-b="dtDoor0B" x1="83.2" y1="-41.2" x2="83.2" y2="-45.6"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtDoor1A" data-b="dtDoor1B" x1="94.4" y1="-41.2" x2="94.4" y2="-45.6"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtDoor2A" data-b="dtDoor2B" x1="105.6" y1="-41.2" x2="105.6" y2="-45.6"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtDoor3A" data-b="dtDoor3B" x1="116.8" y1="-41.2" x2="116.8" y2="-45.6"/>
+    <line class="ds-line" data-part="destTermBack" data-a="dtDoor4A" data-b="dtDoor4B" x1="128" y1="-41.2" x2="128" y2="-45.6"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtShedNear" cx="114.8" cy="-33.8" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtShedEast" cx="128.4" cy="-40.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtShedWest" cx="79.6" cy="-51.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtShedTopFar" cx="93.2" cy="-70.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtShedTopEast" cx="128.4" cy="-52.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtShedTopNear" cx="114.8" cy="-45.8" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtShedTopWest" cx="79.6" cy="-63.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor0A" cx="83.2" cy="-41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor0B" cx="83.2" cy="-45.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor1A" cx="94.4" cy="-41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor1B" cx="94.4" cy="-45.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor2A" cx="105.6" cy="-41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor2B" cx="105.6" cy="-45.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor3A" cx="116.8" cy="-41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor3B" cx="116.8" cy="-45.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor4A" cx="128" cy="-41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermBack" data-p="dtDoor4B" cx="128" cy="-45.6" r="0.95"/>
+    </g>
+    <g data-part="shipperBack">
+    <polygon class="ds-face ds-face--roof" data-part="shipperBack" data-face="shipShedTopFar shipShedTopEast shipShedTopNear shipShedTopWest" points="-149.6,-71.2 -122.4,-57.6 -138.4,-49.6 -165.6,-63.2"/>
+    <polygon class="ds-face ds-face--east" data-part="shipperBack" data-face="shipShedEast shipShedNear shipShedTopNear shipShedTopEast" points="-122.4,-39.2 -138.4,-31.2 -138.4,-49.6 -122.4,-57.6"/>
+    <polygon class="ds-face ds-face--south" data-part="shipperBack" data-face="shipShedNear shipShedWest shipShedTopWest shipShedTopNear" points="-138.4,-31.2 -165.6,-44.8 -165.6,-63.2 -138.4,-49.6"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedEast" data-b="shipShedNear" x1="-122.4" y1="-39.2" x2="-138.4" y2="-31.2"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedNear" data-b="shipShedWest" x1="-138.4" y1="-31.2" x2="-165.6" y2="-44.8"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedEast" data-b="shipShedTopEast" x1="-122.4" y1="-39.2" x2="-122.4" y2="-57.6"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedNear" data-b="shipShedTopNear" x1="-138.4" y1="-31.2" x2="-138.4" y2="-49.6"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedWest" data-b="shipShedTopWest" x1="-165.6" y1="-44.8" x2="-165.6" y2="-63.2"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedTopFar" data-b="shipShedTopEast" x1="-149.6" y1="-71.2" x2="-122.4" y2="-57.6"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedTopEast" data-b="shipShedTopNear" x1="-122.4" y1="-57.6" x2="-138.4" y2="-49.6"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedTopNear" data-b="shipShedTopWest" x1="-138.4" y1="-49.6" x2="-165.6" y2="-63.2"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipShedTopWest" data-b="shipShedTopFar" x1="-165.6" y1="-63.2" x2="-149.6" y2="-71.2"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipDoor0A" data-b="shipDoor0B" x1="-163.2" y1="-36.4" x2="-163.2" y2="-40.8"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipDoor1A" data-b="shipDoor1B" x1="-152" y1="-36.4" x2="-152" y2="-40.8"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipDoor2A" data-b="shipDoor2B" x1="-140.8" y1="-36.4" x2="-140.8" y2="-40.8"/>
+    <line class="ds-line" data-part="shipperBack" data-a="shipDoor3A" data-b="shipDoor3B" x1="-129.6" y1="-36.4" x2="-129.6" y2="-40.8"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipShedNear" cx="-138.4" cy="-31.2" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipShedEast" cx="-122.4" cy="-39.2" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipShedWest" cx="-165.6" cy="-44.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipShedTopFar" cx="-149.6" cy="-71.2" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipShedTopEast" cx="-122.4" cy="-57.6" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipShedTopNear" cx="-138.4" cy="-49.6" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipShedTopWest" cx="-165.6" cy="-63.2" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipDoor0A" cx="-163.2" cy="-36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipDoor0B" cx="-163.2" cy="-40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipDoor1A" cx="-152" cy="-36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipDoor1B" cx="-152" cy="-40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipDoor2A" cx="-140.8" cy="-36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipDoor2B" cx="-140.8" cy="-40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipDoor3A" cx="-129.6" cy="-36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperBack" data-p="shipDoor3B" cx="-129.6" cy="-40.8" r="0.95"/>
+    </g>
+    <g data-part="consigneeBack">
+    <polygon class="ds-face ds-face--roof" data-part="consigneeBack" data-face="conShedTopFar conShedTopEast conShedTopNear conShedTopWest" points="147.2,-40.4 172.8,-27.6 156.8,-19.6 131.2,-32.4"/>
+    <polygon class="ds-face ds-face--east" data-part="consigneeBack" data-face="conShedEast conShedNear conShedTopNear conShedTopEast" points="172.8,-11.6 156.8,-3.6 156.8,-19.6 172.8,-27.6"/>
+    <polygon class="ds-face ds-face--south" data-part="consigneeBack" data-face="conShedNear conShedWest conShedTopWest conShedTopNear" points="156.8,-3.6 131.2,-16.4 131.2,-32.4 156.8,-19.6"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedEast" data-b="conShedNear" x1="172.8" y1="-11.6" x2="156.8" y2="-3.6"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedNear" data-b="conShedWest" x1="156.8" y1="-3.6" x2="131.2" y2="-16.4"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedEast" data-b="conShedTopEast" x1="172.8" y1="-11.6" x2="172.8" y2="-27.6"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedNear" data-b="conShedTopNear" x1="156.8" y1="-3.6" x2="156.8" y2="-19.6"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedWest" data-b="conShedTopWest" x1="131.2" y1="-16.4" x2="131.2" y2="-32.4"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedTopFar" data-b="conShedTopEast" x1="147.2" y1="-40.4" x2="172.8" y2="-27.6"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedTopEast" data-b="conShedTopNear" x1="172.8" y1="-27.6" x2="156.8" y2="-19.6"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedTopNear" data-b="conShedTopWest" x1="156.8" y1="-19.6" x2="131.2" y2="-32.4"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conShedTopWest" data-b="conShedTopFar" x1="131.2" y1="-32.4" x2="147.2" y2="-40.4"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conDoor0A" data-b="conDoor0B" x1="140.8" y1="-8.4" x2="140.8" y2="-12.8"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conDoor1A" data-b="conDoor1B" x1="152" y1="-8.4" x2="152" y2="-12.8"/>
+    <line class="ds-line" data-part="consigneeBack" data-a="conDoor2A" data-b="conDoor2B" x1="163.2" y1="-8.4" x2="163.2" y2="-12.8"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conShedNear" cx="156.8" cy="-3.6" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conShedEast" cx="172.8" cy="-11.6" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conShedWest" cx="131.2" cy="-16.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conShedTopFar" cx="147.2" cy="-40.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conShedTopEast" cx="172.8" cy="-27.6" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conShedTopNear" cx="156.8" cy="-19.6" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conShedTopWest" cx="131.2" cy="-32.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conDoor0A" cx="140.8" cy="-8.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conDoor0B" cx="140.8" cy="-12.8" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conDoor1A" cx="152" cy="-8.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conDoor1B" cx="152" cy="-12.8" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conDoor2A" cx="163.2" cy="-8.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeBack" data-p="conDoor2B" cx="163.2" cy="-12.8" r="0.95"/>
+    </g>
+    <g data-part="hubBack">
+    <polygon class="ds-face ds-face--roof" data-part="hubBack" data-face="hubShedTopFar hubShedTopEast hubShedTopNear hubShedTopWest" points="20.4,-47 80.4,-17 59.6,-6.6 -0.4,-36.6"/>
+    <polygon class="ds-face ds-face--east" data-part="hubBack" data-face="hubShedEast hubShedNear hubShedTopNear hubShedTopEast" points="80.4,-0.2 59.6,10.2 59.6,-6.6 80.4,-17"/>
+    <polygon class="ds-face ds-face--south" data-part="hubBack" data-face="hubShedNear hubShedWest hubShedTopWest hubShedTopNear" points="59.6,10.2 -0.4,-19.8 -0.4,-36.6 59.6,-6.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubBack" data-face="hubTrlN0TopFar hubTrlN0TopEast hubTrlN0TopNear hubTrlN0TopWest" points="-6.4,-31.6 4.8,-26 0,-23.6 -11.2,-29.2"/>
+    <polygon class="ds-face ds-face--east" data-part="hubBack" data-face="hubTrlN0East hubTrlN0Near hubTrlN0TopNear hubTrlN0TopEast" points="4.8,-21.6 0,-19.2 0,-23.6 4.8,-26"/>
+    <polygon class="ds-face ds-face--south" data-part="hubBack" data-face="hubTrlN0Near hubTrlN0West hubTrlN0TopWest hubTrlN0TopNear" points="0,-19.2 -11.2,-24.8 -11.2,-29.2 0,-23.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubBack" data-face="hubTrlN1TopFar hubTrlN1TopEast hubTrlN1TopNear hubTrlN1TopWest" points="14.4,-31.6 25.6,-26 20.8,-23.6 9.6,-29.2"/>
+    <polygon class="ds-face ds-face--east" data-part="hubBack" data-face="hubTrlN1East hubTrlN1Near hubTrlN1TopNear hubTrlN1TopEast" points="25.6,-21.6 20.8,-19.2 20.8,-23.6 25.6,-26"/>
+    <polygon class="ds-face ds-face--south" data-part="hubBack" data-face="hubTrlN1Near hubTrlN1West hubTrlN1TopWest hubTrlN1TopNear" points="20.8,-19.2 9.6,-24.8 9.6,-29.2 20.8,-23.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubBack" data-face="hubTrlN2TopFar hubTrlN2TopEast hubTrlN2TopNear hubTrlN2TopWest" points="35.2,-31.6 46.4,-26 41.6,-23.6 30.4,-29.2"/>
+    <polygon class="ds-face ds-face--east" data-part="hubBack" data-face="hubTrlN2East hubTrlN2Near hubTrlN2TopNear hubTrlN2TopEast" points="46.4,-21.6 41.6,-19.2 41.6,-23.6 46.4,-26"/>
+    <polygon class="ds-face ds-face--south" data-part="hubBack" data-face="hubTrlN2Near hubTrlN2West hubTrlN2TopWest hubTrlN2TopNear" points="41.6,-19.2 30.4,-24.8 30.4,-29.2 41.6,-23.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubBack" data-face="hubTrlN3TopFar hubTrlN3TopEast hubTrlN3TopNear hubTrlN3TopWest" points="56,-31.6 67.2,-26 62.4,-23.6 51.2,-29.2"/>
+    <polygon class="ds-face ds-face--east" data-part="hubBack" data-face="hubTrlN3East hubTrlN3Near hubTrlN3TopNear hubTrlN3TopEast" points="67.2,-21.6 62.4,-19.2 62.4,-23.6 67.2,-26"/>
+    <polygon class="ds-face ds-face--south" data-part="hubBack" data-face="hubTrlN3Near hubTrlN3West hubTrlN3TopWest hubTrlN3TopNear" points="62.4,-19.2 51.2,-24.8 51.2,-29.2 62.4,-23.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubBack" data-face="hubTrlN4TopFar hubTrlN4TopEast hubTrlN4TopNear hubTrlN4TopWest" points="76.8,-31.6 88,-26 83.2,-23.6 72,-29.2"/>
+    <polygon class="ds-face ds-face--east" data-part="hubBack" data-face="hubTrlN4East hubTrlN4Near hubTrlN4TopNear hubTrlN4TopEast" points="88,-21.6 83.2,-19.2 83.2,-23.6 88,-26"/>
+    <polygon class="ds-face ds-face--south" data-part="hubBack" data-face="hubTrlN4Near hubTrlN4West hubTrlN4TopWest hubTrlN4TopNear" points="83.2,-19.2 72,-24.8 72,-29.2 83.2,-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedEast" data-b="hubShedNear" x1="80.4" y1="-0.2" x2="59.6" y2="10.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedNear" data-b="hubShedWest" x1="59.6" y1="10.2" x2="-0.4" y2="-19.8"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedEast" data-b="hubShedTopEast" x1="80.4" y1="-0.2" x2="80.4" y2="-17"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedNear" data-b="hubShedTopNear" x1="59.6" y1="10.2" x2="59.6" y2="-6.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedWest" data-b="hubShedTopWest" x1="-0.4" y1="-19.8" x2="-0.4" y2="-36.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedTopFar" data-b="hubShedTopEast" x1="20.4" y1="-47" x2="80.4" y2="-17"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedTopEast" data-b="hubShedTopNear" x1="80.4" y1="-17" x2="59.6" y2="-6.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedTopNear" data-b="hubShedTopWest" x1="59.6" y1="-6.6" x2="-0.4" y2="-36.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubShedTopWest" data-b="hubShedTopFar" x1="-0.4" y1="-36.6" x2="20.4" y2="-47"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN0A" data-b="hubDoorN0B" x1="-4.8" y1="-2.8" x2="-4.8" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN1A" data-b="hubDoorN1B" x1="6.4" y1="-2.8" x2="6.4" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN2A" data-b="hubDoorN2B" x1="17.6" y1="-2.8" x2="17.6" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN3A" data-b="hubDoorN3B" x1="28.8" y1="-2.8" x2="28.8" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN4A" data-b="hubDoorN4B" x1="40" y1="-2.8" x2="40" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN5A" data-b="hubDoorN5B" x1="51.2" y1="-2.8" x2="51.2" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN6A" data-b="hubDoorN6B" x1="62.4" y1="-2.8" x2="62.4" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN7A" data-b="hubDoorN7B" x1="73.6" y1="-2.8" x2="73.6" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubDoorN8A" data-b="hubDoorN8B" x1="84.8" y1="-2.8" x2="84.8" y2="-7.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0East" data-b="hubTrlN0Near" x1="4.8" y1="-21.6" x2="0" y2="-19.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0Near" data-b="hubTrlN0West" x1="0" y1="-19.2" x2="-11.2" y2="-24.8"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0East" data-b="hubTrlN0TopEast" x1="4.8" y1="-21.6" x2="4.8" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0Near" data-b="hubTrlN0TopNear" x1="0" y1="-19.2" x2="0" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0West" data-b="hubTrlN0TopWest" x1="-11.2" y1="-24.8" x2="-11.2" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0TopFar" data-b="hubTrlN0TopEast" x1="-6.4" y1="-31.6" x2="4.8" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0TopEast" data-b="hubTrlN0TopNear" x1="4.8" y1="-26" x2="0" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0TopNear" data-b="hubTrlN0TopWest" x1="0" y1="-23.6" x2="-11.2" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN0TopWest" data-b="hubTrlN0TopFar" x1="-11.2" y1="-29.2" x2="-6.4" y2="-31.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1East" data-b="hubTrlN1Near" x1="25.6" y1="-21.6" x2="20.8" y2="-19.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1Near" data-b="hubTrlN1West" x1="20.8" y1="-19.2" x2="9.6" y2="-24.8"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1East" data-b="hubTrlN1TopEast" x1="25.6" y1="-21.6" x2="25.6" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1Near" data-b="hubTrlN1TopNear" x1="20.8" y1="-19.2" x2="20.8" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1West" data-b="hubTrlN1TopWest" x1="9.6" y1="-24.8" x2="9.6" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1TopFar" data-b="hubTrlN1TopEast" x1="14.4" y1="-31.6" x2="25.6" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1TopEast" data-b="hubTrlN1TopNear" x1="25.6" y1="-26" x2="20.8" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1TopNear" data-b="hubTrlN1TopWest" x1="20.8" y1="-23.6" x2="9.6" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN1TopWest" data-b="hubTrlN1TopFar" x1="9.6" y1="-29.2" x2="14.4" y2="-31.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2East" data-b="hubTrlN2Near" x1="46.4" y1="-21.6" x2="41.6" y2="-19.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2Near" data-b="hubTrlN2West" x1="41.6" y1="-19.2" x2="30.4" y2="-24.8"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2East" data-b="hubTrlN2TopEast" x1="46.4" y1="-21.6" x2="46.4" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2Near" data-b="hubTrlN2TopNear" x1="41.6" y1="-19.2" x2="41.6" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2West" data-b="hubTrlN2TopWest" x1="30.4" y1="-24.8" x2="30.4" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2TopFar" data-b="hubTrlN2TopEast" x1="35.2" y1="-31.6" x2="46.4" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2TopEast" data-b="hubTrlN2TopNear" x1="46.4" y1="-26" x2="41.6" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2TopNear" data-b="hubTrlN2TopWest" x1="41.6" y1="-23.6" x2="30.4" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN2TopWest" data-b="hubTrlN2TopFar" x1="30.4" y1="-29.2" x2="35.2" y2="-31.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3East" data-b="hubTrlN3Near" x1="67.2" y1="-21.6" x2="62.4" y2="-19.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3Near" data-b="hubTrlN3West" x1="62.4" y1="-19.2" x2="51.2" y2="-24.8"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3East" data-b="hubTrlN3TopEast" x1="67.2" y1="-21.6" x2="67.2" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3Near" data-b="hubTrlN3TopNear" x1="62.4" y1="-19.2" x2="62.4" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3West" data-b="hubTrlN3TopWest" x1="51.2" y1="-24.8" x2="51.2" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3TopFar" data-b="hubTrlN3TopEast" x1="56" y1="-31.6" x2="67.2" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3TopEast" data-b="hubTrlN3TopNear" x1="67.2" y1="-26" x2="62.4" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3TopNear" data-b="hubTrlN3TopWest" x1="62.4" y1="-23.6" x2="51.2" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN3TopWest" data-b="hubTrlN3TopFar" x1="51.2" y1="-29.2" x2="56" y2="-31.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4East" data-b="hubTrlN4Near" x1="88" y1="-21.6" x2="83.2" y2="-19.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4Near" data-b="hubTrlN4West" x1="83.2" y1="-19.2" x2="72" y2="-24.8"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4East" data-b="hubTrlN4TopEast" x1="88" y1="-21.6" x2="88" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4Near" data-b="hubTrlN4TopNear" x1="83.2" y1="-19.2" x2="83.2" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4West" data-b="hubTrlN4TopWest" x1="72" y1="-24.8" x2="72" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4TopFar" data-b="hubTrlN4TopEast" x1="76.8" y1="-31.6" x2="88" y2="-26"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4TopEast" data-b="hubTrlN4TopNear" x1="88" y1="-26" x2="83.2" y2="-23.6"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4TopNear" data-b="hubTrlN4TopWest" x1="83.2" y1="-23.6" x2="72" y2="-29.2"/>
+    <line class="ds-line" data-part="hubBack" data-a="hubTrlN4TopWest" data-b="hubTrlN4TopFar" x1="72" y1="-29.2" x2="76.8" y2="-31.6"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubShedNear" cx="59.6" cy="10.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubShedEast" cx="80.4" cy="-0.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubShedWest" cx="-0.4" cy="-19.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubShedTopFar" cx="20.4" cy="-47" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubShedTopEast" cx="80.4" cy="-17" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubShedTopNear" cx="59.6" cy="-6.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubShedTopWest" cx="-0.4" cy="-36.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN0A" cx="-4.8" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN0B" cx="-4.8" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN1A" cx="6.4" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN1B" cx="6.4" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN2A" cx="17.6" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN2B" cx="17.6" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN3A" cx="28.8" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN3B" cx="28.8" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN4A" cx="40" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN4B" cx="40" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN5A" cx="51.2" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN5B" cx="51.2" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN6A" cx="62.4" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN6B" cx="62.4" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN7A" cx="73.6" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN7B" cx="73.6" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN8A" cx="84.8" cy="-2.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubDoorN8B" cx="84.8" cy="-7.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN0Near" cx="0" cy="-19.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN0East" cx="4.8" cy="-21.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN0West" cx="-11.2" cy="-24.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN0TopFar" cx="-6.4" cy="-31.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN0TopEast" cx="4.8" cy="-26" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN0TopNear" cx="0" cy="-23.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN0TopWest" cx="-11.2" cy="-29.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN1Near" cx="20.8" cy="-19.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN1East" cx="25.6" cy="-21.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN1West" cx="9.6" cy="-24.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN1TopFar" cx="14.4" cy="-31.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN1TopEast" cx="25.6" cy="-26" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN1TopNear" cx="20.8" cy="-23.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN1TopWest" cx="9.6" cy="-29.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN2Near" cx="41.6" cy="-19.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN2East" cx="46.4" cy="-21.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN2West" cx="30.4" cy="-24.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN2TopFar" cx="35.2" cy="-31.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN2TopEast" cx="46.4" cy="-26" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN2TopNear" cx="41.6" cy="-23.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN2TopWest" cx="30.4" cy="-29.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN3Near" cx="62.4" cy="-19.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN3East" cx="67.2" cy="-21.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN3West" cx="51.2" cy="-24.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN3TopFar" cx="56" cy="-31.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN3TopEast" cx="67.2" cy="-26" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN3TopNear" cx="62.4" cy="-23.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN3TopWest" cx="51.2" cy="-29.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN4Near" cx="83.2" cy="-19.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN4East" cx="88" cy="-21.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN4West" cx="72" cy="-24.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN4TopFar" cx="76.8" cy="-31.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN4TopEast" cx="88" cy="-26" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN4TopNear" cx="83.2" cy="-23.6" r="0.95"/>
+    <circle class="ds-dot" data-part="hubBack" data-p="hubTrlN4TopWest" cx="72" cy="-29.2" r="0.95"/>
+    </g>
+    <g data-part="originTermBack">
+    <polygon class="ds-face ds-face--roof" data-part="originTermBack" data-face="otShedTopFar otShedTopEast otShedTopNear otShedTopWest" points="-92.8,-32.4 -52.8,-12.4 -67.2,-5.2 -107.2,-25.2"/>
+    <polygon class="ds-face ds-face--east" data-part="originTermBack" data-face="otShedEast otShedNear otShedTopNear otShedTopEast" points="-52.8,0.4 -67.2,7.6 -67.2,-5.2 -52.8,-12.4"/>
+    <polygon class="ds-face ds-face--south" data-part="originTermBack" data-face="otShedNear otShedWest otShedTopWest otShedTopNear" points="-67.2,7.6 -107.2,-12.4 -107.2,-25.2 -67.2,-5.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedEast" data-b="otShedNear" x1="-52.8" y1="0.4" x2="-67.2" y2="7.6"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedNear" data-b="otShedWest" x1="-67.2" y1="7.6" x2="-107.2" y2="-12.4"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedEast" data-b="otShedTopEast" x1="-52.8" y1="0.4" x2="-52.8" y2="-12.4"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedNear" data-b="otShedTopNear" x1="-67.2" y1="7.6" x2="-67.2" y2="-5.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedWest" data-b="otShedTopWest" x1="-107.2" y1="-12.4" x2="-107.2" y2="-25.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedTopFar" data-b="otShedTopEast" x1="-92.8" y1="-32.4" x2="-52.8" y2="-12.4"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedTopEast" data-b="otShedTopNear" x1="-52.8" y1="-12.4" x2="-67.2" y2="-5.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedTopNear" data-b="otShedTopWest" x1="-67.2" y1="-5.2" x2="-107.2" y2="-25.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otShedTopWest" data-b="otShedTopFar" x1="-107.2" y1="-25.2" x2="-92.8" y2="-32.4"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otDoor0A" data-b="otDoor0B" x1="-107.2" y1="-0.8" x2="-107.2" y2="-5.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otDoor1A" data-b="otDoor1B" x1="-96" y1="-0.8" x2="-96" y2="-5.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otDoor2A" data-b="otDoor2B" x1="-84.8" y1="-0.8" x2="-84.8" y2="-5.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otDoor3A" data-b="otDoor3B" x1="-73.6" y1="-0.8" x2="-73.6" y2="-5.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otDoor4A" data-b="otDoor4B" x1="-62.4" y1="-0.8" x2="-62.4" y2="-5.2"/>
+    <line class="ds-line" data-part="originTermBack" data-a="otDoor5A" data-b="otDoor5B" x1="-51.2" y1="-0.8" x2="-51.2" y2="-5.2"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otShedNear" cx="-67.2" cy="7.6" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otShedEast" cx="-52.8" cy="0.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otShedWest" cx="-107.2" cy="-12.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otShedTopFar" cx="-92.8" cy="-32.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otShedTopEast" cx="-52.8" cy="-12.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otShedTopNear" cx="-67.2" cy="-5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otShedTopWest" cx="-107.2" cy="-25.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor0A" cx="-107.2" cy="-0.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor0B" cx="-107.2" cy="-5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor1A" cx="-96" cy="-0.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor1B" cx="-96" cy="-5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor2A" cx="-84.8" cy="-0.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor2B" cx="-84.8" cy="-5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor3A" cx="-73.6" cy="-0.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor3B" cx="-73.6" cy="-5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor4A" cx="-62.4" cy="-0.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor4B" cx="-62.4" cy="-5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor5A" cx="-51.2" cy="-0.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermBack" data-p="otDoor5B" cx="-51.2" cy="-5.2" r="0.95"/>
+    </g>
+    <g data-part="relayFront">
+    <polygon class="ds-face ds-face--apron" data-part="relayFront" data-face="relayPadFar relayPadEast relayPadNear relayPadWest" points="-24,-14.4 3.2,-0.8 -8,4.8 -35.2,-8.8"/>
+    <polygon class="ds-face ds-face--roof" data-part="relayFront" data-face="relayTrl0TopFar relayTrl0TopEast relayTrl0TopNear relayTrl0TopWest" points="-28.8,-14.4 -17.6,-8.8 -22.4,-6.4 -33.6,-12"/>
+    <polygon class="ds-face ds-face--east" data-part="relayFront" data-face="relayTrl0East relayTrl0Near relayTrl0TopNear relayTrl0TopEast" points="-17.6,-4.4 -22.4,-2 -22.4,-6.4 -17.6,-8.8"/>
+    <polygon class="ds-face ds-face--south" data-part="relayFront" data-face="relayTrl0Near relayTrl0West relayTrl0TopWest relayTrl0TopNear" points="-22.4,-2 -33.6,-7.6 -33.6,-12 -22.4,-6.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="relayFront" data-face="relayTrl1TopFar relayTrl1TopEast relayTrl1TopNear relayTrl1TopWest" points="-9.6,-14.4 1.6,-8.8 -3.2,-6.4 -14.4,-12"/>
+    <polygon class="ds-face ds-face--east" data-part="relayFront" data-face="relayTrl1East relayTrl1Near relayTrl1TopNear relayTrl1TopEast" points="1.6,-4.4 -3.2,-2 -3.2,-6.4 1.6,-8.8"/>
+    <polygon class="ds-face ds-face--south" data-part="relayFront" data-face="relayTrl1Near relayTrl1West relayTrl1TopWest relayTrl1TopNear" points="-3.2,-2 -14.4,-7.6 -14.4,-12 -3.2,-6.4"/>
+    <line class="ds-line ds-line--ground" data-part="relayFront" data-a="relayPadFar" data-b="relayPadEast" x1="-24" y1="-14.4" x2="3.2" y2="-0.8"/>
+    <line class="ds-line ds-line--ground" data-part="relayFront" data-a="relayPadEast" data-b="relayPadNear" x1="3.2" y1="-0.8" x2="-8" y2="4.8"/>
+    <line class="ds-line ds-line--ground" data-part="relayFront" data-a="relayPadNear" data-b="relayPadWest" x1="-8" y1="4.8" x2="-35.2" y2="-8.8"/>
+    <line class="ds-line ds-line--ground" data-part="relayFront" data-a="relayPadWest" data-b="relayPadFar" x1="-35.2" y1="-8.8" x2="-24" y2="-14.4"/>
+    <line class="ds-line ds-line--lot" data-part="relayFront" data-a="relayPadRule0A" data-b="relayPadRule0B" x1="-20.53" y1="-7.6" x2="-20.53" y2="-2"/>
+    <line class="ds-line ds-line--lot" data-part="relayFront" data-a="relayPadRule1A" data-b="relayPadRule1B" x1="-11.47" y1="-7.6" x2="-11.47" y2="-2"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0East" data-b="relayTrl0Near" x1="-17.6" y1="-4.4" x2="-22.4" y2="-2"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0Near" data-b="relayTrl0West" x1="-22.4" y1="-2" x2="-33.6" y2="-7.6"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0East" data-b="relayTrl0TopEast" x1="-17.6" y1="-4.4" x2="-17.6" y2="-8.8"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0Near" data-b="relayTrl0TopNear" x1="-22.4" y1="-2" x2="-22.4" y2="-6.4"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0West" data-b="relayTrl0TopWest" x1="-33.6" y1="-7.6" x2="-33.6" y2="-12"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0TopFar" data-b="relayTrl0TopEast" x1="-28.8" y1="-14.4" x2="-17.6" y2="-8.8"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0TopEast" data-b="relayTrl0TopNear" x1="-17.6" y1="-8.8" x2="-22.4" y2="-6.4"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0TopNear" data-b="relayTrl0TopWest" x1="-22.4" y1="-6.4" x2="-33.6" y2="-12"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl0TopWest" data-b="relayTrl0TopFar" x1="-33.6" y1="-12" x2="-28.8" y2="-14.4"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1East" data-b="relayTrl1Near" x1="1.6" y1="-4.4" x2="-3.2" y2="-2"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1Near" data-b="relayTrl1West" x1="-3.2" y1="-2" x2="-14.4" y2="-7.6"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1East" data-b="relayTrl1TopEast" x1="1.6" y1="-4.4" x2="1.6" y2="-8.8"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1Near" data-b="relayTrl1TopNear" x1="-3.2" y1="-2" x2="-3.2" y2="-6.4"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1West" data-b="relayTrl1TopWest" x1="-14.4" y1="-7.6" x2="-14.4" y2="-12"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1TopFar" data-b="relayTrl1TopEast" x1="-9.6" y1="-14.4" x2="1.6" y2="-8.8"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1TopEast" data-b="relayTrl1TopNear" x1="1.6" y1="-8.8" x2="-3.2" y2="-6.4"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1TopNear" data-b="relayTrl1TopWest" x1="-3.2" y1="-6.4" x2="-14.4" y2="-12"/>
+    <line class="ds-line" data-part="relayFront" data-a="relayTrl1TopWest" data-b="relayTrl1TopFar" x1="-14.4" y1="-12" x2="-9.6" y2="-14.4"/>
+    <circle class="ds-dot ds-dot--ground" data-part="relayFront" data-p="relayPadFar" cx="-24" cy="-14.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="relayFront" data-p="relayPadEast" cx="3.2" cy="-0.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="relayFront" data-p="relayPadNear" cx="-8" cy="4.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="relayFront" data-p="relayPadWest" cx="-35.2" cy="-8.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="relayFront" data-p="relayPadRule0A" cx="-20.53" cy="-7.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="relayFront" data-p="relayPadRule0B" cx="-20.53" cy="-2" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="relayFront" data-p="relayPadRule1A" cx="-11.47" cy="-7.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="relayFront" data-p="relayPadRule1B" cx="-11.47" cy="-2" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl0Near" cx="-22.4" cy="-2" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl0East" cx="-17.6" cy="-4.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl0West" cx="-33.6" cy="-7.6" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl0TopFar" cx="-28.8" cy="-14.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl0TopEast" cx="-17.6" cy="-8.8" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl0TopNear" cx="-22.4" cy="-6.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl0TopWest" cx="-33.6" cy="-12" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl1Near" cx="-3.2" cy="-2" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl1East" cx="1.6" cy="-4.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl1West" cx="-14.4" cy="-7.6" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl1TopFar" cx="-9.6" cy="-14.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl1TopEast" cx="1.6" cy="-8.8" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl1TopNear" cx="-3.2" cy="-6.4" r="0.95"/>
+    <circle class="ds-dot" data-part="relayFront" data-p="relayTrl1TopWest" cx="-14.4" cy="-12" r="0.95"/>
+    </g>
+    <g data-part="destTermFront">
+    <polygon class="ds-face ds-face--apron" data-part="destTermFront" data-face="dtYardFar dtYardEast dtYardNear dtYardWest" points="88.8,-10.4 132.8,11.6 119.2,18.4 75.2,-3.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="destTermFront" data-face="dtTrl0TopFar dtTrl0TopEast dtTrl0TopNear dtTrl0TopWest" points="80,-5.6 91.2,0 86.4,2.4 75.2,-3.2"/>
+    <polygon class="ds-face ds-face--east" data-part="destTermFront" data-face="dtTrl0East dtTrl0Near dtTrl0TopNear dtTrl0TopEast" points="91.2,4.4 86.4,6.8 86.4,2.4 91.2,0"/>
+    <polygon class="ds-face ds-face--south" data-part="destTermFront" data-face="dtTrl0Near dtTrl0West dtTrl0TopWest dtTrl0TopNear" points="86.4,6.8 75.2,1.2 75.2,-3.2 86.4,2.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="destTermFront" data-face="dtTrl1TopFar dtTrl1TopEast dtTrl1TopNear dtTrl1TopWest" points="99.2,-5.6 110.4,0 105.6,2.4 94.4,-3.2"/>
+    <polygon class="ds-face ds-face--east" data-part="destTermFront" data-face="dtTrl1East dtTrl1Near dtTrl1TopNear dtTrl1TopEast" points="110.4,4.4 105.6,6.8 105.6,2.4 110.4,0"/>
+    <polygon class="ds-face ds-face--south" data-part="destTermFront" data-face="dtTrl1Near dtTrl1West dtTrl1TopWest dtTrl1TopNear" points="105.6,6.8 94.4,1.2 94.4,-3.2 105.6,2.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="destTermFront" data-face="dtTrl2TopFar dtTrl2TopEast dtTrl2TopNear dtTrl2TopWest" points="118.4,-5.6 129.6,0 124.8,2.4 113.6,-3.2"/>
+    <polygon class="ds-face ds-face--east" data-part="destTermFront" data-face="dtTrl2East dtTrl2Near dtTrl2TopNear dtTrl2TopEast" points="129.6,4.4 124.8,6.8 124.8,2.4 129.6,0"/>
+    <polygon class="ds-face ds-face--south" data-part="destTermFront" data-face="dtTrl2Near dtTrl2West dtTrl2TopWest dtTrl2TopNear" points="124.8,6.8 113.6,1.2 113.6,-3.2 124.8,2.4"/>
+    <line class="ds-line ds-line--ground" data-part="destTermFront" data-a="dtYardFar" data-b="dtYardEast" x1="88.8" y1="-10.4" x2="132.8" y2="11.6"/>
+    <line class="ds-line ds-line--ground" data-part="destTermFront" data-a="dtYardEast" data-b="dtYardNear" x1="132.8" y1="11.6" x2="119.2" y2="18.4"/>
+    <line class="ds-line ds-line--ground" data-part="destTermFront" data-a="dtYardNear" data-b="dtYardWest" x1="119.2" y1="18.4" x2="75.2" y2="-3.6"/>
+    <line class="ds-line ds-line--ground" data-part="destTermFront" data-a="dtYardWest" data-b="dtYardFar" x1="75.2" y1="-3.6" x2="88.8" y2="-10.4"/>
+    <line class="ds-line ds-line--lot" data-part="destTermFront" data-a="dtYardRule0A" data-b="dtYardRule0B" x1="90.8" y1="0.6" x2="90.8" y2="7.4"/>
+    <line class="ds-line ds-line--lot" data-part="destTermFront" data-a="dtYardRule1A" data-b="dtYardRule1B" x1="99.6" y1="0.6" x2="99.6" y2="7.4"/>
+    <line class="ds-line ds-line--lot" data-part="destTermFront" data-a="dtYardRule2A" data-b="dtYardRule2B" x1="108.4" y1="0.6" x2="108.4" y2="7.4"/>
+    <line class="ds-line ds-line--lot" data-part="destTermFront" data-a="dtYardRule3A" data-b="dtYardRule3B" x1="117.2" y1="0.6" x2="117.2" y2="7.4"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0East" data-b="dtTrl0Near" x1="91.2" y1="4.4" x2="86.4" y2="6.8"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0Near" data-b="dtTrl0West" x1="86.4" y1="6.8" x2="75.2" y2="1.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0East" data-b="dtTrl0TopEast" x1="91.2" y1="4.4" x2="91.2" y2="0"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0Near" data-b="dtTrl0TopNear" x1="86.4" y1="6.8" x2="86.4" y2="2.4"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0West" data-b="dtTrl0TopWest" x1="75.2" y1="1.2" x2="75.2" y2="-3.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0TopFar" data-b="dtTrl0TopEast" x1="80" y1="-5.6" x2="91.2" y2="0"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0TopEast" data-b="dtTrl0TopNear" x1="91.2" y1="0" x2="86.4" y2="2.4"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0TopNear" data-b="dtTrl0TopWest" x1="86.4" y1="2.4" x2="75.2" y2="-3.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl0TopWest" data-b="dtTrl0TopFar" x1="75.2" y1="-3.2" x2="80" y2="-5.6"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1East" data-b="dtTrl1Near" x1="110.4" y1="4.4" x2="105.6" y2="6.8"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1Near" data-b="dtTrl1West" x1="105.6" y1="6.8" x2="94.4" y2="1.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1East" data-b="dtTrl1TopEast" x1="110.4" y1="4.4" x2="110.4" y2="0"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1Near" data-b="dtTrl1TopNear" x1="105.6" y1="6.8" x2="105.6" y2="2.4"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1West" data-b="dtTrl1TopWest" x1="94.4" y1="1.2" x2="94.4" y2="-3.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1TopFar" data-b="dtTrl1TopEast" x1="99.2" y1="-5.6" x2="110.4" y2="0"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1TopEast" data-b="dtTrl1TopNear" x1="110.4" y1="0" x2="105.6" y2="2.4"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1TopNear" data-b="dtTrl1TopWest" x1="105.6" y1="2.4" x2="94.4" y2="-3.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl1TopWest" data-b="dtTrl1TopFar" x1="94.4" y1="-3.2" x2="99.2" y2="-5.6"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2East" data-b="dtTrl2Near" x1="129.6" y1="4.4" x2="124.8" y2="6.8"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2Near" data-b="dtTrl2West" x1="124.8" y1="6.8" x2="113.6" y2="1.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2East" data-b="dtTrl2TopEast" x1="129.6" y1="4.4" x2="129.6" y2="0"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2Near" data-b="dtTrl2TopNear" x1="124.8" y1="6.8" x2="124.8" y2="2.4"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2West" data-b="dtTrl2TopWest" x1="113.6" y1="1.2" x2="113.6" y2="-3.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2TopFar" data-b="dtTrl2TopEast" x1="118.4" y1="-5.6" x2="129.6" y2="0"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2TopEast" data-b="dtTrl2TopNear" x1="129.6" y1="0" x2="124.8" y2="2.4"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2TopNear" data-b="dtTrl2TopWest" x1="124.8" y1="2.4" x2="113.6" y2="-3.2"/>
+    <line class="ds-line" data-part="destTermFront" data-a="dtTrl2TopWest" data-b="dtTrl2TopFar" x1="113.6" y1="-3.2" x2="118.4" y2="-5.6"/>
+    <circle class="ds-dot ds-dot--ground" data-part="destTermFront" data-p="dtYardFar" cx="88.8" cy="-10.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="destTermFront" data-p="dtYardEast" cx="132.8" cy="11.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="destTermFront" data-p="dtYardNear" cx="119.2" cy="18.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="destTermFront" data-p="dtYardWest" cx="75.2" cy="-3.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="destTermFront" data-p="dtYardRule0A" cx="90.8" cy="0.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="destTermFront" data-p="dtYardRule0B" cx="90.8" cy="7.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="destTermFront" data-p="dtYardRule1A" cx="99.6" cy="0.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="destTermFront" data-p="dtYardRule1B" cx="99.6" cy="7.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="destTermFront" data-p="dtYardRule2A" cx="108.4" cy="0.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="destTermFront" data-p="dtYardRule2B" cx="108.4" cy="7.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="destTermFront" data-p="dtYardRule3A" cx="117.2" cy="0.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="destTermFront" data-p="dtYardRule3B" cx="117.2" cy="7.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl0Near" cx="86.4" cy="6.8" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl0East" cx="91.2" cy="4.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl0West" cx="75.2" cy="1.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl0TopFar" cx="80" cy="-5.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl0TopEast" cx="91.2" cy="0" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl0TopNear" cx="86.4" cy="2.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl0TopWest" cx="75.2" cy="-3.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl1Near" cx="105.6" cy="6.8" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl1East" cx="110.4" cy="4.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl1West" cx="94.4" cy="1.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl1TopFar" cx="99.2" cy="-5.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl1TopEast" cx="110.4" cy="0" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl1TopNear" cx="105.6" cy="2.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl1TopWest" cx="94.4" cy="-3.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl2Near" cx="124.8" cy="6.8" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl2East" cx="129.6" cy="4.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl2West" cx="113.6" cy="1.2" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl2TopFar" cx="118.4" cy="-5.6" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl2TopEast" cx="129.6" cy="0" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl2TopNear" cx="124.8" cy="2.4" r="0.95"/>
+    <circle class="ds-dot" data-part="destTermFront" data-p="dtTrl2TopWest" cx="113.6" cy="-3.2" r="0.95"/>
+    </g>
+    <g data-part="shipperFront">
+    <polygon class="ds-face ds-face--apron" data-part="shipperFront" data-face="shipYardFar shipYardEast shipYardNear shipYardWest" points="-156.8,-5.6 -116.8,14.4 -131.2,21.6 -171.2,1.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="shipperFront" data-face="shipTrl0TopFar shipTrl0TopEast shipTrl0TopNear shipTrl0TopWest" points="-168,-1.6 -156.8,4 -161.6,6.4 -172.8,0.8"/>
+    <polygon class="ds-face ds-face--east" data-part="shipperFront" data-face="shipTrl0East shipTrl0Near shipTrl0TopNear shipTrl0TopEast" points="-156.8,8.4 -161.6,10.8 -161.6,6.4 -156.8,4"/>
+    <polygon class="ds-face ds-face--south" data-part="shipperFront" data-face="shipTrl0Near shipTrl0West shipTrl0TopWest shipTrl0TopNear" points="-161.6,10.8 -172.8,5.2 -172.8,0.8 -161.6,6.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="shipperFront" data-face="shipTrl1TopFar shipTrl1TopEast shipTrl1TopNear shipTrl1TopWest" points="-148.8,-1.6 -137.6,4 -142.4,6.4 -153.6,0.8"/>
+    <polygon class="ds-face ds-face--east" data-part="shipperFront" data-face="shipTrl1East shipTrl1Near shipTrl1TopNear shipTrl1TopEast" points="-137.6,8.4 -142.4,10.8 -142.4,6.4 -137.6,4"/>
+    <polygon class="ds-face ds-face--south" data-part="shipperFront" data-face="shipTrl1Near shipTrl1West shipTrl1TopWest shipTrl1TopNear" points="-142.4,10.8 -153.6,5.2 -153.6,0.8 -142.4,6.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="shipperFront" data-face="shipTrl2TopFar shipTrl2TopEast shipTrl2TopNear shipTrl2TopWest" points="-129.6,-1.6 -118.4,4 -123.2,6.4 -134.4,0.8"/>
+    <polygon class="ds-face ds-face--east" data-part="shipperFront" data-face="shipTrl2East shipTrl2Near shipTrl2TopNear shipTrl2TopEast" points="-118.4,8.4 -123.2,10.8 -123.2,6.4 -118.4,4"/>
+    <polygon class="ds-face ds-face--south" data-part="shipperFront" data-face="shipTrl2Near shipTrl2West shipTrl2TopWest shipTrl2TopNear" points="-123.2,10.8 -134.4,5.2 -134.4,0.8 -123.2,6.4"/>
+    <line class="ds-line ds-line--ground" data-part="shipperFront" data-a="shipYardFar" data-b="shipYardEast" x1="-156.8" y1="-5.6" x2="-116.8" y2="14.4"/>
+    <line class="ds-line ds-line--ground" data-part="shipperFront" data-a="shipYardEast" data-b="shipYardNear" x1="-116.8" y1="14.4" x2="-131.2" y2="21.6"/>
+    <line class="ds-line ds-line--ground" data-part="shipperFront" data-a="shipYardNear" data-b="shipYardWest" x1="-131.2" y1="21.6" x2="-171.2" y2="1.6"/>
+    <line class="ds-line ds-line--ground" data-part="shipperFront" data-a="shipYardWest" data-b="shipYardFar" x1="-171.2" y1="1.6" x2="-156.8" y2="-5.6"/>
+    <line class="ds-line ds-line--lot" data-part="shipperFront" data-a="shipYardRule0A" data-b="shipYardRule0B" x1="-156" y1="4.4" x2="-156" y2="11.6"/>
+    <line class="ds-line ds-line--lot" data-part="shipperFront" data-a="shipYardRule1A" data-b="shipYardRule1B" x1="-148" y1="4.4" x2="-148" y2="11.6"/>
+    <line class="ds-line ds-line--lot" data-part="shipperFront" data-a="shipYardRule2A" data-b="shipYardRule2B" x1="-140" y1="4.4" x2="-140" y2="11.6"/>
+    <line class="ds-line ds-line--lot" data-part="shipperFront" data-a="shipYardRule3A" data-b="shipYardRule3B" x1="-132" y1="4.4" x2="-132" y2="11.6"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0East" data-b="shipTrl0Near" x1="-156.8" y1="8.4" x2="-161.6" y2="10.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0Near" data-b="shipTrl0West" x1="-161.6" y1="10.8" x2="-172.8" y2="5.2"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0East" data-b="shipTrl0TopEast" x1="-156.8" y1="8.4" x2="-156.8" y2="4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0Near" data-b="shipTrl0TopNear" x1="-161.6" y1="10.8" x2="-161.6" y2="6.4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0West" data-b="shipTrl0TopWest" x1="-172.8" y1="5.2" x2="-172.8" y2="0.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0TopFar" data-b="shipTrl0TopEast" x1="-168" y1="-1.6" x2="-156.8" y2="4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0TopEast" data-b="shipTrl0TopNear" x1="-156.8" y1="4" x2="-161.6" y2="6.4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0TopNear" data-b="shipTrl0TopWest" x1="-161.6" y1="6.4" x2="-172.8" y2="0.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl0TopWest" data-b="shipTrl0TopFar" x1="-172.8" y1="0.8" x2="-168" y2="-1.6"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1East" data-b="shipTrl1Near" x1="-137.6" y1="8.4" x2="-142.4" y2="10.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1Near" data-b="shipTrl1West" x1="-142.4" y1="10.8" x2="-153.6" y2="5.2"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1East" data-b="shipTrl1TopEast" x1="-137.6" y1="8.4" x2="-137.6" y2="4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1Near" data-b="shipTrl1TopNear" x1="-142.4" y1="10.8" x2="-142.4" y2="6.4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1West" data-b="shipTrl1TopWest" x1="-153.6" y1="5.2" x2="-153.6" y2="0.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1TopFar" data-b="shipTrl1TopEast" x1="-148.8" y1="-1.6" x2="-137.6" y2="4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1TopEast" data-b="shipTrl1TopNear" x1="-137.6" y1="4" x2="-142.4" y2="6.4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1TopNear" data-b="shipTrl1TopWest" x1="-142.4" y1="6.4" x2="-153.6" y2="0.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl1TopWest" data-b="shipTrl1TopFar" x1="-153.6" y1="0.8" x2="-148.8" y2="-1.6"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2East" data-b="shipTrl2Near" x1="-118.4" y1="8.4" x2="-123.2" y2="10.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2Near" data-b="shipTrl2West" x1="-123.2" y1="10.8" x2="-134.4" y2="5.2"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2East" data-b="shipTrl2TopEast" x1="-118.4" y1="8.4" x2="-118.4" y2="4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2Near" data-b="shipTrl2TopNear" x1="-123.2" y1="10.8" x2="-123.2" y2="6.4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2West" data-b="shipTrl2TopWest" x1="-134.4" y1="5.2" x2="-134.4" y2="0.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2TopFar" data-b="shipTrl2TopEast" x1="-129.6" y1="-1.6" x2="-118.4" y2="4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2TopEast" data-b="shipTrl2TopNear" x1="-118.4" y1="4" x2="-123.2" y2="6.4"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2TopNear" data-b="shipTrl2TopWest" x1="-123.2" y1="6.4" x2="-134.4" y2="0.8"/>
+    <line class="ds-line" data-part="shipperFront" data-a="shipTrl2TopWest" data-b="shipTrl2TopFar" x1="-134.4" y1="0.8" x2="-129.6" y2="-1.6"/>
+    <circle class="ds-dot ds-dot--ground" data-part="shipperFront" data-p="shipYardFar" cx="-156.8" cy="-5.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="shipperFront" data-p="shipYardEast" cx="-116.8" cy="14.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="shipperFront" data-p="shipYardNear" cx="-131.2" cy="21.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="shipperFront" data-p="shipYardWest" cx="-171.2" cy="1.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="shipperFront" data-p="shipYardRule0A" cx="-156" cy="4.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="shipperFront" data-p="shipYardRule0B" cx="-156" cy="11.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="shipperFront" data-p="shipYardRule1A" cx="-148" cy="4.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="shipperFront" data-p="shipYardRule1B" cx="-148" cy="11.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="shipperFront" data-p="shipYardRule2A" cx="-140" cy="4.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="shipperFront" data-p="shipYardRule2B" cx="-140" cy="11.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="shipperFront" data-p="shipYardRule3A" cx="-132" cy="4.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="shipperFront" data-p="shipYardRule3B" cx="-132" cy="11.6" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl0Near" cx="-161.6" cy="10.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl0East" cx="-156.8" cy="8.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl0West" cx="-172.8" cy="5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl0TopFar" cx="-168" cy="-1.6" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl0TopEast" cx="-156.8" cy="4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl0TopNear" cx="-161.6" cy="6.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl0TopWest" cx="-172.8" cy="0.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl1Near" cx="-142.4" cy="10.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl1East" cx="-137.6" cy="8.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl1West" cx="-153.6" cy="5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl1TopFar" cx="-148.8" cy="-1.6" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl1TopEast" cx="-137.6" cy="4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl1TopNear" cx="-142.4" cy="6.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl1TopWest" cx="-153.6" cy="0.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl2Near" cx="-123.2" cy="10.8" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl2East" cx="-118.4" cy="8.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl2West" cx="-134.4" cy="5.2" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl2TopFar" cx="-129.6" cy="-1.6" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl2TopEast" cx="-118.4" cy="4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl2TopNear" cx="-123.2" cy="6.4" r="0.95"/>
+    <circle class="ds-dot" data-part="shipperFront" data-p="shipTrl2TopWest" cx="-134.4" cy="0.8" r="0.95"/>
+    </g>
+    <g data-part="rig">
+    <polygon class="ds-face ds-face--roof" data-part="rig" data-face="rigBoxTopFar rigBoxTopEast rigBoxTopNear rigBoxTopWest" points="-233.28,-3.56 -217.08,4.54 -222.52,7.26 -238.72,-0.84"/>
+    <polygon class="ds-face ds-face--east" data-part="rig" data-face="rigBoxEast rigBoxNear rigBoxTopNear rigBoxTopEast" points="-217.08,7.86 -222.52,10.58 -222.52,7.26 -217.08,4.54"/>
+    <polygon class="ds-face ds-face--south" data-part="rig" data-face="rigBoxNear rigBoxWest rigBoxTopWest rigBoxTopNear" points="-222.52,10.58 -238.72,2.48 -238.72,-0.84 -222.52,7.26"/>
+    <polygon class="ds-face ds-face--roof" data-part="rig" data-face="rigCabTopFar rigCabTopEast rigCabTopNear rigCabTopWest" points="-217.08,6.14 -209.28,10.04 -214.72,12.76 -222.52,8.86"/>
+    <polygon class="ds-face ds-face--east" data-part="rig" data-face="rigCabEast rigCabNear rigCabTopNear rigCabTopEast" points="-209.28,11.76 -214.72,14.48 -214.72,12.76 -209.28,10.04"/>
+    <polygon class="ds-face ds-face--south" data-part="rig" data-face="rigCabNear rigCabWest rigCabTopWest rigCabTopNear" points="-214.72,14.48 -222.52,10.58 -222.52,8.86 -214.72,12.76"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxEast" data-b="rigBoxNear" x1="-217.08" y1="7.86" x2="-222.52" y2="10.58"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxNear" data-b="rigBoxWest" x1="-222.52" y1="10.58" x2="-238.72" y2="2.48"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxEast" data-b="rigBoxTopEast" x1="-217.08" y1="7.86" x2="-217.08" y2="4.54"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxNear" data-b="rigBoxTopNear" x1="-222.52" y1="10.58" x2="-222.52" y2="7.26"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxWest" data-b="rigBoxTopWest" x1="-238.72" y1="2.48" x2="-238.72" y2="-0.84"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxTopFar" data-b="rigBoxTopEast" x1="-233.28" y1="-3.56" x2="-217.08" y2="4.54"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxTopEast" data-b="rigBoxTopNear" x1="-217.08" y1="4.54" x2="-222.52" y2="7.26"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxTopNear" data-b="rigBoxTopWest" x1="-222.52" y1="7.26" x2="-238.72" y2="-0.84"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigBoxTopWest" data-b="rigBoxTopFar" x1="-238.72" y1="-0.84" x2="-233.28" y2="-3.56"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabEast" data-b="rigCabNear" x1="-209.28" y1="11.76" x2="-214.72" y2="14.48"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabNear" data-b="rigCabWest" x1="-214.72" y1="14.48" x2="-222.52" y2="10.58"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabEast" data-b="rigCabTopEast" x1="-209.28" y1="11.76" x2="-209.28" y2="10.04"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabNear" data-b="rigCabTopNear" x1="-214.72" y1="14.48" x2="-214.72" y2="12.76"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabWest" data-b="rigCabTopWest" x1="-222.52" y1="10.58" x2="-222.52" y2="8.86"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabTopFar" data-b="rigCabTopEast" x1="-217.08" y1="6.14" x2="-209.28" y2="10.04"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabTopEast" data-b="rigCabTopNear" x1="-209.28" y1="10.04" x2="-214.72" y2="12.76"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabTopNear" data-b="rigCabTopWest" x1="-214.72" y1="12.76" x2="-222.52" y2="8.86"/>
+    <line class="ds-line ds-line--vehicle" data-part="rig" data-a="rigCabTopWest" data-b="rigCabTopFar" x1="-222.52" y1="8.86" x2="-217.08" y2="6.14"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigBoxNear" cx="-222.52" cy="10.58" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigBoxEast" cx="-217.08" cy="7.86" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigBoxWest" cx="-238.72" cy="2.48" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigBoxTopFar" cx="-233.28" cy="-3.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigBoxTopEast" cx="-217.08" cy="4.54" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigBoxTopNear" cx="-222.52" cy="7.26" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigBoxTopWest" cx="-238.72" cy="-0.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigCabNear" cx="-214.72" cy="14.48" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigCabEast" cx="-209.28" cy="11.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigCabWest" cx="-222.52" cy="10.58" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigCabTopFar" cx="-217.08" cy="6.14" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigCabTopEast" cx="-209.28" cy="10.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigCabTopNear" cx="-214.72" cy="12.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--vehicle" data-part="rig" data-p="rigCabTopWest" cx="-222.52" cy="8.86" r="0.95"/>
+    </g>
+    <g data-part="consigneeFront">
+    <polygon class="ds-face ds-face--apron" data-part="consigneeFront" data-face="conYardFar conYardEast conYardNear conYardWest" points="141.2,23.8 176.4,41.4 162.8,48.2 127.6,30.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="consigneeFront" data-face="conTrl0TopFar conTrl0TopEast conTrl0TopNear conTrl0TopWest" points="139.2,26.4 150.4,32 145.6,34.4 134.4,28.8"/>
+    <polygon class="ds-face ds-face--east" data-part="consigneeFront" data-face="conTrl0East conTrl0Near conTrl0TopNear conTrl0TopEast" points="150.4,36.4 145.6,38.8 145.6,34.4 150.4,32"/>
+    <polygon class="ds-face ds-face--south" data-part="consigneeFront" data-face="conTrl0Near conTrl0West conTrl0TopWest conTrl0TopNear" points="145.6,38.8 134.4,33.2 134.4,28.8 145.6,34.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="consigneeFront" data-face="conTrl1TopFar conTrl1TopEast conTrl1TopNear conTrl1TopWest" points="158.4,26.4 169.6,32 164.8,34.4 153.6,28.8"/>
+    <polygon class="ds-face ds-face--east" data-part="consigneeFront" data-face="conTrl1East conTrl1Near conTrl1TopNear conTrl1TopEast" points="169.6,36.4 164.8,38.8 164.8,34.4 169.6,32"/>
+    <polygon class="ds-face ds-face--south" data-part="consigneeFront" data-face="conTrl1Near conTrl1West conTrl1TopWest conTrl1TopNear" points="164.8,38.8 153.6,33.2 153.6,28.8 164.8,34.4"/>
+    <line class="ds-line ds-line--ground" data-part="consigneeFront" data-a="conYardFar" data-b="conYardEast" x1="141.2" y1="23.8" x2="176.4" y2="41.4"/>
+    <line class="ds-line ds-line--ground" data-part="consigneeFront" data-a="conYardEast" data-b="conYardNear" x1="176.4" y1="41.4" x2="162.8" y2="48.2"/>
+    <line class="ds-line ds-line--ground" data-part="consigneeFront" data-a="conYardNear" data-b="conYardWest" x1="162.8" y1="48.2" x2="127.6" y2="30.6"/>
+    <line class="ds-line ds-line--ground" data-part="consigneeFront" data-a="conYardWest" data-b="conYardFar" x1="127.6" y1="30.6" x2="141.2" y2="23.8"/>
+    <line class="ds-line ds-line--lot" data-part="consigneeFront" data-a="conYardRule0A" data-b="conYardRule0B" x1="141.44" y1="32.6" x2="141.44" y2="39.4"/>
+    <line class="ds-line ds-line--lot" data-part="consigneeFront" data-a="conYardRule1A" data-b="conYardRule1B" x1="148.48" y1="32.6" x2="148.48" y2="39.4"/>
+    <line class="ds-line ds-line--lot" data-part="consigneeFront" data-a="conYardRule2A" data-b="conYardRule2B" x1="155.52" y1="32.6" x2="155.52" y2="39.4"/>
+    <line class="ds-line ds-line--lot" data-part="consigneeFront" data-a="conYardRule3A" data-b="conYardRule3B" x1="162.56" y1="32.6" x2="162.56" y2="39.4"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0East" data-b="conTrl0Near" x1="150.4" y1="36.4" x2="145.6" y2="38.8"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0Near" data-b="conTrl0West" x1="145.6" y1="38.8" x2="134.4" y2="33.2"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0East" data-b="conTrl0TopEast" x1="150.4" y1="36.4" x2="150.4" y2="32"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0Near" data-b="conTrl0TopNear" x1="145.6" y1="38.8" x2="145.6" y2="34.4"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0West" data-b="conTrl0TopWest" x1="134.4" y1="33.2" x2="134.4" y2="28.8"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0TopFar" data-b="conTrl0TopEast" x1="139.2" y1="26.4" x2="150.4" y2="32"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0TopEast" data-b="conTrl0TopNear" x1="150.4" y1="32" x2="145.6" y2="34.4"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0TopNear" data-b="conTrl0TopWest" x1="145.6" y1="34.4" x2="134.4" y2="28.8"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl0TopWest" data-b="conTrl0TopFar" x1="134.4" y1="28.8" x2="139.2" y2="26.4"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1East" data-b="conTrl1Near" x1="169.6" y1="36.4" x2="164.8" y2="38.8"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1Near" data-b="conTrl1West" x1="164.8" y1="38.8" x2="153.6" y2="33.2"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1East" data-b="conTrl1TopEast" x1="169.6" y1="36.4" x2="169.6" y2="32"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1Near" data-b="conTrl1TopNear" x1="164.8" y1="38.8" x2="164.8" y2="34.4"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1West" data-b="conTrl1TopWest" x1="153.6" y1="33.2" x2="153.6" y2="28.8"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1TopFar" data-b="conTrl1TopEast" x1="158.4" y1="26.4" x2="169.6" y2="32"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1TopEast" data-b="conTrl1TopNear" x1="169.6" y1="32" x2="164.8" y2="34.4"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1TopNear" data-b="conTrl1TopWest" x1="164.8" y1="34.4" x2="153.6" y2="28.8"/>
+    <line class="ds-line" data-part="consigneeFront" data-a="conTrl1TopWest" data-b="conTrl1TopFar" x1="153.6" y1="28.8" x2="158.4" y2="26.4"/>
+    <circle class="ds-dot ds-dot--ground" data-part="consigneeFront" data-p="conYardFar" cx="141.2" cy="23.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="consigneeFront" data-p="conYardEast" cx="176.4" cy="41.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="consigneeFront" data-p="conYardNear" cx="162.8" cy="48.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="consigneeFront" data-p="conYardWest" cx="127.6" cy="30.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="consigneeFront" data-p="conYardRule0A" cx="141.44" cy="32.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="consigneeFront" data-p="conYardRule0B" cx="141.44" cy="39.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="consigneeFront" data-p="conYardRule1A" cx="148.48" cy="32.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="consigneeFront" data-p="conYardRule1B" cx="148.48" cy="39.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="consigneeFront" data-p="conYardRule2A" cx="155.52" cy="32.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="consigneeFront" data-p="conYardRule2B" cx="155.52" cy="39.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="consigneeFront" data-p="conYardRule3A" cx="162.56" cy="32.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="consigneeFront" data-p="conYardRule3B" cx="162.56" cy="39.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl0Near" cx="145.6" cy="38.8" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl0East" cx="150.4" cy="36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl0West" cx="134.4" cy="33.2" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl0TopFar" cx="139.2" cy="26.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl0TopEast" cx="150.4" cy="32" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl0TopNear" cx="145.6" cy="34.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl0TopWest" cx="134.4" cy="28.8" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl1Near" cx="164.8" cy="38.8" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl1East" cx="169.6" cy="36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl1West" cx="153.6" cy="33.2" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl1TopFar" cx="158.4" cy="26.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl1TopEast" cx="169.6" cy="32" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl1TopNear" cx="164.8" cy="34.4" r="0.95"/>
+    <circle class="ds-dot" data-part="consigneeFront" data-p="conTrl1TopWest" cx="153.6" cy="28.8" r="0.95"/>
+    </g>
+    <g data-part="hubFront">
+    <polygon class="ds-face ds-face--apron" data-part="hubFront" data-face="hubYardFar hubYardEast hubYardNear hubYardWest" points="14.4,16.8 86.4,52.8 65.6,63.2 -6.4,27.2"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubFront" data-face="hubTrlS0TopFar hubTrlS0TopEast hubTrlS0TopNear hubTrlS0TopWest" points="-11.2,28.4 0,34 -4.8,36.4 -16,30.8"/>
+    <polygon class="ds-face ds-face--east" data-part="hubFront" data-face="hubTrlS0East hubTrlS0Near hubTrlS0TopNear hubTrlS0TopEast" points="0,38.4 -4.8,40.8 -4.8,36.4 0,34"/>
+    <polygon class="ds-face ds-face--south" data-part="hubFront" data-face="hubTrlS0Near hubTrlS0West hubTrlS0TopWest hubTrlS0TopNear" points="-4.8,40.8 -16,35.2 -16,30.8 -4.8,36.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubFront" data-face="hubTrlS1TopFar hubTrlS1TopEast hubTrlS1TopNear hubTrlS1TopWest" points="8,28.4 19.2,34 14.4,36.4 3.2,30.8"/>
+    <polygon class="ds-face ds-face--east" data-part="hubFront" data-face="hubTrlS1East hubTrlS1Near hubTrlS1TopNear hubTrlS1TopEast" points="19.2,38.4 14.4,40.8 14.4,36.4 19.2,34"/>
+    <polygon class="ds-face ds-face--south" data-part="hubFront" data-face="hubTrlS1Near hubTrlS1West hubTrlS1TopWest hubTrlS1TopNear" points="14.4,40.8 3.2,35.2 3.2,30.8 14.4,36.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubFront" data-face="hubTrlS2TopFar hubTrlS2TopEast hubTrlS2TopNear hubTrlS2TopWest" points="27.2,28.4 38.4,34 33.6,36.4 22.4,30.8"/>
+    <polygon class="ds-face ds-face--east" data-part="hubFront" data-face="hubTrlS2East hubTrlS2Near hubTrlS2TopNear hubTrlS2TopEast" points="38.4,38.4 33.6,40.8 33.6,36.4 38.4,34"/>
+    <polygon class="ds-face ds-face--south" data-part="hubFront" data-face="hubTrlS2Near hubTrlS2West hubTrlS2TopWest hubTrlS2TopNear" points="33.6,40.8 22.4,35.2 22.4,30.8 33.6,36.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubFront" data-face="hubTrlS3TopFar hubTrlS3TopEast hubTrlS3TopNear hubTrlS3TopWest" points="46.4,28.4 57.6,34 52.8,36.4 41.6,30.8"/>
+    <polygon class="ds-face ds-face--east" data-part="hubFront" data-face="hubTrlS3East hubTrlS3Near hubTrlS3TopNear hubTrlS3TopEast" points="57.6,38.4 52.8,40.8 52.8,36.4 57.6,34"/>
+    <polygon class="ds-face ds-face--south" data-part="hubFront" data-face="hubTrlS3Near hubTrlS3West hubTrlS3TopWest hubTrlS3TopNear" points="52.8,40.8 41.6,35.2 41.6,30.8 52.8,36.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubFront" data-face="hubTrlS4TopFar hubTrlS4TopEast hubTrlS4TopNear hubTrlS4TopWest" points="65.6,28.4 76.8,34 72,36.4 60.8,30.8"/>
+    <polygon class="ds-face ds-face--east" data-part="hubFront" data-face="hubTrlS4East hubTrlS4Near hubTrlS4TopNear hubTrlS4TopEast" points="76.8,38.4 72,40.8 72,36.4 76.8,34"/>
+    <polygon class="ds-face ds-face--south" data-part="hubFront" data-face="hubTrlS4Near hubTrlS4West hubTrlS4TopWest hubTrlS4TopNear" points="72,40.8 60.8,35.2 60.8,30.8 72,36.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubFront" data-face="hubTrlS5TopFar hubTrlS5TopEast hubTrlS5TopNear hubTrlS5TopWest" points="84.8,28.4 96,34 91.2,36.4 80,30.8"/>
+    <polygon class="ds-face ds-face--east" data-part="hubFront" data-face="hubTrlS5East hubTrlS5Near hubTrlS5TopNear hubTrlS5TopEast" points="96,38.4 91.2,40.8 91.2,36.4 96,34"/>
+    <polygon class="ds-face ds-face--south" data-part="hubFront" data-face="hubTrlS5Near hubTrlS5West hubTrlS5TopWest hubTrlS5TopNear" points="91.2,40.8 80,35.2 80,30.8 91.2,36.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="hubFront" data-face="hubOfficeTopFar hubOfficeTopEast hubOfficeTopNear hubOfficeTopWest" points="95.2,28.4 106.4,34 96.8,38.8 85.6,33.2"/>
+    <polygon class="ds-face ds-face--east" data-part="hubFront" data-face="hubOfficeEast hubOfficeNear hubOfficeTopNear hubOfficeTopEast" points="106.4,45.2 96.8,50 96.8,38.8 106.4,34"/>
+    <polygon class="ds-face ds-face--south" data-part="hubFront" data-face="hubOfficeNear hubOfficeWest hubOfficeTopWest hubOfficeTopNear" points="96.8,50 85.6,44.4 85.6,33.2 96.8,38.8"/>
+    <line class="ds-line ds-line--ground" data-part="hubFront" data-a="hubYardFar" data-b="hubYardEast" x1="14.4" y1="16.8" x2="86.4" y2="52.8"/>
+    <line class="ds-line ds-line--ground" data-part="hubFront" data-a="hubYardEast" data-b="hubYardNear" x1="86.4" y1="52.8" x2="65.6" y2="63.2"/>
+    <line class="ds-line ds-line--ground" data-part="hubFront" data-a="hubYardNear" data-b="hubYardWest" x1="65.6" y1="63.2" x2="-6.4" y2="27.2"/>
+    <line class="ds-line ds-line--ground" data-part="hubFront" data-a="hubYardWest" data-b="hubYardFar" x1="-6.4" y1="27.2" x2="14.4" y2="16.8"/>
+    <line class="ds-line ds-line--lot" data-part="hubFront" data-a="hubYardRule0A" data-b="hubYardRule0B" x1="14.29" y1="34.8" x2="14.29" y2="45.2"/>
+    <line class="ds-line ds-line--lot" data-part="hubFront" data-a="hubYardRule1A" data-b="hubYardRule1B" x1="24.57" y1="34.8" x2="24.57" y2="45.2"/>
+    <line class="ds-line ds-line--lot" data-part="hubFront" data-a="hubYardRule2A" data-b="hubYardRule2B" x1="34.86" y1="34.8" x2="34.86" y2="45.2"/>
+    <line class="ds-line ds-line--lot" data-part="hubFront" data-a="hubYardRule3A" data-b="hubYardRule3B" x1="45.14" y1="34.8" x2="45.14" y2="45.2"/>
+    <line class="ds-line ds-line--lot" data-part="hubFront" data-a="hubYardRule4A" data-b="hubYardRule4B" x1="55.43" y1="34.8" x2="55.43" y2="45.2"/>
+    <line class="ds-line ds-line--lot" data-part="hubFront" data-a="hubYardRule5A" data-b="hubYardRule5B" x1="65.71" y1="34.8" x2="65.71" y2="45.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0East" data-b="hubTrlS0Near" x1="0" y1="38.4" x2="-4.8" y2="40.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0Near" data-b="hubTrlS0West" x1="-4.8" y1="40.8" x2="-16" y2="35.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0East" data-b="hubTrlS0TopEast" x1="0" y1="38.4" x2="0" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0Near" data-b="hubTrlS0TopNear" x1="-4.8" y1="40.8" x2="-4.8" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0West" data-b="hubTrlS0TopWest" x1="-16" y1="35.2" x2="-16" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0TopFar" data-b="hubTrlS0TopEast" x1="-11.2" y1="28.4" x2="0" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0TopEast" data-b="hubTrlS0TopNear" x1="0" y1="34" x2="-4.8" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0TopNear" data-b="hubTrlS0TopWest" x1="-4.8" y1="36.4" x2="-16" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS0TopWest" data-b="hubTrlS0TopFar" x1="-16" y1="30.8" x2="-11.2" y2="28.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1East" data-b="hubTrlS1Near" x1="19.2" y1="38.4" x2="14.4" y2="40.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1Near" data-b="hubTrlS1West" x1="14.4" y1="40.8" x2="3.2" y2="35.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1East" data-b="hubTrlS1TopEast" x1="19.2" y1="38.4" x2="19.2" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1Near" data-b="hubTrlS1TopNear" x1="14.4" y1="40.8" x2="14.4" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1West" data-b="hubTrlS1TopWest" x1="3.2" y1="35.2" x2="3.2" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1TopFar" data-b="hubTrlS1TopEast" x1="8" y1="28.4" x2="19.2" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1TopEast" data-b="hubTrlS1TopNear" x1="19.2" y1="34" x2="14.4" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1TopNear" data-b="hubTrlS1TopWest" x1="14.4" y1="36.4" x2="3.2" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS1TopWest" data-b="hubTrlS1TopFar" x1="3.2" y1="30.8" x2="8" y2="28.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2East" data-b="hubTrlS2Near" x1="38.4" y1="38.4" x2="33.6" y2="40.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2Near" data-b="hubTrlS2West" x1="33.6" y1="40.8" x2="22.4" y2="35.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2East" data-b="hubTrlS2TopEast" x1="38.4" y1="38.4" x2="38.4" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2Near" data-b="hubTrlS2TopNear" x1="33.6" y1="40.8" x2="33.6" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2West" data-b="hubTrlS2TopWest" x1="22.4" y1="35.2" x2="22.4" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2TopFar" data-b="hubTrlS2TopEast" x1="27.2" y1="28.4" x2="38.4" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2TopEast" data-b="hubTrlS2TopNear" x1="38.4" y1="34" x2="33.6" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2TopNear" data-b="hubTrlS2TopWest" x1="33.6" y1="36.4" x2="22.4" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS2TopWest" data-b="hubTrlS2TopFar" x1="22.4" y1="30.8" x2="27.2" y2="28.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3East" data-b="hubTrlS3Near" x1="57.6" y1="38.4" x2="52.8" y2="40.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3Near" data-b="hubTrlS3West" x1="52.8" y1="40.8" x2="41.6" y2="35.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3East" data-b="hubTrlS3TopEast" x1="57.6" y1="38.4" x2="57.6" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3Near" data-b="hubTrlS3TopNear" x1="52.8" y1="40.8" x2="52.8" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3West" data-b="hubTrlS3TopWest" x1="41.6" y1="35.2" x2="41.6" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3TopFar" data-b="hubTrlS3TopEast" x1="46.4" y1="28.4" x2="57.6" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3TopEast" data-b="hubTrlS3TopNear" x1="57.6" y1="34" x2="52.8" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3TopNear" data-b="hubTrlS3TopWest" x1="52.8" y1="36.4" x2="41.6" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS3TopWest" data-b="hubTrlS3TopFar" x1="41.6" y1="30.8" x2="46.4" y2="28.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4East" data-b="hubTrlS4Near" x1="76.8" y1="38.4" x2="72" y2="40.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4Near" data-b="hubTrlS4West" x1="72" y1="40.8" x2="60.8" y2="35.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4East" data-b="hubTrlS4TopEast" x1="76.8" y1="38.4" x2="76.8" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4Near" data-b="hubTrlS4TopNear" x1="72" y1="40.8" x2="72" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4West" data-b="hubTrlS4TopWest" x1="60.8" y1="35.2" x2="60.8" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4TopFar" data-b="hubTrlS4TopEast" x1="65.6" y1="28.4" x2="76.8" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4TopEast" data-b="hubTrlS4TopNear" x1="76.8" y1="34" x2="72" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4TopNear" data-b="hubTrlS4TopWest" x1="72" y1="36.4" x2="60.8" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS4TopWest" data-b="hubTrlS4TopFar" x1="60.8" y1="30.8" x2="65.6" y2="28.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5East" data-b="hubTrlS5Near" x1="96" y1="38.4" x2="91.2" y2="40.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5Near" data-b="hubTrlS5West" x1="91.2" y1="40.8" x2="80" y2="35.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5East" data-b="hubTrlS5TopEast" x1="96" y1="38.4" x2="96" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5Near" data-b="hubTrlS5TopNear" x1="91.2" y1="40.8" x2="91.2" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5West" data-b="hubTrlS5TopWest" x1="80" y1="35.2" x2="80" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5TopFar" data-b="hubTrlS5TopEast" x1="84.8" y1="28.4" x2="96" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5TopEast" data-b="hubTrlS5TopNear" x1="96" y1="34" x2="91.2" y2="36.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5TopNear" data-b="hubTrlS5TopWest" x1="91.2" y1="36.4" x2="80" y2="30.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubTrlS5TopWest" data-b="hubTrlS5TopFar" x1="80" y1="30.8" x2="84.8" y2="28.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeEast" data-b="hubOfficeNear" x1="106.4" y1="45.2" x2="96.8" y2="50"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeNear" data-b="hubOfficeWest" x1="96.8" y1="50" x2="85.6" y2="44.4"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeEast" data-b="hubOfficeTopEast" x1="106.4" y1="45.2" x2="106.4" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeNear" data-b="hubOfficeTopNear" x1="96.8" y1="50" x2="96.8" y2="38.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeWest" data-b="hubOfficeTopWest" x1="85.6" y1="44.4" x2="85.6" y2="33.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeTopFar" data-b="hubOfficeTopEast" x1="95.2" y1="28.4" x2="106.4" y2="34"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeTopEast" data-b="hubOfficeTopNear" x1="106.4" y1="34" x2="96.8" y2="38.8"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeTopNear" data-b="hubOfficeTopWest" x1="96.8" y1="38.8" x2="85.6" y2="33.2"/>
+    <line class="ds-line" data-part="hubFront" data-a="hubOfficeTopWest" data-b="hubOfficeTopFar" x1="85.6" y1="33.2" x2="95.2" y2="28.4"/>
+    <circle class="ds-dot ds-dot--ground" data-part="hubFront" data-p="hubYardFar" cx="14.4" cy="16.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="hubFront" data-p="hubYardEast" cx="86.4" cy="52.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="hubFront" data-p="hubYardNear" cx="65.6" cy="63.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="hubFront" data-p="hubYardWest" cx="-6.4" cy="27.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule0A" cx="14.29" cy="34.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule0B" cx="14.29" cy="45.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule1A" cx="24.57" cy="34.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule1B" cx="24.57" cy="45.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule2A" cx="34.86" cy="34.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule2B" cx="34.86" cy="45.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule3A" cx="45.14" cy="34.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule3B" cx="45.14" cy="45.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule4A" cx="55.43" cy="34.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule4B" cx="55.43" cy="45.2" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule5A" cx="65.71" cy="34.8" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="hubFront" data-p="hubYardRule5B" cx="65.71" cy="45.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS0Near" cx="-4.8" cy="40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS0East" cx="0" cy="38.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS0West" cx="-16" cy="35.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS0TopFar" cx="-11.2" cy="28.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS0TopEast" cx="0" cy="34" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS0TopNear" cx="-4.8" cy="36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS0TopWest" cx="-16" cy="30.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS1Near" cx="14.4" cy="40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS1East" cx="19.2" cy="38.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS1West" cx="3.2" cy="35.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS1TopFar" cx="8" cy="28.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS1TopEast" cx="19.2" cy="34" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS1TopNear" cx="14.4" cy="36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS1TopWest" cx="3.2" cy="30.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS2Near" cx="33.6" cy="40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS2East" cx="38.4" cy="38.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS2West" cx="22.4" cy="35.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS2TopFar" cx="27.2" cy="28.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS2TopEast" cx="38.4" cy="34" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS2TopNear" cx="33.6" cy="36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS2TopWest" cx="22.4" cy="30.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS3Near" cx="52.8" cy="40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS3East" cx="57.6" cy="38.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS3West" cx="41.6" cy="35.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS3TopFar" cx="46.4" cy="28.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS3TopEast" cx="57.6" cy="34" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS3TopNear" cx="52.8" cy="36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS3TopWest" cx="41.6" cy="30.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS4Near" cx="72" cy="40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS4East" cx="76.8" cy="38.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS4West" cx="60.8" cy="35.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS4TopFar" cx="65.6" cy="28.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS4TopEast" cx="76.8" cy="34" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS4TopNear" cx="72" cy="36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS4TopWest" cx="60.8" cy="30.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS5Near" cx="91.2" cy="40.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS5East" cx="96" cy="38.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS5West" cx="80" cy="35.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS5TopFar" cx="84.8" cy="28.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS5TopEast" cx="96" cy="34" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS5TopNear" cx="91.2" cy="36.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubTrlS5TopWest" cx="80" cy="30.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubOfficeNear" cx="96.8" cy="50" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubOfficeEast" cx="106.4" cy="45.2" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubOfficeWest" cx="85.6" cy="44.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubOfficeTopFar" cx="95.2" cy="28.4" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubOfficeTopEast" cx="106.4" cy="34" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubOfficeTopNear" cx="96.8" cy="38.8" r="0.95"/>
+    <circle class="ds-dot" data-part="hubFront" data-p="hubOfficeTopWest" cx="85.6" cy="33.2" r="0.95"/>
+    </g>
+    <g data-part="originTermFront">
+    <polygon class="ds-face ds-face--apron" data-part="originTermFront" data-face="otYardFar otYardEast otYardNear otYardWest" points="-98.8,27.4 -46.8,53.4 -61.2,60.6 -113.2,34.6"/>
+    <polygon class="ds-face ds-face--roof" data-part="originTermFront" data-face="otTrl0TopFar otTrl0TopEast otTrl0TopNear otTrl0TopWest" points="-112,34.4 -100.8,40 -105.6,42.4 -116.8,36.8"/>
+    <polygon class="ds-face ds-face--east" data-part="originTermFront" data-face="otTrl0East otTrl0Near otTrl0TopNear otTrl0TopEast" points="-100.8,44.4 -105.6,46.8 -105.6,42.4 -100.8,40"/>
+    <polygon class="ds-face ds-face--south" data-part="originTermFront" data-face="otTrl0Near otTrl0West otTrl0TopWest otTrl0TopNear" points="-105.6,46.8 -116.8,41.2 -116.8,36.8 -105.6,42.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="originTermFront" data-face="otTrl1TopFar otTrl1TopEast otTrl1TopNear otTrl1TopWest" points="-92.8,34.4 -81.6,40 -86.4,42.4 -97.6,36.8"/>
+    <polygon class="ds-face ds-face--east" data-part="originTermFront" data-face="otTrl1East otTrl1Near otTrl1TopNear otTrl1TopEast" points="-81.6,44.4 -86.4,46.8 -86.4,42.4 -81.6,40"/>
+    <polygon class="ds-face ds-face--south" data-part="originTermFront" data-face="otTrl1Near otTrl1West otTrl1TopWest otTrl1TopNear" points="-86.4,46.8 -97.6,41.2 -97.6,36.8 -86.4,42.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="originTermFront" data-face="otTrl2TopFar otTrl2TopEast otTrl2TopNear otTrl2TopWest" points="-73.6,34.4 -62.4,40 -67.2,42.4 -78.4,36.8"/>
+    <polygon class="ds-face ds-face--east" data-part="originTermFront" data-face="otTrl2East otTrl2Near otTrl2TopNear otTrl2TopEast" points="-62.4,44.4 -67.2,46.8 -67.2,42.4 -62.4,40"/>
+    <polygon class="ds-face ds-face--south" data-part="originTermFront" data-face="otTrl2Near otTrl2West otTrl2TopWest otTrl2TopNear" points="-67.2,46.8 -78.4,41.2 -78.4,36.8 -67.2,42.4"/>
+    <polygon class="ds-face ds-face--roof" data-part="originTermFront" data-face="otTrl3TopFar otTrl3TopEast otTrl3TopNear otTrl3TopWest" points="-54.4,34.4 -43.2,40 -48,42.4 -59.2,36.8"/>
+    <polygon class="ds-face ds-face--east" data-part="originTermFront" data-face="otTrl3East otTrl3Near otTrl3TopNear otTrl3TopEast" points="-43.2,44.4 -48,46.8 -48,42.4 -43.2,40"/>
+    <polygon class="ds-face ds-face--south" data-part="originTermFront" data-face="otTrl3Near otTrl3West otTrl3TopWest otTrl3TopNear" points="-48,46.8 -59.2,41.2 -59.2,36.8 -48,42.4"/>
+    <line class="ds-line ds-line--ground" data-part="originTermFront" data-a="otYardFar" data-b="otYardEast" x1="-98.8" y1="27.4" x2="-46.8" y2="53.4"/>
+    <line class="ds-line ds-line--ground" data-part="originTermFront" data-a="otYardEast" data-b="otYardNear" x1="-46.8" y1="53.4" x2="-61.2" y2="60.6"/>
+    <line class="ds-line ds-line--ground" data-part="originTermFront" data-a="otYardNear" data-b="otYardWest" x1="-61.2" y1="60.6" x2="-113.2" y2="34.6"/>
+    <line class="ds-line ds-line--ground" data-part="originTermFront" data-a="otYardWest" data-b="otYardFar" x1="-113.2" y1="34.6" x2="-98.8" y2="27.4"/>
+    <line class="ds-line ds-line--lot" data-part="originTermFront" data-a="otYardRule0A" data-b="otYardRule0B" x1="-95.6" y1="40.4" x2="-95.6" y2="47.6"/>
+    <line class="ds-line ds-line--lot" data-part="originTermFront" data-a="otYardRule1A" data-b="otYardRule1B" x1="-85.2" y1="40.4" x2="-85.2" y2="47.6"/>
+    <line class="ds-line ds-line--lot" data-part="originTermFront" data-a="otYardRule2A" data-b="otYardRule2B" x1="-74.8" y1="40.4" x2="-74.8" y2="47.6"/>
+    <line class="ds-line ds-line--lot" data-part="originTermFront" data-a="otYardRule3A" data-b="otYardRule3B" x1="-64.4" y1="40.4" x2="-64.4" y2="47.6"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0East" data-b="otTrl0Near" x1="-100.8" y1="44.4" x2="-105.6" y2="46.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0Near" data-b="otTrl0West" x1="-105.6" y1="46.8" x2="-116.8" y2="41.2"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0East" data-b="otTrl0TopEast" x1="-100.8" y1="44.4" x2="-100.8" y2="40"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0Near" data-b="otTrl0TopNear" x1="-105.6" y1="46.8" x2="-105.6" y2="42.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0West" data-b="otTrl0TopWest" x1="-116.8" y1="41.2" x2="-116.8" y2="36.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0TopFar" data-b="otTrl0TopEast" x1="-112" y1="34.4" x2="-100.8" y2="40"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0TopEast" data-b="otTrl0TopNear" x1="-100.8" y1="40" x2="-105.6" y2="42.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0TopNear" data-b="otTrl0TopWest" x1="-105.6" y1="42.4" x2="-116.8" y2="36.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl0TopWest" data-b="otTrl0TopFar" x1="-116.8" y1="36.8" x2="-112" y2="34.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1East" data-b="otTrl1Near" x1="-81.6" y1="44.4" x2="-86.4" y2="46.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1Near" data-b="otTrl1West" x1="-86.4" y1="46.8" x2="-97.6" y2="41.2"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1East" data-b="otTrl1TopEast" x1="-81.6" y1="44.4" x2="-81.6" y2="40"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1Near" data-b="otTrl1TopNear" x1="-86.4" y1="46.8" x2="-86.4" y2="42.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1West" data-b="otTrl1TopWest" x1="-97.6" y1="41.2" x2="-97.6" y2="36.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1TopFar" data-b="otTrl1TopEast" x1="-92.8" y1="34.4" x2="-81.6" y2="40"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1TopEast" data-b="otTrl1TopNear" x1="-81.6" y1="40" x2="-86.4" y2="42.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1TopNear" data-b="otTrl1TopWest" x1="-86.4" y1="42.4" x2="-97.6" y2="36.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl1TopWest" data-b="otTrl1TopFar" x1="-97.6" y1="36.8" x2="-92.8" y2="34.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2East" data-b="otTrl2Near" x1="-62.4" y1="44.4" x2="-67.2" y2="46.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2Near" data-b="otTrl2West" x1="-67.2" y1="46.8" x2="-78.4" y2="41.2"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2East" data-b="otTrl2TopEast" x1="-62.4" y1="44.4" x2="-62.4" y2="40"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2Near" data-b="otTrl2TopNear" x1="-67.2" y1="46.8" x2="-67.2" y2="42.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2West" data-b="otTrl2TopWest" x1="-78.4" y1="41.2" x2="-78.4" y2="36.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2TopFar" data-b="otTrl2TopEast" x1="-73.6" y1="34.4" x2="-62.4" y2="40"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2TopEast" data-b="otTrl2TopNear" x1="-62.4" y1="40" x2="-67.2" y2="42.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2TopNear" data-b="otTrl2TopWest" x1="-67.2" y1="42.4" x2="-78.4" y2="36.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl2TopWest" data-b="otTrl2TopFar" x1="-78.4" y1="36.8" x2="-73.6" y2="34.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3East" data-b="otTrl3Near" x1="-43.2" y1="44.4" x2="-48" y2="46.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3Near" data-b="otTrl3West" x1="-48" y1="46.8" x2="-59.2" y2="41.2"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3East" data-b="otTrl3TopEast" x1="-43.2" y1="44.4" x2="-43.2" y2="40"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3Near" data-b="otTrl3TopNear" x1="-48" y1="46.8" x2="-48" y2="42.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3West" data-b="otTrl3TopWest" x1="-59.2" y1="41.2" x2="-59.2" y2="36.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3TopFar" data-b="otTrl3TopEast" x1="-54.4" y1="34.4" x2="-43.2" y2="40"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3TopEast" data-b="otTrl3TopNear" x1="-43.2" y1="40" x2="-48" y2="42.4"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3TopNear" data-b="otTrl3TopWest" x1="-48" y1="42.4" x2="-59.2" y2="36.8"/>
+    <line class="ds-line" data-part="originTermFront" data-a="otTrl3TopWest" data-b="otTrl3TopFar" x1="-59.2" y1="36.8" x2="-54.4" y2="34.4"/>
+    <circle class="ds-dot ds-dot--ground" data-part="originTermFront" data-p="otYardFar" cx="-98.8" cy="27.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="originTermFront" data-p="otYardEast" cx="-46.8" cy="53.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="originTermFront" data-p="otYardNear" cx="-61.2" cy="60.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--ground" data-part="originTermFront" data-p="otYardWest" cx="-113.2" cy="34.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="originTermFront" data-p="otYardRule0A" cx="-95.6" cy="40.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="originTermFront" data-p="otYardRule0B" cx="-95.6" cy="47.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="originTermFront" data-p="otYardRule1A" cx="-85.2" cy="40.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="originTermFront" data-p="otYardRule1B" cx="-85.2" cy="47.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="originTermFront" data-p="otYardRule2A" cx="-74.8" cy="40.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="originTermFront" data-p="otYardRule2B" cx="-74.8" cy="47.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="originTermFront" data-p="otYardRule3A" cx="-64.4" cy="40.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--lot" data-part="originTermFront" data-p="otYardRule3B" cx="-64.4" cy="47.6" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl0Near" cx="-105.6" cy="46.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl0East" cx="-100.8" cy="44.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl0West" cx="-116.8" cy="41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl0TopFar" cx="-112" cy="34.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl0TopEast" cx="-100.8" cy="40" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl0TopNear" cx="-105.6" cy="42.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl0TopWest" cx="-116.8" cy="36.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl1Near" cx="-86.4" cy="46.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl1East" cx="-81.6" cy="44.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl1West" cx="-97.6" cy="41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl1TopFar" cx="-92.8" cy="34.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl1TopEast" cx="-81.6" cy="40" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl1TopNear" cx="-86.4" cy="42.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl1TopWest" cx="-97.6" cy="36.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl2Near" cx="-67.2" cy="46.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl2East" cx="-62.4" cy="44.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl2West" cx="-78.4" cy="41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl2TopFar" cx="-73.6" cy="34.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl2TopEast" cx="-62.4" cy="40" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl2TopNear" cx="-67.2" cy="42.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl2TopWest" cx="-78.4" cy="36.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl3Near" cx="-48" cy="46.8" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl3East" cx="-43.2" cy="44.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl3West" cx="-59.2" cy="41.2" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl3TopFar" cx="-54.4" cy="34.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl3TopEast" cx="-43.2" cy="40" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl3TopNear" cx="-48" cy="42.4" r="0.95"/>
+    <circle class="ds-dot" data-part="originTermFront" data-p="otTrl3TopWest" cx="-59.2" cy="36.8" r="0.95"/>
+    </g>
+    <g data-part="ediMesh">
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link0A" data-b="link0B" x1="-144" y1="-50" x2="-80" y2="-14"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link1A" data-b="link1B" x1="-80" y1="-14" x2="-16" y2="-58"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link2A" data-b="link2B" x1="-16" y1="-58" x2="40" y2="-18"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link3A" data-b="link3B" x1="40" y1="-18" x2="104" y2="-54"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link4A" data-b="link4B" x1="104" y1="-54" x2="152" y2="-22"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link5A" data-b="link5B" x1="-144" y1="-50" x2="40" y2="-18"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link6A" data-b="link6B" x1="40" y1="-18" x2="152" y2="-22"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link7A" data-b="link7B" x1="-144" y1="-50" x2="-104" y2="-70"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link8A" data-b="link8B" x1="-104" y1="-70" x2="40" y2="-18"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link9A" data-b="link9B" x1="40" y1="-18" x2="80" y2="-68"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link10A" data-b="link10B" x1="80" y1="-68" x2="-144" y2="-50"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="link11A" data-b="link11B" x1="-144" y1="-50" x2="152" y2="-22"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="shipperNEA" data-b="shipperNEB" x1="-144" y1="-53.4" x2="-137.2" y2="-50"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="shipperESA" data-b="shipperESB" x1="-137.2" y1="-50" x2="-144" y2="-46.6"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="shipperSWA" data-b="shipperSWB" x1="-144" y1="-46.6" x2="-150.8" y2="-50"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="shipperWNA" data-b="shipperWNB" x1="-150.8" y1="-50" x2="-144" y2="-53.4"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="originTermNEA" data-b="originTermNEB" x1="-80" y1="-17.4" x2="-73.2" y2="-14"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="originTermESA" data-b="originTermESB" x1="-73.2" y1="-14" x2="-80" y2="-10.6"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="originTermSWA" data-b="originTermSWB" x1="-80" y1="-10.6" x2="-86.8" y2="-14"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="originTermWNA" data-b="originTermWNB" x1="-86.8" y1="-14" x2="-80" y2="-17.4"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="relayNEA" data-b="relayNEB" x1="-16" y1="-61.4" x2="-9.2" y2="-58"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="relayESA" data-b="relayESB" x1="-9.2" y1="-58" x2="-16" y2="-54.6"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="relaySWA" data-b="relaySWB" x1="-16" y1="-54.6" x2="-22.8" y2="-58"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="relayWNA" data-b="relayWNB" x1="-22.8" y1="-58" x2="-16" y2="-61.4"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="hubNEA" data-b="hubNEB" x1="40" y1="-21.4" x2="46.8" y2="-18"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="hubESA" data-b="hubESB" x1="46.8" y1="-18" x2="40" y2="-14.6"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="hubSWA" data-b="hubSWB" x1="40" y1="-14.6" x2="33.2" y2="-18"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="hubWNA" data-b="hubWNB" x1="33.2" y1="-18" x2="40" y2="-21.4"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="destTermNEA" data-b="destTermNEB" x1="104" y1="-57.4" x2="110.8" y2="-54"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="destTermESA" data-b="destTermESB" x1="110.8" y1="-54" x2="104" y2="-50.6"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="destTermSWA" data-b="destTermSWB" x1="104" y1="-50.6" x2="97.2" y2="-54"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="destTermWNA" data-b="destTermWNB" x1="97.2" y1="-54" x2="104" y2="-57.4"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="consigneeNEA" data-b="consigneeNEB" x1="152" y1="-25.4" x2="158.8" y2="-22"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="consigneeESA" data-b="consigneeESB" x1="158.8" y1="-22" x2="152" y2="-18.6"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="consigneeSWA" data-b="consigneeSWB" x1="152" y1="-18.6" x2="145.2" y2="-22"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="consigneeWNA" data-b="consigneeWNB" x1="145.2" y1="-22" x2="152" y2="-25.4"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="brokerNEA" data-b="brokerNEB" x1="-104" y1="-73.4" x2="-97.2" y2="-70"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="brokerESA" data-b="brokerESB" x1="-97.2" y1="-70" x2="-104" y2="-66.6"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="brokerSWA" data-b="brokerSWB" x1="-104" y1="-66.6" x2="-110.8" y2="-70"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="brokerWNA" data-b="brokerWNB" x1="-110.8" y1="-70" x2="-104" y2="-73.4"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="payerNEA" data-b="payerNEB" x1="80" y1="-71.4" x2="86.8" y2="-68"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="payerESA" data-b="payerESB" x1="86.8" y1="-68" x2="80" y2="-64.6"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="payerSWA" data-b="payerSWB" x1="80" y1="-64.6" x2="73.2" y2="-68"/>
+    <line class="ds-line ds-line--net" data-part="ediMesh" data-a="payerWNA" data-b="payerWNB" x1="73.2" y1="-68" x2="80" y2="-71.4"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link0A" cx="-144" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link0B" cx="-80" cy="-14" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link1A" cx="-80" cy="-14" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link1B" cx="-16" cy="-58" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link2A" cx="-16" cy="-58" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link2B" cx="40" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link3A" cx="40" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link3B" cx="104" cy="-54" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link4A" cx="104" cy="-54" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link4B" cx="152" cy="-22" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link5A" cx="-144" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link5B" cx="40" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link6A" cx="40" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link6B" cx="152" cy="-22" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link7A" cx="-144" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link7B" cx="-104" cy="-70" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link8A" cx="-104" cy="-70" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link8B" cx="40" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link9A" cx="40" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link9B" cx="80" cy="-68" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link10A" cx="80" cy="-68" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link10B" cx="-144" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link11A" cx="-144" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="link11B" cx="152" cy="-22" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="shipperNEA" cx="-144" cy="-53.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="shipperNEB" cx="-137.2" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="shipperESA" cx="-137.2" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="shipperESB" cx="-144" cy="-46.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="shipperSWA" cx="-144" cy="-46.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="shipperSWB" cx="-150.8" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="shipperWNA" cx="-150.8" cy="-50" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="shipperWNB" cx="-144" cy="-53.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="originTermNEA" cx="-80" cy="-17.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="originTermNEB" cx="-73.2" cy="-14" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="originTermESA" cx="-73.2" cy="-14" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="originTermESB" cx="-80" cy="-10.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="originTermSWA" cx="-80" cy="-10.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="originTermSWB" cx="-86.8" cy="-14" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="originTermWNA" cx="-86.8" cy="-14" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="originTermWNB" cx="-80" cy="-17.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="relayNEA" cx="-16" cy="-61.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="relayNEB" cx="-9.2" cy="-58" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="relayESA" cx="-9.2" cy="-58" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="relayESB" cx="-16" cy="-54.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="relaySWA" cx="-16" cy="-54.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="relaySWB" cx="-22.8" cy="-58" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="relayWNA" cx="-22.8" cy="-58" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="relayWNB" cx="-16" cy="-61.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="hubNEA" cx="40" cy="-21.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="hubNEB" cx="46.8" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="hubESA" cx="46.8" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="hubESB" cx="40" cy="-14.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="hubSWA" cx="40" cy="-14.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="hubSWB" cx="33.2" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="hubWNA" cx="33.2" cy="-18" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="hubWNB" cx="40" cy="-21.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="destTermNEA" cx="104" cy="-57.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="destTermNEB" cx="110.8" cy="-54" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="destTermESA" cx="110.8" cy="-54" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="destTermESB" cx="104" cy="-50.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="destTermSWA" cx="104" cy="-50.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="destTermSWB" cx="97.2" cy="-54" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="destTermWNA" cx="97.2" cy="-54" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="destTermWNB" cx="104" cy="-57.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="consigneeNEA" cx="152" cy="-25.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="consigneeNEB" cx="158.8" cy="-22" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="consigneeESA" cx="158.8" cy="-22" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="consigneeESB" cx="152" cy="-18.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="consigneeSWA" cx="152" cy="-18.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="consigneeSWB" cx="145.2" cy="-22" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="consigneeWNA" cx="145.2" cy="-22" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="consigneeWNB" cx="152" cy="-25.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="brokerNEA" cx="-104" cy="-73.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="brokerNEB" cx="-97.2" cy="-70" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="brokerESA" cx="-97.2" cy="-70" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="brokerESB" cx="-104" cy="-66.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="brokerSWA" cx="-104" cy="-66.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="brokerSWB" cx="-110.8" cy="-70" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="brokerWNA" cx="-110.8" cy="-70" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="brokerWNB" cx="-104" cy="-73.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="payerNEA" cx="80" cy="-71.4" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="payerNEB" cx="86.8" cy="-68" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="payerESA" cx="86.8" cy="-68" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="payerESB" cx="80" cy="-64.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="payerSWA" cx="80" cy="-64.6" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="payerSWB" cx="73.2" cy="-68" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="payerWNA" cx="73.2" cy="-68" r="0.95"/>
+    <circle class="ds-dot ds-dot--net" data-part="ediMesh" data-p="payerWNB" cx="80" cy="-71.4" r="0.95"/>
+    </g>
+    <g data-part="edi11Invoicem0">
+    <polygon class="ds-face ds-face--apron" data-part="edi11Invoicem0" data-face="docFar docEast docNear docWest" points="-1001.44,-1036.24 -991.52,-1031.28 -998.56,-1027.76 -1008.48,-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docFar" data-b="docEast" x1="-1001.44" y1="-1036.24" x2="-991.52" y2="-1031.28"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docEast" data-b="docNear" x1="-991.52" y1="-1031.28" x2="-998.56" y2="-1027.76"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docNear" data-b="docWest" x1="-998.56" y1="-1027.76" x2="-1008.48" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docWest" data-b="docFar" x1="-1008.48" y1="-1032.72" x2="-1001.44" y2="-1036.24"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docRule1A" data-b="docRule1B" x1="-1002.4" y1="-1032.72" x2="-996" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docRule2A" data-b="docRule2B" x1="-1002.4" y1="-1031.36" x2="-996" y2="-1031.36"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docFar" cx="-1001.44" cy="-1036.24" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docEast" cx="-991.52" cy="-1031.28" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docNear" cx="-998.56" cy="-1027.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docWest" cx="-1008.48" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docRule1A" cx="-1002.4" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docRule1B" cx="-996" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docRule2A" cx="-1002.4" cy="-1031.36" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docRule2B" cx="-996" cy="-1031.36" r="0.95"/>
+    </g>
+    <g data-part="edi11Invoicem1">
+    <polygon class="ds-face ds-face--apron" data-part="edi11Invoicem1" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem1" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem1" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem1" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem1" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem1" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem1" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem1" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem1" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+  </g>
+</svg>

@@ -27,14 +27,14 @@ export const routeFigure = figureOf('ediRoad', road, 'The route', 'road')
  * contributes what stands behind the road and what stands in front, which is the gap a truck
  * later drives through.
  */
-/** A rig parked mid-route, so the static frame shows the scale of a vehicle against a yard. */
-const parked = along(0.42)
+/** Where the rig waits before an act moves it: the start of the route, off-frame. */
+export const rigStart = along(0)
 
-/** Two messages sitting on the mesh, likewise — the acts will fly them in Phase 4. */
-const sampleTokens = [
-  { figure: shapes.doc('sampleDoc'), at: nodeAt('originTerm') },
-  { figure: shapes.status('sampleStatus'), at: nodeAt('hub') },
-]
+/** The rig as a part. Acts drive it; the static stage just parks it somewhere visible. */
+export const rigPart = (t: number) => {
+  const spot = along(t)
+  return { figure: truck, id: 'rig', at: spot.at, pose: spot.axis, depth: spot.depth } as const
+}
 
 export const stageParts = [
   { figure: routeFigure, depth: -100 },
@@ -46,13 +46,19 @@ export const stageParts = [
       { figure: place.front, depth: place.frontDepth },
     ]
   }),
-  { figure: truck, id: 'rig', at: parked.at, pose: parked.axis, depth: parked.depth },
   { figure: mesh, depth: 100 },
-  ...sampleTokens.map((t) => ({ ...t, depth: 101 })),
 ] as const
 
+/** Tokens fly above the mesh, so they are never lost behind a link. */
+export const TOKEN_DEPTH = 101
+
 const layout = {
-  parts: stageParts,
+  parts: [
+    ...stageParts,
+    rigPart(0.42),
+    { figure: shapes.doc('sampleDoc'), at: nodeAt('originTerm'), depth: TOKEN_DEPTH },
+    { figure: shapes.status('sampleStatus'), at: nodeAt('hub'), depth: TOKEN_DEPTH },
+  ],
   viewBox: HERO_VIEWBOX,
   // The scene spans a working yard and a mesh of thin links, so the median-edge default
   // sizes dots for the buildings and buries the network. Set it against the smaller detail.
