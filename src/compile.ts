@@ -7,7 +7,7 @@
  */
 
 import type { Scene } from './model.ts'
-import { resolve, type ResolvedScene } from './layout.ts'
+import { resolve, timelineOf, type ResolvedScene } from './layout.ts'
 import { renderSvg, type SvgOptions } from './render/svg.ts'
 
 export interface CompileOptions extends SvgOptions {
@@ -18,8 +18,10 @@ export interface CompileOptions extends SvgOptions {
 export interface CompiledScene {
   readonly name: string
   readonly resolved: ResolvedScene
-  /** Standalone SVG document, suitable for writing to a .svg file. */
+  /** Standalone SVG document, suitable for writing to a .svg file — XML-safe. */
   readonly svg: string
+  /** The same drawing as it sits inside an HTML page. */
+  readonly inline: string
   /** The pasteable block: the SVG, plus pose data and the runtime tag when animated. */
   readonly html: string
   readonly animated: boolean
@@ -27,31 +29,24 @@ export interface CompiledScene {
 
 /** The runtime payload for an animated scene: everything it needs, and nothing more. */
 export const animationPayload = (resolved: ResolvedScene): string | undefined => {
-  const animation = resolved.animation
-  if (animation === undefined) return undefined
-  return JSON.stringify({
-    cycle: animation.cycle,
-    timings: animation.timings,
-    easing: animation.easing,
-    mode: animation.mode,
-    frames: animation.frames,
-    ...(animation.depths === undefined ? {} : { depths: animation.depths }),
-  })
+  const config = timelineOf(resolved)
+  return config === undefined ? undefined : JSON.stringify(config)
 }
 
 export const compile = (scene: Scene, options: CompileOptions = {}): CompiledScene => {
   const resolved = resolve(scene)
-  const svg = renderSvg(resolved, options)
+  const svg = renderSvg(resolved, { ...options, xml: true })
+  const inline = renderSvg(resolved, options)
   const payload = animationPayload(resolved)
 
   const html =
     payload === undefined
-      ? svg
+      ? inline
       : [
-          svg,
+          inline,
           `<script type="application/json" data-dotscene-poses="${resolved.name}">${payload}</script>`,
           `<script src="${options.runtimeSrc ?? './dotscene.min.js'}" defer></script>`,
         ].join('\n')
 
-  return { name: resolved.name, resolved, svg, html, animated: payload !== undefined }
+  return { name: resolved.name, resolved, svg, inline, html, animated: payload !== undefined }
 }

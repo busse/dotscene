@@ -44,7 +44,8 @@ describe('resolve', () => {
     const resolved = resolve(
       defineScene('s', { parts: [{ figure: bar, at: [5, 5] }], animate: { cycle: ['tip'] } }),
     )
-    expect(resolved.animation?.frames.tip?.bar).toEqual({ top: [9, 5], base: [5, 15] })
+    expect(resolved.animation?.points.bar).toEqual(['top', 'base'])
+    expect(resolved.animation?.frames.tip?.bar).toEqual([9, 5, 5, 15])
   })
 
   it('names the part it animates even when the scene has several', () => {
@@ -64,8 +65,8 @@ describe('renderSvg', () => {
     expect(svg).toMatchInlineSnapshot(`
       "<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="bar" viewBox="-1 -1 2 12" role="img">
         <title>A bar</title>
-        <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="bar"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
-        <defs><clipPath id="ds-clip-bar"><rect x="-1" y="-1" width="2" height="12"/></clipPath></defs>
+        <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="bar"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
+        <defs><clipPath id="ds-clip-bar"><rect class="ds-clip" x="-1" y="-1" width="2" height="12"/></clipPath></defs>
         <g clip-path="url(#ds-clip-bar)">
           <g data-part="bar">
           <line class="ds-line" data-part="bar" data-a="top" data-b="base" x1="0" y1="0" x2="0" y2="10"/>
@@ -101,11 +102,21 @@ describe('renderSvg', () => {
       viewBox: [0, 0, 100, 20],
     })
     const svg = renderSvg(resolve(wide))
-    expect(svg).toContain('<clipPath id="ds-clip-stage"><rect x="0" y="0" width="100" height="20"/></clipPath>')
+    expect(svg).toContain('<clipPath id="ds-clip-stage"><rect class="ds-clip" x="0" y="0" width="100" height="20"/></clipPath>')
     expect(svg).toContain('<g clip-path="url(#ds-clip-stage)">')
     // The off-stage geometry is still emitted — the runtime needs it to animate — but the
     // clip is what keeps it invisible until a keyframe walks it on.
     expect(svg).toContain('cx="500"')
+  })
+
+  it('escapes the stylesheet for a standalone file, where a nesting & is fatal XML', () => {
+    const themed = defineScene('themed', { parts: [{ figure: bar }], css: ':root[data-theme="dark"] &{.ds-line{stroke:#fff}}' })
+    const file = renderSvg(resolve(themed), { xml: true })
+    const block = renderSvg(resolve(themed))
+    expect(file).toContain('&amp;{')
+    expect(file).not.toMatch(/&\{/)
+    // Inside an HTML page a <style> is raw text, so the block keeps the & literal.
+    expect(block).toContain('&{')
   })
 
   it('names the clip after the scene so two scenes on one page do not collide', () => {

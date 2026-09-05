@@ -12,8 +12,8 @@ import { writeFile, mkdir } from 'node:fs/promises'
 import { dirname, relative, resolve as resolvePath } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { compile } from './compile.ts'
-import { resolve } from './layout.ts'
-import { atKeyframe, partId, withPose, type Scene } from './model.ts'
+import { keyframeTime, resolve, resolveAt, type ResolvedScene } from './layout.ts'
+import { partId, withPose, type Scene } from './model.ts'
 import { renderAscii } from './render/ascii.ts'
 import { loadScenes, type LoadedScene } from './load.ts'
 import { sceneToJson } from './serialize.ts'
@@ -34,8 +34,10 @@ Usage
 Options
   --dir <path>      where scenes live (default: scenes)
   --json            machine-readable output
-  --pose <name>     which pose to inspect or preview
+  --pose <name>     which pose or keyframe to inspect or preview
   --poses           preview every pose in turn
+  --at <ms>         preview the animation at a millisecond, camera and all
+  --every <ms>      preview the whole animation as a flipbook, one frame per interval
   --width <n>       preview width in characters (default: 44)
   --labels          annotate preview dots with their point names
   --out <path>      build output directory (default: docs, served by GitHub Pages)
@@ -47,6 +49,8 @@ interface Options {
   readonly json: boolean
   readonly pose?: string
   readonly poses: boolean
+  readonly at?: number
+  readonly every?: number
   readonly width: number
   readonly labels: boolean
   readonly out: string
@@ -93,13 +97,15 @@ const sceneSteps = (scene: Scene): readonly string[] => {
 }
 
 /**
- * Stage a scene at a named step. A keyframe name wins over a pose name, so previewing a
- * staged animation shows the whole tableau rather than one part changing shape in place.
+ * Resolve a scene at a named step. A keyframe name wins over a pose name, so previewing a
+ * staged animation shows the whole tableau — every part where the timeline puts it at that
+ * instant, camera included — rather than one part changing shape in place.
  */
-const staged = (scene: Scene, name: string): Scene =>
-  scene.animate?.keyframes?.some((keyframe) => keyframe.name === name) === true
-    ? atKeyframe(scene, name)
-    : withPose(scene, name)
+const staged = (scene: Scene, name: string): ResolvedScene => {
+  const resolved = resolve(scene)
+  const ms = keyframeTime(resolved, name)
+  return ms === undefined ? resolve(withPose(scene, name)) : resolveAt(scene, ms)
+}
 
 const cmdList = (scenes: Map<string, LoadedScene>, options: Options): void => {
   const rows = [...scenes.values()].map(({ scene, file }) => ({
@@ -127,8 +133,9 @@ const cmdList = (scenes: Map<string, LoadedScene>, options: Options): void => {
 }
 
 const cmdInspect = (loaded: LoadedScene, options: Options): void => {
-  const scene = options.pose === undefined ? loaded.scene : staged(loaded.scene, options.pose)
-  const resolved = resolve(scene)
+  const scene = loaded.scene
+  const resolved =
+    options.at !== undefined ? resolveAt(scene, options.at) : options.pose === undefined ? resolve(scene) : staged(scene, options.pose)
 
   if (options.json) {
     process.stdout.write(
@@ -175,27 +182,44 @@ const cmdInspect = (loaded: LoadedScene, options: Options): void => {
   }
   if (resolved.animation !== undefined) {
     const anim = resolved.animation
-    process.stdout.write(`\n  animation  ${anim.mode}, ${anim.easing}, moving ${anim.parts.join(', ')}\n`)
-    for (const name of anim.cycle) {
-      const timing = anim.timings[name]!
-      const movers = Object.keys(anim.frames[name] ?? {})
-      process.stdout.write(
-        `    ${name.padEnd(12)} ${timing.duration}ms in, ${timing.hold}ms hold   [${movers.join(', ')}]\n`,
-      )
+    process.stdout.write(
+      `\n  animation  ${anim.mode}, ${anim.easing}, ${anim.cycle.length} keyframes, ${anim.duration}ms per lap${
+        anim.camera === undefined ? '' : ', camera moves'
+      }\n    moving ${anim.parts.join(', ')}\n`,
+    )
+    // A composed timeline can run to hundreds of steps; the list is for the hand-staged case.
+    if (anim.cycle.length <= 40) {
+      for (const name of anim.cycle) {
+        const timing = anim.timings[name]!
+        const movers = Object.keys(anim.frames[name] ?? {})
+        process.stdout.write(
+          `    ${name.padEnd(12)} ${timing.duration}ms in, ${timing.hold}ms hold   [${movers.join(', ')}]\n`,
+        )
+      }
     }
   }
 }
 
 const cmdPreview = (loaded: LoadedScene, options: Options): void => {
-  const names = options.poses ? (loaded.scene.animate?.cycle ?? sceneSteps(loaded.scene)) : [options.pose ?? '']
+  const draw = (resolved: ResolvedScene): string => renderAscii(resolved, { width: options.width, labels: options.labels })
 
-  const frames = names.map((pose) => {
-    const scene = pose === '' ? loaded.scene : staged(loaded.scene, pose)
-    return {
-      pose: pose === '' ? undefined : pose,
-      art: renderAscii(resolve(scene), { width: options.width, labels: options.labels }),
-    }
-  })
+  let frames: { pose?: string; at?: number; art: string }[]
+  if (options.every !== undefined || options.at !== undefined) {
+    // Time-based: the same sampler the browser runs, so a frame here is a frame there.
+    const lap = resolve(loaded.scene).animation?.duration ?? 0
+    const step = options.every
+    const instants =
+      step === undefined || step <= 0
+        ? [options.at ?? 0]
+        : Array.from({ length: Math.max(1, Math.ceil(lap / step)) }, (_u, i) => i * step)
+    frames = instants.map((at) => ({ at, art: draw(resolveAt(loaded.scene, at)) }))
+  } else {
+    const names = options.poses ? (loaded.scene.animate?.cycle ?? sceneSteps(loaded.scene)) : [options.pose ?? '']
+    frames = names.map((pose) => ({
+      ...(pose === '' ? {} : { pose }),
+      art: draw(pose === '' ? resolve(loaded.scene) : staged(loaded.scene, pose)),
+    }))
+  }
 
   if (options.json) {
     process.stdout.write(`${JSON.stringify({ ok: true, scene: loaded.scene.name, frames }, null, 2)}\n`)
@@ -203,6 +227,7 @@ const cmdPreview = (loaded: LoadedScene, options: Options): void => {
   }
   for (const frame of frames) {
     if (frame.pose !== undefined) process.stdout.write(`\n${loaded.scene.name} · ${frame.pose}\n`)
+    if (frame.at !== undefined) process.stdout.write(`\n${loaded.scene.name} · ${frame.at}ms\n`)
     process.stdout.write(`${frame.art}\n`)
   }
 }
@@ -334,6 +359,8 @@ export const run = async (argv: readonly string[]): Promise<void> => {
       json: { type: 'boolean', default: false },
       pose: { type: 'string' },
       poses: { type: 'boolean', default: false },
+      at: { type: 'string' },
+      every: { type: 'string' },
       width: { type: 'string', default: '44' },
       labels: { type: 'boolean', default: false },
       out: { type: 'string', default: 'docs' },
@@ -346,6 +373,8 @@ export const run = async (argv: readonly string[]): Promise<void> => {
     json: values.json!,
     ...(values.pose === undefined ? {} : { pose: values.pose }),
     poses: values.poses!,
+    ...(values.at === undefined ? {} : { at: Number.parseFloat(values.at) || 0 }),
+    ...(values.every === undefined ? {} : { every: Number.parseFloat(values.every) || 0 }),
     width: Number.parseInt(values.width!, 10) || 44,
     labels: values.labels!,
     out: values.out!,

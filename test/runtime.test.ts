@@ -72,13 +72,17 @@ const fakeSvg = () => {
 }
 
 /** Wrap a part's points in the scene-frame shape the compiler emits. */
-const forBar = (points: Record<string, readonly [number, number]>) => ({ bar: points })
+/** The bar's frame, packed in its points order: top, then base. */
+const forBar = (points: { top: readonly [number, number]; base?: readonly [number, number] }) => ({
+  bar: [...points.top, ...(points.base ?? [])],
+})
 
 const timing = (names: readonly string[], duration = 100, hold = 100) =>
   Object.fromEntries(names.map((name) => [name, { duration, hold }]))
 
 const config = (overrides: Partial<SceneConfig> = {}): SceneConfig => ({
   cycle: ['a', 'b'],
+  points: { bar: ['top', 'base'] },
   frames: {
     a: forBar({ top: [0, 0], base: [0, 10] }),
     b: forBar({ top: [10, 0], base: [0, 10] }),
@@ -245,9 +249,10 @@ describe('multi-part scenes', () => {
 
   const twoPartConfig: SceneConfig = {
     cycle: ['start', 'end'],
+    points: { walker: ['head'], bag: ['tie'] },
     frames: {
-      start: { walker: { head: [0, 0] }, bag: { tie: [10, 0] } },
-      end: { walker: { head: [100, 0] }, bag: { tie: [110, 0] } },
+      start: { walker: [0, 0], bag: [10, 0] },
+      end: { walker: [100, 0], bag: [110, 0] },
     },
     timings: { start: { duration: 100, hold: 100 }, end: { duration: 100, hold: 100 } },
     easing: 'linear',
@@ -301,9 +306,10 @@ describe('moving faces', () => {
     }
     const handle = mountScene(svg, {
       cycle: ['start', 'end'],
+      points: { bar: ['a', 'b'] },
       frames: {
-        start: { bar: { a: [0, 0], b: [1, 1] } },
-        end: { bar: { a: [10, 0], b: [11, 1] } },
+        start: { bar: [0, 0, 1, 1] },
+        end: { bar: [10, 0, 11, 1] },
       },
       timings: { start: { duration: 100, hold: 100 }, end: { duration: 100, hold: 100 } },
       easing: 'linear',
@@ -345,6 +351,7 @@ describe('re-stacking by depth', () => {
     byFrame: Record<string, Record<string, number>>,
   ): SceneConfig => ({
     cycle: ['start', 'end'],
+    points: {},
     frames: { start: {}, end: {} },
     timings: { start: { duration: 100, hold: 100 }, end: { duration: 100, hold: 100 } },
     depths: { base, byFrame },
@@ -376,6 +383,7 @@ describe('re-stacking by depth', () => {
     const { order, svg } = stage(['a', 'b'])
     const bare: SceneConfig = {
       cycle: ['one'],
+      points: {},
       frames: { one: {} },
       timings: { one: { duration: 0, hold: 100 } },
       easing: 'linear',
@@ -385,5 +393,88 @@ describe('re-stacking by depth', () => {
     observed[0]?.fire(true)
     run(400)
     expect(order).toEqual(['a', 'b'])
+  })
+})
+
+describe('camera and fades', () => {
+  /** A scene with one dot, a ground rect, a clip rect and a group — enough to watch the camera. */
+  const cameraSvg = () => {
+    const dot = element({ 'data-p': 'a', 'data-part': 'chip', cx: '0', cy: '0' })
+    const ground = element({ class: 'ds-bg', x: '0', y: '0', width: '100', height: '50' })
+    const clip = element({ class: 'ds-clip', x: '0', y: '0', width: '100', height: '50' })
+    const group = { ...element({ 'data-part': 'chip' }), parentNode: null }
+    const style: Record<string, string> = {}
+    const svgAttrs: Record<string, string> = { viewBox: '0 0 100 50' }
+    const svg = {
+      dot,
+      ground,
+      clip,
+      group,
+      style: { setProperty: (name: string, value: string) => { style[name] = value } },
+      styles: style,
+      attrs: svgAttrs,
+      querySelectorAll: (selector: string) =>
+        selector.startsWith('circle')
+          ? [dot]
+          : selector.startsWith('rect.ds-bg')
+            ? [ground]
+            : selector.startsWith('rect.ds-clip')
+              ? [clip]
+              : selector.startsWith('g[')
+                ? [group]
+                : [],
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      hasAttribute: () => false,
+      setAttribute: (name: string, value: string) => { svgAttrs[name] = value },
+      getAttribute: (name: string) => svgAttrs[name] ?? null,
+    }
+    return svg
+  }
+
+  const shot: SceneConfig = {
+    cycle: ['wide', 'close'],
+    points: { chip: ['a'] },
+    frames: { wide: { chip: [0, 0] }, close: { chip: [50, 0] } },
+    timings: { wide: { duration: 0, hold: 0 }, close: { duration: 1000, hold: 0 } },
+    easing: 'linear',
+    mode: 'loop',
+    camera: { base: [0, 0, 100, 50], byFrame: { wide: [0, 0, 100, 50], close: [50, 10, 40, 20] } },
+    opacity: { base: {}, byFrame: { wide: { chip: 0 }, close: { chip: 1 } } },
+    sizing: 'screen',
+  }
+
+  it('moves the viewBox, the clip and the ground with the camera, and writes the zoom for screen sizing', () => {
+    const svg = cameraSvg()
+    const handle = mountScene(svg, shot)
+    handle.seek(500)
+    expect(svg.attrs.viewBox).toBe('25 5 70 35')
+    expect(svg.clip.attrs.width).toBe('70')
+    expect(svg.ground.attrs.x).toBe('25')
+    expect(svg.styles['--ds-zoom']).toBe('0.7000')
+    expect(svg.dot.attrs.cx).toBe('25')
+  })
+
+  it('fades a part by writing opacity onto its group', () => {
+    const svg = cameraSvg()
+    const handle = mountScene(svg, shot)
+    expect(svg.group.attrs.opacity).toBe('0')
+    handle.seek(250)
+    expect(svg.group.attrs.opacity).toBe('0.25')
+  })
+
+  it('reports its clock and lap, and resumes from where it paused', () => {
+    const svg = cameraSvg()
+    const handle = mountScene(svg, shot)
+    expect(handle.duration).toBe(1000)
+    observed[0]!.fire(true)
+    run(300)
+    handle.pause()
+    const frozen = handle.time()
+    run(300)
+    expect(handle.time()).toBe(frozen)
+    handle.play()
+    run(200)
+    expect(handle.time()).toBeGreaterThan(frozen)
   })
 })

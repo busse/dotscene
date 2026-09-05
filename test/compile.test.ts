@@ -25,9 +25,11 @@ describe('compile', () => {
     expect(out.html).toContain('<script src="/js/dotscene.js" defer></script>')
 
     const payload = JSON.parse(out.html.match(/data-dotscene-poses="bar">(.*?)<\/script>/s)![1]!)
-    expect(payload.frames.tip.bar).toEqual({ top: [4, 0], base: [0, 10] })
     expect(payload.mode).toBe('loop')
-    expect(payload.timings.tip).toEqual({ duration: 700, hold: 900, easing: 'easeInOut' })
+    // Timings carry only what differs from the defaults; the easing is the animation's own.
+    expect(payload.timings.tip).toEqual({ duration: 700, hold: 900 })
+    expect(payload.points.bar).toEqual(['top', 'base'])
+    expect(payload.frames.tip.bar).toEqual([4, 0, 0, 10])
   })
 
   it('produces identical output on repeated runs', () => {

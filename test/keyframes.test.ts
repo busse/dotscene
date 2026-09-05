@@ -10,6 +10,7 @@ import {
   posePoints,
   resolve,
 } from '../src/index.ts'
+import { unpackFrame } from '../src/index.ts'
 import { validateScene } from '../src/validate.ts'
 
 const bar = defineFigure('bar', {
@@ -39,8 +40,8 @@ describe('keyframes', () => {
       }),
     )
     expect(resolved.animation?.frames.together).toEqual({
-      a: { top: [24, 0], base: [20, 10] },
-      b: { top: [30, 0], base: [30, 10] },
+      a: [24, 0, 20, 10],
+      b: [30, 0, 30, 10],
     })
     expect(resolved.animation?.parts).toEqual(['a', 'b'])
   })
@@ -50,7 +51,7 @@ describe('keyframes', () => {
       twoPart({ keyframes: [{ name: 'posed', parts: { b: { pose: 'tip' } } }] }),
     )
     // `b` keeps its declared at: [50, 0] because the keyframe only set a pose.
-    expect(resolved.animation?.frames.posed?.b).toEqual({ top: [54, 0], base: [50, 10] })
+    expect(resolved.animation?.frames.posed?.b).toEqual([54, 0, 50, 10])
   })
 
   it('leaves a part out of the frame entirely when no keyframe moves it', () => {
@@ -92,7 +93,7 @@ describe('keyframes', () => {
 
   it('still accepts the single-part cycle shorthand', () => {
     const resolved = resolve(defineScene('one', { parts: [{ figure: bar }], animate: { cycle: ['tip'] } }))
-    expect(resolved.animation?.frames.tip?.bar).toEqual({ top: [4, 0], base: [0, 10] })
+    expect(resolved.animation?.frames.tip?.bar).toEqual([4, 0, 0, 10])
     expect(resolved.animation?.parts).toEqual(['bar'])
   })
 })
@@ -125,7 +126,7 @@ describe('computed poses', () => {
     const halfway = definePose(bar, 'halfway', lerpPoints(posePoints(bar, undefined), posePoints(bar, 'tip'), 0.5))
     const resolved = resolve(twoPart({ keyframes: [{ name: 'k', parts: { a: { pose: halfway } } }] }))
     // Halfway between the rest position (top at x 0) and `tip` (top at x 4).
-    expect(resolved.animation?.frames.k?.a?.top).toEqual([2, 0])
+    expect(unpackFrame(resolved.animation!.points.a!, resolved.animation!.frames.k!.a!).top).toEqual([2, 0])
   })
 
   it('validates a computed pose at build time, not at keyframe time', () => {
@@ -152,7 +153,7 @@ describe('computed poses', () => {
           animate: { keyframes: [{ name: 'k', parts: { l: { at: [t * 20, 0], pose: mid } } }] },
         }),
       )
-      expect(resolved.animation?.frames.k?.l?.foot?.[0]).toBeCloseTo(10, 6)
+      expect(unpackFrame(resolved.animation!.points.l!, resolved.animation!.frames.k!.l!).foot?.[0]).toBeCloseTo(10, 6)
     }
   })
 })
@@ -178,8 +179,9 @@ describe('compiled payload', () => {
       twoPart({ keyframes: [{ name: 'k', parts: { a: { at: [1, 0] }, b: { at: [2, 0] } } }] }),
     )
     const payload = JSON.parse(out.html.match(/data-dotscene-poses="s">(.*?)<\/script>/s)![1]!)
-    expect(payload.frames.k.a.top).toEqual([1, 0])
-    expect(payload.frames.k.b.top).toEqual([2, 0])
+    expect(payload.points.a).toEqual(['top', 'base'])
+    expect(payload.frames.k.a.slice(0, 2)).toEqual([1, 0])
+    expect(payload.frames.k.b.slice(0, 2)).toEqual([2, 0])
   })
 })
 
@@ -198,13 +200,14 @@ describe('continuous motion', () => {
       if (ms <= clock + duration) {
         const t = duration === 0 ? 1 : (ms - clock) / duration
         const eased = easings[easing](t)
-        const from = animation.frames[animation.cycle[i - 1]!]!.p!.hip![0]
-        const to = animation.frames[name]!.p!.hip![0]
+        const hip = (frame: readonly number[]) => unpackFrame(animation.points.p!, frame).hip![0]
+        const from = hip(animation.frames[animation.cycle[i - 1]!]!.p!)
+        const to = hip(animation.frames[name]!.p!)
         return from + (to - from) * eased
       }
       clock += duration + animation.timings[name]!.hold
     }
-    return animation.frames[animation.cycle.at(-1)!]!.p!.hip![0]
+    return unpackFrame(animation.points.p!, animation.frames[animation.cycle.at(-1)!]!.p!).hip![0]
   }
 
   const run = (easing: 'linear' | 'easeInOut') =>

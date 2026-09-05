@@ -6,29 +6,31 @@
  * run *over* each other: a document still in flight while a truck is already loading.
  *
  * So an act declares beats on its own clock, and `compose` bakes a set of placed acts down
- * onto one shared list. Two rules make that correct, and both are easy to get wrong:
+ * onto one shared list. Keyframes are sparse — a part appears only at the instants its own
+ * act asked for — because the runtime interpolates every part between the keyframes that
+ * mention it, easing each segment by the keyframe it is heading into.
  *
- *   - **Resample whatever is mid-move.** A part missing from a keyframe is simply not
- *     repainted, so it freezes there and jumps at the next keyframe that does mention it.
- *     Any part travelling through an instant another act asked for has to be given its
- *     interpolated state at that instant too.
- *   - **Subdivide eased segments.** The runtime interpolates linearly between keyframes, so
- *     a curve has to be baked into samples here. That is a feature rather than a tax: an act
- *     can use any easing without the runtime knowing anything about it.
+ * That last point is what keeps a busy timeline small. A beat's easing is written onto its
+ * keyframe, and the runtime honours it; when two beats land on the same instant wanting
+ * different easings, each part simply carries its own. Nothing is ever resampled or baked,
+ * so an act can ease everything and pay nothing for it.
+ *
+ * The camera is a track like any other: an act may move it, and two acts moving it at once
+ * is the same authoring mistake as two acts moving one part.
  */
 
-import type { EasingName, Figure, Keyframe, Part, PartKeyframe, Pose, Vec2 } from './model.ts'
-import { definePose, partId } from './model.ts'
-import { easingFor, lerpPoints, posePoints } from './poses.ts'
-import { lerpVec, round } from './geometry.ts'
+import type { CameraKeyframe, EasingName, Keyframe, Part, PartKeyframe, Vec2 } from './model.ts'
+import { partId } from './model.ts'
 import { issueError, type Issue } from './validate.ts'
 
 /** One instant in an act's own clock: where some of its parts are, and how they got there. */
 export interface Beat {
   /** Milliseconds from the act's start. */
   readonly at: number
-  readonly parts: Readonly<Record<string, PartKeyframe>>
-  /** How the parts in this beat travel *into* it. Baked here, not asked of the runtime. */
+  readonly parts?: Readonly<Record<string, PartKeyframe>>
+  /** Where the camera is at this beat. */
+  readonly camera?: CameraKeyframe
+  /** How the parts in this beat travel *into* it. */
   readonly easing?: EasingName
 }
 
@@ -44,9 +46,9 @@ export interface Placement {
 }
 
 export interface ComposeOptions {
-  /** The scene's parts, so a segment that changes pose can be interpolated properly. */
+  /** Accepted for compatibility; nothing is resampled any more, so nothing needs the figures. */
   readonly parts?: readonly Part[]
-  /** Longest gap left inside an eased segment. Smaller is smoother and heavier. Default 150. */
+  /** Accepted for compatibility; nothing is baked any more. */
   readonly maxStep?: number
   /** Names the keyframe at a given millisecond. Default `t<ms>`. */
   readonly name?: (ms: number) => string
@@ -60,94 +62,44 @@ export interface Composed {
   readonly acts: Readonly<Record<string, readonly string[]>>
 }
 
-interface Moment {
+/** The reserved track the camera rides on. */
+const CAMERA = '$camera'
+
+interface Moment<T> {
   readonly at: number
-  readonly state: PartKeyframe
+  readonly state: T
   readonly easing: EasingName
   readonly act: string
 }
 
-const lerpNumber = (from: number, to: number, t: number): number => round(from + (to - from) * t, 3)
-
-const lerpScale = (from: number | Vec2, to: number | Vec2, t: number): number | Vec2 => {
-  if (typeof from === 'number' && typeof to === 'number') return lerpNumber(from, to, t)
-  const a: Vec2 = typeof from === 'number' ? [from, from] : from
-  const b: Vec2 = typeof to === 'number' ? [to, to] : to
-  return [lerpNumber(a[0], b[0], t), lerpNumber(a[1], b[1], t)]
-}
-
-/**
- * A part's state part-way between two beats.
- *
- * Poses are the awkward one. Two keyframes naming different poses already tween correctly,
- * because the renderer turns each into points and the runtime moves the points — but a
- * *third* keyframe forced between them by another act would otherwise carry one end's pose
- * and make the change snap. So a resampled pose is built by interpolating the two, the same
- * trick the walk cycle uses for gait phase.
- */
-const lerpState = (from: PartKeyframe, to: PartKeyframe, t: number, figure?: Figure): PartKeyframe => {
-  const state: Record<string, unknown> = {}
-
-  if (from.at !== undefined && to.at !== undefined) {
-    const [x, y] = lerpVec(from.at, to.at, t)
-    state.at = [round(x, 3), round(y, 3)]
-  } else if ((from.at ?? to.at) !== undefined) {
-    state.at = from.at ?? to.at
+/** Every track's own timeline, in order, with the act each moment came from. */
+const timelines = (placements: readonly Placement[]): Map<string, Moment<PartKeyframe | CameraKeyframe>[]> => {
+  const byTrack = new Map<string, Moment<PartKeyframe | CameraKeyframe>[]>()
+  const push = (track: string, moment: Moment<PartKeyframe | CameraKeyframe>): void => {
+    ;(byTrack.get(track) ?? byTrack.set(track, []).get(track)!).push(moment)
   }
-
-  if (from.depth !== undefined && to.depth !== undefined) state.depth = lerpNumber(from.depth, to.depth, t)
-  else if ((from.depth ?? to.depth) !== undefined) state.depth = from.depth ?? to.depth
-
-  if (from.rotate !== undefined && to.rotate !== undefined) state.rotate = lerpNumber(from.rotate, to.rotate, t)
-  else if ((from.rotate ?? to.rotate) !== undefined) state.rotate = from.rotate ?? to.rotate
-
-  if (from.scale !== undefined && to.scale !== undefined) state.scale = lerpScale(from.scale, to.scale, t)
-  else if ((from.scale ?? to.scale) !== undefined) state.scale = from.scale ?? to.scale
-
-  // Neither of these can be halfway, so they change at the midpoint.
-  const nearer = t < 0.5 ? from : to
-  if (nearer.flipX !== undefined) state.flipX = nearer.flipX
-
-  if (from.pose === to.pose || to.pose === undefined) {
-    if (from.pose !== undefined) state.pose = from.pose
-  } else if (from.pose === undefined || figure === undefined) {
-    state.pose = nearer.pose
-  } else {
-    state.pose = definePose(
-      figure,
-      `mix${Math.round(t * 1000)}`,
-      lerpPoints(posePoints(figure, from.pose), posePoints(figure, to.pose), t),
-    )
-  }
-
-  return state as PartKeyframe
-}
-
-/** A part's own timeline, in order, with the act each moment came from. */
-const timelines = (placements: readonly Placement[]): Map<string, Moment[]> => {
-  const byPart = new Map<string, Moment[]>()
   for (const { act, at: offset } of placements) {
     for (const beat of act.beats) {
-      for (const [part, state] of Object.entries(beat.parts)) {
-        const list = byPart.get(part) ?? []
-        list.push({ at: offset + beat.at, state, easing: beat.easing ?? 'linear', act: act.name })
-        byPart.set(part, list)
+      const easing = beat.easing ?? 'linear'
+      for (const [part, state] of Object.entries(beat.parts ?? {})) {
+        push(part, { at: offset + beat.at, state, easing, act: act.name })
       }
+      if (beat.camera !== undefined) push(CAMERA, { at: offset + beat.at, state: beat.camera, easing, act: act.name })
     }
   }
-  for (const list of byPart.values()) list.sort((a, b) => a.at - b.at)
-  return byPart
+  for (const list of byTrack.values()) list.sort((a, b) => a.at - b.at)
+  return byTrack
 }
 
 /**
- * Two acts driving one part at the same time is an authoring mistake, not a blend.
+ * Two acts driving one track at the same time is an authoring mistake, not a blend.
  *
  * Touching at the ends is fine and is how a part is handed on; genuine overlap means two
  * acts each believe they own it, and whichever sorts later silently wins.
  */
-const findOverlaps = (byPart: Map<string, Moment[]>): Issue[] => {
+const findOverlaps = (byTrack: Map<string, Moment<unknown>[]>): Issue[] => {
   const issues: Issue[] = []
-  for (const [part, moments] of byPart) {
+  for (const [track, moments] of byTrack) {
     const spans = new Map<string, { from: number; to: number }>()
     for (const moment of moments) {
       const span = spans.get(moment.act)
@@ -159,11 +111,12 @@ const findOverlaps = (byPart: Map<string, Moment[]>): Issue[] => {
       const [actA, a] = entries[i - 1]!
       const [actB, b] = entries[i]!
       if (b.from < a.to) {
+        const what = track === CAMERA ? 'the camera' : `'${track}'`
         issues.push({
           code: 'ACT_OVERLAP',
-          part,
+          part: track,
           act: `${actA} / ${actB}`,
-          message: `acts '${actA}' (${a.from}–${a.to}ms) and '${actB}' (${b.from}–${b.to}ms) both move '${part}' at the same time`,
+          message: `acts '${actA}' (${a.from}–${a.to}ms) and '${actB}' (${b.from}–${b.to}ms) both move ${what} at the same time`,
         })
       }
     }
@@ -173,59 +126,68 @@ const findOverlaps = (byPart: Map<string, Moment[]>): Issue[] => {
 
 /** Bake a set of placed acts down onto one keyframe list. */
 export const compose = (placements: readonly Placement[], options: ComposeOptions = {}): Composed => {
-  const maxStep = options.maxStep ?? 150
   const name = options.name ?? ((ms: number) => `t${ms}`)
-  const figures = new Map<string, Figure>()
-  for (const part of options.parts ?? []) figures.set(partId(part), part.figure)
 
-  const byPart = timelines(placements)
-  const overlaps = findOverlaps(byPart)
+  const byTrack = timelines(placements)
+  const overlaps = findOverlaps(byTrack)
   if (overlaps.length > 0) throw issueError(overlaps)
 
-  // Every instant some act asked for, plus enough extra inside eased segments to bake them.
-  const times = new Set<number>()
-  for (const moments of byPart.values()) {
-    for (const moment of moments) times.add(moment.at)
-    for (let i = 1; i < moments.length; i++) {
-      const from = moments[i - 1]!
-      const to = moments[i]!
-      if (to.easing === 'linear') continue
-      const steps = Math.ceil((to.at - from.at) / maxStep)
-      for (let step = 1; step < steps; step++) {
-        times.add(Math.round(from.at + ((to.at - from.at) * step) / steps))
+  // What each instant's keyframe will ease by: the easing most of the beats there want. Any
+  // beat that wants something else carries its own, and the runtime honours it per part.
+  const wanted = new Map<number, Map<EasingName, number>>()
+  for (const moments of byTrack.values()) {
+    moments.forEach((moment, i) => {
+      // The first beat of a track has nothing to ease from, so it has no opinion.
+      if (i === 0) return
+      const tally = wanted.get(moment.at) ?? wanted.set(moment.at, new Map()).get(moment.at)!
+      tally.set(moment.easing, (tally.get(moment.easing) ?? 0) + 1)
+    })
+  }
+  const easingAt = (at: number): EasingName => {
+    const tally = wanted.get(at)
+    if (tally === undefined) return 'linear'
+    let best: EasingName = 'linear'
+    let count = -1
+    for (const [easing, n] of tally) {
+      if (n > count) {
+        best = easing
+        count = n
       }
     }
+    return best
   }
-  if (times.size === 0) return { keyframes: [], duration: 0, acts: {} }
 
-  const ordered = [...times].sort((a, b) => a - b)
+  const times = [...new Set([...byTrack.values()].flatMap((moments) => moments.map((m) => m.at)))].sort((a, b) => a - b)
+  if (times.length === 0) return { keyframes: [], duration: 0, acts: {} }
+
   const keyframes: Keyframe[] = []
   const acts: Record<string, string[]> = {}
 
-  ordered.forEach((at, index) => {
+  // Each track in order, with a cursor, so building the list is one pass rather than a search.
+  const cursors = new Map<string, number>()
+  for (const track of byTrack.keys()) cursors.set(track, 0)
+
+  times.forEach((at, index) => {
     const parts: Record<string, PartKeyframe> = {}
+    let camera: CameraKeyframe | undefined
     const contributing = new Set<string>()
+    const easing = easingAt(at)
 
-    for (const [part, moments] of byPart) {
-      const first = moments[0]!
-      const last = moments[moments.length - 1]!
-      // Outside its own span a part is left alone: it holds wherever it was last painted,
-      // which is what parks a token off-frame between flights for free.
-      if (at < first.at || at > last.at) continue
-
-      let next = moments.findIndex((moment) => moment.at >= at)
-      if (next < 0) next = moments.length - 1
-      const to = moments[next]!
-      contributing.add(to.act)
-
-      if (to.at === at || next === 0) {
-        parts[part] = to.state
-        continue
+    for (const [track, moments] of byTrack) {
+      let cursor = cursors.get(track)!
+      let moment = moments[cursor]
+      if (moment === undefined || moment.at !== at) continue
+      // Two beats of one act at the same instant: the later one written wins.
+      while (moments[cursor + 1]?.at === at) {
+        cursor++
+        moment = moments[cursor]!
       }
-      const from = moments[next - 1]!
-      const span = to.at - from.at
-      const raw = span === 0 ? 1 : (at - from.at) / span
-      parts[part] = lerpState(from.state, to.state, easingFor(to.easing)(raw), figures.get(part))
+      cursors.set(track, cursor + 1)
+      contributing.add(moment.act)
+      // The first beat of a track carries no easing; later ones only when they differ.
+      const own = cursor > 0 && moment.easing !== easing ? { easing: moment.easing } : {}
+      if (track === CAMERA) camera = { ...(moment.state as CameraKeyframe), ...own }
+      else parts[track] = { ...(moment.state as PartKeyframe), ...own }
     }
 
     const label = name(at)
@@ -233,33 +195,70 @@ export const compose = (placements: readonly Placement[], options: ComposeOption
     keyframes.push({
       name: label,
       // The first keyframe is the loop's cut, so it takes no time at all.
-      duration: index === 0 ? 0 : at - ordered[index - 1]!,
+      duration: index === 0 ? 0 : at - times[index - 1]!,
       hold: 0,
-      // Everything is already baked, so the runtime only ever walks straight lines.
-      easing: 'linear',
+      easing,
       parts,
+      ...(camera === undefined ? {} : { camera }),
     })
   })
 
-  return { keyframes, duration: ordered[ordered.length - 1]! - ordered[0]!, acts }
+  return { keyframes, duration: times[times.length - 1]! - times[0]!, acts }
+}
+
+/**
+ * Whether two states put a part in the same place. A field one side leaves out means "as
+ * declared", so only fields both sides state are compared.
+ */
+const sameState = (a: PartKeyframe, b: PartKeyframe): boolean => {
+  const both = <T>(p: T | undefined, q: T | undefined, same: (x: T, y: T) => boolean): boolean =>
+    p === undefined || q === undefined || same(p, q)
+  if (!both(a.at, b.at, (p, q) => p[0] === q[0] && p[1] === q[1])) return false
+  if (!both(a.depth, b.depth, (p, q) => Math.abs(p - q) <= 1e-6)) return false
+  if (!both(a.opacity, b.opacity, (p, q) => p === q)) return false
+  if (!both(a.rotate, b.rotate, (p, q) => p === q)) return false
+  if (!both(a.flipX, b.flipX, (p, q) => p === q)) return false
+  if (!both(a.scale, b.scale, (p, q) => JSON.stringify(p) === JSON.stringify(q))) return false
+  const pose = (p: NonNullable<PartKeyframe['pose']>): string => (typeof p === 'string' ? p : JSON.stringify(p.points))
+  return both(a.pose, b.pose, (p, q) => pose(p) === pose(q))
 }
 
 /**
  * Parts whose state at the end of a timeline differs from their state at the start.
  *
  * A loop cuts from the last keyframe back to the first, so anything left somewhere else
- * jumps in full view. Run this over a timeline meant to loop; an empty list means the seam
- * is invisible.
+ * jumps in full view. Each part is judged on its own last mention against its opening
+ * state — its first keyframe if that is keyframe 0, otherwise how the scene declares it,
+ * which is what the timeline shows before a part's first step. Pass the scene's parts for
+ * that second case. An empty list means the seam is invisible.
  */
-export const loopGaps = (composed: Composed): readonly string[] => {
-  const first = composed.keyframes[0]
-  const last = composed.keyframes[composed.keyframes.length - 1]
-  if (first === undefined || last === undefined) return []
+export const loopGaps = (composed: Composed, parts: readonly Part[] = []): readonly string[] => {
+  const declared = new Map<string, PartKeyframe>()
+  for (const part of parts) {
+    declared.set(partId(part), {
+      ...(part.at === undefined ? {} : { at: part.at }),
+      ...(part.depth === undefined ? {} : { depth: part.depth }),
+      ...(part.opacity === undefined ? {} : { opacity: part.opacity }),
+      ...(part.scale === undefined ? {} : { scale: part.scale }),
+      ...(part.rotate === undefined ? {} : { rotate: part.rotate }),
+      ...(part.flipX === undefined ? {} : { flipX: part.flipX }),
+      ...(part.pose === undefined ? {} : { pose: part.pose }),
+    })
+  }
+  const opening = new Map<string, PartKeyframe>()
+  const last = new Map<string, PartKeyframe>()
+  composed.keyframes.forEach((keyframe, index) => {
+    for (const [part, state] of Object.entries(keyframe.parts ?? {})) {
+      if (!opening.has(part)) opening.set(part, index === 0 ? state : (declared.get(part) ?? state))
+      last.set(part, state)
+    }
+  })
   const gaps: string[] = []
-  for (const [part, state] of Object.entries(last.parts ?? {})) {
-    const start = first.parts?.[part]
-    if (start === undefined || start.at === undefined || state.at === undefined) continue
-    if (start.at[0] !== state.at[0] || start.at[1] !== state.at[1]) gaps.push(part)
+  for (const [part, start] of opening) {
+    const end = last.get(part)!
+    // Something invisible at both ends can be anywhere at both ends.
+    if ((start.opacity ?? 1) <= 0 && (end.opacity ?? 1) <= 0) continue
+    if (!sameState(start, end)) gaps.push(part)
   }
   return gaps
 }

@@ -2,44 +2,51 @@
  * The browser runtime for animated scenes.
  *
  * It moves points the compiler already labelled: dots carry `data-p`, lines carry
- * `data-a`/`data-b`, and the pose frames ride alongside the SVG in a JSON script tag. So
- * there is no scene graph to rebuild at runtime — just numbers written onto attributes.
+ * `data-a`/`data-b`, faces carry `data-face`, and the keyframes ride alongside the SVG in a
+ * JSON script tag. So there is no scene graph to rebuild at runtime — just numbers written
+ * onto attributes.
+ *
+ * Time is one clock, sampled. Every tick asks the shared timeline where each part, the
+ * camera and the paint order are at millisecond `t`, and paints whatever changed. That is
+ * the same sampler `dotscene preview --at` runs in the terminal, so the two never disagree.
  *
  * One rAF loop drives every scene on the page, offscreen scenes stop ticking, and
- * `prefers-reduced-motion` holds the first pose without ever starting.
+ * `prefers-reduced-motion` holds the first frame without ever starting.
  */
 
-import type { AnimateMode, EasingName, Vec2 } from '../model.ts'
-import { easingFor } from '../poses.ts'
+import type { AnimateMode, Vec2 } from '../model.ts'
+import {
+  buildTracks,
+  clockAt,
+  lapOf,
+  sampleAt,
+  type Frame,
+  type SceneFrame,
+  type TimelineConfig,
+  type Tracks,
+  type ViewBox,
+} from '../timeline.ts'
 
-/** One part's points at one keyframe. */
-export type Frame = Readonly<Record<string, Vec2>>
+export type { Frame, SceneFrame } from '../timeline.ts'
 
-/** Every moving part at one keyframe, keyed by part id. */
-export type SceneFrame = Readonly<Record<string, Frame>>
-
-export interface SceneConfig {
-  readonly cycle: readonly string[]
-  readonly frames: Readonly<Record<string, SceneFrame>>
-  readonly timings: Readonly<Record<string, { duration: number; hold: number; easing?: EasingName }>>
-  /**
-   * Paint order. Absent unless the scene reorders.
-   *
-   * `base` is every part once; `byFrame` only what a step changes.
-   */
-  readonly depths?: {
-    readonly base: Readonly<Record<string, number>>
-    readonly byFrame: Readonly<Record<string, Readonly<Record<string, number>>>>
-  }
-  readonly easing: EasingName
-  readonly mode: AnimateMode
-}
+/** The payload a compiled scene carries. */
+export type SceneConfig = TimelineConfig
 
 export interface SceneHandle {
   /** Stop animating and drop the scene from the shared loop. */
   readonly stop: () => void
-  /** Jump straight to a pose, skipping the transition. */
+  /** Jump straight to a keyframe, skipping the transition. */
   readonly goTo: (pose: string) => void
+  /** Jump to a millisecond on the clock and paint it. */
+  readonly seek: (ms: number) => void
+  /** Freeze where it is. */
+  readonly pause: () => void
+  /** Resume from where it froze. */
+  readonly play: () => void
+  /** The clock position, in milliseconds. */
+  readonly time: () => number
+  /** Length of one lap of the clock, in milliseconds. */
+  readonly duration: number
   readonly element: SVGSVGElement
 }
 
@@ -71,11 +78,18 @@ const stop = (ticker: Ticker): void => {
 const prefersReducedMotion = (): boolean =>
   typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
-/** Dots and lines belonging to one part, looked up once at mount. */
+/** Dots, lines and faces belonging to one part, looked up once at mount. */
 interface Bindings {
   readonly dots: readonly (readonly [string, SVGCircleElement])[]
   readonly lines: readonly (readonly [string, string, SVGLineElement])[]
   readonly faces: readonly (readonly [readonly string[], SVGPolygonElement])[]
+}
+
+/** The same bindings, resolved to offsets into the part's flat frame. */
+interface Wired {
+  readonly dots: readonly (readonly [number, SVGCircleElement])[]
+  readonly lines: readonly (readonly [number, number, SVGLineElement])[]
+  readonly faces: readonly (readonly [readonly number[], SVGPolygonElement])[]
 }
 
 /**
@@ -88,63 +102,90 @@ interface Bindings {
 const bindAll = (svg: SVGSVGElement): Map<string, Bindings> => {
   const dots = new Map<string, (readonly [string, SVGCircleElement])[]>()
   const lines = new Map<string, (readonly [string, string, SVGLineElement])[]>()
+  const faces = new Map<string, (readonly [readonly string[], SVGPolygonElement])[]>()
 
   for (const element of svg.querySelectorAll<SVGCircleElement>('circle[data-p]')) {
     const part = element.getAttribute('data-part') ?? ''
-    const list = dots.get(part) ?? []
-    list.push([element.getAttribute('data-p')!, element])
-    dots.set(part, list)
+    ;(dots.get(part) ?? dots.set(part, []).get(part)!).push([element.getAttribute('data-p')!, element])
   }
   for (const element of svg.querySelectorAll<SVGLineElement>('line[data-a][data-b]')) {
     const part = element.getAttribute('data-part') ?? ''
-    const list = lines.get(part) ?? []
-    list.push([element.getAttribute('data-a')!, element.getAttribute('data-b')!, element])
-    lines.set(part, list)
+    ;(lines.get(part) ?? lines.set(part, []).get(part)!).push([
+      element.getAttribute('data-a')!,
+      element.getAttribute('data-b')!,
+      element,
+    ])
   }
-
-  const faces = new Map<string, (readonly [readonly string[], SVGPolygonElement])[]>()
   for (const element of svg.querySelectorAll<SVGPolygonElement>('polygon[data-face]')) {
     const part = element.getAttribute('data-part') ?? ''
-    const list = faces.get(part) ?? []
-    list.push([element.getAttribute('data-face')!.split(' '), element])
-    faces.set(part, list)
+    ;(faces.get(part) ?? faces.set(part, []).get(part)!).push([element.getAttribute('data-face')!.split(' '), element])
   }
 
   const bindings = new Map<string, Bindings>()
   for (const part of new Set([...dots.keys(), ...lines.keys(), ...faces.keys()])) {
-    bindings.set(part, {
-      dots: dots.get(part) ?? [],
-      lines: lines.get(part) ?? [],
-      faces: faces.get(part) ?? [],
-    })
+    bindings.set(part, { dots: dots.get(part) ?? [], lines: lines.get(part) ?? [], faces: faces.get(part) ?? [] })
   }
   return bindings
 }
 
-const paintPart = (bindings: Bindings, points: Frame): void => {
-  for (const [names, element] of bindings.faces) {
+/**
+ * Turn name bindings into offsets into the part's flat frame, `x, y, x, y…` in the order of
+ * its points table. A part the payload gives no table for takes its dots' document order.
+ */
+const wire = (bound: Bindings, names: readonly string[]): Wired => {
+  const index = new Map<string, number>()
+  names.forEach((name, i) => index.set(name, i * 2))
+  const at = (name: string): number => index.get(name) ?? -1
+  return {
+    dots: bound.dots.map(([name, element]) => [at(name), element] as const).filter(([i]) => i >= 0),
+    lines: bound.lines.map(([a, b, element]) => [at(a), at(b), element] as const).filter(([a, b]) => a >= 0 && b >= 0),
+    faces: bound.faces.map(([rim, element]) => [rim.map(at), element] as const),
+  }
+}
+
+/**
+ * What the static drawing shows, read back off the elements.
+ *
+ * A track holds this before its first keyframe and returns to it at the wrap, so it has to
+ * be known — and reading it here costs nothing, where shipping it in the payload would
+ * restate every moving part once more.
+ */
+const restOf = (bound: Bindings, names: readonly string[]): Frame => {
+  const byName = new Map<string, Vec2>()
+  for (const [name, element] of bound.dots) {
+    byName.set(name, [Number(element.getAttribute('cx') ?? 0), Number(element.getAttribute('cy') ?? 0)])
+  }
+  const out: number[] = []
+  for (const name of names) {
+    const at = byName.get(name) ?? [0, 0]
+    out.push(at[0], at[1])
+  }
+  return out
+}
+
+const paintPart = (wired: Wired, frame: Frame): void => {
+  for (const [rim, element] of wired.faces) {
     let path = ''
-    for (const name of names) {
-      const at = points[name]
-      if (at === undefined) continue
-      path += `${path === '' ? '' : ' '}${at[0]},${at[1]}`
+    for (const i of rim) {
+      if (i < 0 || frame[i] === undefined) continue
+      path += `${path === '' ? '' : ' '}${frame[i]},${frame[i + 1]}`
     }
     if (path !== '') element.setAttribute('points', path)
   }
-  for (const [name, element] of bindings.dots) {
-    const at = points[name]
-    if (at === undefined) continue
-    element.setAttribute('cx', String(at[0]))
-    element.setAttribute('cy', String(at[1]))
+  for (const [i, element] of wired.dots) {
+    const x = frame[i]
+    if (x === undefined) continue
+    element.setAttribute('cx', String(x))
+    element.setAttribute('cy', String(frame[i + 1]))
   }
-  for (const [from, to, element] of bindings.lines) {
-    const a = points[from]
-    const b = points[to]
-    if (a === undefined || b === undefined) continue
-    element.setAttribute('x1', String(a[0]))
-    element.setAttribute('y1', String(a[1]))
-    element.setAttribute('x2', String(b[0]))
-    element.setAttribute('y2', String(b[1]))
+  for (const [a, b, element] of wired.lines) {
+    const ax = frame[a]
+    const bx = frame[b]
+    if (ax === undefined || bx === undefined) continue
+    element.setAttribute('x1', String(ax))
+    element.setAttribute('y1', String(frame[a + 1]))
+    element.setAttribute('x2', String(bx))
+    element.setAttribute('y2', String(frame[b + 1]))
   }
 }
 
@@ -156,7 +197,7 @@ const paintPart = (bindings: Bindings, points: Frame): void => {
  * the resulting order differs from the one already on screen — a reorder is rare and a
  * comparison is cheap.
  */
-const restack = (groups: Map<string, SVGGElement>, order: string[], depths: Record<string, number>): string[] => {
+const restack = (groups: Map<string, SVGGElement>, order: string[], depths: Readonly<Record<string, number>>): string[] => {
   const next = [...order].sort((a, b) => (depths[a] ?? 0) - (depths[b] ?? 0))
   if (next.every((part, index) => part === order[index])) return order
   const parent = groups.get(next[0]!)?.parentNode
@@ -168,185 +209,244 @@ const restack = (groups: Map<string, SVGGElement>, order: string[], depths: Reco
   return next
 }
 
-const paint = (bindings: Map<string, Bindings>, frame: SceneFrame): void => {
-  for (const part of Object.keys(frame)) {
-    const bound = bindings.get(part)
-    if (bound !== undefined) paintPart(bound, frame[part]!)
+/** The first element matching a selector that also carries a class — fakes and all. */
+const rectWithClass = (svg: SVGSVGElement, cls: string): Element | undefined => {
+  for (const element of svg.querySelectorAll(`rect.${cls}`)) {
+    if ((element.getAttribute('class') ?? '').split(' ').includes(cls)) return element
   }
+  return undefined
 }
 
-const blendFrame = (from: Frame, to: Frame, t: number): Frame => {
-  const out: Record<string, Vec2> = {}
-  for (const name of Object.keys(from)) {
-    const a = from[name]!
-    const b = to[name] ?? a
-    out[name] = [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]
-  }
-  return out
-}
-
-/** Interpolate every moving part between two keyframes. A part absent from `to` holds still. */
-const blend = (from: SceneFrame, to: SceneFrame, t: number): SceneFrame => {
-  const out: Record<string, Frame> = {}
-  for (const part of Object.keys(from)) {
-    out[part] = blendFrame(from[part]!, to[part] ?? from[part]!, t)
-  }
-  return out
+const parseViewBox = (svg: SVGSVGElement): ViewBox | undefined => {
+  const raw = typeof svg.getAttribute === 'function' ? svg.getAttribute('viewBox') : null
+  if (raw === null || raw === undefined) return undefined
+  const parts = raw.trim().split(/[\s,]+/).map(Number)
+  return parts.length === 4 && parts.every(Number.isFinite) ? (parts as unknown as ViewBox) : undefined
 }
 
 /** Attach the runtime to one already-rendered SVG. */
 export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
   const bindings = bindAll(svg)
-
   const groups = new Map<string, SVGGElement>()
   for (const group of svg.querySelectorAll<SVGGElement>('g[data-part]')) {
     groups.set(group.getAttribute('data-part')!, group)
   }
+  const restOpacity: Record<string, number> = {}
+  for (const [part, group] of groups) {
+    const raw = group.getAttribute('opacity')
+    if (raw !== null) restOpacity[part] = Number(raw)
+  }
+  // Every part's point order: the payload's table, else the order its dots appear in.
+  const names = new Map<string, readonly string[]>()
+  const wired = new Map<string, Wired>()
+  const restFrame: Record<string, Frame> = {}
+  for (const [part, bound] of bindings) {
+    const table = config.points?.[part] ?? bound.dots.map(([name]) => name)
+    names.set(part, table)
+    wired.set(part, wire(bound, table))
+    restFrame[part] = restOf(bound, table)
+  }
+  const rest = { frame: restFrame, opacity: restOpacity }
+
+  const tracks: Tracks = buildTracks(config)
+  const sched = tracks.schedule
+  const mode: AnimateMode = config.mode
+  const lap = lapOf(sched, mode)
+
+  // Camera plumbing: the viewBox itself, the clip and ground rects that follow it, and the
+  // zoom factor scenes sized to the screen read from CSS.
+  const clip = rectWithClass(svg, 'ds-clip')
+  const ground = rectWithClass(svg, 'ds-bg')
+  const restView = config.camera?.base ?? parseViewBox(svg)
+  let lastView: ViewBox | undefined
+  const applyCamera = (view: ViewBox): void => {
+    if (lastView === view) return
+    lastView = view
+    const value = `${view[0]} ${view[1]} ${view[2]} ${view[3]}`
+    svg.setAttribute('viewBox', value)
+    for (const rect of [clip, ground]) {
+      if (rect === undefined) continue
+      rect.setAttribute('x', String(view[0]))
+      rect.setAttribute('y', String(view[1]))
+      rect.setAttribute('width', String(view[2]))
+      rect.setAttribute('height', String(view[3]))
+    }
+    if (config.sizing === 'screen' && restView !== undefined && restView[2] > 0 && svg.style !== undefined) {
+      svg.style.setProperty('--ds-zoom', (view[2] / restView[2]).toFixed(4))
+    }
+  }
+
   // The order the document already has, which is also the order to fall back to.
   let stack = [...groups.keys()]
-  const depthsFor = (name: string): Record<string, number> | undefined => {
-    const table = config.depths
-    if (table === undefined) return undefined
-    return { ...table.base, ...(table.byFrame[name] ?? {}) }
+  const painted = new Map<string, Frame>()
+  const shown = new Map<string, number>()
+
+  const paintAt = (t: number): void => {
+    const sample = sampleAt(tracks, config, t, rest)
+    for (const part of Object.keys(sample.frame)) {
+      const frame = sample.frame[part]!
+      // A held value is the same object every tick; only a fresh interpolation costs a paint.
+      if (painted.get(part) === frame) continue
+      painted.set(part, frame)
+      const bound = wired.get(part)
+      if (bound !== undefined) paintPart(bound, frame)
+    }
+    if (sample.depths !== undefined) stack = restack(groups, stack, sample.depths)
+    if (sample.opacity !== undefined) {
+      for (const [part, value] of Object.entries(sample.opacity)) {
+        if (shown.get(part) === value) continue
+        shown.set(part, value)
+        groups.get(part)?.setAttribute('opacity', String(Math.round(value * 1000) / 1000))
+      }
+    }
+    if (sample.camera !== undefined) applyCamera(sample.camera)
   }
 
-  /** Depths blended between two keyframes, so the crossing lands where the numbers cross. */
-  const blendDepths = (from: string, to: string, t: number): Record<string, number> | undefined => {
-    const a = depthsFor(from)
-    const b = depthsFor(to)
-    if (a === undefined) return b
-    if (b === undefined) return a
-    const out: Record<string, number> = {}
-    for (const part of Object.keys(a)) out[part] = a[part]! + ((b[part] ?? a[part]!) - a[part]!) * t
-    return out
-  }
-
-  const cycle = config.cycle.length > 0 ? config.cycle : Object.keys(config.frames)
-  const frameFor = (index: number): SceneFrame => config.frames[cycle[index] ?? ''] ?? {}
-  const timingFor = (index: number): { duration: number; hold: number; easing?: EasingName } =>
-    config.timings?.[cycle[index] ?? ''] ?? { duration: 700, hold: 900 }
-
-  let index = 0
-  let target = 0
-  let moving = false
-  let markedAt = 0
-  let direction = 1
+  // The clock. `t` is where the scene is; the anchor pair says when and where it last
+  // started moving, so a pause and a resume never lose their place.
+  let t = 0
+  let playing = false
+  /** Paused by hand: scrolling back into view must not restart it. */
+  let held = false
+  let anchorNow = 0
+  let anchorT = 0
+  let direction: 1 | -1 = 1
+  /** For the stepping modes: the clock position to stop at. */
+  let target: number | undefined
 
   const settle = (at: number): void => {
-    index = at
-    target = at
-    moving = false
-    paint(bindings, frameFor(at))
-    const depths = depthsFor(cycle[at] ?? '')
-    if (depths !== undefined) stack = restack(groups, stack, depths)
+    t = at
+    anchorT = at
+    anchorNow = performance.now()
+    paintAt(t)
   }
 
-  /** The next pose in the cycle, bouncing at the ends when the mode says pingpong. */
-  const advance = (): number => {
-    if (config.mode === 'pingpong') {
-      if (index + direction >= cycle.length || index + direction < 0) direction = -direction as 1 | -1
-      return index + direction
-    }
-    return (index + 1) % cycle.length
-  }
-
-  const beginMove = (to: number, now: number): void => {
-    target = to
-    moving = true
-    markedAt = now
+  const currentIndex = (): number => {
+    let index = 0
+    for (let i = 0; i < sched.arrive.length; i++) if (sched.arrive[i]! <= t + 1e-6) index = i
+    return index
   }
 
   const ticker: Ticker = {
     tick: (now) => {
-      const elapsed = now - markedAt
-      if (moving) {
-        // Pacing belongs to the keyframe being moved INTO, so one step can linger and the
-        // next can snap.
-        const { duration, easing } = timingFor(target)
-        const t = duration <= 0 ? 1 : Math.min(1, elapsed / duration)
-        const eased = easingFor(easing ?? config.easing)(t)
-        paint(bindings, blend(frameFor(index), frameFor(target), eased))
-        const mixed = blendDepths(cycle[index] ?? '', cycle[target] ?? '', eased)
-        if (mixed !== undefined) stack = restack(groups, stack, mixed)
-        if (t >= 1) {
-          index = target
-          moving = false
-          markedAt = now
+      if (!playing) return
+      const elapsed = now - anchorNow
+      if (target === undefined) {
+        t = clockAt(sched, mode, anchorT + elapsed)
+      } else {
+        t = anchorT + direction * elapsed
+        if ((direction > 0 && t >= target) || (direction < 0 && t <= target)) {
+          t = target === sched.total ? 0 : target
+          playing = false
         }
-        return
       }
-      // Held at a pose. Automatic modes move on once the hold expires; the interactive
-      // modes wait for the next pointer event instead.
-      if ((config.mode === 'loop' || config.mode === 'pingpong') && elapsed >= timingFor(index).hold) {
-        beginMove(advance(), now)
-      }
+      paintAt(t)
     },
+  }
+
+  /** Play forward to the next keyframe, skipping any dead time in a hold. */
+  const stepForward = (now: number): void => {
+    const index = currentIndex()
+    const next = index + 1
+    if (t <= sched.leave[index]! && t >= sched.arrive[index]!) t = sched.leave[index]!
+    target = next >= sched.arrive.length ? sched.total : sched.arrive[next]!
+    if (target <= t) target = sched.total
+    direction = 1
+    anchorT = t
+    anchorNow = now
+    playing = true
+    start(ticker)
+  }
+
+  /** Play back to the start, skipping holds on the way. */
+  const stepHome = (now: number): void => {
+    const index = currentIndex()
+    if (t > sched.arrive[index]! && t <= sched.leave[index]!) t = sched.arrive[index]!
+    target = 0
+    direction = -1
+    anchorT = t
+    anchorNow = now
+    playing = true
+    start(ticker)
+  }
+
+  const resume = (): void => {
+    if (held) return
+    anchorNow = performance.now()
+    anchorT = t
+    playing = true
+    start(ticker)
+  }
+  const pause = (): void => {
+    playing = false
   }
 
   const observer =
     typeof IntersectionObserver === 'function'
       ? new IntersectionObserver((entries) => {
           for (const entry of entries) {
-            if (entry.isIntersecting) {
-              markedAt = performance.now()
-              start(ticker)
-            } else {
+            if (entry.isIntersecting) resume()
+            else {
+              pause()
               stop(ticker)
             }
           }
         })
       : undefined
 
-  const onEnter = (): void => {
-    markedAt = performance.now()
-    beginMove(advance(), markedAt)
-    start(ticker)
-  }
-  const onLeave = (): void => {
-    markedAt = performance.now()
-    beginMove(0, markedAt)
-    start(ticker)
-  }
+  const onEnter = (): void => stepForward(performance.now())
+  const onLeave = (): void => stepHome(performance.now())
   const onClick = onEnter
-
   const cleanup: (() => void)[] = []
 
   settle(0)
 
   if (!prefersReducedMotion()) {
-    if (config.mode === 'hover') {
+    if (mode === 'hover') {
       svg.addEventListener('pointerenter', onEnter)
       svg.addEventListener('pointerleave', onLeave)
       cleanup.push(() => {
         svg.removeEventListener('pointerenter', onEnter)
         svg.removeEventListener('pointerleave', onLeave)
       })
-      start(ticker)
-    } else if (config.mode === 'click') {
+    } else if (mode === 'click') {
       svg.addEventListener('click', onClick)
       cleanup.push(() => svg.removeEventListener('click', onClick))
-      start(ticker)
     } else if (observer !== undefined) {
       observer.observe(svg)
       cleanup.push(() => observer.disconnect())
     } else {
-      markedAt = performance.now()
-      start(ticker)
+      resume()
     }
   }
 
   return {
     element: svg,
+    duration: lap,
     stop: () => {
+      playing = false
       stop(ticker)
       for (const undo of cleanup) undo()
     },
     goTo: (pose) => {
-      const at = cycle.indexOf(pose)
-      if (at >= 0) settle(at)
+      const at = sched.names.indexOf(pose)
+      if (at >= 0) settle(sched.arrive[at]!)
     },
+    seek: (ms) => settle(lap > 0 ? ((ms % lap) + lap) % lap : 0),
+    pause: () => {
+      held = true
+      pause()
+    },
+    play: () => {
+      held = false
+      if (mode === 'loop' || mode === 'pingpong') resume()
+    },
+    time: () => t,
   }
 }
+
+/** Every scene mounted on the page, by name — for a page that wants to drive one by hand. */
+export const scenes = new Map<string, SceneHandle>()
 
 /**
  * Find every compiled scene on the page and mount it.
@@ -363,7 +463,9 @@ export const mountAll = (root: ParentNode = document): readonly SceneHandle[] =>
     try {
       const config = JSON.parse(script.textContent ?? '{}') as SceneConfig
       svg.setAttribute('data-dotscene-mounted', '')
-      handles.push(mount(svg, config))
+      const handle = mount(svg, config)
+      handles.push(handle)
+      scenes.set(name, handle)
     } catch {
       // A malformed payload should cost one scene its animation, not the whole page.
     }

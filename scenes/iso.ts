@@ -16,13 +16,23 @@ export interface Shape {
   readonly faces?: readonly { readonly points: readonly string[]; readonly kind?: string }[]
   /** Per-point roles, so one part can hold inked buildings and blue ground together. */
   readonly kinds?: Readonly<Record<string, string>>
+  /** Paint order within the shape, as groups of points, back to front. See `merge`. */
+  readonly layers?: readonly (readonly string[])[]
 }
 
+/**
+ * Combine shapes into one, in the order given — which is also their paint order.
+ *
+ * Each shape merged becomes a layer of the result, so a building built as `merge(farBlock,
+ * nearShed)` paints the shed's walls over the block's edges rather than all faces first and
+ * all lines after. A shape that already has layers keeps them.
+ */
 export const merge = (...shapes: readonly Shape[]): Shape => ({
   points: Object.assign({}, ...shapes.map((s) => s.points)),
   edges: shapes.flatMap((s) => s.edges),
   faces: shapes.flatMap((s) => s.faces ?? []),
   kinds: Object.assign({}, ...shapes.map((s) => s.kinds ?? {})),
+  layers: shapes.flatMap((s) => (s.layers !== undefined && s.layers.length > 0 ? s.layers : [Object.keys(s.points)])),
 })
 
 /**
@@ -35,6 +45,15 @@ export const tag = (shape: Shape, kind: string): Shape => ({
   ...shape,
   edges: shape.edges.map((e) => ('from' in e ? { ...e, kind } : { from: e[0], to: e[1], kind })),
   kinds: Object.fromEntries(Object.keys(shape.points).map((n) => [n, kind])),
+})
+
+/**
+ * Re-tone a shape's faces — `roof` becomes `roof-blue` — so one building can wear the palette
+ * while its neighbours stay neutral. Edges and points are untouched; only fills change.
+ */
+export const tone = (shape: Shape, name: string): Shape => ({
+  ...shape,
+  faces: (shape.faces ?? []).map((f) => ({ ...f, kind: `${f.kind ?? 'face'}-${name}` })),
 })
 
 /**
@@ -56,6 +75,7 @@ export const figureOf = (name: string, shape: Shape, title: string, kind?: strin
     edges: kind === undefined ? shape.edges : shape.edges.map((e) => ('from' in e ? e : { from: e[0], to: e[1], kind })),
     faces: shape.faces ?? [],
     ...(Object.keys(pointKinds).length === 0 ? {} : { pointKinds }),
+    ...(shape.layers === undefined || shape.layers.length < 2 ? {} : { layers: shape.layers.filter((l) => l.length > 0) }),
   })
 }
 

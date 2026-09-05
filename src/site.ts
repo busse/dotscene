@@ -81,7 +81,7 @@ export const renderGallery = (compiled: readonly CompiledScene[], runtimeSrc = '
       const heavy = entry.html.length > EMBED_LIMIT
       const stage = heavy
         ? `            <a href="./${entry.name}.html"><img src="./${entry.name}.svg" alt="${escapeHtml(title)}" loading="lazy"></a>`
-        : entry.svg
+        : entry.inline
             .split('\n')
             .map((row) => `            ${row}`)
             .join('\n')

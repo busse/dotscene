@@ -165,6 +165,20 @@ export const validateFigureSpec = (name: string, spec: FigureSpec): readonly Iss
     }
   }
 
+  for (const layer of spec.layers ?? []) {
+    for (const point of layer) {
+      if (!(point in spec.points)) {
+        issues.push({
+          code: 'UNKNOWN_POINT',
+          figure: name,
+          point,
+          message: `a layer names unknown point '${point}'`,
+          ...suggest(point, names),
+        })
+      }
+    }
+  }
+
   for (const [poseName, override] of Object.entries(spec.poses ?? {})) {
     issues.push(...validateOverrideAgainst(name, names, poseName, override))
   }

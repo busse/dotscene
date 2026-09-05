@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { compose, defineFigure, defineScene, loopGaps, resolve, type Act } from '../src/index.ts'
+import { compose, defineFigure, defineScene, loopGaps, resolve, resolveAt, type Act } from '../src/index.ts'
 import { isIssueError } from '../src/validate.ts'
 
 const chip = defineFigure('chip', {
@@ -34,15 +34,35 @@ describe('compose', () => {
     expect(keyframes.map((k) => k.name)).toEqual(['t2000', 't2500'])
   })
 
-  it('resamples a part that is mid-move through another act\'s keyframe', () => {
-    // Without resampling, `slow` would freeze at 0 through t=500 and then jump.
+  it('leaves a part out of the keyframes another act asked for, since the runtime interpolates per part', () => {
+    // Restating `slow` at t=500 would be correct but wasteful: the timeline reads it as
+    // halfway along anyway, because it interpolates between the keyframes that mention it.
     const { keyframes } = compose([
       { act: slide('slow', 'slow', 0, 100, 1000), at: 0 },
       { act: slide('quick', 'quick', 0, 10, 0), at: 500 },
     ])
     const middle = keyframes.find((k) => k.name === 't500')
     expect(middle).toBeDefined()
-    expect(xOf(middle, 'slow')).toBe(50)
+    expect(middle?.parts?.slow).toBeUndefined()
+    // `quick` has two beats at the same instant; the later one wins.
+    expect(xOf(middle, 'quick')).toBe(10)
+  })
+
+  it('reads a part halfway along through a keyframe that does not mention it', () => {
+    const { keyframes } = compose([
+      { act: slide('slow', 'slow', 0, 100, 1000), at: 0 },
+      { act: slide('quick', 'quick', 0, 10, 0), at: 500 },
+    ])
+    const scene = defineScene('sparse', {
+      parts: [
+        { figure: chip, id: 'slow' },
+        { figure: chip, id: 'quick' },
+      ],
+      viewBox: [-10, -10, 120, 20],
+      animate: { mode: 'loop', keyframes },
+    })
+    const at500 = resolveAt(scene, 500)
+    expect(at500.dots.find((d) => d.part === 'slow' && d.point === 'a')?.at).toEqual([50, 0])
   })
 
   it('leaves a part alone outside its own span, so it parks where it was left', () => {
@@ -55,58 +75,86 @@ describe('compose', () => {
     expect(atEnd?.parts?.late).toBeDefined()
   })
 
-  it('bakes an eased segment into samples, since the runtime only walks straight lines', () => {
-    const linear = compose([{ act: slide('a', 'token', 0, 100, 900), at: 0 }])
-    const eased = compose([{ act: slide('a', 'token', 0, 100, 900, 'easeInOut'), at: 0 }], { maxStep: 150 })
-    expect(linear.keyframes).toHaveLength(2)
-    expect(eased.keyframes.length).toBeGreaterThan(5)
-    // Halfway through an easeInOut is still halfway along; a quarter through is not.
-    expect(xOf(eased.keyframes.find((k) => k.name === 't450'), 'token')).toBeCloseTo(50, 5)
-    expect(xOf(eased.keyframes.find((k) => k.name === 't150'), 'token')!).toBeLessThan(25)
+  it('writes a beat\'s easing onto its keyframe rather than baking samples', () => {
+    const eased = compose([{ act: slide('a', 'token', 0, 100, 900, 'easeInOut'), at: 0 }])
+    expect(eased.keyframes).toHaveLength(2)
+    expect(eased.keyframes[1]?.easing).toBe('easeInOut')
+    expect(eased.keyframes[1]?.parts?.token?.easing).toBeUndefined()
   })
 
-  it('leaves a linear segment alone, so nothing pays for easing it does not use', () => {
-    const { keyframes } = compose([{ act: slide('a', 'token', 0, 100, 5000), at: 0 }], { maxStep: 100 })
+  it('lets two parts arrive at one instant each their own way', () => {
+    const { keyframes } = compose([
+      { act: slide('a', 'soft', 0, 100, 900, 'easeInOut'), at: 0 },
+      { act: slide('b', 'hard', 0, 100, 900), at: 0 },
+    ])
+    const end = keyframes.find((k) => k.name === 't900')
+    // One easing wins the keyframe; the other part carries its own.
+    const own = [end?.parts?.soft?.easing, end?.parts?.hard?.easing].filter((e) => e !== undefined)
+    expect(own).toHaveLength(1)
+    const scene = defineScene('two', {
+      parts: [
+        { figure: chip, id: 'soft' },
+        { figure: chip, id: 'hard' },
+      ],
+      viewBox: [-10, -10, 120, 20],
+      animate: { mode: 'loop', keyframes },
+    })
+    const at450 = resolveAt(scene, 450)
+    const x = (part: string) => at450.dots.find((d) => d.part === part && d.point === 'a')?.at[0]
+    expect(x('hard')).toBe(50)
+    expect(x('soft')).toBe(50)
+    const at225 = resolveAt(scene, 225)
+    expect(at225.dots.find((d) => d.part === 'hard' && d.point === 'a')?.at[0]).toBe(25)
+    expect(at225.dots.find((d) => d.part === 'soft' && d.point === 'a')?.at[0]).toBeLessThan(20)
+  })
+
+  it('never adds keyframes an act did not ask for', () => {
+    const { keyframes } = compose([{ act: slide('a', 'token', 0, 100, 5000, 'easeInOut'), at: 0 }])
     expect(keyframes).toHaveLength(2)
   })
 
-  it('interpolates a pose when a resample lands inside a pose change', () => {
-    const posed: Act = {
-      name: 'posed',
-      beats: [
-        { at: 0, parts: { fig: { pose: 'idle' } } },
-        { at: 1000, parts: { fig: { pose: 'up' } } },
-      ],
-    }
-    const withPose = defineFigure('withPose', {
-      points: { a: [0, 0], b: [4, 0] },
-      edges: [['a', 'b']],
-      poses: { idle: {}, up: { a: [0, -10] } },
-    })
-    const { keyframes } = compose(
-      [{ act: posed, at: 0 }, { act: slide('other', 'other', 0, 1, 0), at: 500 }],
-      { parts: [{ figure: withPose, id: 'fig' }] },
-    )
-    const middle = keyframes.find((k) => k.name === 't500')
-    const pose = middle?.parts?.fig?.pose
-    expect(typeof pose).toBe('object')
-    // Halfway between a at y 0 and a at y -10.
-    expect((pose as { points: Record<string, readonly [number, number]> }).points.a).toEqual([0, -5])
-  })
-
-  it('interpolates depth, so a part crosses the stack where the numbers cross', () => {
+  it('interpolates depth and opacity along an eased segment', () => {
     const diving: Act = {
       name: 'dive',
       beats: [
-        { at: 0, parts: { mover: { at: [0, 0], depth: 1 } } },
-        { at: 1000, parts: { mover: { at: [10, 0], depth: 3 } } },
+        { at: 0, parts: { mover: { at: [0, 0], depth: 1, opacity: 0 } } },
+        { at: 1000, parts: { mover: { at: [10, 0], depth: 3, opacity: 1 } }, easing: 'easeInOut' },
       ],
     }
-    const { keyframes } = compose([
-      { act: diving, at: 0 },
-      { act: slide('tick', 'tick', 0, 1, 0), at: 250 },
-    ])
-    expect(keyframes.find((k) => k.name === 't250')?.parts?.mover?.depth).toBe(1.5)
+    const scene = defineScene('dive', {
+      parts: [{ figure: chip, id: 'mover', depth: 1, opacity: 0 }],
+      viewBox: [-10, -10, 40, 20],
+      animate: { mode: 'loop', keyframes: compose([{ act: diving, at: 0 }]).keyframes },
+    })
+    const half = resolveAt(scene, 500)
+    expect(half.opacities?.mover).toBeCloseTo(0.5, 5)
+    expect(half.dots.find((d) => d.point === 'a')?.at[0]).toBe(5)
+  })
+
+  it('carries the camera as a track of its own', () => {
+    const shot: Act = {
+      name: 'shot',
+      beats: [
+        { at: 0, camera: { at: [0, 0], width: 100 } },
+        { at: 1000, camera: { at: [50, 0], width: 40 }, easing: 'easeInOut' },
+      ],
+    }
+    const { keyframes } = compose([{ act: shot, at: 0 }])
+    expect(keyframes.map((k) => k.name)).toEqual(['t0', 't1000'])
+    expect(keyframes[1]?.camera).toEqual({ at: [50, 0], width: 40 })
+    expect(keyframes[1]?.easing).toBe('easeInOut')
+    expect(keyframes[1]?.parts).toEqual({})
+  })
+
+  it('rejects two acts moving the camera at once', () => {
+    const shot = (name: string): Act => ({
+      name,
+      beats: [
+        { at: 0, camera: { at: [0, 0], width: 100 } },
+        { at: 1000, camera: { at: [50, 0], width: 40 } },
+      ],
+    })
+    expect(() => compose([{ act: shot('a'), at: 0 }, { act: shot('b'), at: 500 }])).toThrow(/camera/)
   })
 
   it('rejects two acts driving one part at the same time', () => {
@@ -139,11 +187,23 @@ describe('compose', () => {
       { act: slide('haul', 'truck', 0, 90, 2000), at: 0 },
       { act: slide('ping', 'token', 0, 10, 0), at: 1000 },
     ])
-    expect(acts.t1000).toEqual(expect.arrayContaining(['haul', 'ping']))
+    expect(acts.t1000).toEqual(['ping'])
+    expect(acts.t2000).toEqual(['haul'])
   })
 })
 
 describe('loopGaps', () => {
+  it('judges each part on its own first and last mention, since keyframes are sparse', () => {
+    const early: Act = { name: 'early', beats: [{ at: 0, parts: { a: { at: [0, 0] } } }, { at: 100, parts: { a: { at: [5, 0] } } }] }
+    const late: Act = { name: 'late', beats: [{ at: 0, parts: { b: { at: [0, 0] } } }, { at: 100, parts: { b: { at: [0, 0] } } }] }
+    expect(loopGaps(compose([{ act: early, at: 0 }, { act: late, at: 1000 }]))).toEqual(['a'])
+  })
+
+  it('counts a fade as a gap, since an opaque start and a vanished end would pop at the cut', () => {
+    const fade: Act = { name: 'fade', beats: [{ at: 0, parts: { a: { at: [0, 0], opacity: 1 } } }, { at: 100, parts: { a: { at: [0, 0], opacity: 0 } } }] }
+    expect(loopGaps(compose([{ act: fade, at: 0 }]))).toEqual(['a'])
+  })
+
   it('names a part that does not end where it started', () => {
     const drift: Act = {
       name: 'drift',
@@ -184,7 +244,12 @@ describe('composed output drives a real scene', () => {
     })
     const resolved = resolve(scene)
     expect([...(resolved.animation?.parts ?? [])].sort()).toEqual(['left', 'right'])
-    // Both are in flight at t=400, which is the whole point of composing.
-    expect(Object.keys(resolved.animation?.frames.t400 ?? {}).sort()).toEqual(['left', 'right'])
+    // Only `right` has a beat at t=400; `left` is read off its own segment.
+    expect(Object.keys(resolved.animation?.frames.t400 ?? {})).toEqual(['right'])
+    const at600 = resolveAt(scene, 600)
+    const x = (part: string) => at600.dots.find((d) => d.part === part && d.point === 'a')?.at[0]
+    // Both are in flight at t=600, which is the whole point of composing.
+    expect(x('left')).toBe(10)
+    expect(x('right')).toBe(10)
   })
 })

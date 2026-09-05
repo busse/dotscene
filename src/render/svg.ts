@@ -15,13 +15,22 @@ export interface SvgOptions {
   readonly styles?: boolean
   /** Indentation for nested elements. */
   readonly indent?: string
+  /**
+   * Escape the stylesheet as XML text. A standalone `.svg` is parsed as XML, where a bare
+   * `&` — the CSS nesting selector a themed scene uses — is a fatal error; inside an HTML
+   * page a `<style>` is raw text and the same `&` must stay literal. So the file and the
+   * pasteable block differ in exactly this.
+   */
+  readonly xml?: boolean
 }
 
 /** Default look, kept at low specificity so page CSS can override any of it. */
 export const DEFAULT_CSS = [
-  '.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}',
-  '.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}',
-  '.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}',
+  // `--ds-zoom` is written by the runtime as the camera moves, for scenes sized to the
+  // screen: a push-in shrinks it, so dots and strokes keep their size on the page.
+  '.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}',
+  '.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}',
+  '.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}',
   // A face exists to hide what is behind it, so it defaults to the scene's own ground.
   '.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}',
 ].join('')
@@ -86,7 +95,10 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
 
   const body: string[] = []
   if (titled) body.push(`<title>${escapeXml(scene.title!)}</title>`)
-  if (options.styles !== false) body.push(`<style>${DEFAULT_CSS}${sceneCss(scene)}</style>`)
+  if (options.styles !== false) {
+    const css = `${DEFAULT_CSS}${sceneCss(scene)}`
+    body.push(`<style>${options.xml === true ? css.replace(/&/g, '&amp;') : css}</style>`)
+  }
 
   // Clip to the viewBox. A browser clips to the *viewport*, not the viewBox, so under the
   // default `preserveAspectRatio` a container with a different aspect ratio letterboxes —
@@ -109,6 +121,7 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
   const clipId = `ds-clip-${scene.name}`
   body.push(
     `<defs><clipPath id="${escapeXml(clipId)}"><rect ${attrs([
+      ['class', 'ds-clip'],
       ['x', x],
       ['y', y],
       ['width', width],
@@ -136,45 +149,59 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
   for (const part of scene.partOrder) {
     // One group per part, so the runtime can reorder whole parts when their depth ordering
     // changes — a truck that goes behind one building and in front of the next.
-    content.push(`<g ${attrs([['data-part', part]])}>`)
+    const opacity = scene.opacities?.[part]
+    content.push(`<g ${attrs([['data-part', part], ['opacity', opacity]])}>`)
 
-    for (const face of faces.get(part) ?? []) {
-      content.push(
-        `<polygon ${attrs([
-          ['class', face.kind === undefined ? 'ds-face' : `ds-face ds-face--${face.kind}`],
-          ['data-part', face.part],
-          ['data-face', face.names.join(' ')],
-          ['points', face.at.map(([px, py]) => `${px},${py}`).join(' ')],
-        ])}/>`,
-      )
-    }
+    // Within a part, solid by solid: a compound figure's layers each put down their faces,
+    // lines and dots before the next layer starts, so a near wall hides a far edge.
+    const partFaces = faces.get(part) ?? []
+    const partLines = lines.get(part) ?? []
+    const partDots = dots.get(part) ?? []
+    const layers = new Set<number>([0])
+    for (const item of [...partFaces, ...partLines, ...partDots]) layers.add(item.layer ?? 0)
 
-    for (const line of lines.get(part) ?? []) {
-      content.push(
-        `<line ${attrs([
-          ['class', line.kind === undefined ? 'ds-line' : `ds-line ds-line--${line.kind}`],
-          ['data-part', line.part],
-          ['data-a', line.from],
-          ['data-b', line.to],
-          ['x1', line.a[0]],
-          ['y1', line.a[1]],
-          ['x2', line.b[0]],
-          ['y2', line.b[1]],
-        ])}/>`,
-      )
-    }
+    for (const layer of [...layers].sort((a, b) => a - b)) {
+      for (const face of partFaces) {
+        if ((face.layer ?? 0) !== layer) continue
+        content.push(
+          `<polygon ${attrs([
+            ['class', face.kind === undefined ? 'ds-face' : `ds-face ds-face--${face.kind}`],
+            ['data-part', face.part],
+            ['data-face', face.names.join(' ')],
+            ['points', face.at.map(([px, py]) => `${px},${py}`).join(' ')],
+          ])}/>`,
+        )
+      }
 
-    for (const dot of dots.get(part) ?? []) {
-      content.push(
-        `<circle ${attrs([
-          ['class', dot.kind === undefined ? 'ds-dot' : `ds-dot ds-dot--${dot.kind}`],
-          ['data-part', dot.part],
-          ['data-p', dot.point],
-          ['cx', dot.at[0]],
-          ['cy', dot.at[1]],
-          ['r', scene.dotRadius],
-        ])}/>`,
-      )
+      for (const line of partLines) {
+        if ((line.layer ?? 0) !== layer) continue
+        content.push(
+          `<line ${attrs([
+            ['class', line.kind === undefined ? 'ds-line' : `ds-line ds-line--${line.kind}`],
+            ['data-part', line.part],
+            ['data-a', line.from],
+            ['data-b', line.to],
+            ['x1', line.a[0]],
+            ['y1', line.a[1]],
+            ['x2', line.b[0]],
+            ['y2', line.b[1]],
+          ])}/>`,
+        )
+      }
+
+      for (const dot of partDots) {
+        if ((dot.layer ?? 0) !== layer) continue
+        content.push(
+          `<circle ${attrs([
+            ['class', dot.kind === undefined ? 'ds-dot' : `ds-dot ds-dot--${dot.kind}`],
+            ['data-part', dot.part],
+            ['data-p', dot.point],
+            ['cx', dot.at[0]],
+            ['cy', dot.at[1]],
+            ['r', scene.dotRadius],
+          ])}/>`,
+        )
+      }
     }
 
     content.push('</g>')

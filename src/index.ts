@@ -4,6 +4,8 @@ export { atKeyframe, defineFigure, definePose, defineScene, partId, withPose } f
 export type {
   AnimateMode,
   AnimateSpec,
+  CameraKeyframe,
+  CameraSpec,
   Keyframe,
   PartKeyframe,
   EasingName,
@@ -42,8 +44,11 @@ export type { Bounds, IsometricOptions, MirrorOptions, Ring, Vec3 } from './geom
 export { easings, easingFor, lerpPoints, posePoints, poseOverride } from './poses.ts'
 export type { Easing } from './poses.ts'
 
-export { partPoints, resolve } from './layout.ts'
-export type { Frame, ResolvedAnimation, ResolvedDot, ResolvedLine, ResolvedScene, ViewBox } from './layout.ts'
+export { cameraViewBox, keyframeTime, paintSample, partPoints, resolve, resolveAt, timelineOf } from './layout.ts'
+export type { Frame, ResolvedAnimation, ResolvedDot, ResolvedFace, ResolvedLine, ResolvedScene, SceneFrame, ViewBox } from './layout.ts'
+
+export { buildTracks, clockAt, lapOf, packFrame, sampleAt, sampleTrack, schedule, unpackFrame } from './timeline.ts'
+export type { Sample, Schedule, Sparse, TimelineConfig, Track, Tracks } from './timeline.ts'
 
 export { compose, loopGaps } from './compose.ts'
 export type { Act, Beat, Composed, ComposeOptions, Placement } from './compose.ts'

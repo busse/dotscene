@@ -56,6 +56,15 @@ export interface FigureSpec {
   readonly pointKinds?: Readonly<Record<PointId, string>>
   /** Named poses, each a partial override of `points`. */
   readonly poses?: Readonly<Record<string, PoseOverride>>
+  /**
+   * Paint order inside the figure, as groups of point names, back to front.
+   *
+   * A figure paints its faces, then its lines, then its dots — so in a compound figure a far
+   * solid's lines would cross a near solid's walls. Layers paint solid by solid instead: each
+   * layer's faces, lines and dots go down before the next layer starts. Points in no layer
+   * paint first. An edge or face belongs to the layer of its first point.
+   */
+  readonly layers?: readonly (readonly PointId[])[]
   /** Human-readable description, used for the SVG <title>. */
   readonly title?: string
 }
@@ -68,6 +77,7 @@ export interface Figure {
   readonly faces: readonly Face[]
   readonly pointKinds: Readonly<Record<PointId, string>>
   readonly poses: Readonly<Record<string, PoseOverride>>
+  readonly layers: readonly (readonly PointId[])[]
   readonly title?: string
 }
 
@@ -87,10 +97,32 @@ export interface Transform {
   readonly flipX?: boolean
 }
 
+/**
+ * What the viewer sees: a window onto scene space, given as its centre and width.
+ *
+ * Height follows from the scene's aspect ratio, so a camera move never changes the shape of
+ * the frame — only where it looks and how close. Animating this is what turns a diagram into
+ * a shot: the same geometry read as a wide establishing view, then a push in on one dock.
+ */
+export interface CameraSpec {
+  readonly at: Vec2
+  readonly width: number
+}
+
+/** A camera in a keyframe. Fields left out hold the scene's resting camera. */
+export interface CameraKeyframe {
+  readonly at?: Vec2
+  readonly width?: number
+  /** The camera's own easing into this step, when it differs from the keyframe's. */
+  readonly easing?: EasingName
+}
+
 export interface Part extends Transform {
   readonly figure: Figure
   /** Unique within the scene. Defaults to the figure name. */
   readonly id?: string
+  /** 0 to 1. Anything a scene has to make appear or vanish fades rather than teleporting. */
+  readonly opacity?: number
   /**
    * Paint order. Lower paints first, so higher sits in front.
    *
@@ -116,6 +148,15 @@ export type AnimateMode = 'loop' | 'pingpong' | 'hover' | 'click'
 export interface PartKeyframe extends Transform {
   /** Paint order at this step, interpolated between keyframes like any other number. */
   readonly depth?: number
+  /** 0 to 1, interpolated. The way a thing enters or leaves without a cut. */
+  readonly opacity?: number
+  /**
+   * This part's own easing into the step, when it differs from the keyframe's.
+   *
+   * Two things arriving at one instant need not arrive the same way: a composed timeline
+   * puts a forklift's eased stop and a bird's straight flap on the same keyframe.
+   */
+  readonly easing?: EasingName
   /**
    * A pose name from the figure, or a `Pose` built at runtime.
    *
@@ -130,6 +171,8 @@ export interface PartKeyframe extends Transform {
 export interface Keyframe {
   readonly name: string
   readonly parts?: Readonly<Record<string, PartKeyframe>>
+  /** Where the camera is at this step. Interpolated like a part; omitted, it holds. */
+  readonly camera?: CameraKeyframe
   /** Milliseconds to transition into this keyframe. Falls back to `animate.duration`. */
   readonly duration?: number
   /** Milliseconds held here before moving on. Falls back to `animate.hold`. */
@@ -159,6 +202,12 @@ export interface AnimateSpec {
   readonly hold?: number
   readonly easing?: EasingName
   readonly mode?: AnimateMode
+  /**
+   * How dots and strokes respond to the camera. `scene` keeps them in scene units, so a
+   * push-in enlarges them with everything else; `screen` keeps them a constant size on the
+   * page, the way a pen line stays a pen line however close the drawing is held.
+   */
+  readonly sizing?: 'scene' | 'screen'
 }
 
 export interface SceneSpec {
@@ -166,6 +215,12 @@ export interface SceneSpec {
   readonly title?: string
   /** Explicit viewBox. Omit to fit the content bounds plus `padding`. */
   readonly viewBox?: readonly [number, number, number, number]
+  /**
+   * The resting camera. Its `aspect` (width over height) fixes the frame's shape for every
+   * camera move; it defaults to the `viewBox` aspect, or 16:9. When set, the camera decides
+   * the viewBox and `viewBox` only describes the stage.
+   */
+  readonly camera?: CameraSpec & { readonly aspect?: number }
   /** Scene units of breathing room around the content bounds. Default 6. */
   readonly padding?: number
   /** Dot radius in scene units. Defaults to a proportion of the viewBox — see `resolve`. */
@@ -199,6 +254,7 @@ export interface Scene {
   readonly padding: number
   readonly title?: string
   readonly viewBox?: readonly [number, number, number, number]
+  readonly camera?: CameraSpec & { readonly aspect?: number }
   readonly dotRadius?: number
   readonly lineWidth?: number
   readonly css?: string
@@ -220,6 +276,7 @@ export const defineFigure = (name: string, spec: FigureSpec): Figure => {
     faces: spec.faces ?? [],
     pointKinds: spec.pointKinds ?? {},
     poses: spec.poses ?? {},
+    layers: spec.layers ?? [],
     ...(spec.title === undefined ? {} : { title: spec.title }),
   }
 }
@@ -239,6 +296,7 @@ export const defineScene = (name: string, spec: SceneSpec): Scene => ({
   padding: spec.padding ?? 6,
   ...(spec.title === undefined ? {} : { title: spec.title }),
   ...(spec.viewBox === undefined ? {} : { viewBox: spec.viewBox }),
+  ...(spec.camera === undefined ? {} : { camera: spec.camera }),
   ...(spec.dotRadius === undefined ? {} : { dotRadius: spec.dotRadius }),
   ...(spec.lineWidth === undefined ? {} : { lineWidth: spec.lineWidth }),
   ...(spec.css === undefined ? {} : { css: spec.css }),
