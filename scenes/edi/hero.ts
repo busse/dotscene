@@ -1,90 +1,63 @@
 /**
  * The arrangement: which acts play, and when.
  *
- * Nothing here says what an act *looks* like — that is the act's own file. This decides only
- * the running order and the overlap, which is the whole reason acts keep their own clocks.
- * Drop an act, retime one, or slide the paperwork later against the freight, and everything
- * else is untouched.
- *
- * The rig is the spine. Its acts run back to back and their start times are computed rather
- * than written down, because a gap would show as the rig sliding along with its wheels still
- * and an overlap is rejected outright by the compositor. Everything else hangs off that.
+ * Nothing here says what an act *looks* like — that is the act's own file — and nothing
+ * here says where the camera looks — that is the camera script. This decides only the
+ * running order and the overlap, which is the whole reason acts keep their own clocks.
+ * Slide an act in `timing.ts` and everything else is untouched.
  */
 
-import { compose, defineScene, loopGaps, type Act } from 'dotscene'
+import { compose, defineScene, loopGaps } from 'dotscene'
 import { acts } from './acts/index.ts'
-import { along } from './route.ts'
-import { HERO_VIEWBOX } from './projection.ts'
+import { ambient } from './acts/ambient.ts'
+import { cameraScript } from './acts/camera.ts'
+import { reset } from './acts/reset.ts'
+import { standingCast } from './acts/act.ts'
+import { ASPECT, stageParts, WIDE } from './world.ts'
+import { LOOP, START } from './timing.ts'
 import { css, night, paper, themedCss, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
-import { rigPart, stageParts } from './stage.ts'
+import { DOT_RADIUS, LINE_WIDTH } from './stage.ts'
 
-/** When the first rig leaves. The paperwork before it has to fit in here. */
-const RIG_START = 3600
-
-const driving = acts.filter((a) => a.drive !== undefined)
-
-const rigSchedule = (() => {
-  const at = new Map<string, number>()
-  let cursor = RIG_START
-  for (const act of driving) {
-    at.set(act.id, cursor)
-    cursor += act.duration
-  }
-  return { at, ends: cursor }
-})()
-
-/**
- * When each message act starts.
- *
- * Read against the rig's schedule above: the tender and its answer land before anything
- * moves, the advance ship notice goes out mid-linehaul, and the invoice chases the delivery
- * rather than waiting politely for it.
- */
-const MESSAGES: Readonly<Record<string, number>> = {
-  edi01Tender: 0,
-  edi02Ack: 1600,
-  edi03Accept: 2400,
-  edi04Bol: 4200,
-  edi07Asn: 12000,
-  edi11Invoice: 30500,
-  edi12Payment: 34200,
+const startOf: Readonly<Record<string, number>> = {
+  edi00Prologue: START.prologue,
+  edi01Tender: START.tender,
+  edi02Ack: START.ack,
+  edi03Accept: START.accept,
+  edi04Bol: START.bol,
+  edi05Dispatch: START.dispatch,
+  edi06Pickup: START.pickup,
+  edi07Asn: START.asn,
+  edi08Terminal: START.terminal,
+  edi09Delivery: START.out,
+  edi10Delivered: START.delivered,
+  edi11Invoice: START.invoice,
+  edi12Payment: START.payment,
 }
 
-/** A beat of empty street before the loop cuts, so the repeat is not felt as a jolt. */
-const TAIL = 1800
-
-const home = along(0)
-const settle: Act = {
-  name: 'settle',
-  beats: [
-    {
-      at: Math.max(...Object.entries(MESSAGES).map(([id, at]) => at + acts.find((a) => a.id === id)!.duration), rigSchedule.ends) + TAIL,
-      parts: { rig: { at: home.at, depth: home.depth, pose: home.axis } },
-    },
-  ],
-}
+/** A beat of stillness at the very end, so the loop's cut lands on a settled frame. */
+const settle = { name: 'settle', beats: [{ at: LOOP, parts: {} }] }
 
 export const placements = [
-  ...acts.map((act) => ({
-    act: act.act,
-    at: rigSchedule.at.get(act.id) ?? MESSAGES[act.id] ?? 0,
-  })),
+  ...acts.map((act) => ({ act: act.act, at: startOf[act.id] ?? 0 })),
+  { act: ambient, at: 0 },
+  { act: cameraScript, at: 0 },
+  { act: reset, at: START.reset },
   { act: settle, at: 0 },
 ]
 
-const cast = [...stageParts, rigPart(0), ...acts.flatMap((a) => a.parts)]
+export const cast = [...stageParts, ...standingCast(), ...acts.flatMap((a) => a.parts)]
 
-export const composed = compose(placements, { parts: cast, maxStep: 200 })
+export const composed = compose(placements, { parts: cast, maxStep: 120 })
 
 /** Anything not ending where it started would jump when the loop cuts. Should be empty. */
-export const seam = loopGaps(composed)
+export const seam = loopGaps(composed, cast)
 
 const layout = {
   parts: cast,
-  viewBox: HERO_VIEWBOX,
-  dotRadius: 0.95,
-  lineWidth: 0.45,
-  animate: { mode: 'loop', keyframes: composed.keyframes },
+  camera: { ...WIDE, aspect: ASPECT },
+  dotRadius: DOT_RADIUS,
+  lineWidth: LINE_WIDTH,
+  animate: { mode: 'loop', keyframes: composed.keyframes, sizing: 'screen', easing: 'linear' },
 } as const
 
 /**

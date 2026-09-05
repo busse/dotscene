@@ -1,12 +1,11 @@
 /**
  * The lifecycle, in order.
  *
- * This list is the only place the running order lives. Reorder it, drop an act, or add one,
- * and the hero follows — which is the point of every act being a separate file with its own
- * clock. Nothing here says *when* an act starts; that is the arrangement, and it belongs to
- * the hero.
+ * This list is the only place the running order lives. Nothing here says *when* an act
+ * starts; that is the arrangement, and it belongs to `timing.ts` and the hero.
  */
 
+import { act as prologue } from './a00-prologue.ts'
 import { act as tender } from './a01-tender.ts'
 import { act as ack } from './a02-ack.ts'
 import { act as accept } from './a03-accept.ts'
@@ -20,17 +19,4 @@ import { act as delivered } from './a10-delivered.ts'
 import { act as invoice } from './a11-invoice.ts'
 import { act as payment } from './a12-payment.ts'
 
-export const acts = [
-  tender,
-  ack,
-  accept,
-  bol,
-  dispatch,
-  pickup,
-  asn,
-  terminal,
-  delivery,
-  delivered,
-  invoice,
-  payment,
-] as const
+export const acts = [prologue, tender, ack, accept, bol, dispatch, pickup, asn, terminal, delivery, delivered, invoice, payment] as const

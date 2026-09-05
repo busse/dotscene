@@ -1,67 +1,92 @@
 # The EDI hero animation
 
-An end-to-end EDI transaction lifecycle for a carrier and forwarder, built as an animated
-background. Freight is inked and data is blue: the physical world — docks, terminals,
-trailers, the rig — is drawn in gray-900, and the network above it, with everything
-travelling that network, is non-photo blue. One layer is things; the other is information
-about things.
+An end-to-end EDI transaction lifecycle for a carrier, built as a one-minute looping hero
+background with a moving camera. **Freight is inked and data is blue**: the physical world —
+sheds, yards, trailers, the road, the river — is drawn in gray, and the carrier's office, the
+bank, the rig's cab and every message in the air wear the palette's blue. Two layers: things,
+and information about things.
+
+The thesis is *data moves first*. Every physical move is preceded by a message landing: the
+carrier says yes and only then does a rig leave its bay; the advance ship notice lands and the
+consignee's door goes up before the truck is anywhere near; the driver's device reports in and
+the status fans out to three people. Each message carries its transaction set as digits —
+`204`, `990`, `214`, `856` — which the camera reveals when it pushes in.
 
 ## Where to change what
 
-Every kind of change has exactly one place it belongs.
-
 | to change… | edit | what follows automatically |
 |---|---|---|
-| the site palette | `palette.ts` | every scene, both themes |
-| where a terminal sits | `route.ts` | its buildings, its network node, the road, the rig's path |
-| what is built at a waypoint | `places.ts` | nothing else |
-| the trading-partner network | `network.ts` | where messages fly to and from |
-| a message's shape | `tokens.ts` | every act that sends one |
-| the rig | `fleet.ts` | every act that drives |
-| how fast the whole thing runs | `timing.ts` | every act |
+| the site palette, a face tone | `palette.ts` | every scene, both themes |
+| where a site stands, the road, the river | `world.ts` | its doors, mast, yard, every act that goes there, every shot aimed at it |
+| what a building looks like | `figures/places.ts` | every scene |
+| the rig, the forklift, the pallet | `figures/vehicles.ts` | every act that drives or loads |
+| a message's shape, its badge, the digits | `figures/tokens.ts` | every flight |
+| how a flight, a drive, a docking or a shuttle is staged | `acts/kit.ts` | every act |
 | what one step looks like | `acts/aNN-*.ts` | that step, standalone and in the hero |
-| the running order | `acts/index.ts` | the hero |
-| when a step starts, and what it overlaps | `hero.ts` | the hero |
-| the frame, tile size, or height scale | `projection.ts` | everything |
+| when a step starts | `timing.ts` | the hero, and the camera script |
+| where the camera looks, and when | `acts/camera.ts` | the hero |
+| the ambient life: flag, smoke, birds, van, ripples | `acts/ambient.ts` | the hero |
+| what is put back for the next lap | `acts/reset.ts` | the hero |
+| the frame's shape and the establishing shot | `world.ts` (`ASPECT`, `WIDE`) | everything |
 
-## The twelve acts
+## The acts
 
-| | transaction | what moves |
+| | transaction | what happens |
 |---|---|---|
+| 00 | prologue | the shipper's forklift sets a pallet down by the dock |
 | 01 | **204** load tender | shipper → carrier |
-| 02 | **997** functional acknowledgment | carrier → shipper |
-| 03 | **990** response to tender | carrier → shipper, with an ack back |
-| 04 | **211** bill of lading | shipper → carrier, with an ack back |
-| 05 | **214** dispatched | status out; the rig leaves for the shipper |
-| 06 | **214** picked up | status and ack; the rig loads and pulls away |
-| 07 | **856** advance ship notice | shipper → consignee, skipping the carrier entirely |
-| 08 | **214** arrived at terminal | the long leg through the crossdock; the broker is told too |
-| 09 | **214** out for delivery | the last leg |
-| 10 | **214** delivered | three parties told; the rig carries on out of frame |
-| 11 | **210** freight invoice | carrier → payer, who never saw the freight |
-| 12 | **820** payment and remittance | money moves; the shipper is told what it cost |
+| 02 | **997** acknowledgment | carrier → shipper, small and quick |
+| 03 | **990** response to tender | carrier says yes; ack back; **the rig leaves its bay** |
+| 04 | **211** bill of lading | shipper → carrier; ack back |
+| 05 | **214** dispatched | status out; the rig runs the road to the shipper over the bridge and backs onto the dock; the dock worker waves it in |
+| 06 | **214** picked up | door up, forklift loads the trailer, rig pulls away; the driver reports, the carrier tells the shipper, the shipper acknowledges |
+| 07 | **856** advance ship notice | shipper → consignee across the whole frame; the consignee's door goes up and its forklift comes out to wait |
+| 08 | **214** arrived at terminal | the long leg to the crossdock; check-in; the shipper *and the broker* are told |
+| 09 | **214** out for delivery | the last leg; the consignee is told |
+| 10 | **214** delivered | dock, unload, the receiver signs at the cab; three parties told; the rig drives off |
+| 11 | **210** freight invoice | carrier → bank |
+| 12 | **820** payment | four coins bank → carrier; the shipper is told what it cost |
+| — | reset | the rig is put back on its bay and a fresh pallet on the forks while the camera is elsewhere |
+
+Around all of it: a pennant, smoke from the plant's stack, trees in the wind, two flocks of
+birds, ripples under the bridge, a van going the other way, and the crossdock's own forklift
+working a door all day. Something is always moving.
 
 ## Working on it
 
 ```sh
-node bin/dotscene.js preview edi05Dispatch --poses   # step one act in the terminal
-node bin/dotscene.js inspect ediHero --json          # keyframe count, timing, total length
-node bin/dotscene.js build                           # everything, into docs/
+node bin/dotscene.js preview ediHero --at 24500 --width 120     # what the browser shows at 24.5 s, camera and all
+node bin/dotscene.js preview ediHero --every 5000 --width 60    # a flipbook of the whole lap
+node bin/dotscene.js preview edi06Pickup --at 3000              # one act, on its own clock
+node bin/dotscene.js inspect ediHero                            # keyframes, lap length, cast
+node bin/dotscene.js build                                      # everything, into docs/
 ```
 
-Each act is its own scene, so it builds and previews without the rest. That is the reason for
-the file layout: editing act 11 means opening one file and previewing one scene.
+In a browser, `dotscene.scenes.get('ediHero')` is the running scene: `pause()`, `seek(ms)`,
+`play()`, `time()`. Pausing is sticky — scrolling does not restart it — so a frame can be held
+for as long as it takes to look at it.
+
+Each act is its own scene with its own framing (`focus` in `defineAct`), so it builds and
+previews without the rest.
 
 ## Rules the code depends on
 
-- **An act's first beat establishes everything it will move.** Otherwise the act is correct in
+- **An act's first beat establishes everything it will move.** Otherwise the act is right in
   sequence and wrong on its own, and a bad hand-off shows as a slide rather than a failure.
-  There are tests for this.
-- **The rig's acts run back to back.** `hero.ts` computes their start times rather than listing
-  them; a gap would show as the rig sliding with its wheels still, and an overlap is rejected
-  outright by the compositor.
-- **Two acts may not move the same part at once.** Touching end to end is the hand-off.
-- **Tokens park off-frame at both ends of a flight**, so nothing pops into existence when the
-  loop cuts, and nothing lingers at a node afterwards.
-- **A corner snaps.** The rig's two orientations name the same box corners in different places,
-  so a slow blend between them turns the solid inside out.
+- **One act moves the rig at a time**, and each takes it from where the last one stopped. The
+  compositor rejects an overlap outright; a gap shows as the rig sliding with its wheels still.
+- **Every yard has one loading lane.** Trailers stop a forklift's reach short of the wall, and
+  the forklift works the trailer's side from that lane, so every load is a straight run along
+  one grid axis and happens in view rather than inside a building.
+- **A vehicle turns in a millisecond.** A box names the same corners in different places when
+  laid along the other axis, so a slow blend between headings turns the solid inside out.
+- **Messages fly above the masts.** An arc bows up to sixty units over its endpoints, so a
+  shot about a message is framed on the masts and the sky, not the yard under it. A shot about
+  freight is framed on a dock. The tilts between the two are most of the camera's motion.
+- **Things enter and leave by fading.** No token is parked off-frame; opacity does the work,
+  and a part invisible at both ends of the lap is exempt from the seam check.
+- **The reset happens where the camera is not looking.** The rig jumps back to its bay while
+  the camera is close on the office; the pallet jumps back to the shipper's forks at the same
+  moment. A cut nobody can see is not a cut. `seam` in `hero.ts` must stay empty.
+- **Ambient loops end on their first pose** at the lap's end, so the wrap is a hold rather
+  than a snap.

@@ -24,3 +24,6 @@ yarn-error.log*
 node_modules/
 dist/
 build/
+
+# scratch preview scenes while authoring figures
+scenes/_wip/
