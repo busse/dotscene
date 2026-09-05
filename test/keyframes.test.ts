@@ -285,7 +285,7 @@ describe('animated depth', () => {
     expect(resolved.partOrder).toEqual(['first', 'second'])
   })
 
-  it('emits every part\'s depth at each step, so the runtime can sort the whole stack', () => {
+  it('sends the whole stack once and only what each step changes', () => {
     const resolved = resolve(
       stacked({
         keyframes: [
@@ -294,8 +294,12 @@ describe('animated depth', () => {
         ],
       }),
     )
-    expect(resolved.animation?.depths?.back).toEqual({ behind: 0, mover: 0.5, front: 2 })
-    expect(resolved.animation?.depths?.through).toEqual({ behind: 0, mover: 2.5, front: 2 })
+    // Every part, once.
+    expect(resolved.animation?.depths?.base).toEqual({ behind: 0, mover: 1, front: 2 })
+    // Per step, only the mover — restating the still ones at every keyframe is what makes a
+    // long scene's depth map cost more than all its geometry.
+    expect(resolved.animation?.depths?.byFrame.back).toEqual({ mover: 0.5 })
+    expect(resolved.animation?.depths?.byFrame.through).toEqual({ mover: 2.5 })
   })
 
   it('carries no depth map at all when a scene never reorders', () => {

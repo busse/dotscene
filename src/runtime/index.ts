@@ -22,8 +22,15 @@ export interface SceneConfig {
   readonly cycle: readonly string[]
   readonly frames: Readonly<Record<string, SceneFrame>>
   readonly timings: Readonly<Record<string, { duration: number; hold: number; easing?: EasingName }>>
-  /** Keyframe -> part -> paint order. Absent unless the scene actually reorders. */
-  readonly depths?: Readonly<Record<string, Readonly<Record<string, number>>>>
+  /**
+   * Paint order. Absent unless the scene reorders.
+   *
+   * `base` is every part once; `byFrame` only what a step changes.
+   */
+  readonly depths?: {
+    readonly base: Readonly<Record<string, number>>
+    readonly byFrame: Readonly<Record<string, Readonly<Record<string, number>>>>
+  }
   readonly easing: EasingName
   readonly mode: AnimateMode
 }
@@ -197,8 +204,11 @@ export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
   }
   // The order the document already has, which is also the order to fall back to.
   let stack = [...groups.keys()]
-  const depthsFor = (name: string): Record<string, number> | undefined =>
-    config.depths?.[name] as Record<string, number> | undefined
+  const depthsFor = (name: string): Record<string, number> | undefined => {
+    const table = config.depths
+    if (table === undefined) return undefined
+    return { ...table.base, ...(table.byFrame[name] ?? {}) }
+  }
 
   /** Depths blended between two keyframes, so the crossing lands where the numbers cross. */
   const blendDepths = (from: string, to: string, t: number): Record<string, number> | undefined => {

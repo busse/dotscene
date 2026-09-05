@@ -81,11 +81,17 @@ export interface ResolvedAnimation {
   /** Per-keyframe pacing, so one step can linger while another snaps past. */
   readonly timings: Readonly<Record<string, FrameTiming>>
   /**
-   * Keyframe -> every part's paint order, present only when the scene animates depth.
+   * Paint order, present only when a scene animates depth.
    *
-   * Absent for the ordinary case, so a scene that never reorders costs nothing.
+   * Split deliberately: `base` carries every part once, and `byFrame` carries only the parts
+   * a keyframe actually moves. Sending the whole stack at every step is the obvious shape and
+   * it is ruinous — a scene with thirty-odd parts spends more on restating still ones than on
+   * all its geometry put together.
    */
-  readonly depths?: Readonly<Record<string, SceneDepths>>
+  readonly depths?: {
+    readonly base: SceneDepths
+    readonly byFrame: Readonly<Record<string, SceneDepths>>
+  }
   readonly easing: EasingName
   readonly mode: AnimateMode
   /** The parts this animation moves. */
@@ -210,11 +216,12 @@ export const resolve = (scene: Scene): ResolvedScene => {
       }
       frames[keyframe.name] = frame
       if (reorders) {
-        // Every part, not only the moving ones: the runtime sorts the whole stack, so a
-        // partial map would leave the rest without a place in it.
-        const atStep: Record<string, number> = {}
-        for (const id of partOrder) atStep[id] = keyframe.parts?.[id]?.depth ?? baseDepth.get(id)!
-        depths[keyframe.name] = atStep
+        // Only what this step changes. Everything else is in `base`, which the runtime keeps.
+        const moved: Record<string, number> = {}
+        for (const [id, state] of Object.entries(keyframe.parts ?? {})) {
+          if (state.depth !== undefined) moved[id] = state.depth
+        }
+        depths[keyframe.name] = moved
       }
       timings[keyframe.name] = {
         duration: keyframe.duration ?? animate.duration ?? 700,
@@ -230,7 +237,9 @@ export const resolve = (scene: Scene): ResolvedScene => {
       easing: animate.easing ?? 'easeInOut',
       mode: animate.mode ?? 'loop',
       parts: [...moving],
-      ...(reorders ? { depths } : {}),
+      ...(reorders
+        ? { depths: { base: Object.fromEntries(partOrder.map((id) => [id, baseDepth.get(id)!])), byFrame: depths } }
+        : {}),
     }
   }
 

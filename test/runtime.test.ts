@@ -340,31 +340,31 @@ describe('re-stacking by depth', () => {
     }
   }
 
-  const config = (depths: Record<string, Record<string, number>>): SceneConfig => ({
+  const config = (
+    base: Record<string, number>,
+    byFrame: Record<string, Record<string, number>>,
+  ): SceneConfig => ({
     cycle: ['start', 'end'],
     frames: { start: {}, end: {} },
     timings: { start: { duration: 100, hold: 100 }, end: { duration: 100, hold: 100 } },
-    depths,
+    depths: { base, byFrame },
     easing: 'linear',
     mode: 'loop',
   })
 
   it('sorts the groups to match the depths of the frame it settles on', () => {
     const { order, svg } = stage(['ground', 'truck', 'shed'])
-    const handle = mountScene(svg, config({
-      start: { ground: 0, truck: 1, shed: 2 },
-      end: { ground: 0, truck: 3, shed: 2 },
-    }))
+    const handle = mountScene(
+      svg,
+      config({ ground: 0, truck: 1, shed: 2 }, { start: {}, end: { truck: 3 } }),
+    )
     handle.goTo('end')
     expect(order).toEqual(['ground', 'shed', 'truck'])
   })
 
   it('crosses the stack partway through a transition, where the depths actually cross', () => {
     const { order, svg } = stage(['ground', 'truck', 'shed'])
-    mountScene(svg, config({
-      start: { ground: 0, truck: 1, shed: 2 },
-      end: { ground: 0, truck: 3, shed: 2 },
-    }))
+    mountScene(svg, config({ ground: 0, truck: 1, shed: 2 }, { start: {}, end: { truck: 3 } }))
     observed[0]!.fire(true)
     run(140) // past the 100ms hold, a little way into the move: truck is still behind
     expect(order).toEqual(['ground', 'truck', 'shed'])

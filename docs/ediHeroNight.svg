@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="edi01Tender" viewBox="-190 -78 380 132" role="img">
-  <title>204 — load tender</title>
-  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="edi01Tender"]{--ds-dot-r:0.95;--ds-line-w:0.45;--ds-face-fill:#fbfaf7}svg[data-dotscene="edi01Tender"]{.ds-face--roof{fill:#ffffff}.ds-face--east{fill:#f2f1ec}.ds-face--south{fill:#e6e4dd}.ds-face--apron{fill:#fbfaf7}.ds-line{stroke:#1d2021}.ds-dot{fill:#1d2021}.ds-line--lot{stroke:#a4dded}.ds-dot--lot{fill:#a4dded;r:.5}.ds-line--ground{stroke:#1b7f9f}.ds-dot--ground{fill:#1b7f9f;r:.7}.ds-line--road{stroke:#0b6580;stroke-width:.85}.ds-dot--road{fill:#0b6580;r:.9}.ds-line--net{stroke:#1b7f9f;stroke-width:.4;stroke-opacity:.75}.ds-dot--net{fill:#1b7f9f;r:.6}.ds-line--node{stroke:#0b6580;stroke-width:.7}.ds-dot--node{fill:#0b6580;r:1.2}.ds-line--vehicle{stroke:#1d2021;stroke-width:.4}.ds-dot--vehicle{fill:#1d2021;r:.55}.ds-line--token{stroke:#0b6580;stroke-width:.4}.ds-dot--token{fill:#0b6580;r:.5}.ds-line--tether{stroke:#1b7f9f;stroke-width:.35;stroke-opacity:.4}.ds-dot--tether{fill:#1b7f9f;r:.35;fill-opacity:.5}}</style>
-  <rect class="ds-bg" x="-190" y="-78" width="380" height="132" fill="#fbfaf7"/>
-  <defs><clipPath id="ds-clip-edi01Tender"><rect x="-190" y="-78" width="380" height="132"/></clipPath></defs>
-  <g clip-path="url(#ds-clip-edi01Tender)">
+<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="ediHeroNight" viewBox="-190 -78 380 132" role="img">
+  <title>An EDI lifecycle, end to end — dark</title>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:var(--ds-line-w);stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:var(--ds-dot-r)}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="ediHeroNight"]{--ds-dot-r:0.95;--ds-line-w:0.45;--ds-face-fill:#16181a}svg[data-dotscene="ediHeroNight"]{.ds-face--roof{fill:#3b4042}.ds-face--east{fill:#262a2c}.ds-face--south{fill:#1d2021}.ds-face--apron{fill:#16181a}.ds-line{stroke:#edebe6}.ds-dot{fill:#edebe6}.ds-line--lot{stroke:#33383b}.ds-dot--lot{fill:#33383b;r:.5}.ds-line--ground{stroke:#3d9fbf}.ds-dot--ground{fill:#3d9fbf;r:.7}.ds-line--road{stroke:#a4dded;stroke-width:.85}.ds-dot--road{fill:#a4dded;r:.9}.ds-line--net{stroke:#3d9fbf;stroke-width:.4;stroke-opacity:.75}.ds-dot--net{fill:#3d9fbf;r:.6}.ds-line--node{stroke:#a4dded;stroke-width:.7}.ds-dot--node{fill:#a4dded;r:1.2}.ds-line--vehicle{stroke:#edebe6;stroke-width:.4}.ds-dot--vehicle{fill:#edebe6;r:.55}.ds-line--token{stroke:#a4dded;stroke-width:.4}.ds-dot--token{fill:#a4dded;r:.5}.ds-line--tether{stroke:#3d9fbf;stroke-width:.35;stroke-opacity:.4}.ds-dot--tether{fill:#3d9fbf;r:.35;fill-opacity:.5}}</style>
+  <rect class="ds-bg" x="-190" y="-78" width="380" height="132" fill="#16181a"/>
+  <defs><clipPath id="ds-clip-ediHeroNight"><rect x="-190" y="-78" width="380" height="132"/></clipPath></defs>
+  <g clip-path="url(#ds-clip-ediHeroNight)">
     <g data-part="ediRoad">
     <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb0FA" data-b="kerb0FB" x1="-219.6" y1="5.8" x2="-199.6" y2="15.8"/>
     <line class="ds-line ds-line--road" data-part="ediRoad" data-a="kerb0NA" data-b="kerb0NB" x1="-228.4" y1="10.2" x2="-208.4" y2="20.2"/>
@@ -1143,7 +1143,290 @@
     <circle class="ds-dot ds-dot--token" data-part="edi01Tenderm0" data-p="docRule2A" cx="-1002.4" cy="-1031.36" r="0.95"/>
     <circle class="ds-dot ds-dot--token" data-part="edi01Tenderm0" data-p="docRule2B" cx="-996" cy="-1031.36" r="0.95"/>
     </g>
+    <g data-part="edi02Ackm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi02Ackm0" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi02Ackm0" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi02Ackm0" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi02Ackm0" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi02Ackm0" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi02Ackm0" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi02Ackm0" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi02Ackm0" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi02Ackm0" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+    <g data-part="edi03Acceptm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi03Acceptm0" data-face="docFar docEast docNear docWest" points="-1001.44,-1036.24 -991.52,-1031.28 -998.56,-1027.76 -1008.48,-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm0" data-a="docFar" data-b="docEast" x1="-1001.44" y1="-1036.24" x2="-991.52" y2="-1031.28"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm0" data-a="docEast" data-b="docNear" x1="-991.52" y1="-1031.28" x2="-998.56" y2="-1027.76"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm0" data-a="docNear" data-b="docWest" x1="-998.56" y1="-1027.76" x2="-1008.48" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm0" data-a="docWest" data-b="docFar" x1="-1008.48" y1="-1032.72" x2="-1001.44" y2="-1036.24"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm0" data-a="docRule1A" data-b="docRule1B" x1="-1002.4" y1="-1032.72" x2="-996" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm0" data-a="docRule2A" data-b="docRule2B" x1="-1002.4" y1="-1031.36" x2="-996" y2="-1031.36"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm0" data-p="docFar" cx="-1001.44" cy="-1036.24" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm0" data-p="docEast" cx="-991.52" cy="-1031.28" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm0" data-p="docNear" cx="-998.56" cy="-1027.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm0" data-p="docWest" cx="-1008.48" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm0" data-p="docRule1A" cx="-1002.4" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm0" data-p="docRule1B" cx="-996" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm0" data-p="docRule2A" cx="-1002.4" cy="-1031.36" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm0" data-p="docRule2B" cx="-996" cy="-1031.36" r="0.95"/>
+    </g>
+    <g data-part="edi03Acceptm1">
+    <polygon class="ds-face ds-face--apron" data-part="edi03Acceptm1" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm1" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm1" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm1" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi03Acceptm1" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm1" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm1" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm1" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi03Acceptm1" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+    <g data-part="edi04Bolm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi04Bolm0" data-face="docFar docEast docNear docWest" points="-1001.44,-1036.24 -991.52,-1031.28 -998.56,-1027.76 -1008.48,-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm0" data-a="docFar" data-b="docEast" x1="-1001.44" y1="-1036.24" x2="-991.52" y2="-1031.28"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm0" data-a="docEast" data-b="docNear" x1="-991.52" y1="-1031.28" x2="-998.56" y2="-1027.76"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm0" data-a="docNear" data-b="docWest" x1="-998.56" y1="-1027.76" x2="-1008.48" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm0" data-a="docWest" data-b="docFar" x1="-1008.48" y1="-1032.72" x2="-1001.44" y2="-1036.24"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm0" data-a="docRule1A" data-b="docRule1B" x1="-1002.4" y1="-1032.72" x2="-996" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm0" data-a="docRule2A" data-b="docRule2B" x1="-1002.4" y1="-1031.36" x2="-996" y2="-1031.36"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm0" data-p="docFar" cx="-1001.44" cy="-1036.24" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm0" data-p="docEast" cx="-991.52" cy="-1031.28" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm0" data-p="docNear" cx="-998.56" cy="-1027.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm0" data-p="docWest" cx="-1008.48" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm0" data-p="docRule1A" cx="-1002.4" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm0" data-p="docRule1B" cx="-996" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm0" data-p="docRule2A" cx="-1002.4" cy="-1031.36" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm0" data-p="docRule2B" cx="-996" cy="-1031.36" r="0.95"/>
+    </g>
+    <g data-part="edi04Bolm1">
+    <polygon class="ds-face ds-face--apron" data-part="edi04Bolm1" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm1" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm1" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm1" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi04Bolm1" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm1" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm1" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm1" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi04Bolm1" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+    <g data-part="edi05Dispatchm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi05Dispatchm0" data-face="statusFar statusEast statusNear statusWest" points="-1001.12,-1034.96 -994.08,-1031.44 -998.88,-1029.04 -1005.92,-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi05Dispatchm0" data-a="statusFar" data-b="statusEast" x1="-1001.12" y1="-1034.96" x2="-994.08" y2="-1031.44"/>
+    <line class="ds-line ds-line--token" data-part="edi05Dispatchm0" data-a="statusEast" data-b="statusNear" x1="-994.08" y1="-1031.44" x2="-998.88" y2="-1029.04"/>
+    <line class="ds-line ds-line--token" data-part="edi05Dispatchm0" data-a="statusNear" data-b="statusWest" x1="-998.88" y1="-1029.04" x2="-1005.92" y2="-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi05Dispatchm0" data-a="statusWest" data-b="statusFar" x1="-1005.92" y1="-1032.56" x2="-1001.12" y2="-1034.96"/>
+    <line class="ds-line ds-line--token" data-part="edi05Dispatchm0" data-a="statusRuleA" data-b="statusRuleB" x1="-1001.44" y1="-1032" x2="-997.76" y2="-1032"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi05Dispatchm0" data-p="statusFar" cx="-1001.12" cy="-1034.96" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi05Dispatchm0" data-p="statusEast" cx="-994.08" cy="-1031.44" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi05Dispatchm0" data-p="statusNear" cx="-998.88" cy="-1029.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi05Dispatchm0" data-p="statusWest" cx="-1005.92" cy="-1032.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi05Dispatchm0" data-p="statusRuleA" cx="-1001.44" cy="-1032" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi05Dispatchm0" data-p="statusRuleB" cx="-997.76" cy="-1032" r="0.95"/>
+    </g>
+    <g data-part="edi06Pickupm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi06Pickupm0" data-face="statusFar statusEast statusNear statusWest" points="-1001.12,-1034.96 -994.08,-1031.44 -998.88,-1029.04 -1005.92,-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm0" data-a="statusFar" data-b="statusEast" x1="-1001.12" y1="-1034.96" x2="-994.08" y2="-1031.44"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm0" data-a="statusEast" data-b="statusNear" x1="-994.08" y1="-1031.44" x2="-998.88" y2="-1029.04"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm0" data-a="statusNear" data-b="statusWest" x1="-998.88" y1="-1029.04" x2="-1005.92" y2="-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm0" data-a="statusWest" data-b="statusFar" x1="-1005.92" y1="-1032.56" x2="-1001.12" y2="-1034.96"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm0" data-a="statusRuleA" data-b="statusRuleB" x1="-1001.44" y1="-1032" x2="-997.76" y2="-1032"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm0" data-p="statusFar" cx="-1001.12" cy="-1034.96" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm0" data-p="statusEast" cx="-994.08" cy="-1031.44" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm0" data-p="statusNear" cx="-998.88" cy="-1029.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm0" data-p="statusWest" cx="-1005.92" cy="-1032.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm0" data-p="statusRuleA" cx="-1001.44" cy="-1032" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm0" data-p="statusRuleB" cx="-997.76" cy="-1032" r="0.95"/>
+    </g>
+    <g data-part="edi06Pickupm1">
+    <polygon class="ds-face ds-face--apron" data-part="edi06Pickupm1" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm1" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm1" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm1" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi06Pickupm1" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm1" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm1" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm1" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi06Pickupm1" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+    <g data-part="edi07Asnm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi07Asnm0" data-face="docFar docEast docNear docWest" points="-1001.44,-1036.24 -991.52,-1031.28 -998.56,-1027.76 -1008.48,-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm0" data-a="docFar" data-b="docEast" x1="-1001.44" y1="-1036.24" x2="-991.52" y2="-1031.28"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm0" data-a="docEast" data-b="docNear" x1="-991.52" y1="-1031.28" x2="-998.56" y2="-1027.76"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm0" data-a="docNear" data-b="docWest" x1="-998.56" y1="-1027.76" x2="-1008.48" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm0" data-a="docWest" data-b="docFar" x1="-1008.48" y1="-1032.72" x2="-1001.44" y2="-1036.24"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm0" data-a="docRule1A" data-b="docRule1B" x1="-1002.4" y1="-1032.72" x2="-996" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm0" data-a="docRule2A" data-b="docRule2B" x1="-1002.4" y1="-1031.36" x2="-996" y2="-1031.36"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm0" data-p="docFar" cx="-1001.44" cy="-1036.24" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm0" data-p="docEast" cx="-991.52" cy="-1031.28" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm0" data-p="docNear" cx="-998.56" cy="-1027.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm0" data-p="docWest" cx="-1008.48" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm0" data-p="docRule1A" cx="-1002.4" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm0" data-p="docRule1B" cx="-996" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm0" data-p="docRule2A" cx="-1002.4" cy="-1031.36" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm0" data-p="docRule2B" cx="-996" cy="-1031.36" r="0.95"/>
+    </g>
+    <g data-part="edi07Asnm1">
+    <polygon class="ds-face ds-face--apron" data-part="edi07Asnm1" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm1" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm1" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm1" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi07Asnm1" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm1" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm1" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm1" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi07Asnm1" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+    <g data-part="edi08Terminalm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi08Terminalm0" data-face="statusFar statusEast statusNear statusWest" points="-1001.12,-1034.96 -994.08,-1031.44 -998.88,-1029.04 -1005.92,-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm0" data-a="statusFar" data-b="statusEast" x1="-1001.12" y1="-1034.96" x2="-994.08" y2="-1031.44"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm0" data-a="statusEast" data-b="statusNear" x1="-994.08" y1="-1031.44" x2="-998.88" y2="-1029.04"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm0" data-a="statusNear" data-b="statusWest" x1="-998.88" y1="-1029.04" x2="-1005.92" y2="-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm0" data-a="statusWest" data-b="statusFar" x1="-1005.92" y1="-1032.56" x2="-1001.12" y2="-1034.96"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm0" data-a="statusRuleA" data-b="statusRuleB" x1="-1001.44" y1="-1032" x2="-997.76" y2="-1032"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm0" data-p="statusFar" cx="-1001.12" cy="-1034.96" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm0" data-p="statusEast" cx="-994.08" cy="-1031.44" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm0" data-p="statusNear" cx="-998.88" cy="-1029.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm0" data-p="statusWest" cx="-1005.92" cy="-1032.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm0" data-p="statusRuleA" cx="-1001.44" cy="-1032" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm0" data-p="statusRuleB" cx="-997.76" cy="-1032" r="0.95"/>
+    </g>
+    <g data-part="edi08Terminalm1">
+    <polygon class="ds-face ds-face--apron" data-part="edi08Terminalm1" data-face="statusFar statusEast statusNear statusWest" points="-1001.12,-1034.96 -994.08,-1031.44 -998.88,-1029.04 -1005.92,-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm1" data-a="statusFar" data-b="statusEast" x1="-1001.12" y1="-1034.96" x2="-994.08" y2="-1031.44"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm1" data-a="statusEast" data-b="statusNear" x1="-994.08" y1="-1031.44" x2="-998.88" y2="-1029.04"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm1" data-a="statusNear" data-b="statusWest" x1="-998.88" y1="-1029.04" x2="-1005.92" y2="-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm1" data-a="statusWest" data-b="statusFar" x1="-1005.92" y1="-1032.56" x2="-1001.12" y2="-1034.96"/>
+    <line class="ds-line ds-line--token" data-part="edi08Terminalm1" data-a="statusRuleA" data-b="statusRuleB" x1="-1001.44" y1="-1032" x2="-997.76" y2="-1032"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm1" data-p="statusFar" cx="-1001.12" cy="-1034.96" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm1" data-p="statusEast" cx="-994.08" cy="-1031.44" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm1" data-p="statusNear" cx="-998.88" cy="-1029.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm1" data-p="statusWest" cx="-1005.92" cy="-1032.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm1" data-p="statusRuleA" cx="-1001.44" cy="-1032" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi08Terminalm1" data-p="statusRuleB" cx="-997.76" cy="-1032" r="0.95"/>
+    </g>
+    <g data-part="edi09Deliverym0">
+    <polygon class="ds-face ds-face--apron" data-part="edi09Deliverym0" data-face="statusFar statusEast statusNear statusWest" points="-1001.12,-1034.96 -994.08,-1031.44 -998.88,-1029.04 -1005.92,-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi09Deliverym0" data-a="statusFar" data-b="statusEast" x1="-1001.12" y1="-1034.96" x2="-994.08" y2="-1031.44"/>
+    <line class="ds-line ds-line--token" data-part="edi09Deliverym0" data-a="statusEast" data-b="statusNear" x1="-994.08" y1="-1031.44" x2="-998.88" y2="-1029.04"/>
+    <line class="ds-line ds-line--token" data-part="edi09Deliverym0" data-a="statusNear" data-b="statusWest" x1="-998.88" y1="-1029.04" x2="-1005.92" y2="-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi09Deliverym0" data-a="statusWest" data-b="statusFar" x1="-1005.92" y1="-1032.56" x2="-1001.12" y2="-1034.96"/>
+    <line class="ds-line ds-line--token" data-part="edi09Deliverym0" data-a="statusRuleA" data-b="statusRuleB" x1="-1001.44" y1="-1032" x2="-997.76" y2="-1032"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi09Deliverym0" data-p="statusFar" cx="-1001.12" cy="-1034.96" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi09Deliverym0" data-p="statusEast" cx="-994.08" cy="-1031.44" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi09Deliverym0" data-p="statusNear" cx="-998.88" cy="-1029.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi09Deliverym0" data-p="statusWest" cx="-1005.92" cy="-1032.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi09Deliverym0" data-p="statusRuleA" cx="-1001.44" cy="-1032" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi09Deliverym0" data-p="statusRuleB" cx="-997.76" cy="-1032" r="0.95"/>
+    </g>
+    <g data-part="edi10Deliveredm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi10Deliveredm0" data-face="statusFar statusEast statusNear statusWest" points="-1001.12,-1034.96 -994.08,-1031.44 -998.88,-1029.04 -1005.92,-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm0" data-a="statusFar" data-b="statusEast" x1="-1001.12" y1="-1034.96" x2="-994.08" y2="-1031.44"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm0" data-a="statusEast" data-b="statusNear" x1="-994.08" y1="-1031.44" x2="-998.88" y2="-1029.04"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm0" data-a="statusNear" data-b="statusWest" x1="-998.88" y1="-1029.04" x2="-1005.92" y2="-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm0" data-a="statusWest" data-b="statusFar" x1="-1005.92" y1="-1032.56" x2="-1001.12" y2="-1034.96"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm0" data-a="statusRuleA" data-b="statusRuleB" x1="-1001.44" y1="-1032" x2="-997.76" y2="-1032"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm0" data-p="statusFar" cx="-1001.12" cy="-1034.96" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm0" data-p="statusEast" cx="-994.08" cy="-1031.44" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm0" data-p="statusNear" cx="-998.88" cy="-1029.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm0" data-p="statusWest" cx="-1005.92" cy="-1032.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm0" data-p="statusRuleA" cx="-1001.44" cy="-1032" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm0" data-p="statusRuleB" cx="-997.76" cy="-1032" r="0.95"/>
+    </g>
+    <g data-part="edi10Deliveredm1">
+    <polygon class="ds-face ds-face--apron" data-part="edi10Deliveredm1" data-face="statusFar statusEast statusNear statusWest" points="-1001.12,-1034.96 -994.08,-1031.44 -998.88,-1029.04 -1005.92,-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm1" data-a="statusFar" data-b="statusEast" x1="-1001.12" y1="-1034.96" x2="-994.08" y2="-1031.44"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm1" data-a="statusEast" data-b="statusNear" x1="-994.08" y1="-1031.44" x2="-998.88" y2="-1029.04"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm1" data-a="statusNear" data-b="statusWest" x1="-998.88" y1="-1029.04" x2="-1005.92" y2="-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm1" data-a="statusWest" data-b="statusFar" x1="-1005.92" y1="-1032.56" x2="-1001.12" y2="-1034.96"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm1" data-a="statusRuleA" data-b="statusRuleB" x1="-1001.44" y1="-1032" x2="-997.76" y2="-1032"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm1" data-p="statusFar" cx="-1001.12" cy="-1034.96" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm1" data-p="statusEast" cx="-994.08" cy="-1031.44" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm1" data-p="statusNear" cx="-998.88" cy="-1029.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm1" data-p="statusWest" cx="-1005.92" cy="-1032.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm1" data-p="statusRuleA" cx="-1001.44" cy="-1032" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm1" data-p="statusRuleB" cx="-997.76" cy="-1032" r="0.95"/>
+    </g>
+    <g data-part="edi10Deliveredm2">
+    <polygon class="ds-face ds-face--apron" data-part="edi10Deliveredm2" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm2" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm2" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm2" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi10Deliveredm2" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm2" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm2" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm2" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi10Deliveredm2" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+    <g data-part="edi11Invoicem0">
+    <polygon class="ds-face ds-face--apron" data-part="edi11Invoicem0" data-face="docFar docEast docNear docWest" points="-1001.44,-1036.24 -991.52,-1031.28 -998.56,-1027.76 -1008.48,-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docFar" data-b="docEast" x1="-1001.44" y1="-1036.24" x2="-991.52" y2="-1031.28"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docEast" data-b="docNear" x1="-991.52" y1="-1031.28" x2="-998.56" y2="-1027.76"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docNear" data-b="docWest" x1="-998.56" y1="-1027.76" x2="-1008.48" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docWest" data-b="docFar" x1="-1008.48" y1="-1032.72" x2="-1001.44" y2="-1036.24"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docRule1A" data-b="docRule1B" x1="-1002.4" y1="-1032.72" x2="-996" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem0" data-a="docRule2A" data-b="docRule2B" x1="-1002.4" y1="-1031.36" x2="-996" y2="-1031.36"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docFar" cx="-1001.44" cy="-1036.24" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docEast" cx="-991.52" cy="-1031.28" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docNear" cx="-998.56" cy="-1027.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docWest" cx="-1008.48" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docRule1A" cx="-1002.4" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docRule1B" cx="-996" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docRule2A" cx="-1002.4" cy="-1031.36" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem0" data-p="docRule2B" cx="-996" cy="-1031.36" r="0.95"/>
+    </g>
+    <g data-part="edi11Invoicem1">
+    <polygon class="ds-face ds-face--apron" data-part="edi11Invoicem1" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem1" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem1" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem1" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi11Invoicem1" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem1" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem1" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem1" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi11Invoicem1" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+    <g data-part="edi12Paymentm0">
+    <polygon class="ds-face ds-face--apron" data-part="edi12Paymentm0" data-face="docFar docEast docNear docWest" points="-1001.44,-1036.24 -991.52,-1031.28 -998.56,-1027.76 -1008.48,-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm0" data-a="docFar" data-b="docEast" x1="-1001.44" y1="-1036.24" x2="-991.52" y2="-1031.28"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm0" data-a="docEast" data-b="docNear" x1="-991.52" y1="-1031.28" x2="-998.56" y2="-1027.76"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm0" data-a="docNear" data-b="docWest" x1="-998.56" y1="-1027.76" x2="-1008.48" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm0" data-a="docWest" data-b="docFar" x1="-1008.48" y1="-1032.72" x2="-1001.44" y2="-1036.24"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm0" data-a="docRule1A" data-b="docRule1B" x1="-1002.4" y1="-1032.72" x2="-996" y2="-1032.72"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm0" data-a="docRule2A" data-b="docRule2B" x1="-1002.4" y1="-1031.36" x2="-996" y2="-1031.36"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm0" data-p="docFar" cx="-1001.44" cy="-1036.24" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm0" data-p="docEast" cx="-991.52" cy="-1031.28" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm0" data-p="docNear" cx="-998.56" cy="-1027.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm0" data-p="docWest" cx="-1008.48" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm0" data-p="docRule1A" cx="-1002.4" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm0" data-p="docRule1B" cx="-996" cy="-1032.72" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm0" data-p="docRule2A" cx="-1002.4" cy="-1031.36" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm0" data-p="docRule2B" cx="-996" cy="-1031.36" r="0.95"/>
+    </g>
+    <g data-part="edi12Paymentm1">
+    <polygon class="ds-face ds-face--apron" data-part="edi12Paymentm1" data-face="ackFar ackEast ackNear ackWest" points="-1000.48,-1034.16 -995.68,-1031.76 -999.52,-1029.84 -1004.32,-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm1" data-a="ackFar" data-b="ackEast" x1="-1000.48" y1="-1034.16" x2="-995.68" y2="-1031.76"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm1" data-a="ackEast" data-b="ackNear" x1="-995.68" y1="-1031.76" x2="-999.52" y2="-1029.84"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm1" data-a="ackNear" data-b="ackWest" x1="-999.52" y1="-1029.84" x2="-1004.32" y2="-1032.24"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm1" data-a="ackWest" data-b="ackFar" x1="-1004.32" y1="-1032.24" x2="-1000.48" y2="-1034.16"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm1" data-p="ackFar" cx="-1000.48" cy="-1034.16" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm1" data-p="ackEast" cx="-995.68" cy="-1031.76" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm1" data-p="ackNear" cx="-999.52" cy="-1029.84" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm1" data-p="ackWest" cx="-1004.32" cy="-1032.24" r="0.95"/>
+    </g>
+    <g data-part="edi12Paymentm2">
+    <polygon class="ds-face ds-face--apron" data-part="edi12Paymentm2" data-face="statusFar statusEast statusNear statusWest" points="-1001.12,-1034.96 -994.08,-1031.44 -998.88,-1029.04 -1005.92,-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm2" data-a="statusFar" data-b="statusEast" x1="-1001.12" y1="-1034.96" x2="-994.08" y2="-1031.44"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm2" data-a="statusEast" data-b="statusNear" x1="-994.08" y1="-1031.44" x2="-998.88" y2="-1029.04"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm2" data-a="statusNear" data-b="statusWest" x1="-998.88" y1="-1029.04" x2="-1005.92" y2="-1032.56"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm2" data-a="statusWest" data-b="statusFar" x1="-1005.92" y1="-1032.56" x2="-1001.12" y2="-1034.96"/>
+    <line class="ds-line ds-line--token" data-part="edi12Paymentm2" data-a="statusRuleA" data-b="statusRuleB" x1="-1001.44" y1="-1032" x2="-997.76" y2="-1032"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm2" data-p="statusFar" cx="-1001.12" cy="-1034.96" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm2" data-p="statusEast" cx="-994.08" cy="-1031.44" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm2" data-p="statusNear" cx="-998.88" cy="-1029.04" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm2" data-p="statusWest" cx="-1005.92" cy="-1032.56" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm2" data-p="statusRuleA" cx="-1001.44" cy="-1032" r="0.95"/>
+    <circle class="ds-dot ds-dot--token" data-part="edi12Paymentm2" data-p="statusRuleB" cx="-997.76" cy="-1032" r="0.95"/>
+    </g>
   </g>
 </svg>
-<script type="application/json" data-dotscene-poses="edi01Tender">{"cycle":["t0","t1","t351","t701","t1051","t1401","t1402"],"timings":{"t0":{"duration":0,"hold":0,"easing":"linear"},"t1":{"duration":1,"hold":0,"easing":"linear"},"t351":{"duration":350,"hold":0,"easing":"linear"},"t701":{"duration":350,"hold":0,"easing":"linear"},"t1051":{"duration":350,"hold":0,"easing":"linear"},"t1401":{"duration":350,"hold":0,"easing":"linear"},"t1402":{"duration":1,"hold":0,"easing":"linear"}},"easing":"easeInOut","mode":"loop","frames":{"t0":{"edi01Tenderm0":{"docFar":[-1001.44,-1036.24],"docEast":[-991.52,-1031.28],"docNear":[-998.56,-1027.76],"docWest":[-1008.48,-1032.72],"docRule1A":[-1002.4,-1032.72],"docRule1B":[-996,-1032.72],"docRule2A":[-1002.4,-1031.36],"docRule2B":[-996,-1031.36]}},"t1":{"edi01Tenderm0":{"docFar":[-145.44,-86.24],"docEast":[-135.52,-81.28],"docNear":[-142.56,-77.76],"docWest":[-152.48,-82.72],"docRule1A":[-146.4,-82.72],"docRule1B":[-140,-82.72],"docRule2A":[-146.4,-81.36],"docRule2B":[-140,-81.36]}},"t351":{"edi01Tenderm0":{"docFar":[-122.44,-89.68],"docEast":[-112.52,-84.72],"docNear":[-119.56,-81.2],"docWest":[-129.48,-86.16],"docRule1A":[-123.4,-86.16],"docRule1B":[-117,-86.16],"docRule2A":[-123.4,-84.8],"docRule2B":[-117,-84.8]}},"t701":{"edi01Tenderm0":{"docFar":[-53.44,-87.24],"docEast":[-43.52,-82.28],"docNear":[-50.56,-78.76],"docWest":[-60.48,-83.72],"docRule1A":[-54.4,-83.72],"docRule1B":[-48,-83.72],"docRule2A":[-54.4,-82.36],"docRule2B":[-48,-82.36]}},"t1051":{"edi01Tenderm0":{"docFar":[15.56,-65.68],"docEast":[25.48,-60.72],"docNear":[18.44,-57.2],"docWest":[8.52,-62.16],"docRule1A":[14.6,-62.16],"docRule1B":[21,-62.16],"docRule2A":[14.6,-60.8],"docRule2B":[21,-60.8]}},"t1401":{"edi01Tenderm0":{"docFar":[38.56,-54.24],"docEast":[48.48,-49.28],"docNear":[41.44,-45.76],"docWest":[31.52,-50.72],"docRule1A":[37.6,-50.72],"docRule1B":[44,-50.72],"docRule2A":[37.6,-49.36],"docRule2B":[44,-49.36]}},"t1402":{"edi01Tenderm0":{"docFar":[-1001.44,-1036.24],"docEast":[-991.52,-1031.28],"docNear":[-998.56,-1027.76],"docWest":[-1008.48,-1032.72],"docRule1A":[-1002.4,-1032.72],"docRule1B":[-996,-1032.72],"docRule2A":[-1002.4,-1031.36],"docRule2B":[-996,-1031.36]}}}}</script>
-<script src="./dotscene.min.js" defer></script>

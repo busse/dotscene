@@ -54,19 +54,21 @@ const flightBeats = (part: string, flight: Flight, samples = 4): Beat[] => {
   // Control point of a quadratic, lifted above the midpoint.
   const control: Vec2 = [(from[0] + to[0]) / 2, (from[1] + to[1]) / 2 + lift]
 
-  const beats: Beat[] = []
+  // Parked at both ends, one millisecond either side of the flight. Symmetry matters here:
+  // a token that starts its life already at a node pops into existence when a loop cuts back
+  // to the beginning, and one that ends at a node lingers there for the rest of the run.
+  const beats: Beat[] = [{ at: flight.at, parts: { [part]: { at: PARKED } } }]
   for (let i = 0; i <= samples; i++) {
     const t = easings.easeInOut(i / samples)
     const inv = 1 - t
     const x = inv * inv * from[0] + 2 * inv * t * control[0] + t * t * to[0]
     const y = inv * inv * from[1] + 2 * inv * t * control[1] + t * t * to[1]
     beats.push({
-      at: flight.at + Math.round((flight.duration * i) / samples),
+      at: flight.at + 1 + Math.round((flight.duration * i) / samples),
       parts: { [part]: { at: [Math.round(x * 100) / 100, Math.round(y * 100) / 100] } },
     })
   }
-  // Hop off-frame the instant it lands, so it is gone rather than lingering at the node.
-  beats.push({ at: flight.at + flight.duration + 1, parts: { [part]: { at: PARKED } } })
+  beats.push({ at: flight.at + flight.duration + 2, parts: { [part]: { at: PARKED } } })
   return beats
 }
 
