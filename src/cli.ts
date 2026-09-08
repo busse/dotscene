@@ -8,7 +8,7 @@
  */
 
 import { parseArgs } from 'node:util'
-import { writeFile, mkdir } from 'node:fs/promises'
+import { mkdir, readdir, writeFile } from 'node:fs/promises'
 import { dirname, relative, resolve as resolvePath } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { compile } from './compile.ts'
@@ -112,6 +112,7 @@ const cmdList = (scenes: Map<string, LoadedScene>, options: Options): void => {
     name: scene.name,
     file: relative(process.cwd(), file),
     title: scene.title,
+    ...(scene.version === undefined ? {} : { version: scene.version }),
     parts: scene.parts.map(partId),
     poses: sceneSteps(scene),
     animated: scene.animate !== undefined,
@@ -126,7 +127,9 @@ const cmdList = (scenes: Map<string, LoadedScene>, options: Options): void => {
     return
   }
   for (const row of rows) {
-    const marks = [row.animated ? 'animated' : undefined, `${row.parts.length} part(s)`].filter(Boolean).join(', ')
+    const marks = [row.animated ? 'animated' : undefined, row.version === undefined ? undefined : `v${row.version}`, `${row.parts.length} part(s)`]
+      .filter(Boolean)
+      .join(', ')
     process.stdout.write(`${row.name}  (${marks})  ${row.file}\n`)
     if (row.poses.length > 0) process.stdout.write(`  poses: ${row.poses.join(', ')}\n`)
   }
@@ -287,12 +290,12 @@ const cmdNew = async (name: string | undefined, options: Options): Promise<void>
  * esbuild is a dev dependency, so it is imported here rather than at module load — the
  * read-only commands must keep working in an install that never builds.
  */
-const bundleRuntime = async (outfile: string): Promise<number> => {
+const bundleRuntime = async (): Promise<string> => {
   const { build } = await import('esbuild')
   const entry = resolvePath(dirname(fileURLToPath(import.meta.url)), 'runtime/index.ts')
   const result = await build({
     entryPoints: [entry],
-    outfile,
+    write: false,
     bundle: true,
     minify: true,
     format: 'iife',
@@ -301,9 +304,26 @@ const bundleRuntime = async (outfile: string): Promise<number> => {
     globalName: 'dotscene',
     target: 'es2020',
     legalComments: 'none',
-    metafile: true,
   })
-  return Object.values(result.metafile.outputs)[0]?.bytes ?? 0
+  return result.outputFiles[0]?.text ?? ''
+}
+
+/** `<name>-v<n>` files already under `versions/`, by scene name. */
+const archivedVersions = async (dir: string): Promise<Record<string, number[]>> => {
+  const found: Record<string, number[]> = {}
+  let names: string[]
+  try {
+    names = await readdir(dir)
+  } catch {
+    return found
+  }
+  for (const file of names) {
+    const match = /^(.+)-v(\d+)\.html$/.exec(file)
+    if (match === null) continue
+    ;(found[match[1]!] ??= []).push(Number(match[2]))
+  }
+  for (const list of Object.values(found)) list.sort((a, b) => a - b)
+  return found
 }
 
 const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Promise<void> => {
@@ -311,6 +331,7 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
 
   const compiled = [...scenes.values()].map(({ scene }) => compile(scene))
   const written: string[] = []
+  const runtime = compiled.some((entry) => entry.animated) ? await bundleRuntime() : ''
 
   for (const entry of compiled) {
     const svgFile = resolvePath(options.out, `${entry.name}.svg`)
@@ -319,6 +340,29 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
     await writeFile(htmlFile, `${entry.html}\n`)
     written.push(relative(process.cwd(), svgFile), relative(process.cwd(), htmlFile))
   }
+
+  // Versioned scenes are archived once, self-contained — the runtime inlined, so a frozen
+  // copy keeps playing however the runtime changes later — and never overwritten.
+  const versionsDir = resolvePath(options.out, 'versions')
+  for (const entry of compiled) {
+    const version = entry.resolved.version
+    if (version === undefined) continue
+    await mkdir(versionsDir, { recursive: true })
+    const stem = resolvePath(versionsDir, `${entry.name}-v${version}`)
+    const frozen = entry.html.replace(/<script src="[^"]*dotscene\.min\.js" defer><\/script>/, () => `<script>${runtime}</script>`)
+    for (const [file, content] of [
+      [`${stem}.svg`, `${entry.svg}\n`],
+      [`${stem}.html`, `${frozen}\n`],
+    ] as const) {
+      try {
+        await writeFile(file, content, { flag: 'wx' })
+        written.push(relative(process.cwd(), file))
+      } catch (error) {
+        if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error
+      }
+    }
+  }
+  const archives = await archivedVersions(versionsDir)
 
   // GitHub Pages runs Jekyll over the directory unless told not to; the build output is
   // already final, so opt out rather than letting it be reprocessed.
@@ -331,13 +375,14 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
   written.push(relative(process.cwd(), cssFile))
 
   const galleryFile = resolvePath(options.out, 'index.html')
-  await writeFile(galleryFile, renderGallery(compiled))
+  await writeFile(galleryFile, renderGallery(compiled, './dotscene.min.js', archives))
   written.push(relative(process.cwd(), galleryFile))
 
   let runtimeBytes = 0
-  if (compiled.some((entry) => entry.animated)) {
+  if (runtime !== '') {
     const runtimeFile = resolvePath(options.out, 'dotscene.min.js')
-    runtimeBytes = await bundleRuntime(runtimeFile)
+    await writeFile(runtimeFile, runtime)
+    runtimeBytes = Buffer.byteLength(runtime)
     written.push(relative(process.cwd(), runtimeFile))
   }
 

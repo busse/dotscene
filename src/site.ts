@@ -69,15 +69,31 @@ pre {
 code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 .cut { display: block; margin-top: .8em; color: var(--muted); font-style: italic; }
 .cut a { color: inherit; }
+.versions { font-size: .8rem; margin-top: -1rem; }
+.versions a { color: inherit; }
 .tag { display: inline-block; font-size: .72rem; color: var(--muted); border: 1px solid var(--rule);
        border-radius: 100px; padding: .1rem .5rem; margin-left: .4rem; vertical-align: middle; }
 `
 
-export const renderGallery = (compiled: readonly CompiledScene[], runtimeSrc = './dotscene.min.js'): string => {
+export const renderGallery = (
+  compiled: readonly CompiledScene[],
+  runtimeSrc = './dotscene.min.js',
+  archives: Readonly<Record<string, readonly number[]>> = {},
+): string => {
   const sections = compiled
     .map((entry) => {
       const title = entry.resolved.title ?? entry.name
+      const version = entry.resolved.version
       const tag = entry.animated ? '<span class="tag">animated</span>' : ''
+      const versionTag = version === undefined ? '' : `<span class="tag">v${version}</span>`
+      // Every archived version, each a frozen page of its own; the current one is marked.
+      const older = (archives[entry.name] ?? []).filter((v) => v !== version)
+      const versions =
+        older.length === 0
+          ? ''
+          : `<p class="versions">earlier: ${older
+              .map((v) => `<a href="./versions/${entry.name}-v${v}.html">v${v}</a>`)
+              .join(' · ')}</p>`
       const heavy = entry.html.length > EMBED_LIMIT
       const stage = heavy
         ? `            <a href="./${entry.name}.html"><img src="./${entry.name}.svg" alt="${escapeHtml(title)}" loading="lazy"></a>`
@@ -86,8 +102,8 @@ export const renderGallery = (compiled: readonly CompiledScene[], runtimeSrc = '
             .map((row) => `            ${row}`)
             .join('\n')
       return `      <section class="scene">
-        <h2>${escapeHtml(entry.name)}${tag}${heavy ? '<span class="tag">open to play</span>' : ''}</h2>
-        <p>${escapeHtml(title)}</p>
+        <h2>${escapeHtml(entry.name)}${tag}${versionTag}${heavy ? '<span class="tag">open to play</span>' : ''}</h2>
+        <p>${escapeHtml(title)}</p>${versions}
         <div class="layout">
           <div class="stage">
 ${stage}

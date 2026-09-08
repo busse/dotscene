@@ -216,6 +216,14 @@ export interface SceneSpec {
   /** Explicit viewBox. Omit to fit the content bounds plus `padding`. */
   readonly viewBox?: readonly [number, number, number, number]
   /**
+   * A version number for the scene's output.
+   *
+   * `build` keeps a frozen, self-contained copy of every versioned scene under `versions/`
+   * and never overwrites one, so a revision can be judged against what came before it.
+   * Bump it when the scene's output changes in a way worth keeping the old one of.
+   */
+  readonly version?: number
+  /**
    * The resting camera. Its `aspect` (width over height) fixes the frame's shape for every
    * camera move; it defaults to the `viewBox` aspect, or 16:9. When set, the camera decides
    * the viewBox and `viewBox` only describes the stage.
@@ -254,6 +262,7 @@ export interface Scene {
   readonly padding: number
   readonly title?: string
   readonly viewBox?: readonly [number, number, number, number]
+  readonly version?: number
   readonly camera?: CameraSpec & { readonly aspect?: number }
   readonly dotRadius?: number
   readonly lineWidth?: number
@@ -296,6 +305,7 @@ export const defineScene = (name: string, spec: SceneSpec): Scene => ({
   padding: spec.padding ?? 6,
   ...(spec.title === undefined ? {} : { title: spec.title }),
   ...(spec.viewBox === undefined ? {} : { viewBox: spec.viewBox }),
+  ...(spec.version === undefined ? {} : { version: spec.version }),
   ...(spec.camera === undefined ? {} : { camera: spec.camera }),
   ...(spec.dotRadius === undefined ? {} : { dotRadius: spec.dotRadius }),
   ...(spec.lineWidth === undefined ? {} : { lineWidth: spec.lineWidth }),

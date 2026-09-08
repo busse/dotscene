@@ -32,6 +32,12 @@ describe('compile', () => {
     expect(payload.frames.tip.bar).toEqual([4, 0, 0, 10])
   })
 
+  it('stamps a versioned scene, so an archived copy says what it is', () => {
+    const out = compile(defineScene('bar', { parts: [{ figure: bar }], version: 3 }))
+    expect(out.svg).toContain('data-version="3"')
+    expect(compile(defineScene('bar', { parts: [{ figure: bar }] })).svg).not.toContain('data-version')
+  })
+
   it('produces identical output on repeated runs', () => {
     const scene = defineScene('bar', { parts: [{ figure: bar }], animate: { cycle: ['tip'] } })
     expect(compile(scene).html).toBe(compile(scene).html)

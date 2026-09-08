@@ -88,6 +88,7 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
     ['xmlns', 'http://www.w3.org/2000/svg'],
     ['class', 'dotscene'],
     ['data-dotscene', scene.name],
+    ['data-version', scene.version],
     ['viewBox', `${x} ${y} ${width} ${height}`],
     ['role', titled ? 'img' : undefined],
     ['aria-hidden', titled ? undefined : 'true'],

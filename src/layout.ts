@@ -66,6 +66,7 @@ export interface FrameTiming {
 export interface ResolvedScene {
   readonly name: string
   readonly title?: string
+  readonly version?: number
   readonly viewBox: ViewBox
   /** Dot radius in scene units, so the same figure reads the same at any authoring scale. */
   readonly dotRadius: number
@@ -366,6 +367,7 @@ export const resolve = (scene: Scene): ResolvedScene => {
   return {
     name: scene.name,
     ...(scene.title === undefined ? {} : { title: scene.title }),
+    ...(scene.version === undefined ? {} : { version: scene.version }),
     viewBox,
     dotRadius,
     lineWidth: scene.lineWidth ?? round(Math.max(0.2, dotRadius * 0.45), 2),
