@@ -10,6 +10,10 @@ The island sits in the **right half of the frame**, and every shot places its su
 seven tenths of the way across, because the page that uses it lays its copy over the left.
 The sea on the left is the page's.
 
+This file is the map. The [case study](../../CASE-STUDY.md) at the repo root is the long
+read: how the scene is built layer by layer, the working loop, and what each round of review
+changed and the rule it left behind.
+
 ## Where to change what
 
 | to change… | edit | what follows automatically |

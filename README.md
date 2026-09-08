@@ -228,7 +228,7 @@ Size it with CSS — the SVG is `width: 100%; height: auto` at a 2.4:1 aspect, a
 
 `docs/ediHeroNight.html` is a fixed-dark twin, for a standalone `.svg` or an `<img>` where no page CSS can reach in. `docs/ediHeroMeadow.html` is the same animation on a green ground with grass and bare earth for texture, with its own dark twin. See `scenes/edi/README.md` for what to edit to change what.
 
-`docs/islandHero.html` is a second hero over the same machinery: the Island of Misfit Applications, a tropical island where the applications nobody owns wash up and a lighthouse keeper puts them right, one a day. Its action sits in the right half of the frame so a page can lay copy over the left. `scenes/island/README.md` is its map.
+`docs/islandHero.html` is a second hero over the same machinery: the Island of Misfit Applications, a tropical island where the applications nobody owns wash up and a lighthouse keeper puts them right, one a day. Its action sits in the right half of the frame so a page can lay copy over the left. `scenes/island/README.md` is its map, and [CASE-STUDY.md](CASE-STUDY.md) is the long read: how it is built, what six rounds of review changed, and the rules for building the next one.
 
 ## Card art for the site
 
