@@ -11,5 +11,10 @@
  *   down at dusk, and hangs from its handle; the cron job is a tall cabinet with a clock and
  *   a real beard; the chatbot's screen is portrait; the spreadsheet has figures and a selected
  *   cell; the crab has pincers and the turtle a shell; the banner reads 404.
+ * - v4 — after the third UAT: the dock and the mainframe move to the far shore between the hut
+ *   and the tower, away from the beach where the cron job and the crab are; the boat comes in
+ *   along the far sea; the mug and its stump paint in front of the hammock; the keeper comes
+ *   back out of the hut, sets the mug down and sleeps in the hammock on camera, so the reset
+ *   moves only the misfits; the sun and moon pass behind the island.
  */
-export const ISLAND_VERSION = 3
+export const ISLAND_VERSION = 4

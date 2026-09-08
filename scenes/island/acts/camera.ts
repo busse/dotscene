@@ -55,11 +55,12 @@ const shots: Shot[] = [
   // The landing: open up on the runway, the tower and its beam.
   shot(START.landing + 2400, between(runway, tower, 0.3), 340, 4),
   // The boat: the harbour under the lamp, then a slow push while it ties up.
-  shot(START.boat + 6000, harbour, 400, 20),
-  shot(START.boat + 7600, harbour, 380, 16),
-  // Up to the lamp, and stay with the beam while the island is put back below.
-  shot(START.reset - 600, tower, 200, -14),
-  shot(START.reset + 1800, tower, 220, -14),
+  shot(START.boat + 6000, harbour, 380, 2),
+  // A slow push while it ties up and the keeper goes to bed, then a quick tilt up to the lamp.
+  shot(START.reset - 700, harbour, 340, 0),
+  // Stay with the beam while the island is put back below, out of frame or under a fade.
+  shot(START.reset - 100, tower, 200, -14),
+  shot(START.reset + 1500, tower, 220, -14),
   { at: LOOP, to: WIDE.at, width: WIDE.width, easing: 'easeInOut' },
 ]
 

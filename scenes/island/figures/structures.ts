@@ -250,6 +250,7 @@ export const dock = defineFigure('dock', {
     east: {},
     west: dockPoints((l, w) => [-l, -w]),
     south: dockPoints((l, w) => [-w, l]),
+    north: dockPoints((l, w) => [w, -l]),
   },
 })
 /** The shore end and the seaward end, in the rest pose (along +x). */

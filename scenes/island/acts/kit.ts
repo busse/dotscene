@@ -25,6 +25,8 @@ export const depthOf = (cell: Cell): number => cell[0] + cell[1]
 
 /** Depth for anything in the air, over every solid. */
 export const SKY = 1000
+/** Behind the island: the sun and the moon paint before the land. */
+export const BEHIND = -1002
 
 // ---------------------------------------------------------------------------------------------
 // The keeper
@@ -52,7 +54,7 @@ export const mugAt = (state: PartKeyframe, pose: string | Pose): PartKeyframe =>
   const [hx, hy] = handOf(pose)
   const at = state.at!
   const flip = state.flipX ? -1 : 1
-  return { at: [roundTo(at[0] + hx * flip * KEEPER_SCALE, 2), roundTo(at[1] + hy * KEEPER_SCALE, 2)], depth: roundTo((state.depth ?? 0) + 0.05, 3) }
+  return { at: [roundTo(at[0] + hx * flip * KEEPER_SCALE, 2), roundTo(at[1] + hy * KEEPER_SCALE, 2)], depth: roundTo((state.depth ?? 0) + 0.25, 3) }
 }
 
 /** Standing on a cell. The keeper's mug comes along; anything else stands alone. */
@@ -204,7 +206,7 @@ export const arcAcross = (part: string, from: Vec2, to: Vec2, rise: number, at: 
     const x = from[0] + (to[0] - from[0]) * f
     const y = from[1] + (to[1] - from[1]) * f - Math.sin(f * Math.PI) * rise
     const o = i === 0 ? opacity[0] : i === steps ? opacity[2] : opacity[1]
-    beats.push({ at: at + Math.round(duration * f), parts: { [part]: { at: vec([x, y]), opacity: o, depth: SKY - 100 } } })
+    beats.push({ at: at + Math.round(duration * f), parts: { [part]: { at: vec([x, y]), opacity: o, depth: BEHIND } } })
   }
   return beats
 }

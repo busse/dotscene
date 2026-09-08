@@ -41,6 +41,7 @@ for (let i = 1; i <= steps; i++) {
 
 // Held at the dock, then gone again before dawn, so the harbour is empty and waiting once more.
 beats.push({ at: holdAt(START.reset), parts: Object.fromEntries(['boat', 'boatLantern', 'wake'].map((id) => [id, stateBefore(beats, id, holdAt(START.reset))])) })
-beats.push({ at: START.reset + 20, parts: { ...state(BOAT.from, 0, 0), wake: { opacity: 0 } } })
+// Casts off again under the last of the dark, fading as it goes, and is out at sea by dawn.
+beats.push({ at: START.reset + 2600, parts: { ...state(BOAT.from, 0, 0), wake: { opacity: 0 } }, easing: 'easeIn' })
 
 export const act = defineAct('islandBoat', 'A boat finds the harbour', beats)

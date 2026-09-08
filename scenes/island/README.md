@@ -35,15 +35,15 @@ The sea on the left is the page's.
 | | act | what happens |
 |---|---|---|
 | 00 | dawn | the sun comes up out of the sea; the keeper sits up in the hammock and reaches for the mug of coffee steaming on the stump beside it, two slow sips, down onto the grass, a stretch, and off to the dock — mug in hand, all day, with a sip on arrival at every misfit |
-| 01 | the mainframe | rocking on its corners at the dock; the keeper leans in and it gets wheels, and rolls |
+| 01 | the mainframe | rocking on its corners at the root of the jetty on the far shore; the keeper leans in and it gets wheels, and rolls out along the planks |
 | 02 | the spreadsheet | a stack of sheets teetering on the grass; the keeper fetches a proper drum and the stack straightens on it |
 | 03 | the fax | posting pages into the sea with a splash; the keeper strings a wire to the lamp and the next page flies there instead |
 | 04 | the cron job | pacing the beach ringing at every turn; the keeper pins an owner's flag on it, trims the beard, and it goes to sit in the shade |
 | 05 | the chatbot | a screen on a pole saying `?` to everything; wired to the mainframe it starts giving answers |
-| 06 | dusk | the keeper lights the lamp; the beam sweeps the sky; home by way of the hammock, where the mug goes back on its stump; into the hut, window lit, chimney smoking |
+| 06 | dusk | the keeper lights the lamp; the beam sweeps the sky; home to the hut for supper, window lit, chimney smoking; then out again, the mug set down on its stump, and into the hammock for the night |
 | 07 | the landing | the plane that has towed its `404` banner over all day comes in and lands on the grass |
-| 08 | the boat | a boat finds the harbour by the light and ties up at the dock |
-| — | reset | under the deepest dark, with the camera on the lamp, everything is put back for the next lap |
+| 08 | the boat | a boat comes in along the far sea by the light and noses up to the jetty's end |
+| — | reset | under the deepest dark, with the camera on the lamp, the misfits are put back for the next lap; the keeper is already asleep |
 
 Around all of it: seven palms in the breeze, ripples on the sea, a crab on the sand, a turtle
 in the shallows, and stars when it is dark.
@@ -79,8 +79,13 @@ that waits for the handle, then seeks and pauses, and screenshot that.
   the same state an instant before it, the part slides there for as long as it has been
   still. `stateBefore` and `holdAt` in `acts/act.ts` do this; the drift test enforces it.
 - **The reset happens where the camera is not looking and under the dark.** The camera is
-  on the lamp when the misfits jump back; the nightfall is at its deepest. `seam` in
-  `hero.ts` must stay empty.
+  on the lamp when the misfits jump back; the nightfall is at its deepest. The jetty is in
+  that shot, so the mainframe fades out, jumps and fades in rather than cutting. The keeper
+  is not reset at all: the dusk act walks them to the hammock, and morning finds them there.
+  `seam` in `hero.ts` must stay empty.
+- **Things on the jetty paint after it.** The jetty runs away from the viewer, so its far end
+  is behind its root; a depth taken from a cell out on the planks would put the deck over the
+  thing standing on it. The mainframe's depth is floored at its home cell's.
 - **Ambient loops end on their first pose** at the lap's end, so the wrap is a hold rather
   than a snap. Waves only run whole cycles.
 - **The beam never points down.** It sweeps the sky between two angles rather than turning

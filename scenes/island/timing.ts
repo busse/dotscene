@@ -19,7 +19,7 @@ export const START = {
   landing: 46000,
   boat: 47000,
   night: 49000,
-  reset: 56000,
+  reset: 57000,
 } as const
 
 /** Where each misfit is put right — the ambient "broken" loops run until these. */

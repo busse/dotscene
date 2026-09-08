@@ -18,7 +18,8 @@ const K = 'keeper'
 
 const at = (cell: readonly [number, number], z = 0, extra: Partial<PartKeyframe> = {}): PartKeyframe => ({
   at: vec(project([cell[0], cell[1], z])),
-  depth: depthOf(cell) + 0.5,
+  // Never behind the jetty it rolls out along, whose far end is behind its root.
+  depth: Math.max(depthOf(cell), depthOf(MAINFRAME.home)) + 0.5,
   pose: 'square',
   rotate: 0,
   ...extra,
@@ -49,8 +50,8 @@ beats.push({ at: ROLL + 2150, parts: { [M]: at(MAINFRAME.rolled, 0.22, { pose: '
 beats.push({ at: ROLL + 2400, parts: { [M]: at(MAINFRAME.rolled, 0, { pose: 'round' }) }, easing: 'easeIn' })
 
 // The keeper waves it off and heads for the next one.
-beats.push({ at: ROLL + 600, parts: standAt(K, WORK.mainframe, 'wave', true) })
-beats.push({ at: ROLL + 1300, parts: standAt(K, WORK.mainframe, 'idle', true) })
-beats.push(...walk(K, WORK.mainframe, WORK.spreadsheet, ROLL + 1400, Math.max(walkTime(WORK.mainframe, WORK.spreadsheet), START.spreadsheet + 2200 - (ROLL + 1400))))
+beats.push({ at: ROLL + 200, parts: standAt(K, WORK.mainframe, 'wave', true) })
+beats.push({ at: ROLL + 700, parts: standAt(K, WORK.mainframe, 'idle', true) })
+beats.push(...walk(K, WORK.mainframe, WORK.spreadsheet, ROLL + 800, Math.max(walkTime(WORK.mainframe, WORK.spreadsheet), START.spreadsheet + 2200 - (ROLL + 800))))
 
 export const act = defineAct('islandMainframe', 'The mainframe on square wheels', beats)

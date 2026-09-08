@@ -17,7 +17,7 @@ import { DOCK_END, HAMMOCK_LIE, HUT_CHIMNEY, HUT_DOOR, LAMP as LAMP_LOCAL, LIGHT
 import { CHATBOT_MOUTH, CHATBOT_PORT, CRON_BADGE, FAX_SLOT, MAINFRAME_PORT, chatbot, cron, drum, fax, mainframe, spreadsheet } from './figures/misfits.ts'
 import { BANNER_W, BOAT_LANTERN, PLANE_TAIL, banner, boat, crab, moon, plane, stars, sun, turtle, wake } from './figures/traffic.ts'
 import { nightfall } from './figures/fixtures.ts'
-import { depthOf, KEEPER_SCALE, MUG_SCALE, feetAt, lyingAt, SKY, type Cell } from './acts/kit.ts'
+import { BEHIND, depthOf, KEEPER_SCALE, MUG_SCALE, feetAt, lyingAt, SKY, type Cell } from './acts/kit.ts'
 
 const v3 = (c: Cell, z = 0): Vec3 => [c[0], c[1], z]
 const add = (a: Cell, b: Cell): Cell => [a[0] + b[0], a[1] + b[1]]
@@ -44,10 +44,15 @@ export const isl = (u: number, v: number): Cell => add(ORIGIN, cell(u, v))
 const HUT_AT = isl(5, -4)
 const LIGHTHOUSE_AT = isl(POINT[0], POINT[1])
 const HAMMOCK_AT = isl(HAMMOCK_SPOT[0], HAMMOCK_SPOT[1])
-/** The root a cell inside the beach's rim, so the jetty starts on sand and ends over water. */
-const DOCK_AT = isl(5, 7.6)
-/** The dock lies along +y here, so its seaward end is that far down the y axis. */
-export const DOCK_TIP = add(DOCK_AT, [0, DOCK_END[0]])
+/**
+ * The dock is on the far shore, between the hut and the tower, pointing north (−y, up and to
+ * the right on screen). Its root is a cell inside the beach's rim, so the jetty starts on
+ * sand and ends over water, and the mainframe's fixing happens at the back of the scene,
+ * away from the beach where the cron job paces and the crab scuttles.
+ */
+const DOCK_AT = isl(7, -7.2)
+/** The dock lies along −y here, so its seaward end is that far up the y axis. */
+export const DOCK_TIP = add(DOCK_AT, [0, -DOCK_END[0]])
 
 export const HAMMOCK = {
   cell: add(HAMMOCK_AT, [HAMMOCK_LIE[0], HAMMOCK_LIE[1]]),
@@ -67,7 +72,7 @@ export const STUMP = {
 /** The mug resting on the stump: its handle origin offset so the cup sits centred on the top. */
 export const MUG_ON_STUMP = {
   at: [STUMP.top[0] + 8 * MUG_SCALE, STUMP.top[1] - 6 * MUG_SCALE] as Vec2,
-  depth: depthOf(STUMP_AT) + 0.3,
+  depth: depthOf(HAMMOCK_AT) + 0.8,
 }
 
 export const HUT = {
@@ -83,11 +88,11 @@ export const LAMP = {
   at: project([LIGHTHOUSE_AT[0] + LAMP_LOCAL[0], LIGHTHOUSE_AT[1] + LAMP_LOCAL[1], LAMP_LOCAL[2]]),
 }
 
-const MAINFRAME_HOME = add(DOCK_AT, [0, 0.5])
-const MAINFRAME_ROLLED = add(DOCK_AT, [0, 2.7])
+const MAINFRAME_HOME = add(DOCK_AT, [0, 0.4])
+const MAINFRAME_ROLLED = add(DOCK_AT, [0, -2.5])
 export const MAINFRAME = {
   home: MAINFRAME_HOME,
-  mid: add(DOCK_AT, [0, 1.6]),
+  mid: add(DOCK_AT, [0, -1.4]),
   rolled: MAINFRAME_ROLLED,
   /** The socket on its side, where it stands after rolling. */
   portRolled: project([MAINFRAME_ROLLED[0] + MAINFRAME_PORT[0], MAINFRAME_ROLLED[1] + MAINFRAME_PORT[1], MAINFRAME_PORT[2] + 0.35]),
@@ -123,7 +128,7 @@ export const CHATBOT = {
 /** Where the keeper stands to work on each of them. */
 export const WORK = {
   /** Beside the mainframe on its near side, so the keeper stands in front of it. */
-  mainframe: add(DOCK_AT, [1.2, -1.6]),
+  mainframe: add(DOCK_AT, [1.6, 0.6]),
   spreadsheet: isl(6.3, 2.4),
   fax: isl(8.6, 6.8),
   cron: isl(4.6, 7.7),
@@ -144,13 +149,14 @@ export const PLANE = {
 }
 
 /** The boat comes in from the open sea at the lower right, bow first, and moors at the tip. */
+/** The launch comes in along +x from the far sea, top left, and noses up to the jetty's end. */
 export const BOAT = {
-  from: add(DOCK_TIP, [24, 1.1]),
-  docked: add(DOCK_TIP, [1.4, 1.1]),
-  pose: 'xr',
-  lantern: [-BOAT_LANTERN[0], BOAT_LANTERN[1], BOAT_LANTERN[2]] as Vec3,
-  wakeOffset: [2.1, 0] as Cell,
-  wakePoses: ['ra', 'rb', 'rc'] as const,
+  from: add(DOCK_TIP, [-18, -1.0]),
+  docked: add(DOCK_TIP, [-2.3, -1.0]),
+  pose: 'x',
+  lantern: BOAT_LANTERN,
+  wakeOffset: [-2.1, 0] as Cell,
+  wakePoses: ['a', 'b', 'c'] as const,
 }
 
 /** The sun's day and the moon's night, in scene units: over the sea, round to the point. */
@@ -186,8 +192,9 @@ export const stageParts: readonly Part[] = [
   placed('hammock', hammock, HAMMOCK_AT, { depth: depthOf(HAMMOCK_AT) + 0.2 }),
   // In front of the keeper (+0.42) and the mug (+0.47), so a body lies in it, not on it.
   placed('hammockRim', hammockRim, HAMMOCK_AT, { depth: depthOf(HAMMOCK_AT) + 0.6 }),
-  placed('stump', stump, STUMP_AT, { depth: depthOf(STUMP_AT) + 0.2 }),
-  placed('dock', dock, DOCK_AT, { pose: 'south', depth: depthOf(DOCK_AT) - 0.3 }),
+  // In front of the hammock's rim (+0.6), so the mug on it is never threaded through the canvas.
+  placed('stump', stump, STUMP_AT, { depth: depthOf(HAMMOCK_AT) + 0.7 }),
+  placed('dock', dock, DOCK_AT, { pose: 'north', depth: depthOf(DOCK_AT) - 0.3 }),
   placed('signpost', signpost, isl(11.5, 6.6)),
   ...PALMS.map(([c, small], i) => placed(`palm${i}`, small ? palmSmall : palm, c, { pose: 'rest' })),
   placed('bush0', bush, isl(7.6, -1)),
@@ -214,11 +221,11 @@ export const cast = (): Part[] => [
   { id: 'beam', figure: beam, at: LAMP.at, opacity: 0, rotate: 200, depth: SKY + 590 },
   placed('plane', plane, PLANE.a, { pose: 'x', z: 8.5, depth: SKY + 2 }),
   { id: 'banner', figure: banner, at: [project(v3(PLANE.a, 8.5))[0] + PLANE.bannerOffset[0], project(v3(PLANE.a, 8.5))[1] + PLANE.bannerOffset[1]], pose: 'a', depth: SKY + 1 },
-  placed('boat', boat, BOAT.from, { pose: 'xr', opacity: 0, depth: depthOf(BOAT.from) + 0.4 }),
+  placed('boat', boat, BOAT.from, { pose: BOAT.pose, opacity: 0, depth: depthOf(BOAT.from) + 0.4 }),
   { id: 'boatLantern', figure: lamp, at: project([BOAT.from[0] + BOAT.lantern[0], BOAT.from[1] + BOAT.lantern[1], BOAT.lantern[2]]), opacity: 0, scale: 0.5, depth: SKY + 601 },
-  placed('wake', wake, add(BOAT.from, BOAT.wakeOffset), { pose: 'ra', opacity: 0, depth: depthOf(BOAT.from) + 0.3 }),
-  { id: 'sun', figure: sun, at: SUN.rise, opacity: 0, depth: SKY - 100 },
-  { id: 'moon', figure: moon, at: MOON.rise, opacity: 0, depth: SKY + 610 },
+  placed('wake', wake, add(BOAT.from, BOAT.wakeOffset), { pose: BOAT.wakePoses[0], opacity: 0, depth: depthOf(BOAT.from) + 0.3 }),
+  { id: 'sun', figure: sun, at: SUN.rise, opacity: 0, depth: BEHIND },
+  { id: 'moon', figure: moon, at: MOON.rise, opacity: 0, depth: BEHIND },
   { id: 'stars', figure: stars, at: STARS_AT, pose: 'a', opacity: 0, depth: SKY + 605 },
   placed('crab', crab, isl(4.5, 6.4), { pose: 'a', scale: 0.75, depth: depthOf(isl(4.5, 6.4)) + 0.2 }),
   placed('turtle', turtle, isl(9, 12), { pose: 'a', scale: 1.2, depth: FAR + 6 }),
