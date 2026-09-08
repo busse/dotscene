@@ -9,7 +9,7 @@
 import { defineAct } from './act.ts'
 import { cabTop, dock, door, drive, flight, flightSpan, liftAt, liftCellFor, look, report, roadAtDoor } from './kit.ts'
 import { ACK, ACK_DELAY, DOCKING, HOP } from '../timing.ts'
-import { dockedAt, loadingSpotWest, nodeOf, SHIPPER_LIFT_YARD, SHIPPER_STAGING, sites } from '../world.ts'
+import { dockedAt, loadingSpotWest, nodeOf, RIG_LANE, SHIPPER_LIFT_YARD, SHIPPER_STAGING, sites } from '../world.ts'
 
 const lift = 'shipperLift'
 const pal = 'pallet'
@@ -32,10 +32,10 @@ const loading = [
 ]
 
 export const LEAVE_AT = LOAD_AT + 4400
-const pullOut = dock({ part: 'rig', door: doorCell, at: LEAVE_AT, duration: DOCKING, direction: 'out', lane: 0.25 })
+const pullOut = dock({ part: 'rig', door: doorCell, at: LEAVE_AT, duration: DOCKING, direction: 'out', lane: RIG_LANE })
 /** Roll on a little, so the act hands the rig on already moving. */
 export const RUN_END = roadAtDoor(doorCell) + 0.03
-const rollOn = drive({ part: 'rig', from: roadAtDoor(doorCell), to: RUN_END, at: LEAVE_AT + DOCKING + 1, duration: 900, lane: 0.25, easeStart: true })
+const rollOn = drive({ part: 'rig', from: roadAtDoor(doorCell), to: RUN_END, at: LEAVE_AT + DOCKING + 1, duration: 900, lane: RIG_LANE, easeStart: true })
 
 /** The driver reports the pickup as the rig rolls; the carrier passes it on; the shipper acknowledges. */
 const REPORT_AT = LEAVE_AT + 600

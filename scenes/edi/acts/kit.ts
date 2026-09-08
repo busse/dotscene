@@ -205,13 +205,31 @@ const heading = (axis: 'x' | 'y', dir: 1 | -1, forward: boolean): Heading => {
   return withAxis ? axis : (`${axis}r` as Heading)
 }
 
-const laneOffset = (axis: 'x' | 'y', lane: number): Cell => (axis === 'x' ? [0, lane] : [-lane, 0])
+/**
+ * Right-hand traffic: the lane sits to the right of the direction of travel, so two vehicles
+ * going opposite ways pass on opposite sides without being told to. `travel` is the sign
+ * of motion along the axis.
+ */
+const laneOffset = (axis: 'x' | 'y', travel: 1 | -1, lane: number): Cell =>
+  axis === 'x' ? [0, travel * lane] : [-travel * lane, 0]
 
-const onRoad = (t: number, lane: number, depthBias: number): { cell: Cell; depth: number; axis: 'x' | 'y'; dir: 1 | -1 } => {
-  const spot = along(t)
-  const offset = laneOffset(spot.axis, lane)
-  const cell: Cell = [spot.cell[0] + offset[0], spot.cell[1] + offset[1]]
-  return { cell, depth: depthOf(cell) + depthBias, axis: spot.axis, dir: spot.dir }
+const addCell = (a: Cell, b: Cell): Cell => [a[0] + b[0], a[1] + b[1]]
+
+/** Paint-order bias for a vehicle over the road and yard it stands on. */
+const VEHICLE_DEPTH = 0.3
+
+/** One straight run of a drive: which axis it follows, which way, and the pose that fits. */
+interface Run {
+  readonly axis: 'x' | 'y'
+  readonly travel: 1 | -1
+  readonly pose: Heading
+}
+
+/** The run between two route parameters, read at its midpoint so a corner never confuses it. */
+const runBetween = (a: number, b: number, forward: boolean): Run => {
+  const spot = along((a + b) / 2)
+  const travel = (spot.dir * (forward ? 1 : -1)) as 1 | -1
+  return { axis: spot.axis, travel, pose: heading(spot.axis, spot.dir, forward) }
 }
 
 export interface Drive {
@@ -221,7 +239,7 @@ export interface Drive {
   readonly to: number
   readonly at: number
   readonly duration: number
-  /** Offset across the road, in grid units. Positive is the near side. */
+  /** How far to the right of the centreline the vehicle keeps, in grid units. */
   readonly lane?: number
   readonly depthBias?: number
   /** Ease out of the start and into the stop. Default: linear, for a vehicle already rolling. */
@@ -233,35 +251,43 @@ export interface Drive {
  * A vehicle running a stretch of road.
  *
  * Position and depth vary linearly along a straight run, so there is a beat only where the
- * road turns — and at a corner the heading snaps over a millisecond, because a box names
- * the same corners in different places when laid along the other axis, and a slow blend
- * between them turns the solid inside out.
+ * road turns. The heading on each run is read from the run itself — its midpoint — never
+ * from the corner, because a corner belongs to two runs and reading it names the wrong one.
+ * At the corner the heading snaps over a millisecond: a box names the same corners in
+ * different places when laid along the other axis, and a slow blend between them turns the
+ * solid inside out. The lane is mitred at a corner, the way a kerb is.
  */
 export const drive = (drive: Drive): Beat[] => {
   const beats: Beat[] = []
   const lane = drive.lane ?? 0
-  const bias = drive.depthBias ?? 0.6
+  const bias = drive.depthBias ?? VEHICLE_DEPTH
   const forward = drive.to >= drive.from
   const stops = [drive.from, ...cornersBetween(drive.from, drive.to), drive.to]
   const span = Math.abs(drive.to - drive.from) || 1
-  let pose: Heading | undefined
+  const runs = stops.slice(0, -1).map((t, i) => runBetween(t, stops[i + 1]!, forward))
+
+  const state = (t: number, offset: Cell, pose: Heading): PartKeyframe => {
+    const cell = addCell(along(t).cell, offset)
+    return { at: project([cell[0], cell[1], 0]), depth: roundTo(depthOf(cell) + bias, 3), pose }
+  }
 
   stops.forEach((t, i) => {
     const when = drive.at + Math.round((drive.duration * Math.abs(t - drive.from)) / span)
-    const here = onRoad(t, lane, bias)
-    const wanted = heading(here.axis, here.dir, forward)
-    if (pose !== undefined && wanted !== pose) {
+    const before = runs[i - 1]
+    const after = runs[i]
+    const offsets = [before, after]
+      .filter((run): run is Run => run !== undefined)
+      .map((run) => laneOffset(run.axis, run.travel, lane))
+    // On a straight both runs give the same offset; at a turn the two make the mitre.
+    const offset = before !== undefined && after !== undefined && before.axis === after.axis ? offsets[0]! : offsets.reduce(addCell, [0, 0])
+
+    if (before !== undefined && after !== undefined && before.pose !== after.pose) {
       // Hold the old heading until the corner, then turn in one millisecond.
-      const before = onRoad(t, lane, bias)
-      beats.push({ at: when - 1, parts: { [drive.part]: { at: project([before.cell[0], before.cell[1], 0]), depth: roundTo(before.depth, 3), pose } } })
+      beats.push({ at: when - 1, parts: { [drive.part]: state(t, offset, before.pose) } })
     }
-    pose = wanted
+    const pose = (after ?? before)!.pose
     const easing = i === stops.length - 1 && drive.easeStop === true ? 'easeOut' : i === 1 && drive.easeStart === true ? 'easeIn' : undefined
-    beats.push({
-      at: when,
-      parts: { [drive.part]: { at: project([here.cell[0], here.cell[1], 0]), depth: roundTo(here.depth, 3), pose } },
-      ...(easing === undefined ? {} : { easing }),
-    })
+    beats.push({ at: when, parts: { [drive.part]: state(t, offset, pose) }, ...(easing === undefined ? {} : { easing }) })
   })
   return beats
 }
@@ -291,12 +317,14 @@ export interface Dock {
  */
 export const dock = (dock: Dock): Beat[] => {
   const lane = dock.lane ?? 0
-  const roadSpot = onRoad(roadAtDoor(dock.door), lane, 0.6)
-  const roadCell: Cell = [dock.door[0], roadSpot.cell[1]]
+  const roadSpot = along(roadAtDoor(dock.door))
+  const forward = dock.facing !== 'back'
+  const travel = (roadSpot.dir * (forward ? 1 : -1)) as 1 | -1
+  const roadCell = addCell([dock.door[0], roadSpot.cell[1]], laneOffset(roadSpot.axis, travel, lane))
   const bay = dockedAt(dock.door)
-  const onRoadState = (pose: Heading): PartKeyframe => ({ at: project([roadCell[0], roadCell[1], 0]), depth: roundTo(depthOf(roadCell) + 0.6, 3), pose })
-  const inBay: PartKeyframe = { at: project([bay[0], bay[1], 0]), depth: roundTo(depthOf(bay) + 0.6, 3), pose: 'y' }
-  const alongRoad = heading(roadSpot.axis, roadSpot.dir, dock.facing !== 'back')
+  const onRoadState = (pose: Heading): PartKeyframe => ({ at: project([roadCell[0], roadCell[1], 0]), depth: roundTo(depthOf(roadCell) + VEHICLE_DEPTH, 3), pose })
+  const inBay: PartKeyframe = { at: project([bay[0], bay[1], 0]), depth: roundTo(depthOf(bay) + VEHICLE_DEPTH, 3), pose: 'y' }
+  const alongRoad = heading(roadSpot.axis, roadSpot.dir, forward)
   if (dock.direction === 'in') {
     return [
       { at: dock.at, parts: { [dock.part]: onRoadState(alongRoad) } },

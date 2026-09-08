@@ -124,9 +124,10 @@ export const consigneeStore = figureOf(
   ),
   'The consignee — a receiving warehouse',
 )
+/** Spaced a forklift's reach apart, so one coming out of the second door is already beside the first. */
 export const CONSIGNEE_DOORS: readonly Slot[] = [
   [-1.7, 1.5],
-  [-0.4, 1.5],
+  [0.2, 1.5],
 ]
 
 /** The payer: a bank — columns along its front, a pediment over them, steps below. */

@@ -87,6 +87,10 @@ Useful flags: `--pose <name>`, `--poses`, `--at <ms>`, `--every <ms>`, `--width 
 
 `dotscene build` writes to `docs/`: one `.svg` and one `.html` per scene, a `dotscene.css`, the gallery at `index.html`, and `dotscene.min.js` when any scene animates. That path is committed rather than ignored, because GitHub Pages serves the gallery straight from it — point Pages at the `main` branch, `/docs` folder. Use `--out` for somewhere else.
 
+### Versions
+
+Give a scene a `version` and `build` also writes `docs/versions/<name>-v<n>.html` and `.svg` — a frozen copy with the runtime inlined, so it keeps playing however the runtime changes later — and never overwrites one that exists. The current build stays at `docs/<name>.html`; the gallery tags each scene with its version and links every earlier one. Bump the number when a scene's output changes in a way worth keeping the old one of, so a revision can be judged against what came before.
+
 The emitted block carries its own point labels, which is how the runtime moves things without rebuilding a scene graph:
 
 ```html

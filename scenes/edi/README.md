@@ -52,6 +52,14 @@ Around all of it: a pennant, smoke from the plant's stack, trees in the wind, tw
 birds, ripples under the bridge, a van going the other way, and the crossdock's own forklift
 working a door all day. Something is always moving.
 
+## Versions
+
+`version.ts` carries the version every EDI scene reports, with a changelog. `build` archives
+each versioned scene under `docs/versions/<name>-v<n>.html` (self-contained, runtime inlined)
+and never overwrites one, so `ediHero-v1.html` stays exactly as it was tested. Bump the shared
+version when the world, the kit or the arrangement changes; give one act its own `version` in
+`defineAct` when only that act moves on. The gallery links every archived version.
+
 ## Working on it
 
 ```sh

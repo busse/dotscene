@@ -17,6 +17,7 @@ import { ASPECT, stageParts, WIDE } from './world.ts'
 import { LOOP, START } from './timing.ts'
 import { css, night, paper, themedCss, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
 import { DOT_RADIUS, LINE_WIDTH } from './stage.ts'
+import { EDI_VERSION } from './version.ts'
 
 const startOf: Readonly<Record<string, number>> = {
   edi00Prologue: START.prologue,
@@ -53,6 +54,7 @@ export const composed = compose(placements, { parts: cast, maxStep: 120 })
 export const seam = loopGaps(composed, cast)
 
 const layout = {
+  version: EDI_VERSION,
   parts: cast,
   camera: { ...WIDE, aspect: ASPECT },
   dotRadius: DOT_RADIUS,

@@ -105,6 +105,9 @@ before touching anything in that folder. Figures live in `scenes/edi/figures/`, 
 - Two files must not export scenes with the same name — `loadScenes` rejects it rather than picking one.
 - Output is byte-stable by design (2-decimal rounding, fixed ordering). A noisy `git diff` after a rebuild means something actually changed.
 - `docs/` is build output but **is committed** — GitHub Pages serves the gallery from it. Rebuild and commit it alongside any scene change; never hand-edit a file in there.
+- **Versioned scenes are archived, never overwritten.** A scene with a `version` gets a frozen, self-contained copy under `docs/versions/<name>-v<n>.html`; bump the version when the output changes in a way worth comparing against. The EDI scenes take theirs from `scenes/edi/version.ts`, and an act can carry its own.
+- **A vehicle's heading belongs to the run, not the corner.** Read the axis at a run's midpoint; a corner belongs to two runs and `along()` at one names the run that ends there, which is how a rig drives a whole leg sideways.
+- **Depth compares centres.** A part whose origin is at one end — a trailer with its origin at its rear — needs its depth taken from its centre, or it paints behind things it is in front of.
 
 ## Style
 

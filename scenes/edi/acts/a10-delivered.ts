@@ -10,7 +10,7 @@
 import { defineAct } from './act.ts'
 import { cabTop, dock, drive, flight, flightSpan, liftAt, look, report, roadAtDoor, stand, walk } from './kit.ts'
 import { ACK, ACK_DELAY, DOCKING, HOP } from '../timing.ts'
-import { CONSIGNEE_DROP, CONSIGNEE_LIFT_REST, CONSIGNEE_WAIT, dockedAt, loadingSpotEast, nodeOf, RECEIVER_HOME, sites } from '../world.ts'
+import { CONSIGNEE_DROP, CONSIGNEE_LIFT_REST, CONSIGNEE_WAIT, dockedAt, loadingSpotEast, nodeOf, RECEIVER_HOME, RIG_LANE, sites } from '../world.ts'
 import { RUN_END as ARRIVE } from './a09-delivery.ts'
 
 const lift = 'consigneeLift'
@@ -19,7 +19,7 @@ const doorCell = sites.consignee.doors[0]!
 const bay = dockedAt(doorCell)
 const atTrailer = loadingSpotEast(doorCell)
 
-const backIn = dock({ part: 'rig', door: doorCell, at: 0, duration: DOCKING, direction: 'in', lane: 0.25 })
+const backIn = dock({ part: 'rig', door: doorCell, at: 0, duration: DOCKING, direction: 'in', lane: RIG_LANE })
 
 /** Unloading: reach into the trailer, the pallet appears on the forks, carry it east, set it down. */
 const UNLOAD_AT = DOCKING + 500
@@ -60,8 +60,8 @@ const ack = flight({ id: 'deliveredAck', from: nodeOf('shipper'), to: nodeOf('ca
 
 /** And away: off the dock, along the road, and out of the frame. */
 export const LEAVE_AT = UNLOAD_AT + 4200
-const pullOut = dock({ part: 'rig', door: doorCell, at: LEAVE_AT, duration: DOCKING, direction: 'out', lane: 0.25 })
-const away = drive({ part: 'rig', from: ARRIVE, to: 1, at: LEAVE_AT + DOCKING + 1, duration: 3200, lane: 0.25, easeStart: true })
+const pullOut = dock({ part: 'rig', door: doorCell, at: LEAVE_AT, duration: DOCKING, direction: 'out', lane: RIG_LANE })
+const away = drive({ part: 'rig', from: ARRIVE, to: 1, at: LEAVE_AT + DOCKING + 1, duration: 3200, lane: RIG_LANE, easeStart: true })
 
 export const act = defineAct({
   id: 'edi10Delivered',

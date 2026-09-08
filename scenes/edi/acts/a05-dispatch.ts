@@ -8,7 +8,7 @@
 import { defineAct } from './act.ts'
 import { cycle, dock, drive, flight, look, roadAtDoor, stand } from './kit.ts'
 import { DOCKING, HOP } from '../timing.ts'
-import { nodeOf, sites, WORKER_HOME } from '../world.ts'
+import { nodeOf, RIG_LANE, sites, WORKER_HOME } from '../world.ts'
 
 const status = flight({ id: 'dispatch', from: nodeOf('carrier'), to: nodeOf('shipper'), at: 0, duration: HOP, label: '214', badge: 'pin' })
 
@@ -19,8 +19,8 @@ export const DRIVE_AT = 200
 export const DRIVE_MS = 7000
 export const DOCK_AT = DRIVE_AT + DRIVE_MS
 
-const run = drive({ part: 'rig', from: RUN_START, to: RUN_END, at: DRIVE_AT, duration: DRIVE_MS, lane: 0.25, easeStart: true, easeStop: true })
-const backIn = dock({ part: 'rig', door: sites.shipper.doors[1]!, at: DOCK_AT, duration: DOCKING, direction: 'in', lane: 0.25, facing: 'back' })
+const run = drive({ part: 'rig', from: RUN_START, to: RUN_END, at: DRIVE_AT, duration: DRIVE_MS, lane: RIG_LANE, easeStart: true, easeStop: true })
+const backIn = dock({ part: 'rig', door: sites.shipper.doors[1]!, at: DOCK_AT, duration: DOCKING, direction: 'in', lane: RIG_LANE, facing: 'back' })
 
 /** The worker waves the rig in, then stands back. */
 const wave = [

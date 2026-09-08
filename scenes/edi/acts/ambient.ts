@@ -98,7 +98,7 @@ beats.push(...cloudDrift('cloudB', [40, -142], [250, -136], 1.1, 0.8))
 
 // A van with somewhere else to be: once each way, timed to pass the rig in the other lane.
 const vanRun = (from: number, to: number, at: number): Beat[] =>
-  drive({ part: 'van', from, to, at, duration: 11000, lane: -0.32, depthBias: 0.5 }).map((b) => ({
+  drive({ part: 'van', from, to, at, duration: 11000, lane: 0.3 }).map((b) => ({
     ...b,
     parts: { van: { ...b.parts!.van!, opacity: 1 } },
   }))

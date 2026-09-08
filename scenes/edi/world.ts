@@ -278,6 +278,13 @@ const trailerShape: Shape = merge(
 )
 export const parkedTrailer = figureOf('parkedTrailer', trailerShape, 'A parked trailer')
 
+/**
+ * Paint order for a parked trailer: its centre, not its rear. Depth compares centres, and a
+ * trailer's origin is at its rear on the door — judged from there it would paint behind a
+ * rig docked beside it that is in fact further back.
+ */
+const parkedDepth = (door: Cell): number => depthOf(add(door, [0, DOCK_GAP + 1.3]))
+
 export interface Site {
   readonly id: string
   readonly label: string
@@ -332,6 +339,9 @@ export const loadingSpotEast = (door: Cell): Cell => [door[0] + 1.9, door[1] + D
 
 /** Where the rig starts and returns: backed onto a bay of the carrier's crossdock. */
 export const RIG_BAY = dockedAt(sites.hub.doors[3]!)
+
+/** How far right of the centreline the rig keeps. Every drive and docking uses this one number. */
+export const RIG_LANE = 0.25
 
 /**
  * The loading lane: one row across each yard, a forklift's reach in front of the docked
@@ -432,7 +442,7 @@ export const stageParts: readonly Part[] = [
   placed('shipper', shipperPlant, sites.shipper.cell),
   placed('shipperMast', mast, add(sites.shipper.cell, [SHIPPER_MAST_BASE[0], SHIPPER_MAST_BASE[1]]), { z: SHIPPER_MAST_BASE[2], depth: depthOf(sites.shipper.cell) + 0.1 }),
   ...sites.shipper.doors.map((door, i) => placed(`shipperDoor${i}`, dockDoor, door, { pose: 'closed', depth: depthOf(door) + 0.2 })),
-  placed('shipperTrailer', parkedTrailer, add(sites.shipper.doors[2]!, [0, DOCK_GAP]), { depth: depthOf(sites.shipper.doors[2]!) + 0.5 }),
+  placed('shipperTrailer', parkedTrailer, add(sites.shipper.doors[2]!, [0, DOCK_GAP]), { depth: parkedDepth(sites.shipper.doors[2]!) }),
 
   // The carrier: the office tower behind, the crossdock on the road.
   placed('office', hubOffice, sites.office.cell),
@@ -441,7 +451,7 @@ export const stageParts: readonly Part[] = [
   placed('hub', hubCrossdock, sites.hub.cell),
   ...sites.hub.doors.map((door, i) => placed(`hubDoor${i}`, dockDoor, door, { pose: i === 2 ? 'open' : 'closed', depth: depthOf(door) + 0.2 })),
   ...[0, 1, 4].map((i) =>
-    placed(`hubTrailer${i}`, parkedTrailer, add(sites.hub.doors[i]!, [0, DOCK_GAP]), { depth: depthOf(sites.hub.doors[i]!) + 0.5 }),
+    placed(`hubTrailer${i}`, parkedTrailer, add(sites.hub.doors[i]!, [0, DOCK_GAP]), { depth: parkedDepth(sites.hub.doors[i]!) }),
   ),
 
   // The consignee.
@@ -474,7 +484,7 @@ export const stageParts: readonly Part[] = [
 export const SKY = 1000
 
 export const cast = {
-  rig: (): Part => ({ id: 'rig', figure: rig, at: at(v3(RIG_BAY)), pose: 'y', depth: depthOf(RIG_BAY) + 0.6 }),
+  rig: (): Part => ({ id: 'rig', figure: rig, at: at(v3(RIG_BAY)), pose: 'y', depth: depthOf(RIG_BAY) + 0.3 }),
   van: (): Part => ({ id: 'van', figure: van, at: at(v3(along(0).cell)), pose: 'x', depth: along(0).depth, opacity: 0 }),
   shipperLift: (): Part => ({ id: 'shipperLift', figure: forklift, at: at(v3(SHIPPER_LIFT_WEST)), pose: 'xHigh', depth: depthOf(SHIPPER_LIFT_WEST) }),
   hubLift: (): Part => ({ id: 'hubLift', figure: forklift, at: at(v3(HUB_LIFT_HOME)), pose: 'yLow', depth: depthOf(HUB_LIFT_HOME) + 0.3 }),

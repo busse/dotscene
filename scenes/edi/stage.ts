@@ -8,11 +8,13 @@
 import { defineScene } from 'dotscene'
 import { ASPECT, RIPPLE_CELLS, WIDE, cast, stageParts } from './world.ts'
 import { css, night, paper, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
+import { EDI_VERSION } from './version.ts'
 
 export const DOT_RADIUS = 0.62
 export const LINE_WIDTH = 0.34
 
 const layout = {
+  version: EDI_VERSION,
   parts: [
     ...stageParts,
     ...RIPPLE_CELLS.map((cell, i) => cast.ripples(i, cell)),

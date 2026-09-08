@@ -9,6 +9,7 @@ import { compose, defineScene, type Act, type Beat, type Part, type Scene, type 
 import { ASPECT, WIDE, cast, RIPPLE_CELLS, stageParts } from '../world.ts'
 import { css, paper, GROUND_PAPER } from '../palette.ts'
 import { DOT_RADIUS, LINE_WIDTH } from '../stage.ts'
+import { EDI_VERSION } from '../version.ts'
 
 export interface EdiAct {
   readonly id: string
@@ -48,6 +49,8 @@ export const defineAct = (spec: {
   readonly focus?: { readonly at: Vec2; readonly width: number }
   /** A pause after the last beat, before whatever the hero places next. */
   readonly tail?: number
+  /** This act's own output version. Defaults to the EDI scenes' shared version. */
+  readonly version?: number
 }): EdiAct => {
   const parts = spec.parts ?? []
   const beats = [...spec.beats].sort((a, b) => a.at - b.at)
@@ -60,6 +63,7 @@ export const defineAct = (spec: {
 
   const scene = defineScene(spec.id, {
     title: spec.title,
+    version: spec.version ?? EDI_VERSION,
     parts: players,
     camera: { ...camera, aspect: ASPECT },
     dotRadius: DOT_RADIUS,

@@ -8,13 +8,13 @@
 import { defineAct } from './act.ts'
 import { dock, flight, flightSpan, look } from './kit.ts'
 import { ACK, ACK_DELAY, DOCKING, HOP } from '../timing.ts'
-import { nodeOf, sites } from '../world.ts'
+import { nodeOf, RIG_LANE, sites } from '../world.ts'
 
 const accept = flight({ id: 'accept', from: nodeOf('carrier'), to: nodeOf('shipper'), at: 0, duration: HOP, label: '990', badge: 'check' })
 const ack = flight({ id: 'accept', from: nodeOf('shipper'), to: nodeOf('carrier'), at: flightSpan(HOP) + ACK_DELAY, duration: ACK, badge: 'check', small: true })
 
 /** The rig leaves its bay while the paperwork is still in the air, heading back up the road. */
-const pullOut = dock({ part: 'rig', door: sites.hub.doors[3]!, at: 900, duration: DOCKING, direction: 'out', facing: 'back' })
+const pullOut = dock({ part: 'rig', door: sites.hub.doors[3]!, at: 900, duration: DOCKING, direction: 'out', facing: 'back', lane: RIG_LANE })
 
 export const act = defineAct({
   id: 'edi03Accept',

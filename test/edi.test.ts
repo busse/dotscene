@@ -160,6 +160,49 @@ describe('the hero', () => {
     expect(dark.partOrder).toEqual(light.partOrder)
   })
 
+  it('only ever moves a vehicle along the axis of the heading it holds', () => {
+    // A rig lying along x that travels along y is driving sideways. Between any two of a
+    // vehicle's keyframes that share a pose, the displacement must be along that pose's axis.
+    const grid = ([sx, sy]: readonly [number, number]): [number, number] => [(sx / 8 + sy / 4) / 2, (sy / 4 - sx / 8) / 2]
+    for (const part of ['rig', 'van']) {
+      let previous: { cell: [number, number]; pose: string } | undefined
+      for (const keyframe of composed.keyframes) {
+        const state = keyframe.parts?.[part]
+        if (state?.at === undefined || typeof state.pose !== 'string') continue
+        const cell = grid(state.at)
+        if (previous !== undefined && previous.pose === state.pose) {
+          const axis = state.pose[0]
+          const across = axis === 'x' ? cell[1] - previous.cell[1] : cell[0] - previous.cell[0]
+          expect(Math.abs(across), `${part} at ${keyframe.name} in pose ${state.pose}`).toBeLessThan(1e-3)
+        }
+        previous = { cell, pose: state.pose }
+      }
+    }
+  })
+
+  it('turns at the corner, not one corner late', () => {
+    // The terminal leg crosses two corners: the heading must change at each, and the rig must
+    // lie along y for the whole of the y run between them.
+    // The first corner comes only half a second into this leg.
+    const times = [START.terminal + 300, START.terminal + 3500, START.terminal + 6200]
+    const poses = times.map((t) => {
+      const at = resolveAt(scene, t)
+      // The trailer box's East and Near corners are its y extent: the trailer's width when it
+      // lies along x, its full length when it lies along y.
+      const east = at.dots.find((d) => d.part === 'rig' && d.point === 'trailerEast')!.at
+      const near = at.dots.find((d) => d.part === 'rig' && d.point === 'trailerNear')!.at
+      return Math.hypot(east[0] - near[0], east[1] - near[1]) > 15 ? 'y' : 'x'
+    })
+    expect(poses).toEqual(['x', 'y', 'x'])
+  })
+
+  it('paints a docked rig behind the parked trailer beside it, which is nearer', () => {
+    // At the shipper the rig backs onto door 1 while a trailer stands on door 2, down-right of
+    // it on screen. The trailer must paint after the rig.
+    const at = resolveAt(scene, START.pickup + 2000)
+    expect(at.partOrder.indexOf('shipperTrailer')).toBeGreaterThan(at.partOrder.indexOf('rig'))
+  })
+
   it('paints the rig behind a building it passes and in front of the yard it crosses', () => {
     // On its way to the shipper the rig runs along the road in front of the shipper's
     // trailers, so it must paint after them.
