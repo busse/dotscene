@@ -50,7 +50,7 @@ what each note changed, and the rule it left behind, is the most reusable thing 
 | keyframes | 1,352, sparse: each names only the parts that change |
 | payload | 705 kB of animation data inline in the block; the runtime is 9 kB |
 | source | about 3,600 lines under `scenes/island/`, plus 117 lines of tests |
-| build output | one HTML block with both themes; one `.svg` still; one archived page per version |
+| build output | one HTML block with both themes; one `.svg` still; one self-playing `.anim.svg` (SMIL, 6 MB) for places no script runs; one archived page per version |
 
 The payload is proportional to what happens, not to the cast. Restating every part at every
 instant would be several megabytes; naming only what moves, against a per-part point table,
@@ -343,5 +343,8 @@ an agent reads at the start of a session.
   after the loop starts.
 - **The payload is 705 kB.** Most of it is the mug riding every keeper keyframe. The gallery
   shows scenes over 90 kB as images linking to their own page rather than playing them inline.
+  The self-playing SVG, which says the same timeline per element rather than per part, is six
+  megabytes, and it scales dots and strokes with the zoom because constant screen sizing needs
+  a script.
 - **The last seconds are quiet.** The camera holds on the lamp and the sweeping beam while the
   misfits are put back below, out of frame. It is the price of a clean reset.

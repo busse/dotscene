@@ -326,6 +326,9 @@ const archivedVersions = async (dir: string): Promise<Record<string, number[]>> 
   return found
 }
 
+/** Above this an image proxy is likely to refuse the file, and a browser to labour over it. */
+const SMIL_LIMIT = 8 * 1024 * 1024
+
 const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Promise<void> => {
   await mkdir(options.out, { recursive: true })
 
@@ -339,6 +342,12 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
     await writeFile(svgFile, `${entry.svg}\n`)
     await writeFile(htmlFile, `${entry.html}\n`)
     written.push(relative(process.cwd(), svgFile), relative(process.cwd(), htmlFile))
+    // A self-playing copy for places no script runs, unless it would be too heavy to serve.
+    if (entry.smil !== undefined && entry.smil.length <= SMIL_LIMIT) {
+      const animFile = resolvePath(options.out, `${entry.name}.anim.svg`)
+      await writeFile(animFile, `${entry.smil}\n`)
+      written.push(relative(process.cwd(), animFile))
+    }
   }
 
   // Versioned scenes are archived once, self-contained — the runtime inlined, so a frozen

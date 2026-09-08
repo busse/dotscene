@@ -60,6 +60,7 @@ export { sceneFromJson, sceneToJson } from './serialize.ts'
 export type { JsonFigure, JsonPart, JsonScene } from './serialize.ts'
 
 export { DEFAULT_CSS, renderSvg } from './render/svg.ts'
+export { renderSmil } from './render/smil.ts'
 export type { SvgOptions } from './render/svg.ts'
 
 export { renderAscii } from './render/ascii.ts'

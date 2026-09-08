@@ -106,6 +106,12 @@ README is the map. Lessons it added, which apply to any staged scene:
 - **Ease only where motion starts and stops.** `easing` is per keyframe, and a part can carry its own. An ease decelerates to zero at every keyframe it crosses, so easing each step of a walk makes it pulse — use `linear` for the run and ease only the first and last transitions.
 - **Messages fly above the things that send them.** An arc bows up to sixty units over its endpoints. A shot about a message is framed on the masts and the sky; a shot about freight is framed on a dock. Aim the camera at the altitude of the thing you want seen, and check with `preview --at`.
 - **A paused scene is paused.** The runtime's `pause()` is sticky against the intersection observer; without that, every screenshot tool that scrolls restarts the clock and the frame you inspect is not the frame you asked for.
+- **`build` also writes `<name>.anim.svg` for every looping scene: the timeline baked into the SVG as
+  SMIL, for a README or an `<img>` where no script runs.** It agrees with the runtime at every
+  keyframe, but it cannot re-stack parts as they pass one another, cannot keep dots and strokes a
+  constant size as the camera zooms (`sizing: 'screen'`), and cannot do hover or click. It is per
+  element rather than per part, so it is several times the runtime payload — six megabytes for the
+  island. `node scripts/gallery-md.mjs` writes `GALLERY.md` from these files.
 - **A standalone `.svg` is XML.** The compiler escapes the stylesheet in the `.svg` file and leaves it raw in the block, because a nesting `&` is fatal in one and required in the other. Validate with `xmllint --noout docs/<scene>.svg` after touching the renderer's CSS.
 - **Match a palette with literal hex, not `currentColor`.** A standalone `.svg`, an `<img src>` or a rasterised PNG inherits nothing from a page. Set the scene's `background` too — assuming white is how a chosen paper colour gets lost. When a palette's roles invert on dark, emit a second scene over the same figure rather than one file for both.
 - **Colour by role, not by name.** Give edges a `kind` and points a `pointKinds` entry, then style the `ds-line--x` / `ds-dot--x` classes. Matching point-name prefixes works but breaks silently on a rename.

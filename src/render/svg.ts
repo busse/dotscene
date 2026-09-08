@@ -41,7 +41,7 @@ export const DEFAULT_CSS = [
  * Override from a page with a more specific selector — `svg.dotscene .ds-dot { r: 2 }` —
  * rather than by redefining the custom property, which this rule would win.
  */
-const sceneCss = (scene: ResolvedScene): string => {
+export const sceneCss = (scene: ResolvedScene): string => {
   const selector = `svg[data-dotscene="${scene.name}"]`
   const ground = scene.background === undefined ? '' : `;--ds-face-fill:${scene.background}`
   const sizing = `${selector}{--ds-dot-r:${scene.dotRadius};--ds-line-w:${scene.lineWidth}${ground}}`
@@ -50,7 +50,7 @@ const sceneCss = (scene: ResolvedScene): string => {
   return scene.css === undefined ? sizing : `${sizing}${selector}{${scene.css}}`
 }
 
-const escapeXml = (value: string): string =>
+export const escapeXml = (value: string): string =>
   value.replace(/[&<>"']/g, (char) => {
     switch (char) {
       case '&':
@@ -66,7 +66,7 @@ const escapeXml = (value: string): string =>
     }
   })
 
-const attrs = (pairs: readonly (readonly [string, string | number | undefined])[]): string =>
+export const attrs = (pairs: readonly (readonly [string, string | number | undefined])[]): string =>
   pairs
     .filter((pair): pair is readonly [string, string | number] => pair[1] !== undefined)
     .map(([name, value]) => `${name}="${typeof value === 'string' ? escapeXml(value) : value}"`)

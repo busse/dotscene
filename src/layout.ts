@@ -415,7 +415,7 @@ export const timelineOf = (resolved: ResolvedScene): TimelineConfig | undefined 
 }
 
 /** What the static drawing shows for every moving part — the state a track starts from. */
-const restOf = (resolved: ResolvedScene): { frame: SceneFrame; opacity: Record<string, number> } => {
+export const restOf = (resolved: ResolvedScene): { frame: SceneFrame; opacity: Record<string, number> } => {
   const named: Record<string, Record<string, Vec2>> = {}
   for (const dot of resolved.dots) (named[dot.part] ??= {})[dot.point] = dot.at
   const frame: Record<string, Frame> = {}

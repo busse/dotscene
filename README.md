@@ -85,6 +85,8 @@ Useful flags: `--pose <name>`, `--poses`, `--at <ms>`, `--every <ms>`, `--width 
 
 ## Output
 
+A looping scene also gets a self-playing copy, `docs/<name>.anim.svg`: the timeline baked into the SVG as SMIL `<animate>` elements, so it plays wherever an SVG image renders and no script can run — a GitHub README, an `<img>`, a Markdown preview. It matches the runtime at every keyframe. It cannot re-stack parts as they pass one another, keep dots and strokes a constant size as the camera zooms, or respond to hover and click; those need the runtime. [GALLERY.md](GALLERY.md) shows every scene this way.
+
 `dotscene build` writes to `docs/`: one `.svg` and one `.html` per scene, a `dotscene.css`, the gallery at `index.html`, and `dotscene.min.js` when any scene animates. That path is committed rather than ignored, because GitHub Pages serves the gallery straight from it — point Pages at the `main` branch, `/docs` folder. Use `--out` for somewhere else.
 
 ### Versions

@@ -1,0 +1,562 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="artBussetech" data-animation="smil" viewBox="0 0 290 100" role="img">
+  <title>One person, a workforce of agents, and a receipt for every run</title>
+  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="artBussetech"]{--ds-dot-r:2.1;--ds-line-w:0.9}svg[data-dotscene="artBussetech"]{.ds-face{fill:#f2f1ec}.ds-face--blue{fill:#c2e8f3}.ds-face--soft{fill:#a4dded}.ds-face--warm{fill:#e6e4dd}.ds-line--blue{stroke:#0b6580}.ds-dot--blue{fill:#0b6580}.ds-line--soft{stroke:#0b6580;stroke-opacity:.45}.ds-dot--soft{fill:#0b6580;fill-opacity:.55}.ds-line--muted{stroke:#656c6f}.ds-dot--muted{fill:#656c6f}.ds-line--hair{stroke:#656c6f;stroke-opacity:.5;stroke-width:.6}.ds-dot--hair{fill:#656c6f;fill-opacity:.5;r:1.1}@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) &amp;{.ds-face{fill:#1e2124}.ds-face--blue{fill:#075166}.ds-face--soft{fill:#1b7f9f}.ds-face--warm{fill:#2a2d30}.ds-line--blue{stroke:#a4dded}.ds-dot--blue{fill:#a4dded}.ds-line--soft{stroke:#a4dded;stroke-opacity:.45}.ds-dot--soft{fill:#a4dded;fill-opacity:.55}.ds-line--muted{stroke:#8e9598}.ds-dot--muted{fill:#8e9598}.ds-line--hair{stroke:#8e9598;stroke-opacity:.5;stroke-width:.6}.ds-dot--hair{fill:#8e9598;fill-opacity:.5;r:1.1}}}:root[data-theme="dark"] &amp;{.ds-face{fill:#1e2124}.ds-face--blue{fill:#075166}.ds-face--soft{fill:#1b7f9f}.ds-face--warm{fill:#2a2d30}.ds-line--blue{stroke:#a4dded}.ds-dot--blue{fill:#a4dded}.ds-line--soft{stroke:#a4dded;stroke-opacity:.45}.ds-dot--soft{fill:#a4dded;fill-opacity:.55}.ds-line--muted{stroke:#8e9598}.ds-dot--muted{fill:#8e9598}.ds-line--hair{stroke:#8e9598;stroke-opacity:.5;stroke-width:.6}.ds-dot--hair{fill:#8e9598;fill-opacity:.5;r:1.1}}}</style>
+  <g data-part="ledger">
+  <polygon class="ds-face" data-part="ledger" points="234,16 266,16 266,84 234,84"/>
+  <line class="ds-line" data-part="ledger" x1="234" y1="16" x2="266" y2="16"/>
+  <line class="ds-line" data-part="ledger" x1="266" y1="16" x2="266" y2="84"/>
+  <line class="ds-line" data-part="ledger" x1="266" y1="84" x2="234" y2="84"/>
+  <line class="ds-line" data-part="ledger" x1="234" y1="84" x2="234" y2="16"/>
+  <line class="ds-line ds-line--hair" data-part="ledger" x1="240" y1="28" x2="260" y2="28"/>
+  <line class="ds-line ds-line--hair" data-part="ledger" x1="240" y1="37" x2="260" y2="37">
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="260;260;240;240;260;260;260;260;260;260;260"/>
+  </line>
+  <line class="ds-line ds-line--hair" data-part="ledger" x1="240" y1="46" x2="260" y2="46">
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="260;260;240;240;240;240;260;260;260;260;260"/>
+  </line>
+  <line class="ds-line ds-line--hair" data-part="ledger" x1="240" y1="55" x2="240" y2="55">
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="240;240;240;240;240;240;240;240;260;260;240"/>
+  </line>
+  <line class="ds-line ds-line--hair" data-part="ledger" x1="240" y1="64" x2="240" y2="64">
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="240;240;240;240;240;240;240;240;260;260;240"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="ledger" x1="249" y1="79" x2="249" y2="79">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="249;249;249;249;249;249;249;249;244;244;249"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="79;79;79;79;79;79;79;79;74;74;79"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="ledger" x1="249" y1="79" x2="249" y2="79">
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="249;249;249;249;249;249;249;249;258;258;249"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="79;79;79;79;79;79;79;79;69;69;79"/>
+  </line>
+  <circle class="ds-dot" data-part="ledger" data-p="tl" cx="234" cy="16" r="2.1"/>
+  <circle class="ds-dot" data-part="ledger" data-p="tr" cx="266" cy="16" r="2.1"/>
+  <circle class="ds-dot" data-part="ledger" data-p="br" cx="266" cy="84" r="2.1"/>
+  <circle class="ds-dot" data-part="ledger" data-p="bl" cx="234" cy="84" r="2.1"/>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e0L" cx="240" cy="28" r="2.1"/>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e0R" cx="260" cy="28" r="2.1"/>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e1L" cx="240" cy="37" r="2.1"/>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e1R" cx="260" cy="37" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="260;260;240;240;260;260;260;260;260;260;260"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e2L" cx="240" cy="46" r="2.1"/>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e2R" cx="260" cy="46" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="260;260;240;240;240;240;260;260;260;260;260"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e3L" cx="240" cy="55" r="2.1"/>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e3R" cx="240" cy="55" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="240;240;240;240;240;240;240;240;260;260;240"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e4L" cx="240" cy="64" r="2.1"/>
+  <circle class="ds-dot ds-dot--hair" data-part="ledger" data-p="e4R" cx="240" cy="64" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="240;240;240;240;240;240;240;240;260;260;240"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="ledger" data-p="tickA" cx="249" cy="79" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="249;249;249;249;249;249;249;249;244;244;249"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="79;79;79;79;79;79;79;79;74;74;79"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="ledger" data-p="tickB" cx="249" cy="79" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="ledger" data-p="tickC" cx="249" cy="79" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="249;249;249;249;249;249;249;249;258;258;249"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.54227;0.55394;0.65598;0.66764;0.76968;0.78134;0.81535;0.95141;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.5 1 0.89 1;0 0 1 1;0.45 0 0.55 1" values="79;79;79;79;79;79;79;79;69;69;79"/>
+  </circle>
+  </g>
+  <g data-part="agent0">
+  <polygon class="ds-face ds-face--blue" data-part="agent0" points="122,17 128.06,20.5 128.06,27.5 122,31 115.94,27.5 115.94,20.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent0" x1="122" y1="17" x2="128.06" y2="20.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent0" x1="128.06" y1="20.5" x2="128.06" y2="27.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent0" x1="128.06" y1="27.5" x2="122" y2="31"/>
+  <line class="ds-line ds-line--blue" data-part="agent0" x1="122" y1="31" x2="115.94" y2="27.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent0" x1="115.94" y1="27.5" x2="115.94" y2="20.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent0" x1="115.94" y1="20.5" x2="122" y2="17"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent0" data-p="r0" cx="122" cy="17" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent0" data-p="r1" cx="128.06" cy="20.5" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent0" data-p="r2" cx="128.06" cy="27.5" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent0" data-p="r3" cx="122" cy="31" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent0" data-p="r4" cx="115.94" cy="27.5" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent0" data-p="r5" cx="115.94" cy="20.5" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent0" data-p="core" cx="122" cy="24" r="2.1"/>
+  </g>
+  <g data-part="agent1">
+  <polygon class="ds-face ds-face--blue" data-part="agent1" points="154,9 160.06,12.5 160.06,19.5 154,23 147.94,19.5 147.94,12.5">
+    <animate attributeName="points" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="154,9 160.06,12.5 160.06,19.5 154,23 147.94,19.5 147.94,12.5;154,9 160.06,12.5 160.06,19.5 154,23 147.94,19.5 147.94,12.5;154,6.55 162.18,11.27 162.18,20.73 154,25.45 145.82,20.73 145.82,11.27;154,9 160.06,12.5 160.06,19.5 154,23 147.94,19.5 147.94,12.5;154,9 160.06,12.5 160.06,19.5 154,23 147.94,19.5 147.94,12.5"/>
+  </polygon>
+  <line class="ds-line ds-line--blue" data-part="agent1" x1="154" y1="9" x2="160.06" y2="12.5">
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="9;9;6.55;9;9"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="160.06;160.06;162.18;160.06;160.06"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="12.5;12.5;11.27;12.5;12.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent1" x1="160.06" y1="12.5" x2="160.06" y2="19.5">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="160.06;160.06;162.18;160.06;160.06"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="12.5;12.5;11.27;12.5;12.5"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="160.06;160.06;162.18;160.06;160.06"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="19.5;19.5;20.73;19.5;19.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent1" x1="160.06" y1="19.5" x2="154" y2="23">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="160.06;160.06;162.18;160.06;160.06"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="19.5;19.5;20.73;19.5;19.5"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="23;23;25.45;23;23"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent1" x1="154" y1="23" x2="147.94" y2="19.5">
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="23;23;25.45;23;23"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="147.94;147.94;145.82;147.94;147.94"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="19.5;19.5;20.73;19.5;19.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent1" x1="147.94" y1="19.5" x2="147.94" y2="12.5">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="147.94;147.94;145.82;147.94;147.94"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="19.5;19.5;20.73;19.5;19.5"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="147.94;147.94;145.82;147.94;147.94"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="12.5;12.5;11.27;12.5;12.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent1" x1="147.94" y1="12.5" x2="154" y2="9">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="147.94;147.94;145.82;147.94;147.94"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="12.5;12.5;11.27;12.5;12.5"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="9;9;6.55;9;9"/>
+  </line>
+  <circle class="ds-dot ds-dot--blue" data-part="agent1" data-p="r0" cx="154" cy="9" r="2.1">
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="9;9;6.55;9;9"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent1" data-p="r1" cx="160.06" cy="12.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="160.06;160.06;162.18;160.06;160.06"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="12.5;12.5;11.27;12.5;12.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent1" data-p="r2" cx="160.06" cy="19.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="160.06;160.06;162.18;160.06;160.06"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="19.5;19.5;20.73;19.5;19.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent1" data-p="r3" cx="154" cy="23" r="2.1">
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="23;23;25.45;23;23"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent1" data-p="r4" cx="147.94" cy="19.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="147.94;147.94;145.82;147.94;147.94"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="19.5;19.5;20.73;19.5;19.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent1" data-p="r5" cx="147.94" cy="12.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="147.94;147.94;145.82;147.94;147.94"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.27697;0.30224;0.33139;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="12.5;12.5;11.27;12.5;12.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent1" data-p="core" cx="154" cy="16" r="2.1"/>
+  </g>
+  <g data-part="agent2">
+  <polygon class="ds-face ds-face--blue" data-part="agent2" points="186,17 192.06,20.5 192.06,27.5 186,31 179.94,27.5 179.94,20.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent2" x1="186" y1="17" x2="192.06" y2="20.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent2" x1="192.06" y1="20.5" x2="192.06" y2="27.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent2" x1="192.06" y1="27.5" x2="186" y2="31"/>
+  <line class="ds-line ds-line--blue" data-part="agent2" x1="186" y1="31" x2="179.94" y2="27.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent2" x1="179.94" y1="27.5" x2="179.94" y2="20.5"/>
+  <line class="ds-line ds-line--blue" data-part="agent2" x1="179.94" y1="20.5" x2="186" y2="17"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent2" data-p="r0" cx="186" cy="17" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent2" data-p="r1" cx="192.06" cy="20.5" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent2" data-p="r2" cx="192.06" cy="27.5" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent2" data-p="r3" cx="186" cy="31" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent2" data-p="r4" cx="179.94" cy="27.5" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent2" data-p="r5" cx="179.94" cy="20.5" r="2.1"/>
+  <circle class="ds-dot ds-dot--blue" data-part="agent2" data-p="core" cx="186" cy="24" r="2.1"/>
+  </g>
+  <g data-part="agent3">
+  <polygon class="ds-face ds-face--blue" data-part="agent3" points="128,53 134.06,56.5 134.06,63.5 128,67 121.94,63.5 121.94,56.5">
+    <animate attributeName="points" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="128,53 134.06,56.5 134.06,63.5 128,67 121.94,63.5 121.94,56.5;128,53 134.06,56.5 134.06,63.5 128,67 121.94,63.5 121.94,56.5;128,50.55 136.18,55.28 136.18,64.72 128,69.45 119.82,64.72 119.82,55.28;128,53 134.06,56.5 134.06,63.5 128,67 121.94,63.5 121.94,56.5;128,53 134.06,56.5 134.06,63.5 128,67 121.94,63.5 121.94,56.5"/>
+  </polygon>
+  <line class="ds-line ds-line--blue" data-part="agent3" x1="128" y1="53" x2="134.06" y2="56.5">
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="53;53;50.55;53;53"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="134.06;134.06;136.18;134.06;134.06"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent3" x1="134.06" y1="56.5" x2="134.06" y2="63.5">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="134.06;134.06;136.18;134.06;134.06"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="134.06;134.06;136.18;134.06;134.06"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent3" x1="134.06" y1="63.5" x2="128" y2="67">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="134.06;134.06;136.18;134.06;134.06"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="67;67;69.45;67;67"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent3" x1="128" y1="67" x2="121.94" y2="63.5">
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="67;67;69.45;67;67"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="121.94;121.94;119.82;121.94;121.94"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent3" x1="121.94" y1="63.5" x2="121.94" y2="56.5">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="121.94;121.94;119.82;121.94;121.94"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="121.94;121.94;119.82;121.94;121.94"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent3" x1="121.94" y1="56.5" x2="128" y2="53">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="121.94;121.94;119.82;121.94;121.94"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="53;53;50.55;53;53"/>
+  </line>
+  <circle class="ds-dot ds-dot--blue" data-part="agent3" data-p="r0" cx="128" cy="53" r="2.1">
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="53;53;50.55;53;53"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent3" data-p="r1" cx="134.06" cy="56.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="134.06;134.06;136.18;134.06;134.06"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent3" data-p="r2" cx="134.06" cy="63.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="134.06;134.06;136.18;134.06;134.06"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent3" data-p="r3" cx="128" cy="67" r="2.1">
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="67;67;69.45;67;67"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent3" data-p="r4" cx="121.94" cy="63.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="121.94;121.94;119.82;121.94;121.94"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent3" data-p="r5" cx="121.94" cy="56.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="121.94;121.94;119.82;121.94;121.94"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.33139;0.35666;0.38581;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent3" data-p="core" cx="128" cy="60" r="2.1"/>
+  </g>
+  <g data-part="agent4">
+  <polygon class="ds-face ds-face--blue" data-part="agent4" points="180,53 186.06,56.5 186.06,63.5 180,67 173.94,63.5 173.94,56.5">
+    <animate attributeName="points" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="180,53 186.06,56.5 186.06,63.5 180,67 173.94,63.5 173.94,56.5;180,53 186.06,56.5 186.06,63.5 180,67 173.94,63.5 173.94,56.5;180,50.55 188.18,55.28 188.18,64.72 180,69.45 171.82,64.72 171.82,55.28;180,53 186.06,56.5 186.06,63.5 180,67 173.94,63.5 173.94,56.5;180,53 186.06,56.5 186.06,63.5 180,67 173.94,63.5 173.94,56.5"/>
+  </polygon>
+  <line class="ds-line ds-line--blue" data-part="agent4" x1="180" y1="53" x2="186.06" y2="56.5">
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="53;53;50.55;53;53"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="186.06;186.06;188.18;186.06;186.06"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent4" x1="186.06" y1="56.5" x2="186.06" y2="63.5">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="186.06;186.06;188.18;186.06;186.06"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="186.06;186.06;188.18;186.06;186.06"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent4" x1="186.06" y1="63.5" x2="180" y2="67">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="186.06;186.06;188.18;186.06;186.06"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="67;67;69.45;67;67"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent4" x1="180" y1="67" x2="173.94" y2="63.5">
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="67;67;69.45;67;67"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="173.94;173.94;171.82;173.94;173.94"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent4" x1="173.94" y1="63.5" x2="173.94" y2="56.5">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="173.94;173.94;171.82;173.94;173.94"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="173.94;173.94;171.82;173.94;173.94"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+  </line>
+  <line class="ds-line ds-line--blue" data-part="agent4" x1="173.94" y1="56.5" x2="180" y2="53">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="173.94;173.94;171.82;173.94;173.94"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="53;53;50.55;53;53"/>
+  </line>
+  <circle class="ds-dot ds-dot--blue" data-part="agent4" data-p="r0" cx="180" cy="53" r="2.1">
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="53;53;50.55;53;53"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent4" data-p="r1" cx="186.06" cy="56.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="186.06;186.06;188.18;186.06;186.06"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent4" data-p="r2" cx="186.06" cy="63.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="186.06;186.06;188.18;186.06;186.06"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent4" data-p="r3" cx="180" cy="67" r="2.1">
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="67;67;69.45;67;67"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent4" data-p="r4" cx="173.94" cy="63.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="173.94;173.94;171.82;173.94;173.94"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="63.5;63.5;64.72;63.5;63.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent4" data-p="r5" cx="173.94" cy="56.5" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="173.94;173.94;171.82;173.94;173.94"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.38581;0.41108;0.44023;1" keySplines="0 0 1 1;0.5 1 0.89 1;0.11 0 0.5 0;0 0 1 1" values="56.5;56.5;55.28;56.5;56.5"/>
+  </circle>
+  <circle class="ds-dot ds-dot--blue" data-part="agent4" data-p="core" cx="180" cy="60" r="2.1"/>
+  </g>
+  <g data-part="human">
+  <line class="ds-line" data-part="human" x1="40" y1="15.15" x2="40" y2="25.65"/>
+  <line class="ds-line" data-part="human" x1="40" y1="25.65" x2="40" y2="35.1"/>
+  <line class="ds-line" data-part="human" x1="40" y1="35.1" x2="40" y2="47.7"/>
+  <line class="ds-line" data-part="human" x1="40" y1="25.65" x2="32.65" y2="27.75"/>
+  <line class="ds-line" data-part="human" x1="40" y1="25.65" x2="47.35" y2="27.75"/>
+  <line class="ds-line" data-part="human" x1="32.65" y1="27.75" x2="26.35" y2="37.2"/>
+  <line class="ds-line" data-part="human" x1="26.35" y1="37.2" x2="23.2" y2="46.65"/>
+  <line class="ds-line" data-part="human" x1="47.35" y1="27.75" x2="52.6" y2="39.3">
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="52.6;52.6;57.85;57.85;53.65;52.6"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="39.3;39.3;31.95;31.95;37.2;39.3"/>
+  </line>
+  <line class="ds-line" data-part="human" x1="52.6" y1="39.3" x2="52.6" y2="48.75">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="52.6;52.6;57.85;57.85;53.65;52.6"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="39.3;39.3;31.95;31.95;37.2;39.3"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="52.6;52.6;66.25;66.25;56.8;52.6"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="48.75;48.75;36.15;36.15;46.65;48.75"/>
+  </line>
+  <line class="ds-line" data-part="human" x1="40" y1="47.7" x2="34.75" y2="49.8"/>
+  <line class="ds-line" data-part="human" x1="40" y1="47.7" x2="45.25" y2="49.8"/>
+  <line class="ds-line" data-part="human" x1="34.75" y1="49.8" x2="32.65" y2="64.5"/>
+  <line class="ds-line" data-part="human" x1="32.65" y1="64.5" x2="31.6" y2="79.2"/>
+  <line class="ds-line" data-part="human" x1="45.25" y1="49.8" x2="47.35" y2="64.5"/>
+  <line class="ds-line" data-part="human" x1="47.35" y1="64.5" x2="48.4" y2="79.2"/>
+  <circle class="ds-dot" data-part="human" data-p="head" cx="40" cy="15.15" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="neck" cx="40" cy="25.65" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="chest" cx="40" cy="35.1" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="hip" cx="40" cy="47.7" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="shoulderL" cx="32.65" cy="27.75" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="elbowL" cx="26.35" cy="37.2" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="handL" cx="23.2" cy="46.65" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="hipL" cx="34.75" cy="49.8" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="kneeL" cx="32.65" cy="64.5" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="footL" cx="31.6" cy="79.2" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="shoulderR" cx="47.35" cy="27.75" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="elbowR" cx="52.6" cy="39.3" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="52.6;52.6;57.85;57.85;53.65;52.6"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="39.3;39.3;31.95;31.95;37.2;39.3"/>
+  </circle>
+  <circle class="ds-dot" data-part="human" data-p="handR" cx="52.6" cy="48.75" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="52.6;52.6;66.25;66.25;56.8;52.6"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="48.75;48.75;36.15;36.15;46.65;48.75"/>
+  </circle>
+  <circle class="ds-dot" data-part="human" data-p="hipR" cx="45.25" cy="49.8" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="kneeR" cx="47.35" cy="64.5" r="2.1"/>
+  <circle class="ds-dot" data-part="human" data-p="footR" cx="48.4" cy="79.2" r="2.1"/>
+  </g>
+  <g data-part="brief">
+  <animate attributeName="opacity" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="1;1;1;1;1;1;1;1;0;1"/>
+  <polygon class="ds-face ds-face--warm" data-part="brief" points="51,36 59,36 59,46 51,46">
+    <animate attributeName="points" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="51,36 59,36 59,46 51,46;51,36 59,36 59,46 51,46;60,27 68,27 68,37 60,37;60,27 68,27 68,37 60,37;150,11 158,11 158,21 150,21;124,55 132,55 132,65 124,65;176,55 184,55 184,65 176,65;176,55 184,55 184,65 176,65;176,55 184,55 184,65 176,65;51,36 59,36 59,46 51,46"/>
+  </polygon>
+  <line class="ds-line" data-part="brief" x1="51" y1="36" x2="59" y2="36">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="51;51;60;60;150;124;176;176;176;51"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="36;36;27;27;11;55;55;55;55;36"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="59;59;68;68;158;132;184;184;184;59"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="36;36;27;27;11;55;55;55;55;36"/>
+  </line>
+  <line class="ds-line" data-part="brief" x1="59" y1="36" x2="59" y2="46">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="59;59;68;68;158;132;184;184;184;59"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="36;36;27;27;11;55;55;55;55;36"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="59;59;68;68;158;132;184;184;184;59"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="46;46;37;37;21;65;65;65;65;46"/>
+  </line>
+  <line class="ds-line" data-part="brief" x1="59" y1="46" x2="51" y2="46">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="59;59;68;68;158;132;184;184;184;59"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="46;46;37;37;21;65;65;65;65;46"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="51;51;60;60;150;124;176;176;176;51"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="46;46;37;37;21;65;65;65;65;46"/>
+  </line>
+  <line class="ds-line" data-part="brief" x1="51" y1="46" x2="51" y2="36">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="51;51;60;60;150;124;176;176;176;51"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="46;46;37;37;21;65;65;65;65;46"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="51;51;60;60;150;124;176;176;176;51"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="36;36;27;27;11;55;55;55;55;36"/>
+  </line>
+  <line class="ds-line ds-line--hair" data-part="brief" x1="53" y1="41" x2="57" y2="41">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="53;53;62;62;152;126;178;178;178;53"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="41;41;32;32;16;60;60;60;60;41"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="57;57;66;66;156;130;182;182;182;57"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="41;41;32;32;16;60;60;60;60;41"/>
+  </line>
+  <circle class="ds-dot" data-part="brief" data-p="tl" cx="51" cy="36" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="51;51;60;60;150;124;176;176;176;51"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="36;36;27;27;11;55;55;55;55;36"/>
+  </circle>
+  <circle class="ds-dot" data-part="brief" data-p="tr" cx="59" cy="36" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="59;59;68;68;158;132;184;184;184;59"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="36;36;27;27;11;55;55;55;55;36"/>
+  </circle>
+  <circle class="ds-dot" data-part="brief" data-p="br" cx="59" cy="46" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="59;59;68;68;158;132;184;184;184;59"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="46;46;37;37;21;65;65;65;65;46"/>
+  </circle>
+  <circle class="ds-dot" data-part="brief" data-p="bl" cx="51" cy="46" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="51;51;60;60;150;124;176;176;176;51"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="46;46;37;37;21;65;65;65;65;46"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="brief" data-p="ruleL" cx="53" cy="41" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="53;53;62;62;152;126;178;178;178;53"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="41;41;32;32;16;60;60;60;60;41"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="brief" data-p="ruleR" cx="57" cy="41" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="57;57;66;66;156;130;182;182;182;57"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.06803;0.1069;0.11662;0.17007;0.20408;0.2381;0.25267;0.27697;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1" values="41;41;32;32;16;60;60;60;60;41"/>
+  </circle>
+  </g>
+  <g data-part="receipt0" opacity="0">
+  <animate attributeName="opacity" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="0;0;1;1;0;0;0"/>
+  <polygon class="ds-face ds-face--warm" data-part="receipt0" points="246,45 254,45 254,55 246,55">
+    <animate attributeName="points" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246,45 254,45 254,55 246,55;246,45 254,45 254,55 246,55;150,11 158,11 158,21 150,21;246,23 254,23 254,33 246,33;246,23 254,23 254,33 246,33;246,23 254,23 254,33 246,33;246,23 254,23 254,33 246,33"/>
+  </polygon>
+  <line class="ds-line" data-part="receipt0" x1="246" y1="45" x2="254" y2="45">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;150;246;246;246;246"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;11;23;23;23;23"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;158;254;254;254;254"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;11;23;23;23;23"/>
+  </line>
+  <line class="ds-line" data-part="receipt0" x1="254" y1="45" x2="254" y2="55">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;158;254;254;254;254"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;11;23;23;23;23"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;158;254;254;254;254"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;21;33;33;33;33"/>
+  </line>
+  <line class="ds-line" data-part="receipt0" x1="254" y1="55" x2="246" y2="55">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;158;254;254;254;254"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;21;33;33;33;33"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;150;246;246;246;246"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;21;33;33;33;33"/>
+  </line>
+  <line class="ds-line" data-part="receipt0" x1="246" y1="55" x2="246" y2="45">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;150;246;246;246;246"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;21;33;33;33;33"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;150;246;246;246;246"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;11;23;23;23;23"/>
+  </line>
+  <line class="ds-line ds-line--hair" data-part="receipt0" x1="248" y1="50" x2="252" y2="50">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="248;248;152;248;248;248;248"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;16;28;28;28;28"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="252;252;156;252;252;252;252"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;16;28;28;28;28"/>
+  </line>
+  <circle class="ds-dot" data-part="receipt0" data-p="tl" cx="246" cy="45" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;150;246;246;246;246"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;11;23;23;23;23"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt0" data-p="tr" cx="254" cy="45" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;158;254;254;254;254"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;11;23;23;23;23"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt0" data-p="br" cx="254" cy="55" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;158;254;254;254;254"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;21;33;33;33;33"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt0" data-p="bl" cx="246" cy="55" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;150;246;246;246;246"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;21;33;33;33;33"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="receipt0" data-p="ruleL" cx="248" cy="50" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="248;248;152;248;248;248;248"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;16;28;28;28;28"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="receipt0" data-p="ruleR" cx="252" cy="50" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="252;252;156;252;252;252;252"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.44023;0.45967;0.52284;0.54227;0.55394;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;16;28;28;28;28"/>
+  </circle>
+  </g>
+  <g data-part="receipt1" opacity="0">
+  <animate attributeName="opacity" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="0;0;1;1;0;0;0"/>
+  <polygon class="ds-face ds-face--warm" data-part="receipt1" points="246,45 254,45 254,55 246,55">
+    <animate attributeName="points" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246,45 254,45 254,55 246,55;246,45 254,45 254,55 246,55;124,55 132,55 132,65 124,65;246,32 254,32 254,42 246,42;246,32 254,32 254,42 246,42;246,32 254,32 254,42 246,42;246,32 254,32 254,42 246,42"/>
+  </polygon>
+  <line class="ds-line" data-part="receipt1" x1="246" y1="45" x2="254" y2="45">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;124;246;246;246;246"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;32;32;32;32"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;132;254;254;254;254"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;32;32;32;32"/>
+  </line>
+  <line class="ds-line" data-part="receipt1" x1="254" y1="45" x2="254" y2="55">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;132;254;254;254;254"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;32;32;32;32"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;132;254;254;254;254"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;42;42;42;42"/>
+  </line>
+  <line class="ds-line" data-part="receipt1" x1="254" y1="55" x2="246" y2="55">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;132;254;254;254;254"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;42;42;42;42"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;124;246;246;246;246"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;42;42;42;42"/>
+  </line>
+  <line class="ds-line" data-part="receipt1" x1="246" y1="55" x2="246" y2="45">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;124;246;246;246;246"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;42;42;42;42"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;124;246;246;246;246"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;32;32;32;32"/>
+  </line>
+  <line class="ds-line ds-line--hair" data-part="receipt1" x1="248" y1="50" x2="252" y2="50">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="248;248;126;248;248;248;248"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;60;37;37;37;37"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="252;252;130;252;252;252;252"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;60;37;37;37;37"/>
+  </line>
+  <circle class="ds-dot" data-part="receipt1" data-p="tl" cx="246" cy="45" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;124;246;246;246;246"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;32;32;32;32"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt1" data-p="tr" cx="254" cy="45" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;132;254;254;254;254"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;32;32;32;32"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt1" data-p="br" cx="254" cy="55" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;132;254;254;254;254"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;42;42;42;42"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt1" data-p="bl" cx="246" cy="55" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;124;246;246;246;246"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;42;42;42;42"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="receipt1" data-p="ruleL" cx="248" cy="50" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="248;248;126;248;248;248;248"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;60;37;37;37;37"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="receipt1" data-p="ruleR" cx="252" cy="50" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="252;252;130;252;252;252;252"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.55394;0.57337;0.63654;0.65598;0.66764;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;60;37;37;37;37"/>
+  </circle>
+  </g>
+  <g data-part="receipt2" opacity="0">
+  <animate attributeName="opacity" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="0;0;1;1;0;0;0"/>
+  <polygon class="ds-face ds-face--warm" data-part="receipt2" points="246,45 254,45 254,55 246,55">
+    <animate attributeName="points" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246,45 254,45 254,55 246,55;246,45 254,45 254,55 246,55;176,55 184,55 184,65 176,65;246,41 254,41 254,51 246,51;246,41 254,41 254,51 246,51;246,41 254,41 254,51 246,51;246,41 254,41 254,51 246,51"/>
+  </polygon>
+  <line class="ds-line" data-part="receipt2" x1="246" y1="45" x2="254" y2="45">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;176;246;246;246;246"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;41;41;41;41"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;184;254;254;254;254"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;41;41;41;41"/>
+  </line>
+  <line class="ds-line" data-part="receipt2" x1="254" y1="45" x2="254" y2="55">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;184;254;254;254;254"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;41;41;41;41"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;184;254;254;254;254"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;51;51;51;51"/>
+  </line>
+  <line class="ds-line" data-part="receipt2" x1="254" y1="55" x2="246" y2="55">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;184;254;254;254;254"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;51;51;51;51"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;176;246;246;246;246"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;51;51;51;51"/>
+  </line>
+  <line class="ds-line" data-part="receipt2" x1="246" y1="55" x2="246" y2="45">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;176;246;246;246;246"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;51;51;51;51"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;176;246;246;246;246"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;41;41;41;41"/>
+  </line>
+  <line class="ds-line ds-line--hair" data-part="receipt2" x1="248" y1="50" x2="252" y2="50">
+    <animate attributeName="x1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="248;248;178;248;248;248;248"/>
+    <animate attributeName="y1" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;60;46;46;46;46"/>
+    <animate attributeName="x2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="252;252;182;252;252;252;252"/>
+    <animate attributeName="y2" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;60;46;46;46;46"/>
+  </line>
+  <circle class="ds-dot" data-part="receipt2" data-p="tl" cx="246" cy="45" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;176;246;246;246;246"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;41;41;41;41"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt2" data-p="tr" cx="254" cy="45" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;184;254;254;254;254"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="45;45;55;41;41;41;41"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt2" data-p="br" cx="254" cy="55" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="254;254;184;254;254;254;254"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;51;51;51;51"/>
+  </circle>
+  <circle class="ds-dot" data-part="receipt2" data-p="bl" cx="246" cy="55" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="246;246;176;246;246;246;246"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="55;55;65;51;51;51;51"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="receipt2" data-p="ruleL" cx="248" cy="50" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="248;248;178;248;248;248;248"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;60;46;46;46;46"/>
+  </circle>
+  <circle class="ds-dot ds-dot--hair" data-part="receipt2" data-p="ruleR" cx="252" cy="50" r="2.1">
+    <animate attributeName="cx" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="252;252;182;252;252;252;252"/>
+    <animate attributeName="cy" dur="10.29s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.66764;0.68707;0.75024;0.76968;0.78134;1" keySplines="0 0 1 1;0.45 0 0.55 1;0.45 0 0.55 1;0.45 0 0.55 1;0 0 1 1;0 0 1 1" values="50;50;60;46;46;46;46"/>
+  </circle>
+  </g>
+</svg>

@@ -9,6 +9,7 @@
 import type { Scene } from './model.ts'
 import { resolve, timelineOf, type ResolvedScene } from './layout.ts'
 import { renderSvg, type SvgOptions } from './render/svg.ts'
+import { renderSmil } from './render/smil.ts'
 
 export interface CompileOptions extends SvgOptions {
   /** `src` for the runtime script tag on animated scenes. Default './dotscene.min.js'. */
@@ -25,6 +26,11 @@ export interface CompiledScene {
   /** The pasteable block: the SVG, plus pose data and the runtime tag when animated. */
   readonly html: string
   readonly animated: boolean
+  /**
+   * The animation as a self-playing SVG document (SMIL), for an `<img>` or a README where no
+   * script runs. Absent for static scenes and for the hover and click modes.
+   */
+  readonly smil?: string
 }
 
 /** The runtime payload for an animated scene: everything it needs, and nothing more. */
@@ -48,5 +54,6 @@ export const compile = (scene: Scene, options: CompileOptions = {}): CompiledSce
           `<script src="${options.runtimeSrc ?? './dotscene.min.js'}" defer></script>`,
         ].join('\n')
 
-  return { name: resolved.name, resolved, svg, inline, html, animated: payload !== undefined }
+  const smil = payload === undefined ? undefined : renderSmil(resolved, { indent: options.indent })
+  return { name: resolved.name, resolved, svg, inline, html, animated: payload !== undefined, ...(smil === undefined ? {} : { smil }) }
 }
