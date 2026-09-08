@@ -11,7 +11,7 @@ import { at as project } from '../../edi/projection.ts'
 import { pulseRing } from '../../edi/figures/tokens.ts'
 import { badgeFlag } from '../figures/misfits.ts'
 import { defineAct } from './act.ts'
-import { depthOf, SKY, standAt, walk, walkTime, vec, type Cell } from './kit.ts'
+import { depthOf, sip, SKY, standAt, walk, walkTime, vec, type Cell } from './kit.ts'
 import { CRON, WORK } from '../world.ts'
 import { FIXED, START } from '../timing.ts'
 
@@ -64,16 +64,16 @@ const STOP = here
 beats.push({ at: t, parts: { [C]: bot(STOP, 'rest', false) } })
 
 // The keeper pins the flag, and the beard comes off.
-beats.push({ at: START.cron + 2500, parts: standAt(K, WORK.cron, 'idle') })
-beats.push({ at: START.cron + 2900, parts: standAt(K, WORK.cron, 'holdR') })
-beats.push({ at: FIXED.cron - 1000, parts: standAt(K, WORK.cron, 'offerR'), easing: 'easeInOut' })
+beats.push(...sip(WORK.cron, START.cron + 2500))
+beats.push({ at: START.cron + 3600, parts: standAt(K, WORK.cron, 'holdR') })
+beats.push({ at: FIXED.cron - 600, parts: standAt(K, WORK.cron, 'offerR'), easing: 'easeInOut' })
 const pin = vec(project([STOP[0] + CRON.badge[0], STOP[1] + CRON.badge[1], CRON.badge[2]]))
-beats.push({ at: FIXED.cron - 900, parts: { cronFlag: { at: pin, opacity: 0, scale: 0.4, depth: depthOf(STOP) + 0.9 } } })
-beats.push({ at: FIXED.cron - 500, parts: { cronFlag: { at: pin, opacity: 1, scale: 1, depth: depthOf(STOP) + 0.9 } }, easing: 'easeOut' })
-beats.push({ at: FIXED.cron - 500, parts: { [C]: bot(STOP, 'rest', false) } })
+beats.push({ at: FIXED.cron - 600, parts: { cronFlag: { at: pin, opacity: 0, scale: 0.4, depth: depthOf(STOP) + 0.9 } } })
+beats.push({ at: FIXED.cron - 300, parts: { cronFlag: { at: pin, opacity: 1, scale: 1, depth: depthOf(STOP) + 0.9 } }, easing: 'easeOut' })
+beats.push({ at: FIXED.cron - 300, parts: { [C]: bot(STOP, 'rest', false) } })
 beats.push({ at: FIXED.cron, parts: { [C]: bot(STOP, 'trim', false) }, easing: 'easeInOut' })
 beats.push({ at: FIXED.cron + 200, parts: standAt(K, WORK.cron, 'wave') })
-beats.push({ at: FIXED.cron + 1000, parts: standAt(K, WORK.cron, 'idle') })
+beats.push({ at: FIXED.cron + 800, parts: standAt(K, WORK.cron, 'idle') })
 
 // Off to the shade, flag and all, and down it sits.
 const SHADE = FIXED.cron + 600
@@ -99,6 +99,6 @@ const sat = vec(project([CRON.rest[0] + CRON.badge[0], CRON.rest[1] + CRON.badge
 beats.push({ at: SHADE + shadeMs + 500, parts: { cronFlag: { at: sat, opacity: 1, scale: 1, depth: depthOf(CRON.rest) + 0.9 } }, easing: 'easeInOut' })
 
 // The keeper walks on to the chatbot.
-beats.push(...walk(K, WORK.cron, WORK.chatbot, FIXED.cron + 1200, Math.max(walkTime(WORK.cron, WORK.chatbot), START.chatbot + 1500 - (FIXED.cron + 1200))))
+beats.push(...walk(K, WORK.cron, WORK.chatbot, FIXED.cron + 900, Math.max(walkTime(WORK.cron, WORK.chatbot), START.chatbot + 1600 - (FIXED.cron + 900))))
 
 export const act = defineAct('islandCron', 'The temporary cron job', beats, parts)

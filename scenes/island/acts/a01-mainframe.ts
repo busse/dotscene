@@ -9,7 +9,7 @@
 import { type Beat, type PartKeyframe } from 'dotscene'
 import { at as project } from '../../edi/projection.ts'
 import { defineAct } from './act.ts'
-import { depthOf, standAt, walk, walkTime, vec } from './kit.ts'
+import { depthOf, sip, standAt, walk, walkTime, vec } from './kit.ts'
 import { MAINFRAME, WORK } from '../world.ts'
 import { FIXED, START } from '../timing.ts'
 
@@ -34,10 +34,10 @@ for (let t = 340, i = 0; t < FIXED.mainframe - 400; t += 340, i++) {
 beats.push({ at: FIXED.mainframe - 400, parts: { [M]: at(MAINFRAME.home, 0, { rotate: 0 }) }, easing: 'easeOut' })
 
 // The keeper kneels to it, and the wheels turn round as it stands up again.
-beats.push({ at: START.mainframe + 300, parts: standAt(K, WORK.mainframe, 'idle') })
-beats.push({ at: START.mainframe + 700, parts: standAt(K, WORK.mainframe, 'lean'), easing: 'easeInOut' })
-beats.push({ at: FIXED.mainframe - 300, parts: standAt(K, WORK.mainframe, 'lean') })
-beats.push({ at: FIXED.mainframe + 200, parts: standAt(K, WORK.mainframe, 'idle'), easing: 'easeInOut' })
+beats.push(...sip(WORK.mainframe, START.mainframe + 300, true))
+beats.push({ at: START.mainframe + 1500, parts: standAt(K, WORK.mainframe, 'lean', true), easing: 'easeInOut' })
+beats.push({ at: FIXED.mainframe - 300, parts: standAt(K, WORK.mainframe, 'lean', true) })
+beats.push({ at: FIXED.mainframe + 200, parts: standAt(K, WORK.mainframe, 'idle', true), easing: 'easeInOut' })
 beats.push({ at: FIXED.mainframe, parts: { [M]: at(MAINFRAME.home, 0, { pose: 'round' }) }, easing: 'easeInOut' })
 
 // And it rolls, with a bounce, and settles.
@@ -49,8 +49,8 @@ beats.push({ at: ROLL + 2150, parts: { [M]: at(MAINFRAME.rolled, 0.22, { pose: '
 beats.push({ at: ROLL + 2400, parts: { [M]: at(MAINFRAME.rolled, 0, { pose: 'round' }) }, easing: 'easeIn' })
 
 // The keeper waves it off and heads for the next one.
-beats.push({ at: ROLL + 900, parts: standAt(K, WORK.mainframe, 'wave') })
-beats.push({ at: ROLL + 1800, parts: standAt(K, WORK.mainframe, 'idle') })
-beats.push(...walk(K, WORK.mainframe, WORK.spreadsheet, ROLL + 2000, Math.max(walkTime(WORK.mainframe, WORK.spreadsheet), START.spreadsheet + 2200 - (ROLL + 2000))))
+beats.push({ at: ROLL + 600, parts: standAt(K, WORK.mainframe, 'wave', true) })
+beats.push({ at: ROLL + 1300, parts: standAt(K, WORK.mainframe, 'idle', true) })
+beats.push(...walk(K, WORK.mainframe, WORK.spreadsheet, ROLL + 1400, Math.max(walkTime(WORK.mainframe, WORK.spreadsheet), START.spreadsheet + 2200 - (ROLL + 1400))))
 
 export const act = defineAct('islandMainframe', 'The mainframe on square wheels', beats)

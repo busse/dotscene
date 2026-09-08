@@ -25,8 +25,8 @@ const held = (act: { beats: readonly import('dotscene').Beat[] }, ...ids: string
 
 export const act = defineAct('islandReset', 'The island put back for the night', [
   { at: HOLD, parts: { ...held(mainframeAct.act, 'mainframe'), ...held(spreadsheetAct.act, 'spreadsheet', 'drum'), ...held(cronAct.act, 'cron', 'cronFlag') } },
-  { at: T, parts: { keeper: { opacity: 0 } } },
-  { at: T + 10, parts: { keeper: { ...lyingAt('keeper', HAMMOCK.cell, HAMMOCK.z).keeper, opacity: 0 } } },
+  { at: T, parts: { keeper: { opacity: 0 }, mug: { opacity: 0 } } },
+  { at: T + 10, parts: { keeper: { ...lyingAt(HAMMOCK.cell, HAMMOCK.z).keeper, opacity: 0 }, mug: { ...lyingAt(HAMMOCK.cell, HAMMOCK.z).mug, opacity: 0 } } },
   { at: T + 1600, parts: { keeper: { opacity: 1 } }, easing: 'easeIn' },
   { at: T + 20, parts: { mainframe: { at: vec(project([MAINFRAME.home[0], MAINFRAME.home[1], 0])), pose: 'square', rotate: 0, depth: depthOf(MAINFRAME.home) + 0.5 } } },
   { at: T + 25, parts: { spreadsheet: { at: vec(project([SPREADSHEET.home[0], SPREADSHEET.home[1], 0])), pose: 'rest', depth: depthOf(SPREADSHEET.home) + 0.6 }, drum: { at: vec(project([SPREADSHEET.drumFrom[0], SPREADSHEET.drumFrom[1], 0])), opacity: 0, depth: depthOf(SPREADSHEET.drumFrom) + 0.5 } } },

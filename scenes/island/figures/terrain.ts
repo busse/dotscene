@@ -140,67 +140,83 @@ export const rocks = figureOf(
 // Palms
 
 /**
- * A coconut palm: a trunk that leans a little as it climbs, a crown, five fronds that rise
- * and droop, two coconuts. Sway moves the crown and the fronds; the trunk's top follows a
- * little and its foot not at all.
+ * A coconut palm: a trunk that curves as it climbs, a crown, and seven fronds drawn as leaf
+ * shapes — each a thin face from the crown out to a drooping tip — so the crown reads as
+ * foliage rather than a set of legs. Sway moves the crown and the fronds; the trunk's top
+ * follows a little and its foot not at all.
  */
 const palmFigure = (name: string, title: string, height: number, span: number) => {
   const lean = 0.11 * height
   const trunk: readonly [number, number, number][] = [
     [0, 0, 0],
-    [lean * 0.25, 0, height * 0.36],
-    [lean * 0.65, 0, height * 0.7],
+    [lean * 0.18, 0, height * 0.28],
+    [lean * 0.45, 0, height * 0.55],
+    [lean * 0.75, 0, height * 0.8],
     [lean, 0, height],
   ]
-  const crown: [number, number, number] = [lean, 0, height]
-  // Five fronds fanning round the crown; each rises to a mid point and droops to a tip.
-  const angles = [-0.35, 0.95, 2.2, 3.5, 4.75]
+  const crown = trunk[4]!
+  const angles = [0.15, 1.05, 1.95, 2.85, 3.75, 4.65, 5.55]
   const frondPoints = (dx: number, dz: number): Record<string, Vec2> => {
     const out: Record<string, Vec2> = {}
     angles.forEach((a, i) => {
       const ux = Math.cos(a)
       const uy = Math.sin(a)
-      out[`f${i}m`] = at([crown[0] + dx + ux * span * 0.45, crown[1] + uy * span * 0.45, crown[2] + dz + 0.35])
-      out[`f${i}t`] = at([crown[0] + dx + ux * span, crown[1] + uy * span, crown[2] + dz - 0.55])
+      const px = -uy
+      const py = ux
+      const mid = 0.5
+      const half = 0.15
+      out[`f${i}l`] = at([crown[0] + dx * 0.6 + ux * span * mid + px * span * half, crown[1] + uy * span * mid + py * span * half, crown[2] + dz * 0.6 + 0.42])
+      out[`f${i}r`] = at([crown[0] + dx * 0.6 + ux * span * mid - px * span * half, crown[1] + uy * span * mid - py * span * half, crown[2] + dz * 0.6 + 0.42])
+      out[`f${i}t`] = at([crown[0] + dx + ux * span, crown[1] + uy * span, crown[2] + dz - 0.9])
     })
     return out
   }
+  const nuts = (dx: number): Record<string, Vec2> => ({
+    nutA: at([crown[0] + dx + 0.16, crown[1] - 0.1, crown[2] - 0.4]),
+    nutB: at([crown[0] + dx + 0.28, crown[1] + 0.1, crown[2] - 0.52]),
+  })
   const base: Record<string, Vec2> = {
     t0: at(trunk[0]!),
     t1: at(trunk[1]!),
     t2: at(trunk[2]!),
+    t3: at(trunk[3]!),
     crown: at(crown),
-    nutA: at([crown[0] + 0.18, crown[1] - 0.12, crown[2] - 0.45]),
-    nutB: at([crown[0] + 0.32, crown[1] + 0.1, crown[2] - 0.6]),
+    ...nuts(0),
     ...frondPoints(0, 0),
   }
   const sway = (dx: number): PoseOverride => ({
-    t2: at([trunk[2]![0] + dx * 0.4, 0, trunk[2]![2]]),
+    t3: at([trunk[3]![0] + dx * 0.4, 0, trunk[3]![2]]),
     crown: at([crown[0] + dx, crown[1], crown[2]]),
-    nutA: at([crown[0] + dx + 0.18, crown[1] - 0.12, crown[2] - 0.45]),
-    nutB: at([crown[0] + dx + 0.32, crown[1] + 0.1, crown[2] - 0.6]),
-    ...frondPoints(dx * 2.2, -0.08),
+    ...nuts(dx),
+    ...frondPoints(dx * 2.2, -0.1),
   })
+  // Far fronds first, so the near ones paint over them.
+  const order = angles.map((_a, i) => i).sort((i, j) => Math.cos(angles[i]!) + Math.sin(angles[i]!) - (Math.cos(angles[j]!) + Math.sin(angles[j]!)))
   return defineFigure(name, {
     title,
     points: base,
     edges: [
       { from: 't0', to: 't1', kind: 'trunk' },
       { from: 't1', to: 't2', kind: 'trunk' },
-      { from: 't2', to: 'crown', kind: 'trunk' },
-      ...angles.flatMap((_a, i) => [
-        { from: 'crown', to: `f${i}m`, kind: 'foliage' },
-        { from: `f${i}m`, to: `f${i}t`, kind: 'foliage' },
+      { from: 't2', to: 't3', kind: 'trunk' },
+      { from: 't3', to: 'crown', kind: 'trunk' },
+      ...order.flatMap((i) => [
+        { from: 'crown', to: `f${i}l`, kind: 'frond' },
+        { from: `f${i}l`, to: `f${i}t`, kind: 'frond' },
+        { from: `f${i}t`, to: `f${i}r`, kind: 'frond' },
+        { from: `f${i}r`, to: 'crown', kind: 'frond' },
       ]),
     ],
+    faces: order.map((i) => ({ points: ['crown', `f${i}l`, `f${i}t`, `f${i}r`], kind: 'foliage' })),
     pointKinds: {
       t0: 'trunk',
       t1: 'trunk',
       t2: 'trunk',
-      crown: 'foliage',
+      t3: 'trunk',
+      crown: 'frond',
       nutA: 'soft',
       nutB: 'soft',
-      ...Object.fromEntries(angles.flatMap((_a, i) => [[`f${i}m`, 'foliage'], [`f${i}t`, 'foliage']])),
+      ...Object.fromEntries(angles.flatMap((_a, i) => [[`f${i}l`, 'frond'], [`f${i}r`, 'frond'], [`f${i}t`, 'frond']])),
     },
     poses: { rest: {}, swayA: sway(0.09), swayB: sway(-0.09) },
   })

@@ -7,9 +7,9 @@
  * sun's arc, and nightfall.
  */
 
-import { definePose, easings, lerpPoints, posePoints, type Beat, type PartKeyframe, type Vec2 } from 'dotscene'
+import { definePose, easings, lerpPoints, posePoints, type Beat, type PartKeyframe, type Pose, type Vec2 } from 'dotscene'
 import { at as project } from '../../edi/projection.ts'
-import { person } from '../../person.ts'
+import { keeper } from '../figures/keeper.ts'
 import { strung, wire } from '../figures/fixtures.ts'
 import { NIGHT } from '../timing.ts'
 
@@ -29,7 +29,7 @@ export const SKY = 1000
 // ---------------------------------------------------------------------------------------------
 // The keeper
 
-/** The person figure is 64 tall; the keeper stands about seven and a half units. */
+/** The keeper figure is 64 tall; the keeper stands about seven and a half units. */
 export const KEEPER_SCALE = 0.2
 const FEET = 64 * KEEPER_SCALE
 
@@ -39,15 +39,67 @@ export const feetAt = (cell: Cell, z = 0): Vec2 => {
   return [x, y - FEET]
 }
 
-export const standAt = (part: string, cell: Cell, pose: string, flipX = false, z = 0): Record<string, PartKeyframe> => ({
-  [part]: { at: feetAt(cell, z), pose, flipX, rotate: 0, depth: roundTo(depthOf(cell) + 0.4, 3) },
+/** The mug is oversized on purpose; it has to read at the width of a whole island. */
+export const MUG_SCALE = KEEPER_SCALE * 1.15
+
+const handOf = (pose: string | Pose): Vec2 => {
+  const points = typeof pose === 'string' ? (keeper.poses[pose] ?? {}) : pose.points
+  return (points.handL ?? keeper.points.handL) as Vec2
+}
+
+/** The mug, hanging from the keeper's left hand in whatever pose the keeper is in. */
+export const mugAt = (state: PartKeyframe, pose: string | Pose): PartKeyframe => {
+  const [hx, hy] = handOf(pose)
+  const at = state.at!
+  const flip = state.flipX ? -1 : 1
+  return { at: [roundTo(at[0] + hx * flip * KEEPER_SCALE, 2), roundTo(at[1] + hy * KEEPER_SCALE, 2)], depth: roundTo((state.depth ?? 0) + 0.05, 3) }
+}
+
+/** Standing on a cell. The keeper's mug comes along; anything else stands alone. */
+export const standAt = (part: string, cell: Cell, pose: string, flipX = false, z = 0): Record<string, PartKeyframe> => {
+  const state: PartKeyframe = { at: feetAt(cell, z), pose, flipX, rotate: 0, depth: roundTo(depthOf(cell) + 0.4, 3) }
+  return part === 'keeper' ? { [part]: state, mug: mugAt(state, pose) } : { [part]: state }
+}
+
+const HIP_LIE = keeper.poses.lie!.hip as Vec2
+
+/**
+ * In the hammock: lying, sitting up, or sipping — all anchored at the hip on the cell, so
+ * the tween between them is a body sitting up rather than a figure swinging round.
+ */
+export const restAt = (cell: Cell, z: number, pose: 'lie' | 'sitUp' | 'sipSit'): Record<string, PartKeyframe> => {
+  const [x, y] = project([cell[0], cell[1], z])
+  const state: PartKeyframe = {
+    at: [roundTo(x - HIP_LIE[0] * KEEPER_SCALE, 2), roundTo(y - HIP_LIE[1] * KEEPER_SCALE, 2)],
+    pose,
+    flipX: false,
+    rotate: 0,
+    depth: roundTo(depthOf(cell) + 0.3, 3),
+  }
+  return { keeper: state, mug: mugAt(state, pose) }
+}
+
+export const lyingAt = (cell: Cell, z: number): Record<string, PartKeyframe> => restAt(cell, z, 'lie')
+
+/** Steam over the mug in `state`, which must carry a mug. */
+export const steamOver = (state: Record<string, PartKeyframe>, pose: 'a' | 'b', opacity: number): PartKeyframe => ({
+  at: state.mug!.at,
+  pose,
+  opacity,
+  depth: roundTo((state.mug!.depth ?? 0) + 0.01, 3),
 })
 
-/** Lying in the hammock: the standing figure tipped over onto its back. */
-export const lyingAt = (part: string, cell: Cell, z: number): Record<string, PartKeyframe> => {
-  const [x, y] = project([cell[0], cell[1], z])
-  // Rotated about the head, so the body swings out along the hammock's length.
-  return { [part]: { at: [x - 4, y - 1], pose: 'idle', flipX: false, rotate: -78, depth: roundTo(depthOf(cell) + 0.3, 3) } }
+/** A sip on arrival: idle, mug up with steam, two beats, and down again. 900 ms. */
+export const sip = (cell: Cell, at: number, flipX = false): Beat[] => {
+  const idle = standAt('keeper', cell, 'idle', flipX)
+  const sipping = standAt('keeper', cell, 'sip', flipX)
+  return [
+    { at, parts: { ...idle, steam: steamOver(idle, 'a', 0) } },
+    { at: at + 200, parts: { ...sipping, steam: steamOver(sipping, 'a', 1) }, easing: 'easeInOut' },
+    { at: at + 450, parts: { steam: steamOver(sipping, 'b', 1) } },
+    { at: at + 700, parts: { ...sipping, steam: steamOver(sipping, 'a', 1) } },
+    { at: at + 900, parts: { ...idle, steam: steamOver(idle, 'a', 0) }, easing: 'easeInOut' },
+  ]
 }
 
 const GAIT = ['stepA', 'passA', 'stepB', 'passB'] as const
@@ -59,7 +111,7 @@ const gaitPose = (phase: number) => {
   const cached = gaitCache.get(key)
   if (cached !== undefined) return cached
   const index = Math.floor(wrapped)
-  const pose = definePose(person, `gait${key}`, lerpPoints(posePoints(person, GAIT[index]!), posePoints(person, GAIT[(index + 1) % 4]!), wrapped - index))
+  const pose = definePose(keeper, `gait${key}`, lerpPoints(posePoints(keeper, GAIT[index]!), posePoints(keeper, GAIT[(index + 1) % 4]!), wrapped - index))
   gaitCache.set(key, pose)
   return pose
 }
@@ -75,13 +127,15 @@ export const walk = (part: string, from: Cell, to: Cell, at: number, duration: n
   // The steps take all but the last 180 ms; the settle into `endPose` lands exactly at
   // `at + duration`, so an act that hands the keeper on at that instant does not overlap.
   const stepping = Math.max(240, duration - 180)
-  const beats: Beat[] = [{ at, parts: { [part]: { at: a, pose: 'idle', flipX: false, rotate: 0, depth: roundTo(depthOf(from) + 0.4, 3) } } }]
+  const beats: Beat[] = [{ at, parts: standAt(part, from, 'idle', false) }]
   for (let i = 1; i <= halfSteps; i++) {
     const t = i / halfSteps
     const cell: Cell = [from[0] + (to[0] - from[0]) * t, from[1] + (to[1] - from[1]) * t]
+    const pose = gaitPose(i)
+    const state: PartKeyframe = { at: vec([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]), pose, flipX, rotate: 0, depth: roundTo(depthOf(cell) + 0.4, 3) }
     beats.push({
       at: at + Math.round((stepping * i) / halfSteps),
-      parts: { [part]: { at: vec([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]), pose: gaitPose(i), flipX, rotate: 0, depth: roundTo(depthOf(cell) + 0.4, 3) } },
+      parts: part === 'keeper' ? { [part]: state, mug: mugAt(state, pose) } : { [part]: state },
     })
   }
   beats.push({ at: at + stepping + 180, parts: standAt(part, to, endPose, false) })

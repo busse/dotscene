@@ -8,7 +8,7 @@
 
 import { easings, type Beat, type Part, type PartKeyframe, type Vec2 } from 'dotscene'
 import { defineAct, holdAt, stateBefore } from './act.ts'
-import { flight, SKY, slackWire, standAt, stringWire, walk, walkTime, vec, wire } from './kit.ts'
+import { flight, sip, SKY, slackWire, standAt, stringWire, walk, walkTime, vec, wire } from './kit.ts'
 import { sheet } from '../figures/fixtures.ts'
 import { splash } from '../figures/traffic.ts'
 import { FAX, LAMP, WORK } from '../world.ts'
@@ -62,9 +62,9 @@ for (let t = 600; t < FIXED.fax - 1800; t += 2300, n++) {
 }
 
 // The keeper arrives, and strings the wire up to the lamp.
-beats.push({ at: START.fax + 2400, parts: standAt(K, WORK.fax, 'idle') })
-beats.push({ at: START.fax + 2800, parts: standAt(K, WORK.fax, 'offerR') })
-beats.push(...stringWire('faxWire', FAX.slot, LAMP.at, START.fax + 2800, FIXED.fax - (START.fax + 2800)))
+beats.push(...sip(WORK.fax, START.fax + 2400))
+beats.push({ at: START.fax + 3500, parts: standAt(K, WORK.fax, 'offerR') })
+beats.push(...stringWire('faxWire', FAX.slot, LAMP.at, START.fax + 3500, FIXED.fax - (START.fax + 3500)))
 beats.push({ at: FIXED.fax + 200, parts: standAt(K, WORK.fax, 'idle') })
 
 // The next page goes up the wire as an envelope, and lands at the lamp.

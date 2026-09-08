@@ -19,6 +19,7 @@ The sea on the left is the page's.
 | the frame's shape and the establishing shot | `world.ts` (`ASPECT`, `WIDE`) | everything |
 | what the island, the tower, the hut, the dock look like | `figures/terrain.ts`, `figures/structures.ts` | every scene |
 | what a misfit looks like, its poses | `figures/misfits.ts` | its act |
+| the keeper's own poses (lie, sit up, sip, stretch), the mug, the steam | `figures/keeper.ts` | dawn and every sip |
 | the plane, the boat, the sun, the moon, the crab, the turtle | `figures/traffic.ts` | the acts that use them |
 | wires, bubbles, glows, the dark | `figures/fixtures.ts` | the acts that use them |
 | how the keeper walks, stands, lies; flights, arcs, wires, speech | `acts/kit.ts` | every act |
@@ -33,7 +34,7 @@ The sea on the left is the page's.
 
 | | act | what happens |
 |---|---|---|
-| 00 | dawn | the sun comes up out of the sea; the keeper wakes in the hammock and walks down to the dock |
+| 00 | dawn | the sun comes up out of the sea; the keeper sits up in the hammock, a mug of coffee arrives steaming, two slow sips, down onto the grass, a stretch, and off to the dock — mug in hand, all day, with a sip on arrival at every misfit |
 | 01 | the mainframe | rocking on its corners at the dock; the keeper leans in and it gets wheels, and rolls |
 | 02 | the spreadsheet | a stack of sheets teetering on the grass; the keeper fetches a proper drum and the stack straightens on it |
 | 03 | the fax | posting pages into the sea with a splash; the keeper strings a wire to the lamp and the next page flies there instead |
@@ -84,5 +85,10 @@ that waits for the handle, then seeks and pauses, and screenshot that.
   than a snap. Waves only run whole cycles.
 - **The beam never points down.** It sweeps the sky between two angles rather than turning
   full circle, because a wedge pointing into the island reads as a mistake.
+- **The mug goes where the keeper goes.** `standAt`, `walk` and `restAt` in `acts/kit.ts` place the
+  mug from the left hand of whatever pose the keeper is in, so an act never has to think about
+  it; `sip` is the one beat that does.
+- **Lying and sitting share a hip.** The hammock poses are anchored on the hip, so the tween
+  from lying to sitting pivots there. A rotation about the head reads as a corpse rising.
 - **Off-frame is a real place.** The plane's ends of run and the boat's start are outside
   the establishing shot on purpose, so their parked states never show.

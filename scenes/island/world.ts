@@ -10,14 +10,14 @@
 
 import type { Part, Vec2, Vec3 } from 'dotscene'
 import { at as project, cell } from '../edi/projection.ts'
-import { person } from '../person.ts'
+import { keeper, mug, steam } from './figures/keeper.ts'
 import { ripples } from '../edi/figures/sky.ts'
 import { BEACH, HAMMOCK_SPOT, POINT, bush, flowers, island, palm, palmSmall, rocks } from './figures/terrain.ts'
-import { DOCK_END, HAMMOCK_LIE, HUT_CHIMNEY, HUT_DOOR, LAMP as LAMP_LOCAL, LIGHTHOUSE_DOOR, beam, dock, hammock, hut, lamp, lighthouse, signpost } from './figures/structures.ts'
+import { DOCK_END, HAMMOCK_LIE, HUT_CHIMNEY, HUT_DOOR, LAMP as LAMP_LOCAL, LIGHTHOUSE_DOOR, beam, dock, hammock, hammockRim, hut, lamp, lighthouse, signpost } from './figures/structures.ts'
 import { CHATBOT_MOUTH, CHATBOT_PORT, CRON_BADGE, FAX_SLOT, MAINFRAME_PORT, chatbot, cron, drum, fax, mainframe, spreadsheet } from './figures/misfits.ts'
 import { BOAT_LANTERN, PLANE_TAIL, banner, boat, crab, moon, plane, stars, sun, turtle, wake } from './figures/traffic.ts'
 import { nightfall } from './figures/fixtures.ts'
-import { depthOf, KEEPER_SCALE, feetAt, SKY, type Cell } from './acts/kit.ts'
+import { depthOf, KEEPER_SCALE, MUG_SCALE, feetAt, lyingAt, SKY, type Cell } from './acts/kit.ts'
 
 const v3 = (c: Cell, z = 0): Vec3 => [c[0], c[1], z]
 const add = (a: Cell, b: Cell): Cell => [a[0] + b[0], a[1] + b[1]]
@@ -107,7 +107,8 @@ export const CHATBOT = {
 
 /** Where the keeper stands to work on each of them. */
 export const WORK = {
-  mainframe: add(DOCK_AT, [-1.1, -0.2]),
+  /** Beside the mainframe on its near side, so the keeper stands in front of it. */
+  mainframe: add(DOCK_AT, [1.7, -0.9]),
   spreadsheet: isl(6.3, 2.4),
   fax: isl(8.6, 6.8),
   cron: isl(5, 8.6),
@@ -168,6 +169,8 @@ export const stageParts: readonly Part[] = [
   placed('lighthouse', lighthouse, LIGHTHOUSE_AT),
   placed('hut', hut, HUT_AT),
   placed('hammock', hammock, HAMMOCK_AT, { depth: depthOf(HAMMOCK_AT) + 0.2 }),
+  // In front of the keeper (+0.42) and the mug (+0.47), so a body lies in it, not on it.
+  placed('hammockRim', hammockRim, HAMMOCK_AT, { depth: depthOf(HAMMOCK_AT) + 0.6 }),
   placed('dock', dock, DOCK_AT, { pose: 'south', depth: depthOf(DOCK_AT) - 0.3 }),
   placed('signpost', signpost, isl(11.5, 6.6)),
   ...PALMS.map(([c, small], i) => placed(`palm${i}`, small ? palmSmall : palm, c, { pose: 'rest' })),
@@ -182,7 +185,9 @@ export const stageParts: readonly Part[] = [
 
 export const cast = (): Part[] => [
   { id: 'nightfall', figure: nightfall, depth: SKY + 500, opacity: 0 },
-  { id: 'keeper', figure: person, at: feetAt(HAMMOCK.cell, HAMMOCK.z), scale: KEEPER_SCALE, pose: 'idle', rotate: -78, depth: depthOf(HAMMOCK.cell) + 0.3 },
+  { id: 'keeper', figure: keeper, ...lyingAt(HAMMOCK.cell, HAMMOCK.z).keeper, scale: KEEPER_SCALE },
+  { id: 'mug', figure: mug, ...lyingAt(HAMMOCK.cell, HAMMOCK.z).mug, scale: MUG_SCALE, opacity: 0 },
+  { id: 'steam', figure: steam, at: lyingAt(HAMMOCK.cell, HAMMOCK.z).mug!.at, scale: MUG_SCALE, pose: 'a', opacity: 0, depth: (lyingAt(HAMMOCK.cell, HAMMOCK.z).mug!.depth ?? 0) + 0.01 },
   placed('mainframe', mainframe, MAINFRAME_HOME, { pose: 'square', depth: depthOf(MAINFRAME_HOME) + 0.5, z: 0.35 }),
   placed('spreadsheet', spreadsheet, SPREADSHEET.home, { pose: 'rest', depth: depthOf(SPREADSHEET.home) + 0.6 }),
   placed('drum', drum, SPREADSHEET.drumFrom, { opacity: 0, depth: depthOf(SPREADSHEET.drumFrom) + 0.5 }),

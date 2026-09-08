@@ -11,7 +11,7 @@ import { badgeBox, badgeCheck, badgeCoin, badgeDoc, badgePin } from '../../edi/f
 import { bubble } from '../figures/misfits.ts'
 import { query } from '../figures/fixtures.ts'
 import { defineAct, holdAt, stateBefore } from './act.ts'
-import { SKY, slackWire, speak, standAt, stringWire, walk, walkTime, wire } from './kit.ts'
+import { sip, SKY, slackWire, speak, standAt, stringWire, walk, walkTime, wire } from './kit.ts'
 import { CHATBOT, HUT, MAINFRAME, WORK } from '../world.ts'
 import { FIXED, NIGHT, START } from '../timing.ts'
 
@@ -46,9 +46,9 @@ const say = (glyph: string, at: number, mouthPose = 'talk') => {
 for (let t = 900; t < FIXED.chatbot - 2600; t += 2700) say('glyphQuery', t)
 
 // The keeper arrives, and runs a cable to the mainframe's socket where it now stands.
-beats.push({ at: START.chatbot + 1600, parts: standAt(K, WORK.chatbot, 'idle') })
-beats.push({ at: START.chatbot + 2200, parts: standAt(K, WORK.chatbot, 'offerR') })
-beats.push(...stringWire('botWire', CHATBOT.port, MAINFRAME.portRolled, START.chatbot + 2400, FIXED.chatbot - 700 - (START.chatbot + 2400)))
+beats.push(...sip(WORK.chatbot, START.chatbot + 1700))
+beats.push({ at: START.chatbot + 2800, parts: standAt(K, WORK.chatbot, 'offerR') })
+beats.push(...stringWire('botWire', CHATBOT.port, MAINFRAME.portRolled, START.chatbot + 3000, FIXED.chatbot - 700 - (START.chatbot + 3000)))
 beats.push({ at: FIXED.chatbot - 300, parts: standAt(K, WORK.chatbot, 'idle') })
 beats.push({ at: FIXED.chatbot, parts: { [B]: { pose: 'happy' } }, easing: 'easeOut' })
 

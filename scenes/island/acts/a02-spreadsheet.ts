@@ -8,7 +8,7 @@
 import { type Beat, type PartKeyframe } from 'dotscene'
 import { at as project } from '../../edi/projection.ts'
 import { defineAct } from './act.ts'
-import { depthOf, standAt, walk, walkTime, vec } from './kit.ts'
+import { depthOf, sip, standAt, walk, walkTime, vec } from './kit.ts'
 import { SPREADSHEET, WORK } from '../world.ts'
 import { FIXED, START } from '../timing.ts'
 
@@ -36,14 +36,14 @@ for (let t = 0, i = 0; t < FIXED.spreadsheet - 1200; t += 700, i++) {
 }
 
 // The keeper arrives, considers it, and goes for the drum.
-beats.push({ at: START.spreadsheet + 2300, parts: standAt(K, WORK.spreadsheet, 'idle') })
-beats.push({ at: START.spreadsheet + 2700, parts: standAt(K, WORK.spreadsheet, 'lean') })
-beats.push({ at: START.spreadsheet + 3300, parts: standAt(K, WORK.spreadsheet, 'offerR') })
+beats.push(...sip(WORK.spreadsheet, START.spreadsheet + 2300))
+beats.push({ at: START.spreadsheet + 3400, parts: standAt(K, WORK.spreadsheet, 'lean') })
+beats.push({ at: START.spreadsheet + 3900, parts: standAt(K, WORK.spreadsheet, 'offerR') })
 
 // The drum slides over from beside the hut and under the stack.
-beats.push({ at: START.spreadsheet + 2800, parts: { [D]: drum(SPREADSHEET.drumFrom, 0) } })
-beats.push({ at: START.spreadsheet + 3200, parts: { [D]: drum(SPREADSHEET.drumFrom, 1) } })
-beats.push({ at: FIXED.spreadsheet - 900, parts: { [D]: drum(SPREADSHEET.home, 1) }, easing: 'easeInOut' })
+beats.push({ at: START.spreadsheet + 3900, parts: { [D]: drum(SPREADSHEET.drumFrom, 0) } })
+beats.push({ at: START.spreadsheet + 4200, parts: { [D]: drum(SPREADSHEET.drumFrom, 1) } })
+beats.push({ at: FIXED.spreadsheet - 500, parts: { [D]: drum(SPREADSHEET.home, 1) }, easing: 'easeInOut' })
 
 // The stack straightens and rises onto it.
 beats.push({ at: FIXED.spreadsheet - 1200, parts: { [S]: stack(0, 'rest') } })

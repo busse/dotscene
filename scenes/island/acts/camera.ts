@@ -30,8 +30,9 @@ const shot = (at: number, subject: Vec2, width: number, dy = 0): Shot => ({ at, 
 
 const shots: Shot[] = [
   { at: 0, to: WIDE.at, width: WIDE.width },
-  // Dawn: push in on the hammock as the keeper wakes.
-  shot(3600, hammock, 210, -6),
+  // Dawn: push in on the hammock as the keeper sits up, and stay for the coffee.
+  shot(2400, hammock, 200, -4),
+  shot(5200, hammock, 215, -6),
   // Down to the dock with the keeper.
   shot(START.mainframe + 800, dockSide, 170, -8),
   shot(FIXED.mainframe + 2600, dockSide, 200, -12),

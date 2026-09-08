@@ -259,7 +259,8 @@ export const DOCK_END: Vec2 = [DOCK_LENGTH, 0]
 // ---------------------------------------------------------------------------------------------
 // The hammock
 
-const SAG = [1.4, 1.14, 1.0, 1.0, 1.14, 1.4]
+/** Rope ends high on the trunks, the canvas slung low between them. */
+const SAG = [2.2, 1.16, 1.0, 1.0, 1.16, 2.2]
 const HX = [-1.5, -0.9, -0.3, 0.3, 0.9, 1.5]
 
 export const hammock = figureOf(
@@ -291,8 +292,36 @@ export const hammock = figureOf(
   })(),
   'A hammock',
 )
-/** Where a lying figure's centre goes. */
-export const HAMMOCK_LIE: Vec3 = [0, 0.15, 1.05]
+/**
+ * The hammock's near rim: a band of canvas along its front edge, placed as its own part in
+ * front of whoever lies in it, so they are in the hammock rather than on a sheet.
+ */
+export const hammockRim = figureOf(
+  'hammockRim',
+  (() => {
+    const points: Record<string, Vec2> = {}
+    ;[1, 2, 3, 4].forEach((i) => {
+      points[`c${i}`] = at([HX[i]!, 0.42, SAG[i]! - 0.28])
+      points[`d${i}`] = at([HX[i]!, 0.5, SAG[i]! - 0.46])
+    })
+    return tag(
+      {
+        points,
+        edges: [
+          ['d1', 'd2'],
+          ['d2', 'd3'],
+          ['d3', 'd4'],
+        ],
+        faces: [{ points: ['c1', 'c2', 'c3', 'c4', 'd4', 'd3', 'd2', 'd1'], kind: 'canvas' }],
+      },
+      'soft',
+    )
+  })(),
+  'The near edge of a hammock',
+)
+
+/** Where a lying figure's hip goes. */
+export const HAMMOCK_LIE: Vec3 = [0, 0.12, 1.02]
 
 // ---------------------------------------------------------------------------------------------
 // The signboard nobody reads

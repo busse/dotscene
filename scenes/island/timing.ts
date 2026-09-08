@@ -27,8 +27,8 @@ export const FIXED = {
   mainframe: 11000,
   spreadsheet: 19300,
   fax: 25000,
-  cron: 31800,
-  chatbot: 39000,
+  cron: 32600,
+  chatbot: 39600,
 } as const
 
 /** The nightfall overlay: when it starts to darken, when it is darkest, when dawn lifts it. */
