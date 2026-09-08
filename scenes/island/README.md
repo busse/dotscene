@@ -83,10 +83,12 @@ that waits for the handle, then seeks and pauses, and screenshot that.
   that shot, so the mainframe fades out, jumps and fades in rather than cutting. The keeper
   is not reset at all: the dusk act walks them to the hammock, and morning finds them there.
   `seam` in `hero.ts` must stay empty.
-- **Walks are straight lines, so check them against the hut.** A station on the far side of
-  the hut from the last one sends the keeper through its walls. Place stations so every leg
-  of the day clears the hut, the tower and the stack; the far-shore cron job is reached from
-  the fax across the middle of the island, not past the hut.
+- **Walks are straight lines, so check them against the hut and the hammock.** A station on
+  the far side of the hut from the last one sends the keeper through its walls, and the door
+  opens toward the hammock, so a walk from the door to the stump would cross the canvas and
+  vanish behind its rim. Place stations so every leg of the day clears the hut, the tower,
+  the stack and the hammock; where a straight line cannot, walk two legs by way of a point
+  (`HUT.corner`, `HAMMOCK.around`), as the evening does.
 - **Ambient loops end on their first pose** at the lap's end, so the wrap is a hold rather
   than a snap. Waves only run whole cycles.
 - **The beam never points down.** It sweeps the sky between two angles rather than turning

@@ -18,5 +18,8 @@
  *   moves only the misfits; the sun and moon pass behind the island.
  * - v5 — v4 moved the wrong thing. The jetty and the mainframe are back on the front shore as
  *   in v3; it is the cron job that paces the far shore now, between the hut and the tower.
+ * - v6 — bedtime without the glitch: the hammock hangs a clear cell in front of the hut rather
+ *   than against its door, and the evening walks go round the hut's corner and round the palm
+ *   at the hammock's end instead of through the walls and the canvas.
  */
-export const ISLAND_VERSION = 5
+export const ISLAND_VERSION = 6

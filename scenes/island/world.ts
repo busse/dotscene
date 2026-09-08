@@ -61,6 +61,8 @@ export const HAMMOCK = {
   z: HAMMOCK_LIE[2],
   /** Beside it, on the grass. */
   stand: add(HAMMOCK_AT, [0.2, 1.3]),
+  /** Past the palm at its +x end: the way round from the hut's door to its near side. */
+  around: add(HAMMOCK_AT, [2.8, 0.4]),
 }
 
 /** The stump at the hammock's head end, on the near side, where the mug lives overnight. */
@@ -79,6 +81,8 @@ export const MUG_ON_STUMP = {
 
 export const HUT = {
   door: add(HUT_AT, HUT_DOOR),
+  /** Off the hut's near corner: the way to the door from the tower without clipping a wall. */
+  corner: add(HUT_AT, [1.9, 2.3]),
   lighthouseDoor: add(LIGHTHOUSE_AT, LIGHTHOUSE_DOOR),
   window: project([HUT_AT[0] + 1.02, HUT_AT[1], 0.9]),
   chimney: project([HUT_AT[0] + HUT_CHIMNEY[0], HUT_AT[1] + HUT_CHIMNEY[1], HUT_CHIMNEY[2]]),
@@ -179,8 +183,9 @@ const placed = (id: string, figure: Part['figure'], c: Cell, extra: Partial<Part
 }
 
 const PALMS: readonly [Cell, boolean][] = [
-  [isl(0.5, -4.5), false],
-  [isl(3.5, -1.5), false],
+  // The two the hammock hangs between: a cell and a half either side of it along x.
+  [isl(-0.1, -3.3), false],
+  [isl(2.9, -0.3), false],
   [isl(-3, -6.5), false],
   [isl(9.3, 3.6), false],
   [isl(12.6, -6.2), true],

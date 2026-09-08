@@ -9,7 +9,7 @@ import { pulseRing } from '../../edi/figures/tokens.ts'
 import { smokePuff } from '../../edi/figures/places.ts'
 import { glow } from '../figures/fixtures.ts'
 import { defineAct } from './act.ts'
-import { lyingAt, restAt, SKY, standAt, walk, walkTime, vec } from './kit.ts'
+import { lyingAt, restAt, SKY, standAt, walk, walkTime, vec, type Cell } from './kit.ts'
 import { HAMMOCK, HUT, LAMP, MUG_ON_STUMP, STUMP } from '../world.ts'
 import { NIGHT, START } from '../timing.ts'
 
@@ -49,10 +49,18 @@ beats.push({ at: NIGHT.lift + 1, parts: { lamp: { opacity: 0 } } })
 // Home to the hut for supper, mug and all; the window lights. Then out again — over to the
 // stump beside the hammock, the mug set down on it, and into the hammock for the night, so the
 // keeper the morning finds there is the one that went to bed.
+/** Two straight legs by way of `mid`, with a beat between them; returns when the walk ends. */
+const via = (from: Cell, mid: Cell, to: Cell, at: number, carry: boolean): number => {
+  const first = walkTime(from, mid)
+  const second = walkTime(mid, to)
+  beats.push(...walk(K, from, mid, at, first, 'idle', carry))
+  beats.push(...walk(K, mid, to, at + first + 60, second, 'idle', carry))
+  return at + first + 60 + second
+}
+
 const HOME = LIT + 1800
-const toHut = walkTime(HUT.lighthouseDoor, HUT.door)
-beats.push(...walk(K, HUT.lighthouseDoor, HUT.door, HOME, toHut))
-const IN = HOME + toHut
+// Round the hut's near corner rather than through it.
+const IN = via(HUT.lighthouseDoor, HUT.corner, HUT.door, HOME, true)
 beats.push({ at: IN + 300, parts: { [K]: { opacity: 1 }, mug: { opacity: 1 } } })
 beats.push({ at: IN + 800, parts: { [K]: { opacity: 0 }, mug: { opacity: 0 } }, easing: 'easeIn' })
 beats.push({ at: IN + 600, parts: { hutGlow: { opacity: 0 } } })
@@ -64,9 +72,8 @@ const OUT = IN + 1000
 const atDoor = standAt(K, HUT.door, 'idle')
 beats.push({ at: OUT, parts: { [K]: { ...atDoor[K], opacity: 0 }, mug: { ...atDoor.mug, opacity: 0 } } })
 beats.push({ at: OUT + 500, parts: { [K]: { opacity: 1 }, mug: { opacity: 1 } }, easing: 'easeOut' })
-const toStump = walkTime(HUT.door, STUMP.stand)
-beats.push(...walk(K, HUT.door, STUMP.stand, OUT + 600, toStump))
-const AT_STUMP = OUT + 600 + toStump
+// Round the palm at the hammock's end to its near side, rather than through the hammock.
+const AT_STUMP = via(HUT.door, HAMMOCK.around, STUMP.stand, OUT + 600, true)
 beats.push({ at: AT_STUMP + 250, parts: standAt(K, STUMP.stand, 'offerL', true), easing: 'easeInOut' })
 beats.push({ at: AT_STUMP + 550, parts: { mug: { ...MUG_ON_STUMP } }, easing: 'easeOut' })
 beats.push({ at: AT_STUMP + 800, parts: standAt(K, STUMP.stand, 'idle', true, 0, false), easing: 'easeInOut' })

@@ -90,8 +90,8 @@ export const BEACH: readonly UV[] = [
   [4, 8.3],
   [12, 5.2],
 ]
-/** Inland, between two palms. */
-export const HAMMOCK_SPOT: UV = [2, -3]
+/** Inland, between two palms, a clear cell in front of the hut so its door is not blocked. */
+export const HAMMOCK_SPOT: UV = [1.4, -1.8]
 
 // ---------------------------------------------------------------------------------------------
 // Rocks

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="islandStage" data-version="5" viewBox="-210 -155 600 250" role="img">
+<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="islandStage" data-version="6" viewBox="-210 -155 600 250" role="img">
   <title>The island, before the day begins</title>
   <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="islandStage"]{--ds-dot-r:0.62;--ds-line-w:0.34;--ds-face-fill:#dcf2f9}svg[data-dotscene="islandStage"]{.ds-face--roof{fill:#ffffff}.ds-face--east{fill:#f2f1ec}.ds-face--south{fill:#e6e4dd}.ds-face--roof-warm{fill:#f2f1ec}.ds-face--east-warm{fill:#e6e4dd}.ds-face--south-warm{fill:#dbd9d2}.ds-face--roof-blue{fill:#a4dded}.ds-face--east-blue{fill:#6fc2dc}.ds-face--south-blue{fill:#3d9fbf}.ds-face--roof-kraft{fill:#dbd9d2}.ds-face--east-kraft{fill:#b4b2ab}.ds-face--south-kraft{fill:#948c7d}.ds-face--roof-shed{fill:#ffffff}.ds-face--east-shed{fill:#e6e4dd}.ds-face--south-shed{fill:#dbd9d2}.ds-face--sea{fill:#c2e8f3}.ds-face--shallows{fill:#dcf2f9}.ds-face--sand{fill:#f2f1ec}.ds-face--grass{fill:#e3ecd6}.ds-face--patch{fill:#d3e0c1}.ds-face--rock{fill:#dbd9d2}.ds-face--foliage{fill:#d3e0c1}.ds-face--trunk{fill:#dbd9d2}.ds-face--wood{fill:#e6e4dd}.ds-face--canvas{fill:#f2f1ec}.ds-face--lamp{fill:#a4dded}.ds-face--beam{fill:#a4dded}.ds-face--glass{fill:#dcf2f9}.ds-face--screen{fill:#dcf2f9}.ds-face--paper{fill:#ffffff}.ds-face--bubble{fill:#ffffff}.ds-face--metal{fill:#dbd9d2}.ds-face--sail{fill:#ffffff}.ds-face--hull{fill:#e6e4dd}.ds-face--sun{fill:#dcf2f9}.ds-face--moon{fill:#dcf2f9}.ds-face--wing{fill:#f2f1ec}.ds-face--banner{fill:#ffffff}.ds-face--shell{fill:#dbd9d2}.ds-face--flag{fill:#3d9fbf}.ds-face--door{fill:#dbd9d2}.ds-face--night{fill:#16181a}.ds-face--coin{fill:#a4dded}.ds-face--smoke{fill:#f2f1ec}.ds-face--cloud{fill:#ffffff}.ds-face--beam{fill-opacity:.55}.ds-face--shallows{fill-opacity:.7}.ds-face--bubble{fill-opacity:.92}.ds-face--smoke{fill-opacity:.7}.ds-face--cloud{fill-opacity:.85}.ds-line{stroke:#1d2021}.ds-dot{fill:#1d2021}.ds-line--soft{stroke:#656c6f;stroke-width:calc(0.3 * var(--ds-zoom));stroke-opacity:0.8}.ds-dot--soft{fill:#656c6f;r:calc(0.42 * var(--ds-zoom));fill-opacity:0.8}.ds-line--blue{stroke:#0b6580;stroke-width:calc(0.5 * var(--ds-zoom))}.ds-dot--blue{fill:#0b6580;r:calc(0.6 * var(--ds-zoom))}.ds-line--lamp{stroke:#0b6580;stroke-width:calc(0.55 * var(--ds-zoom))}.ds-dot--lamp{fill:#0b6580;r:calc(0.65 * var(--ds-zoom))}.ds-line--sun{stroke:#0b6580;stroke-width:calc(0.5 * var(--ds-zoom));stroke-opacity:0.85}.ds-dot--sun{fill:#0b6580;r:calc(0.55 * var(--ds-zoom));fill-opacity:0.85}.ds-line--star{stroke:#3d9fbf;stroke-width:calc(0.4 * var(--ds-zoom));stroke-opacity:0.9}.ds-dot--star{fill:#3d9fbf;r:calc(0.6 * var(--ds-zoom));fill-opacity:0.9}.ds-line--sea{stroke:#3d9fbf;stroke-width:calc(0.4 * var(--ds-zoom));stroke-opacity:0.7}.ds-dot--sea{fill:#3d9fbf;r:calc(0.45 * var(--ds-zoom));fill-opacity:0.7}.ds-line--water{stroke:#3d9fbf;stroke-width:calc(0.4 * var(--ds-zoom));stroke-opacity:0.7}.ds-dot--water{fill:#3d9fbf;r:calc(0.45 * var(--ds-zoom));fill-opacity:0.7}.ds-line--sand{stroke:#948c7d;stroke-width:calc(0.35 * var(--ds-zoom));stroke-opacity:0.6}.ds-dot--sand{fill:#948c7d;r:calc(0.45 * var(--ds-zoom));fill-opacity:0.6}.ds-line--wood{stroke:#574f41;stroke-width:calc(0.4 * var(--ds-zoom));stroke-opacity:0.85}.ds-dot--wood{fill:#574f41;r:calc(0.5 * var(--ds-zoom));fill-opacity:0.85}.ds-line--metal{stroke:#656c6f;stroke-width:calc(0.4 * var(--ds-zoom))}.ds-dot--metal{fill:#656c6f;r:calc(0.5 * var(--ds-zoom))}.ds-line--foliage{stroke:#7fa06a;stroke-width:calc(0.4 * var(--ds-zoom))}.ds-dot--foliage{fill:#7fa06a;r:calc(0.45 * var(--ds-zoom))}.ds-line--frond{stroke:#7fa06a;stroke-width:calc(0.32 * var(--ds-zoom));stroke-opacity:0.9}.ds-dot--frond{fill:#7fa06a;r:calc(0.22 * var(--ds-zoom));fill-opacity:0.9}.ds-face--mug{fill:#ffffff}.ds-face--beard{fill:#656c6f;fill-opacity:.32}.ds-line--mug{stroke:#1d2021;stroke-width:calc(0.42 * var(--ds-zoom))}.ds-dot--mug{fill:#1d2021;r:calc(0.36 * var(--ds-zoom))}.ds-line--steam{stroke:#656c6f;stroke-width:calc(0.32 * var(--ds-zoom));stroke-opacity:0.75}.ds-dot--steam{fill:#656c6f;r:calc(0.26 * var(--ds-zoom));fill-opacity:0.75}.ds-line--canvas{stroke:#656c6f;stroke-width:calc(0.3 * var(--ds-zoom));stroke-opacity:0.7}.ds-dot--canvas{fill:#656c6f;r:calc(0.4 * var(--ds-zoom));fill-opacity:0.7}.ds-line--token{stroke:#0b6580;stroke-width:calc(0.5 * var(--ds-zoom))}.ds-dot--token{fill:#0b6580;r:calc(0.6 * var(--ds-zoom))}.ds-line--glyph{stroke:#0b6580;stroke-width:calc(0.55 * var(--ds-zoom))}.ds-dot--glyph{fill:#0b6580;r:calc(0.5 * var(--ds-zoom))}.ds-line--coin{stroke:#0b6580;stroke-width:calc(0.5 * var(--ds-zoom))}.ds-dot--coin{fill:#0b6580;r:calc(0.5 * var(--ds-zoom))}.ds-line--pulse{stroke:#0b6580;stroke-width:calc(0.55 * var(--ds-zoom));stroke-opacity:0.9}.ds-dot--pulse{fill:#0b6580;r:calc(0.55 * var(--ds-zoom));fill-opacity:0.9}.ds-line--bird{stroke:#1d2021;stroke-width:calc(0.45 * var(--ds-zoom))}.ds-dot--bird{fill:#1d2021;r:calc(0.45 * var(--ds-zoom))}.ds-line--night,.ds-dot--night{display:none}}</style>
   <rect class="ds-bg" x="-210" y="-155" width="600" height="250" fill="#dcf2f9"/>
@@ -516,75 +516,6 @@
     <circle class="ds-dot ds-dot--frond" data-part="palm4" data-p="f6r" cx="288.49" cy="-63.99" r="0.62"/>
     <circle class="ds-dot ds-dot--frond" data-part="palm4" data-p="f6t" cx="296.83" cy="-57.22" r="0.62"/>
     </g>
-    <g data-part="palm0">
-    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f4l f4t f4r" points="184.4,-59.8 185.75,-67.35 180.42,-67.34 179.07,-66.75"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f5l f5t f5r" points="184.4,-59.8 194.43,-64.6 199.37,-64.68 189.34,-66.84"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f3l f3t f3r" points="184.4,-59.8 176.05,-65.66 164.48,-61.56 172.83,-62.67"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f6l f6t f6r" points="184.4,-59.8 195.52,-59.49 207,-55.61 195.88,-62.88"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f2l f2t f2r" points="184.4,-59.8 172.67,-60.8 163.61,-51.73 175.35,-57.69"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f0l f0t f0r" points="184.4,-59.8 188.38,-55.92 197.83,-47.09 193.85,-57.93"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f1l f1t f1r" points="184.4,-59.8 178.17,-56.46 178.48,-45.28 184.72,-55.58"/>
-    <line class="ds-line ds-line--trunk" data-part="palm0" data-a="t0" data-b="t1" x1="180" y1="-42" x2="180.79" y2="-47.2"/>
-    <line class="ds-line ds-line--trunk" data-part="palm0" data-a="t1" data-b="t2" x1="180.79" y1="-47.2" x2="181.98" y2="-52.01"/>
-    <line class="ds-line ds-line--trunk" data-part="palm0" data-a="t2" data-b="t3" x1="181.98" y1="-52.01" x2="183.3" y2="-56.35"/>
-    <line class="ds-line ds-line--trunk" data-part="palm0" data-a="t3" data-b="crown" x1="183.3" y1="-56.35" x2="184.4" y2="-59.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f4l" x1="184.4" y1="-59.8" x2="185.75" y2="-67.35"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f4l" data-b="f4t" x1="185.75" y1="-67.35" x2="180.42" y2="-67.34"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f4t" data-b="f4r" x1="180.42" y1="-67.34" x2="179.07" y2="-66.75"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f4r" data-b="crown" x1="179.07" y1="-66.75" x2="184.4" y2="-59.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f5l" x1="184.4" y1="-59.8" x2="194.43" y2="-64.6"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f5l" data-b="f5t" x1="194.43" y1="-64.6" x2="199.37" y2="-64.68"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f5t" data-b="f5r" x1="199.37" y1="-64.68" x2="189.34" y2="-66.84"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f5r" data-b="crown" x1="189.34" y1="-66.84" x2="184.4" y2="-59.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f3l" x1="184.4" y1="-59.8" x2="176.05" y2="-65.66"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f3l" data-b="f3t" x1="176.05" y1="-65.66" x2="164.48" y2="-61.56"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f3t" data-b="f3r" x1="164.48" y1="-61.56" x2="172.83" y2="-62.67"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f3r" data-b="crown" x1="172.83" y1="-62.67" x2="184.4" y2="-59.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f6l" x1="184.4" y1="-59.8" x2="195.52" y2="-59.49"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f6l" data-b="f6t" x1="195.52" y1="-59.49" x2="207" y2="-55.61"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f6t" data-b="f6r" x1="207" y1="-55.61" x2="195.88" y2="-62.88"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f6r" data-b="crown" x1="195.88" y1="-62.88" x2="184.4" y2="-59.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f2l" x1="184.4" y1="-59.8" x2="172.67" y2="-60.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f2l" data-b="f2t" x1="172.67" y1="-60.8" x2="163.61" y2="-51.73"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f2t" data-b="f2r" x1="163.61" y1="-51.73" x2="175.35" y2="-57.69"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f2r" data-b="crown" x1="175.35" y1="-57.69" x2="184.4" y2="-59.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f0l" x1="184.4" y1="-59.8" x2="188.38" y2="-55.92"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f0l" data-b="f0t" x1="188.38" y1="-55.92" x2="197.83" y2="-47.09"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f0t" data-b="f0r" x1="197.83" y1="-47.09" x2="193.85" y2="-57.93"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f0r" data-b="crown" x1="193.85" y1="-57.93" x2="184.4" y2="-59.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f1l" x1="184.4" y1="-59.8" x2="178.17" y2="-56.46"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f1l" data-b="f1t" x1="178.17" y1="-56.46" x2="178.48" y2="-45.28"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f1t" data-b="f1r" x1="178.48" y1="-45.28" x2="184.72" y2="-55.58"/>
-    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f1r" data-b="crown" x1="184.72" y1="-55.58" x2="184.4" y2="-59.8"/>
-    <circle class="ds-dot ds-dot--trunk" data-part="palm0" data-p="t0" cx="180" cy="-42" r="0.62"/>
-    <circle class="ds-dot ds-dot--trunk" data-part="palm0" data-p="t1" cx="180.79" cy="-47.2" r="0.62"/>
-    <circle class="ds-dot ds-dot--trunk" data-part="palm0" data-p="t2" cx="181.98" cy="-52.01" r="0.62"/>
-    <circle class="ds-dot ds-dot--trunk" data-part="palm0" data-p="t3" cx="183.3" cy="-56.35" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="crown" cx="184.4" cy="-59.8" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="palm0" data-p="nutA" cx="186.48" cy="-57.96" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="palm0" data-p="nutB" cx="185.84" cy="-56.2" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f0l" cx="188.38" cy="-55.92" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f0r" cx="193.85" cy="-57.93" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f0t" cx="197.83" cy="-47.09" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f1l" cx="178.17" cy="-56.46" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f1r" cx="184.72" cy="-55.58" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f1t" cx="178.48" cy="-45.28" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f2l" cx="172.67" cy="-60.8" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f2r" cx="175.35" cy="-57.69" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f2t" cx="163.61" cy="-51.73" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f3l" cx="176.05" cy="-65.66" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f3r" cx="172.83" cy="-62.67" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f3t" cx="164.48" cy="-61.56" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f4l" cx="185.75" cy="-67.35" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f4r" cx="179.07" cy="-66.75" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f4t" cx="180.42" cy="-67.34" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f5l" cx="194.43" cy="-64.6" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f5r" cx="189.34" cy="-66.84" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f5t" cx="199.37" cy="-64.68" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f6l" cx="195.52" cy="-59.49" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f6r" cx="195.88" cy="-62.88" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f6t" cx="207" cy="-55.61" r="0.62"/>
-    </g>
     <g data-part="hut">
     <polygon class="ds-face ds-face--roof-warm" data-part="hut" data-face="hutTopFar hutTopEast hutTopNear hutTopWest" points="216,-54.4 232,-46.4 216,-38.4 200,-46.4"/>
     <polygon class="ds-face ds-face--east-warm" data-part="hut" data-face="hutEast hutNear hutTopNear hutTopEast" points="232,-40 216,-32 216,-38.4 232,-46.4"/>
@@ -647,6 +578,75 @@
     <circle class="ds-dot ds-dot--soft" data-part="hut" data-p="winB" cx="225.2" cy="-39.2" r="0.62"/>
     <circle class="ds-dot ds-dot--soft" data-part="hut" data-p="winC" cx="225.2" cy="-41.2" r="0.62"/>
     <circle class="ds-dot ds-dot--soft" data-part="hut" data-p="winD" cx="229.2" cy="-43.2" r="0.62"/>
+    </g>
+    <g data-part="palm0">
+    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f4l f4t f4r" points="179.6,-55 180.95,-62.55 175.62,-62.54 174.27,-61.95"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f5l f5t f5r" points="179.6,-55 189.63,-59.8 194.57,-59.88 184.54,-62.04"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f3l f3t f3r" points="179.6,-55 171.25,-60.86 159.68,-56.76 168.03,-57.87"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f6l f6t f6r" points="179.6,-55 190.72,-54.69 202.2,-50.81 191.08,-58.08"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f2l f2t f2r" points="179.6,-55 167.87,-56 158.81,-46.93 170.55,-52.89"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f0l f0t f0r" points="179.6,-55 183.58,-51.12 193.03,-42.29 189.05,-53.13"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm0" data-face="crown f1l f1t f1r" points="179.6,-55 173.37,-51.66 173.68,-40.48 179.92,-50.78"/>
+    <line class="ds-line ds-line--trunk" data-part="palm0" data-a="t0" data-b="t1" x1="175.2" y1="-37.2" x2="175.99" y2="-42.4"/>
+    <line class="ds-line ds-line--trunk" data-part="palm0" data-a="t1" data-b="t2" x1="175.99" y1="-42.4" x2="177.18" y2="-47.21"/>
+    <line class="ds-line ds-line--trunk" data-part="palm0" data-a="t2" data-b="t3" x1="177.18" y1="-47.21" x2="178.5" y2="-51.55"/>
+    <line class="ds-line ds-line--trunk" data-part="palm0" data-a="t3" data-b="crown" x1="178.5" y1="-51.55" x2="179.6" y2="-55"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f4l" x1="179.6" y1="-55" x2="180.95" y2="-62.55"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f4l" data-b="f4t" x1="180.95" y1="-62.55" x2="175.62" y2="-62.54"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f4t" data-b="f4r" x1="175.62" y1="-62.54" x2="174.27" y2="-61.95"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f4r" data-b="crown" x1="174.27" y1="-61.95" x2="179.6" y2="-55"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f5l" x1="179.6" y1="-55" x2="189.63" y2="-59.8"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f5l" data-b="f5t" x1="189.63" y1="-59.8" x2="194.57" y2="-59.88"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f5t" data-b="f5r" x1="194.57" y1="-59.88" x2="184.54" y2="-62.04"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f5r" data-b="crown" x1="184.54" y1="-62.04" x2="179.6" y2="-55"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f3l" x1="179.6" y1="-55" x2="171.25" y2="-60.86"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f3l" data-b="f3t" x1="171.25" y1="-60.86" x2="159.68" y2="-56.76"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f3t" data-b="f3r" x1="159.68" y1="-56.76" x2="168.03" y2="-57.87"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f3r" data-b="crown" x1="168.03" y1="-57.87" x2="179.6" y2="-55"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f6l" x1="179.6" y1="-55" x2="190.72" y2="-54.69"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f6l" data-b="f6t" x1="190.72" y1="-54.69" x2="202.2" y2="-50.81"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f6t" data-b="f6r" x1="202.2" y1="-50.81" x2="191.08" y2="-58.08"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f6r" data-b="crown" x1="191.08" y1="-58.08" x2="179.6" y2="-55"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f2l" x1="179.6" y1="-55" x2="167.87" y2="-56"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f2l" data-b="f2t" x1="167.87" y1="-56" x2="158.81" y2="-46.93"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f2t" data-b="f2r" x1="158.81" y1="-46.93" x2="170.55" y2="-52.89"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f2r" data-b="crown" x1="170.55" y1="-52.89" x2="179.6" y2="-55"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f0l" x1="179.6" y1="-55" x2="183.58" y2="-51.12"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f0l" data-b="f0t" x1="183.58" y1="-51.12" x2="193.03" y2="-42.29"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f0t" data-b="f0r" x1="193.03" y1="-42.29" x2="189.05" y2="-53.13"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f0r" data-b="crown" x1="189.05" y1="-53.13" x2="179.6" y2="-55"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="crown" data-b="f1l" x1="179.6" y1="-55" x2="173.37" y2="-51.66"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f1l" data-b="f1t" x1="173.37" y1="-51.66" x2="173.68" y2="-40.48"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f1t" data-b="f1r" x1="173.68" y1="-40.48" x2="179.92" y2="-50.78"/>
+    <line class="ds-line ds-line--frond" data-part="palm0" data-a="f1r" data-b="crown" x1="179.92" y1="-50.78" x2="179.6" y2="-55"/>
+    <circle class="ds-dot ds-dot--trunk" data-part="palm0" data-p="t0" cx="175.2" cy="-37.2" r="0.62"/>
+    <circle class="ds-dot ds-dot--trunk" data-part="palm0" data-p="t1" cx="175.99" cy="-42.4" r="0.62"/>
+    <circle class="ds-dot ds-dot--trunk" data-part="palm0" data-p="t2" cx="177.18" cy="-47.21" r="0.62"/>
+    <circle class="ds-dot ds-dot--trunk" data-part="palm0" data-p="t3" cx="178.5" cy="-51.55" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="crown" cx="179.6" cy="-55" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="palm0" data-p="nutA" cx="181.68" cy="-53.16" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="palm0" data-p="nutB" cx="181.04" cy="-51.4" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f0l" cx="183.58" cy="-51.12" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f0r" cx="189.05" cy="-53.13" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f0t" cx="193.03" cy="-42.29" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f1l" cx="173.37" cy="-51.66" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f1r" cx="179.92" cy="-50.78" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f1t" cx="173.68" cy="-40.48" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f2l" cx="167.87" cy="-56" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f2r" cx="170.55" cy="-52.89" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f2t" cx="158.81" cy="-46.93" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f3l" cx="171.25" cy="-60.86" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f3r" cx="168.03" cy="-57.87" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f3t" cx="159.68" cy="-56.76" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f4l" cx="180.95" cy="-62.55" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f4r" cx="174.27" cy="-61.95" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f4t" cx="175.62" cy="-62.54" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f5l" cx="189.63" cy="-59.8" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f5r" cx="184.54" cy="-62.04" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f5t" cx="194.57" cy="-59.88" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f6l" cx="190.72" cy="-54.69" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f6r" cx="191.08" cy="-58.08" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm0" data-p="f6t" cx="202.2" cy="-50.81" r="0.62"/>
     </g>
     <g data-part="palm6">
     <polygon class="ds-face ds-face--foliage" data-part="palm6" data-face="crown f4l f4t f4r" points="108.4,-53.8 109.75,-61.35 104.42,-61.34 103.07,-60.75"/>
@@ -716,29 +716,6 @@
     <circle class="ds-dot ds-dot--frond" data-part="palm6" data-p="f6l" cx="119.52" cy="-53.49" r="0.62"/>
     <circle class="ds-dot ds-dot--frond" data-part="palm6" data-p="f6r" cx="119.88" cy="-56.88" r="0.62"/>
     <circle class="ds-dot ds-dot--frond" data-part="palm6" data-p="f6t" cx="131" cy="-49.61" r="0.62"/>
-    </g>
-    <g data-part="hammock">
-    <polygon class="ds-face ds-face--canvas" data-part="hammock" data-face="h1 h2 h3 h4 c4 c3 c2 c1" points="184.8,-44.24 189.6,-41.2 194.4,-38.8 199.2,-37.04 195.84,-34.24 191.04,-36 186.24,-38.4 181.44,-41.44"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h0" data-b="h1" x1="180" y1="-50.8" x2="184.8" y2="-44.24"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h1" data-b="h2" x1="184.8" y1="-44.24" x2="189.6" y2="-41.2"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h2" data-b="h3" x1="189.6" y1="-41.2" x2="194.4" y2="-38.8"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h3" data-b="h4" x1="194.4" y1="-38.8" x2="199.2" y2="-37.04"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h4" data-b="h5" x1="199.2" y1="-37.04" x2="204" y2="-38.8"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h1" data-b="c1" x1="184.8" y1="-44.24" x2="181.44" y2="-41.44"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="c1" data-b="c2" x1="181.44" y1="-41.44" x2="186.24" y2="-38.4"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="c2" data-b="c3" x1="186.24" y1="-38.4" x2="191.04" y2="-36"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="c3" data-b="c4" x1="191.04" y1="-36" x2="195.84" y2="-34.24"/>
-    <line class="ds-line ds-line--soft" data-part="hammock" data-a="c4" data-b="h4" x1="195.84" y1="-34.24" x2="199.2" y2="-37.04"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h0" cx="180" cy="-50.8" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h1" cx="184.8" cy="-44.24" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h2" cx="189.6" cy="-41.2" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h3" cx="194.4" cy="-38.8" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h4" cx="199.2" cy="-37.04" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h5" cx="204" cy="-38.8" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="c1" cx="181.44" cy="-41.44" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="c2" cx="186.24" cy="-38.4" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="c3" cx="191.04" cy="-36" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="c4" cx="195.84" cy="-34.24" r="0.62"/>
     </g>
     <g data-part="rocks">
     <polygon class="ds-face ds-face--rock" data-part="rocks" data-face="rockA0 rockA1 rockA2 rockA3 rockA4" points="287.35,-34.21 279.31,-36.92 279.1,-41.65 288.27,-41.24 294.43,-37.48"/>
@@ -821,104 +798,6 @@
     <circle class="ds-dot" data-part="rocks" data-p="rockD3" cx="284.82" cy="-32.18" r="0.62"/>
     <circle class="ds-dot" data-part="rocks" data-p="rockD4" cx="288.02" cy="-29.01" r="0.62"/>
     <circle class="ds-dot" data-part="rocks" data-p="rockDTop" cx="282.8" cy="-30.6" r="0.62"/>
-    </g>
-    <g data-part="keeper">
-    <line class="ds-line" data-part="keeper" data-a="head" data-b="neck" x1="185.5" y1="-42.37" x2="187.29" y2="-41.48"/>
-    <line class="ds-line" data-part="keeper" data-a="neck" data-b="chest" x1="187.29" y1="-41.48" x2="188.9" y2="-40.67"/>
-    <line class="ds-line" data-part="keeper" data-a="chest" data-b="hip" x1="188.9" y1="-40.67" x2="191.04" y2="-39.6"/>
-    <line class="ds-line" data-part="keeper" data-a="neck" data-b="shoulderL" x1="187.29" y1="-41.48" x2="188.33" y2="-41.64"/>
-    <line class="ds-line" data-part="keeper" data-a="neck" data-b="shoulderR" x1="187.29" y1="-41.48" x2="186.95" y2="-40.95"/>
-    <line class="ds-line" data-part="keeper" data-a="shoulderL" data-b="elbowL" x1="188.33" y1="-41.64" x2="190.53" y2="-41.13"/>
-    <line class="ds-line" data-part="keeper" data-a="elbowL" data-b="handL" x1="190.53" y1="-41.13" x2="192.44" y2="-40.48"/>
-    <line class="ds-line" data-part="keeper" data-a="shoulderR" data-b="elbowR" x1="186.95" y1="-40.95" x2="187.97" y2="-39.85"/>
-    <line class="ds-line" data-part="keeper" data-a="elbowR" data-b="handR" x1="187.97" y1="-39.85" x2="189.29" y2="-38.9"/>
-    <line class="ds-line" data-part="keeper" data-a="hip" data-b="hipL" x1="191.04" y1="-39.6" x2="191.89" y2="-39.67"/>
-    <line class="ds-line" data-part="keeper" data-a="hip" data-b="hipR" x1="191.04" y1="-39.6" x2="190.91" y2="-39.17"/>
-    <line class="ds-line" data-part="keeper" data-a="hipL" data-b="kneeL" x1="191.89" y1="-39.67" x2="194.59" y2="-38.51"/>
-    <line class="ds-line" data-part="keeper" data-a="kneeL" data-b="footL" x1="194.59" y1="-38.51" x2="197.2" y2="-37.31"/>
-    <line class="ds-line" data-part="keeper" data-a="hipR" data-b="kneeR" x1="190.91" y1="-39.17" x2="193.22" y2="-37.82"/>
-    <line class="ds-line" data-part="keeper" data-a="kneeR" data-b="footR" x1="193.22" y1="-37.82" x2="195.62" y2="-36.52"/>
-    <circle class="ds-dot" data-part="keeper" data-p="head" cx="185.5" cy="-42.37" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="neck" cx="187.29" cy="-41.48" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="chest" cx="188.9" cy="-40.67" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="hip" cx="191.04" cy="-39.6" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="shoulderL" cx="188.33" cy="-41.64" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="elbowL" cx="190.53" cy="-41.13" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="handL" cx="192.44" cy="-40.48" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="hipL" cx="191.89" cy="-39.67" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="kneeL" cx="194.59" cy="-38.51" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="footL" cx="197.2" cy="-37.31" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="shoulderR" cx="186.95" cy="-40.95" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="elbowR" cx="187.97" cy="-39.85" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="handR" cx="189.29" cy="-38.9" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="hipR" cx="190.91" cy="-39.17" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="kneeR" cx="193.22" cy="-37.82" r="0.62"/>
-    <circle class="ds-dot" data-part="keeper" data-p="footR" cx="195.62" cy="-36.52" r="0.62"/>
-    </g>
-    <g data-part="hammockRim">
-    <polygon class="ds-face ds-face--canvas" data-part="hammockRim" data-face="c1 c2 c3 c4 d4 d3 d2 d1" points="181.44,-41.44 186.24,-38.4 191.04,-36 195.84,-34.24 195.2,-33.2 190.4,-34.96 185.6,-37.36 180.8,-40.4"/>
-    <line class="ds-line ds-line--soft" data-part="hammockRim" data-a="d1" data-b="d2" x1="180.8" y1="-40.4" x2="185.6" y2="-37.36"/>
-    <line class="ds-line ds-line--soft" data-part="hammockRim" data-a="d2" data-b="d3" x1="185.6" y1="-37.36" x2="190.4" y2="-34.96"/>
-    <line class="ds-line ds-line--soft" data-part="hammockRim" data-a="d3" data-b="d4" x1="190.4" y1="-34.96" x2="195.2" y2="-33.2"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="c1" cx="181.44" cy="-41.44" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="d1" cx="180.8" cy="-40.4" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="c2" cx="186.24" cy="-38.4" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="d2" cx="185.6" cy="-37.36" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="c3" cx="191.04" cy="-36" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="d3" cx="190.4" cy="-34.96" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="c4" cx="195.84" cy="-34.24" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="d4" cx="195.2" cy="-33.2" r="0.62"/>
-    </g>
-    <g data-part="stump">
-    <polygon class="ds-face ds-face--roof-kraft" data-part="stump" data-face="stumpTopFar stumpTopEast stumpTopNear stumpTopWest" points="184.4,-38.8 187.6,-37.2 184.4,-35.6 181.2,-37.2"/>
-    <polygon class="ds-face ds-face--east-kraft" data-part="stump" data-face="stumpEast stumpNear stumpTopNear stumpTopEast" points="187.6,-35 184.4,-33.4 184.4,-35.6 187.6,-37.2"/>
-    <polygon class="ds-face ds-face--south-kraft" data-part="stump" data-face="stumpNear stumpWest stumpTopWest stumpTopNear" points="184.4,-33.4 181.2,-35 181.2,-37.2 184.4,-35.6"/>
-    <line class="ds-line" data-part="stump" data-a="stumpEast" data-b="stumpNear" x1="187.6" y1="-35" x2="184.4" y2="-33.4"/>
-    <line class="ds-line" data-part="stump" data-a="stumpNear" data-b="stumpWest" x1="184.4" y1="-33.4" x2="181.2" y2="-35"/>
-    <line class="ds-line" data-part="stump" data-a="stumpEast" data-b="stumpTopEast" x1="187.6" y1="-35" x2="187.6" y2="-37.2"/>
-    <line class="ds-line" data-part="stump" data-a="stumpNear" data-b="stumpTopNear" x1="184.4" y1="-33.4" x2="184.4" y2="-35.6"/>
-    <line class="ds-line" data-part="stump" data-a="stumpWest" data-b="stumpTopWest" x1="181.2" y1="-35" x2="181.2" y2="-37.2"/>
-    <line class="ds-line" data-part="stump" data-a="stumpTopFar" data-b="stumpTopEast" x1="184.4" y1="-38.8" x2="187.6" y2="-37.2"/>
-    <line class="ds-line" data-part="stump" data-a="stumpTopEast" data-b="stumpTopNear" x1="187.6" y1="-37.2" x2="184.4" y2="-35.6"/>
-    <line class="ds-line" data-part="stump" data-a="stumpTopNear" data-b="stumpTopWest" x1="184.4" y1="-35.6" x2="181.2" y2="-37.2"/>
-    <line class="ds-line" data-part="stump" data-a="stumpTopWest" data-b="stumpTopFar" x1="181.2" y1="-37.2" x2="184.4" y2="-38.8"/>
-    <circle class="ds-dot" data-part="stump" data-p="stumpNear" cx="184.4" cy="-33.4" r="0.62"/>
-    <circle class="ds-dot" data-part="stump" data-p="stumpEast" cx="187.6" cy="-35" r="0.62"/>
-    <circle class="ds-dot" data-part="stump" data-p="stumpWest" cx="181.2" cy="-35" r="0.62"/>
-    <circle class="ds-dot" data-part="stump" data-p="stumpTopFar" cx="184.4" cy="-38.8" r="0.62"/>
-    <circle class="ds-dot" data-part="stump" data-p="stumpTopEast" cx="187.6" cy="-37.2" r="0.62"/>
-    <circle class="ds-dot" data-part="stump" data-p="stumpTopNear" cx="184.4" cy="-35.6" r="0.62"/>
-    <circle class="ds-dot" data-part="stump" data-p="stumpTopWest" cx="181.2" cy="-37.2" r="0.62"/>
-    </g>
-    <g data-part="mug">
-    <polygon class="ds-face ds-face--mug" data-part="mug" data-face="tl tr br bl" points="183.25,-39.73 185.55,-39.73 185.32,-37.2 183.48,-37.2"/>
-    <line class="ds-line ds-line--mug" data-part="mug" data-a="tl" data-b="tr" x1="183.25" y1="-39.73" x2="185.55" y2="-39.73"/>
-    <line class="ds-line ds-line--mug" data-part="mug" data-a="tr" data-b="br" x1="185.55" y1="-39.73" x2="185.32" y2="-37.2"/>
-    <line class="ds-line ds-line--mug" data-part="mug" data-a="br" data-b="bl" x1="185.32" y1="-37.2" x2="183.48" y2="-37.2"/>
-    <line class="ds-line ds-line--mug" data-part="mug" data-a="bl" data-b="tl" x1="183.48" y1="-37.2" x2="183.25" y2="-39.73"/>
-    <line class="ds-line ds-line--mug" data-part="mug" data-a="hA" data-b="hB" x1="185.55" y1="-39.04" x2="186.59" y2="-38.81"/>
-    <line class="ds-line ds-line--mug" data-part="mug" data-a="hB" data-b="hC" x1="186.59" y1="-38.81" x2="186.59" y2="-37.66"/>
-    <line class="ds-line ds-line--mug" data-part="mug" data-a="hC" data-b="hD" x1="186.59" y1="-37.66" x2="185.32" y2="-37.43"/>
-    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="tl" cx="183.25" cy="-39.73" r="0.62"/>
-    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="tr" cx="185.55" cy="-39.73" r="0.62"/>
-    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="br" cx="185.32" cy="-37.2" r="0.62"/>
-    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="bl" cx="183.48" cy="-37.2" r="0.62"/>
-    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="hA" cx="185.55" cy="-39.04" r="0.62"/>
-    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="hB" cx="186.59" cy="-38.81" r="0.62"/>
-    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="hC" cx="186.59" cy="-37.66" r="0.62"/>
-    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="hD" cx="185.32" cy="-37.43" r="0.62"/>
-    </g>
-    <g data-part="steam" opacity="0">
-    <line class="ds-line ds-line--steam" data-part="steam" data-a="s0" data-b="s1" x1="183.94" y1="-40.19" x2="183.6" y2="-41.34"/>
-    <line class="ds-line ds-line--steam" data-part="steam" data-a="s1" data-b="s2" x1="183.6" y1="-41.34" x2="184.06" y2="-42.49"/>
-    <line class="ds-line ds-line--steam" data-part="steam" data-a="t0" data-b="t1" x1="184.86" y1="-40.19" x2="185.21" y2="-41.34"/>
-    <line class="ds-line ds-line--steam" data-part="steam" data-a="t1" data-b="t2" x1="185.21" y1="-41.34" x2="184.75" y2="-42.49"/>
-    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="s0" cx="183.94" cy="-40.19" r="0.62"/>
-    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="s1" cx="183.6" cy="-41.34" r="0.62"/>
-    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="s2" cx="184.06" cy="-42.49" r="0.62"/>
-    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="t0" cx="184.86" cy="-40.19" r="0.62"/>
-    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="t1" cx="185.21" cy="-41.34" r="0.62"/>
-    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="t2" cx="184.75" cy="-42.49" r="0.62"/>
     </g>
     <g data-part="lighthouse">
     <polygon class="ds-face ds-face--roof" data-part="lighthouse" data-face="towerTopFar towerTopEast towerTopNear towerTopWest" points="292,-77.6 303.2,-72 292,-66.4 280.8,-72"/>
@@ -1005,74 +884,28 @@
     <circle class="ds-dot ds-dot--soft" data-part="lighthouse" data-p="lhDoorTR" cx="286" cy="-30.8" r="0.62"/>
     <circle class="ds-dot ds-dot--soft" data-part="lighthouse" data-p="lhDoorTL" cx="282" cy="-32.8" r="0.62"/>
     </g>
-    <g data-part="palm1">
-    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f4l f4t f4r" points="208.4,-47.8 209.75,-55.35 204.42,-55.34 203.07,-54.75"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f5l f5t f5r" points="208.4,-47.8 218.43,-52.6 223.37,-52.68 213.34,-54.84"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f3l f3t f3r" points="208.4,-47.8 200.05,-53.66 188.48,-49.56 196.83,-50.67"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f6l f6t f6r" points="208.4,-47.8 219.52,-47.49 231,-43.61 219.88,-50.88"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f2l f2t f2r" points="208.4,-47.8 196.67,-48.8 187.61,-39.73 199.35,-45.69"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f0l f0t f0r" points="208.4,-47.8 212.38,-43.92 221.83,-35.09 217.85,-45.93"/>
-    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f1l f1t f1r" points="208.4,-47.8 202.17,-44.46 202.48,-33.28 208.72,-43.58"/>
-    <line class="ds-line ds-line--trunk" data-part="palm1" data-a="t0" data-b="t1" x1="204" y1="-30" x2="204.79" y2="-35.2"/>
-    <line class="ds-line ds-line--trunk" data-part="palm1" data-a="t1" data-b="t2" x1="204.79" y1="-35.2" x2="205.98" y2="-40.01"/>
-    <line class="ds-line ds-line--trunk" data-part="palm1" data-a="t2" data-b="t3" x1="205.98" y1="-40.01" x2="207.3" y2="-44.35"/>
-    <line class="ds-line ds-line--trunk" data-part="palm1" data-a="t3" data-b="crown" x1="207.3" y1="-44.35" x2="208.4" y2="-47.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f4l" x1="208.4" y1="-47.8" x2="209.75" y2="-55.35"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f4l" data-b="f4t" x1="209.75" y1="-55.35" x2="204.42" y2="-55.34"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f4t" data-b="f4r" x1="204.42" y1="-55.34" x2="203.07" y2="-54.75"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f4r" data-b="crown" x1="203.07" y1="-54.75" x2="208.4" y2="-47.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f5l" x1="208.4" y1="-47.8" x2="218.43" y2="-52.6"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f5l" data-b="f5t" x1="218.43" y1="-52.6" x2="223.37" y2="-52.68"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f5t" data-b="f5r" x1="223.37" y1="-52.68" x2="213.34" y2="-54.84"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f5r" data-b="crown" x1="213.34" y1="-54.84" x2="208.4" y2="-47.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f3l" x1="208.4" y1="-47.8" x2="200.05" y2="-53.66"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f3l" data-b="f3t" x1="200.05" y1="-53.66" x2="188.48" y2="-49.56"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f3t" data-b="f3r" x1="188.48" y1="-49.56" x2="196.83" y2="-50.67"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f3r" data-b="crown" x1="196.83" y1="-50.67" x2="208.4" y2="-47.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f6l" x1="208.4" y1="-47.8" x2="219.52" y2="-47.49"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f6l" data-b="f6t" x1="219.52" y1="-47.49" x2="231" y2="-43.61"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f6t" data-b="f6r" x1="231" y1="-43.61" x2="219.88" y2="-50.88"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f6r" data-b="crown" x1="219.88" y1="-50.88" x2="208.4" y2="-47.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f2l" x1="208.4" y1="-47.8" x2="196.67" y2="-48.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f2l" data-b="f2t" x1="196.67" y1="-48.8" x2="187.61" y2="-39.73"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f2t" data-b="f2r" x1="187.61" y1="-39.73" x2="199.35" y2="-45.69"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f2r" data-b="crown" x1="199.35" y1="-45.69" x2="208.4" y2="-47.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f0l" x1="208.4" y1="-47.8" x2="212.38" y2="-43.92"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f0l" data-b="f0t" x1="212.38" y1="-43.92" x2="221.83" y2="-35.09"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f0t" data-b="f0r" x1="221.83" y1="-35.09" x2="217.85" y2="-45.93"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f0r" data-b="crown" x1="217.85" y1="-45.93" x2="208.4" y2="-47.8"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f1l" x1="208.4" y1="-47.8" x2="202.17" y2="-44.46"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f1l" data-b="f1t" x1="202.17" y1="-44.46" x2="202.48" y2="-33.28"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f1t" data-b="f1r" x1="202.48" y1="-33.28" x2="208.72" y2="-43.58"/>
-    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f1r" data-b="crown" x1="208.72" y1="-43.58" x2="208.4" y2="-47.8"/>
-    <circle class="ds-dot ds-dot--trunk" data-part="palm1" data-p="t0" cx="204" cy="-30" r="0.62"/>
-    <circle class="ds-dot ds-dot--trunk" data-part="palm1" data-p="t1" cx="204.79" cy="-35.2" r="0.62"/>
-    <circle class="ds-dot ds-dot--trunk" data-part="palm1" data-p="t2" cx="205.98" cy="-40.01" r="0.62"/>
-    <circle class="ds-dot ds-dot--trunk" data-part="palm1" data-p="t3" cx="207.3" cy="-44.35" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="crown" cx="208.4" cy="-47.8" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="palm1" data-p="nutA" cx="210.48" cy="-45.96" r="0.62"/>
-    <circle class="ds-dot ds-dot--soft" data-part="palm1" data-p="nutB" cx="209.84" cy="-44.2" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f0l" cx="212.38" cy="-43.92" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f0r" cx="217.85" cy="-45.93" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f0t" cx="221.83" cy="-35.09" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f1l" cx="202.17" cy="-44.46" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f1r" cx="208.72" cy="-43.58" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f1t" cx="202.48" cy="-33.28" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f2l" cx="196.67" cy="-48.8" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f2r" cx="199.35" cy="-45.69" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f2t" cx="187.61" cy="-39.73" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f3l" cx="200.05" cy="-53.66" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f3r" cx="196.83" cy="-50.67" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f3t" cx="188.48" cy="-49.56" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f4l" cx="209.75" cy="-55.35" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f4r" cx="203.07" cy="-54.75" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f4t" cx="204.42" cy="-55.34" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f5l" cx="218.43" cy="-52.6" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f5r" cx="213.34" cy="-54.84" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f5t" cx="223.37" cy="-52.68" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f6l" cx="219.52" cy="-47.49" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f6r" cx="219.88" cy="-50.88" r="0.62"/>
-    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f6t" cx="231" cy="-43.61" r="0.62"/>
+    <g data-part="hammock">
+    <polygon class="ds-face ds-face--canvas" data-part="hammock" data-face="h1 h2 h3 h4 c4 c3 c2 c1" points="180,-39.44 184.8,-36.4 189.6,-34 194.4,-32.24 191.04,-29.44 186.24,-31.2 181.44,-33.6 176.64,-36.64"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h0" data-b="h1" x1="175.2" y1="-46" x2="180" y2="-39.44"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h1" data-b="h2" x1="180" y1="-39.44" x2="184.8" y2="-36.4"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h2" data-b="h3" x1="184.8" y1="-36.4" x2="189.6" y2="-34"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h3" data-b="h4" x1="189.6" y1="-34" x2="194.4" y2="-32.24"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h4" data-b="h5" x1="194.4" y1="-32.24" x2="199.2" y2="-34"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="h1" data-b="c1" x1="180" y1="-39.44" x2="176.64" y2="-36.64"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="c1" data-b="c2" x1="176.64" y1="-36.64" x2="181.44" y2="-33.6"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="c2" data-b="c3" x1="181.44" y1="-33.6" x2="186.24" y2="-31.2"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="c3" data-b="c4" x1="186.24" y1="-31.2" x2="191.04" y2="-29.44"/>
+    <line class="ds-line ds-line--soft" data-part="hammock" data-a="c4" data-b="h4" x1="191.04" y1="-29.44" x2="194.4" y2="-32.24"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h0" cx="175.2" cy="-46" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h1" cx="180" cy="-39.44" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h2" cx="184.8" cy="-36.4" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h3" cx="189.6" cy="-34" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h4" cx="194.4" cy="-32.24" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="h5" cx="199.2" cy="-34" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="c1" cx="176.64" cy="-36.64" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="c2" cx="181.44" cy="-33.6" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="c3" cx="186.24" cy="-31.2" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammock" data-p="c4" cx="191.04" cy="-29.44" r="0.62"/>
     </g>
     <g data-part="drum" opacity="0">
     <line class="ds-line ds-line--metal" data-part="drum" data-a="bot0" data-b="bot1" x1="242" y1="-29" x2="236" y2="-27.76"/>
@@ -1112,6 +945,74 @@
     <circle class="ds-dot ds-dot--metal" data-part="drum" data-p="top6" cx="242" cy="-38.6" r="0.62"/>
     <circle class="ds-dot ds-dot--metal" data-part="drum" data-p="top7" cx="244.49" cy="-35.6" r="0.62"/>
     </g>
+    <g data-part="keeper">
+    <line class="ds-line" data-part="keeper" data-a="head" data-b="neck" x1="180.7" y1="-37.57" x2="182.49" y2="-36.68"/>
+    <line class="ds-line" data-part="keeper" data-a="neck" data-b="chest" x1="182.49" y1="-36.68" x2="184.1" y2="-35.87"/>
+    <line class="ds-line" data-part="keeper" data-a="chest" data-b="hip" x1="184.1" y1="-35.87" x2="186.24" y2="-34.8"/>
+    <line class="ds-line" data-part="keeper" data-a="neck" data-b="shoulderL" x1="182.49" y1="-36.68" x2="183.53" y2="-36.84"/>
+    <line class="ds-line" data-part="keeper" data-a="neck" data-b="shoulderR" x1="182.49" y1="-36.68" x2="182.15" y2="-36.15"/>
+    <line class="ds-line" data-part="keeper" data-a="shoulderL" data-b="elbowL" x1="183.53" y1="-36.84" x2="185.73" y2="-36.33"/>
+    <line class="ds-line" data-part="keeper" data-a="elbowL" data-b="handL" x1="185.73" y1="-36.33" x2="187.64" y2="-35.68"/>
+    <line class="ds-line" data-part="keeper" data-a="shoulderR" data-b="elbowR" x1="182.15" y1="-36.15" x2="183.17" y2="-35.05"/>
+    <line class="ds-line" data-part="keeper" data-a="elbowR" data-b="handR" x1="183.17" y1="-35.05" x2="184.49" y2="-34.1"/>
+    <line class="ds-line" data-part="keeper" data-a="hip" data-b="hipL" x1="186.24" y1="-34.8" x2="187.09" y2="-34.87"/>
+    <line class="ds-line" data-part="keeper" data-a="hip" data-b="hipR" x1="186.24" y1="-34.8" x2="186.11" y2="-34.37"/>
+    <line class="ds-line" data-part="keeper" data-a="hipL" data-b="kneeL" x1="187.09" y1="-34.87" x2="189.79" y2="-33.71"/>
+    <line class="ds-line" data-part="keeper" data-a="kneeL" data-b="footL" x1="189.79" y1="-33.71" x2="192.4" y2="-32.51"/>
+    <line class="ds-line" data-part="keeper" data-a="hipR" data-b="kneeR" x1="186.11" y1="-34.37" x2="188.42" y2="-33.02"/>
+    <line class="ds-line" data-part="keeper" data-a="kneeR" data-b="footR" x1="188.42" y1="-33.02" x2="190.82" y2="-31.72"/>
+    <circle class="ds-dot" data-part="keeper" data-p="head" cx="180.7" cy="-37.57" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="neck" cx="182.49" cy="-36.68" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="chest" cx="184.1" cy="-35.87" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="hip" cx="186.24" cy="-34.8" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="shoulderL" cx="183.53" cy="-36.84" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="elbowL" cx="185.73" cy="-36.33" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="handL" cx="187.64" cy="-35.68" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="hipL" cx="187.09" cy="-34.87" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="kneeL" cx="189.79" cy="-33.71" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="footL" cx="192.4" cy="-32.51" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="shoulderR" cx="182.15" cy="-36.15" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="elbowR" cx="183.17" cy="-35.05" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="handR" cx="184.49" cy="-34.1" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="hipR" cx="186.11" cy="-34.37" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="kneeR" cx="188.42" cy="-33.02" r="0.62"/>
+    <circle class="ds-dot" data-part="keeper" data-p="footR" cx="190.82" cy="-31.72" r="0.62"/>
+    </g>
+    <g data-part="hammockRim">
+    <polygon class="ds-face ds-face--canvas" data-part="hammockRim" data-face="c1 c2 c3 c4 d4 d3 d2 d1" points="176.64,-36.64 181.44,-33.6 186.24,-31.2 191.04,-29.44 190.4,-28.4 185.6,-30.16 180.8,-32.56 176,-35.6"/>
+    <line class="ds-line ds-line--soft" data-part="hammockRim" data-a="d1" data-b="d2" x1="176" y1="-35.6" x2="180.8" y2="-32.56"/>
+    <line class="ds-line ds-line--soft" data-part="hammockRim" data-a="d2" data-b="d3" x1="180.8" y1="-32.56" x2="185.6" y2="-30.16"/>
+    <line class="ds-line ds-line--soft" data-part="hammockRim" data-a="d3" data-b="d4" x1="185.6" y1="-30.16" x2="190.4" y2="-28.4"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="c1" cx="176.64" cy="-36.64" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="d1" cx="176" cy="-35.6" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="c2" cx="181.44" cy="-33.6" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="d2" cx="180.8" cy="-32.56" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="c3" cx="186.24" cy="-31.2" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="d3" cx="185.6" cy="-30.16" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="c4" cx="191.04" cy="-29.44" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="hammockRim" data-p="d4" cx="190.4" cy="-28.4" r="0.62"/>
+    </g>
+    <g data-part="stump">
+    <polygon class="ds-face ds-face--roof-kraft" data-part="stump" data-face="stumpTopFar stumpTopEast stumpTopNear stumpTopWest" points="179.6,-34 182.8,-32.4 179.6,-30.8 176.4,-32.4"/>
+    <polygon class="ds-face ds-face--east-kraft" data-part="stump" data-face="stumpEast stumpNear stumpTopNear stumpTopEast" points="182.8,-30.2 179.6,-28.6 179.6,-30.8 182.8,-32.4"/>
+    <polygon class="ds-face ds-face--south-kraft" data-part="stump" data-face="stumpNear stumpWest stumpTopWest stumpTopNear" points="179.6,-28.6 176.4,-30.2 176.4,-32.4 179.6,-30.8"/>
+    <line class="ds-line" data-part="stump" data-a="stumpEast" data-b="stumpNear" x1="182.8" y1="-30.2" x2="179.6" y2="-28.6"/>
+    <line class="ds-line" data-part="stump" data-a="stumpNear" data-b="stumpWest" x1="179.6" y1="-28.6" x2="176.4" y2="-30.2"/>
+    <line class="ds-line" data-part="stump" data-a="stumpEast" data-b="stumpTopEast" x1="182.8" y1="-30.2" x2="182.8" y2="-32.4"/>
+    <line class="ds-line" data-part="stump" data-a="stumpNear" data-b="stumpTopNear" x1="179.6" y1="-28.6" x2="179.6" y2="-30.8"/>
+    <line class="ds-line" data-part="stump" data-a="stumpWest" data-b="stumpTopWest" x1="176.4" y1="-30.2" x2="176.4" y2="-32.4"/>
+    <line class="ds-line" data-part="stump" data-a="stumpTopFar" data-b="stumpTopEast" x1="179.6" y1="-34" x2="182.8" y2="-32.4"/>
+    <line class="ds-line" data-part="stump" data-a="stumpTopEast" data-b="stumpTopNear" x1="182.8" y1="-32.4" x2="179.6" y2="-30.8"/>
+    <line class="ds-line" data-part="stump" data-a="stumpTopNear" data-b="stumpTopWest" x1="179.6" y1="-30.8" x2="176.4" y2="-32.4"/>
+    <line class="ds-line" data-part="stump" data-a="stumpTopWest" data-b="stumpTopFar" x1="176.4" y1="-32.4" x2="179.6" y2="-34"/>
+    <circle class="ds-dot" data-part="stump" data-p="stumpNear" cx="179.6" cy="-28.6" r="0.62"/>
+    <circle class="ds-dot" data-part="stump" data-p="stumpEast" cx="182.8" cy="-30.2" r="0.62"/>
+    <circle class="ds-dot" data-part="stump" data-p="stumpWest" cx="176.4" cy="-30.2" r="0.62"/>
+    <circle class="ds-dot" data-part="stump" data-p="stumpTopFar" cx="179.6" cy="-34" r="0.62"/>
+    <circle class="ds-dot" data-part="stump" data-p="stumpTopEast" cx="182.8" cy="-32.4" r="0.62"/>
+    <circle class="ds-dot" data-part="stump" data-p="stumpTopNear" cx="179.6" cy="-30.8" r="0.62"/>
+    <circle class="ds-dot" data-part="stump" data-p="stumpTopWest" cx="176.4" cy="-32.4" r="0.62"/>
+    </g>
     <g data-part="bush0">
     <polygon class="ds-face ds-face--foliage" data-part="bush0" data-face="bTop b3 b4" points="236.8,-31.6 235.04,-33.28 241.6,-32.4"/>
     <polygon class="ds-face ds-face--foliage" data-part="bush0" data-face="bTop b4 b5" points="236.8,-31.6 241.6,-32.4 243.36,-29.12"/>
@@ -1135,6 +1036,105 @@
     <circle class="ds-dot ds-dot--foliage" data-part="bush0" data-p="b4" cx="241.6" cy="-32.4" r="0.62"/>
     <circle class="ds-dot ds-dot--foliage" data-part="bush0" data-p="b5" cx="243.36" cy="-29.12" r="0.62"/>
     <circle class="ds-dot ds-dot--foliage" data-part="bush0" data-p="bTop" cx="236.8" cy="-31.6" r="0.62"/>
+    </g>
+    <g data-part="mug">
+    <polygon class="ds-face ds-face--mug" data-part="mug" data-face="tl tr br bl" points="178.45,-34.93 180.75,-34.93 180.52,-32.4 178.68,-32.4"/>
+    <line class="ds-line ds-line--mug" data-part="mug" data-a="tl" data-b="tr" x1="178.45" y1="-34.93" x2="180.75" y2="-34.93"/>
+    <line class="ds-line ds-line--mug" data-part="mug" data-a="tr" data-b="br" x1="180.75" y1="-34.93" x2="180.52" y2="-32.4"/>
+    <line class="ds-line ds-line--mug" data-part="mug" data-a="br" data-b="bl" x1="180.52" y1="-32.4" x2="178.68" y2="-32.4"/>
+    <line class="ds-line ds-line--mug" data-part="mug" data-a="bl" data-b="tl" x1="178.68" y1="-32.4" x2="178.45" y2="-34.93"/>
+    <line class="ds-line ds-line--mug" data-part="mug" data-a="hA" data-b="hB" x1="180.75" y1="-34.24" x2="181.79" y2="-34.01"/>
+    <line class="ds-line ds-line--mug" data-part="mug" data-a="hB" data-b="hC" x1="181.79" y1="-34.01" x2="181.79" y2="-32.86"/>
+    <line class="ds-line ds-line--mug" data-part="mug" data-a="hC" data-b="hD" x1="181.79" y1="-32.86" x2="180.52" y2="-32.63"/>
+    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="tl" cx="178.45" cy="-34.93" r="0.62"/>
+    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="tr" cx="180.75" cy="-34.93" r="0.62"/>
+    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="br" cx="180.52" cy="-32.4" r="0.62"/>
+    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="bl" cx="178.68" cy="-32.4" r="0.62"/>
+    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="hA" cx="180.75" cy="-34.24" r="0.62"/>
+    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="hB" cx="181.79" cy="-34.01" r="0.62"/>
+    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="hC" cx="181.79" cy="-32.86" r="0.62"/>
+    <circle class="ds-dot ds-dot--mug" data-part="mug" data-p="hD" cx="180.52" cy="-32.63" r="0.62"/>
+    </g>
+    <g data-part="steam" opacity="0">
+    <line class="ds-line ds-line--steam" data-part="steam" data-a="s0" data-b="s1" x1="179.14" y1="-35.39" x2="178.8" y2="-36.54"/>
+    <line class="ds-line ds-line--steam" data-part="steam" data-a="s1" data-b="s2" x1="178.8" y1="-36.54" x2="179.26" y2="-37.69"/>
+    <line class="ds-line ds-line--steam" data-part="steam" data-a="t0" data-b="t1" x1="180.06" y1="-35.39" x2="180.41" y2="-36.54"/>
+    <line class="ds-line ds-line--steam" data-part="steam" data-a="t1" data-b="t2" x1="180.41" y1="-36.54" x2="179.95" y2="-37.69"/>
+    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="s0" cx="179.14" cy="-35.39" r="0.62"/>
+    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="s1" cx="178.8" cy="-36.54" r="0.62"/>
+    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="s2" cx="179.26" cy="-37.69" r="0.62"/>
+    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="t0" cx="180.06" cy="-35.39" r="0.62"/>
+    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="t1" cx="180.41" cy="-36.54" r="0.62"/>
+    <circle class="ds-dot ds-dot--steam" data-part="steam" data-p="t2" cx="179.95" cy="-37.69" r="0.62"/>
+    </g>
+    <g data-part="palm1">
+    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f4l f4t f4r" points="203.6,-43 204.95,-50.55 199.62,-50.54 198.27,-49.95"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f5l f5t f5r" points="203.6,-43 213.63,-47.8 218.57,-47.88 208.54,-50.04"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f3l f3t f3r" points="203.6,-43 195.25,-48.86 183.68,-44.76 192.03,-45.87"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f6l f6t f6r" points="203.6,-43 214.72,-42.69 226.2,-38.81 215.08,-46.08"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f2l f2t f2r" points="203.6,-43 191.87,-44 182.81,-34.93 194.55,-40.89"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f0l f0t f0r" points="203.6,-43 207.58,-39.12 217.03,-30.29 213.05,-41.13"/>
+    <polygon class="ds-face ds-face--foliage" data-part="palm1" data-face="crown f1l f1t f1r" points="203.6,-43 197.37,-39.66 197.68,-28.48 203.92,-38.78"/>
+    <line class="ds-line ds-line--trunk" data-part="palm1" data-a="t0" data-b="t1" x1="199.2" y1="-25.2" x2="199.99" y2="-30.4"/>
+    <line class="ds-line ds-line--trunk" data-part="palm1" data-a="t1" data-b="t2" x1="199.99" y1="-30.4" x2="201.18" y2="-35.21"/>
+    <line class="ds-line ds-line--trunk" data-part="palm1" data-a="t2" data-b="t3" x1="201.18" y1="-35.21" x2="202.5" y2="-39.55"/>
+    <line class="ds-line ds-line--trunk" data-part="palm1" data-a="t3" data-b="crown" x1="202.5" y1="-39.55" x2="203.6" y2="-43"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f4l" x1="203.6" y1="-43" x2="204.95" y2="-50.55"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f4l" data-b="f4t" x1="204.95" y1="-50.55" x2="199.62" y2="-50.54"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f4t" data-b="f4r" x1="199.62" y1="-50.54" x2="198.27" y2="-49.95"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f4r" data-b="crown" x1="198.27" y1="-49.95" x2="203.6" y2="-43"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f5l" x1="203.6" y1="-43" x2="213.63" y2="-47.8"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f5l" data-b="f5t" x1="213.63" y1="-47.8" x2="218.57" y2="-47.88"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f5t" data-b="f5r" x1="218.57" y1="-47.88" x2="208.54" y2="-50.04"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f5r" data-b="crown" x1="208.54" y1="-50.04" x2="203.6" y2="-43"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f3l" x1="203.6" y1="-43" x2="195.25" y2="-48.86"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f3l" data-b="f3t" x1="195.25" y1="-48.86" x2="183.68" y2="-44.76"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f3t" data-b="f3r" x1="183.68" y1="-44.76" x2="192.03" y2="-45.87"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f3r" data-b="crown" x1="192.03" y1="-45.87" x2="203.6" y2="-43"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f6l" x1="203.6" y1="-43" x2="214.72" y2="-42.69"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f6l" data-b="f6t" x1="214.72" y1="-42.69" x2="226.2" y2="-38.81"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f6t" data-b="f6r" x1="226.2" y1="-38.81" x2="215.08" y2="-46.08"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f6r" data-b="crown" x1="215.08" y1="-46.08" x2="203.6" y2="-43"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f2l" x1="203.6" y1="-43" x2="191.87" y2="-44"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f2l" data-b="f2t" x1="191.87" y1="-44" x2="182.81" y2="-34.93"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f2t" data-b="f2r" x1="182.81" y1="-34.93" x2="194.55" y2="-40.89"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f2r" data-b="crown" x1="194.55" y1="-40.89" x2="203.6" y2="-43"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f0l" x1="203.6" y1="-43" x2="207.58" y2="-39.12"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f0l" data-b="f0t" x1="207.58" y1="-39.12" x2="217.03" y2="-30.29"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f0t" data-b="f0r" x1="217.03" y1="-30.29" x2="213.05" y2="-41.13"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f0r" data-b="crown" x1="213.05" y1="-41.13" x2="203.6" y2="-43"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="crown" data-b="f1l" x1="203.6" y1="-43" x2="197.37" y2="-39.66"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f1l" data-b="f1t" x1="197.37" y1="-39.66" x2="197.68" y2="-28.48"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f1t" data-b="f1r" x1="197.68" y1="-28.48" x2="203.92" y2="-38.78"/>
+    <line class="ds-line ds-line--frond" data-part="palm1" data-a="f1r" data-b="crown" x1="203.92" y1="-38.78" x2="203.6" y2="-43"/>
+    <circle class="ds-dot ds-dot--trunk" data-part="palm1" data-p="t0" cx="199.2" cy="-25.2" r="0.62"/>
+    <circle class="ds-dot ds-dot--trunk" data-part="palm1" data-p="t1" cx="199.99" cy="-30.4" r="0.62"/>
+    <circle class="ds-dot ds-dot--trunk" data-part="palm1" data-p="t2" cx="201.18" cy="-35.21" r="0.62"/>
+    <circle class="ds-dot ds-dot--trunk" data-part="palm1" data-p="t3" cx="202.5" cy="-39.55" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="crown" cx="203.6" cy="-43" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="palm1" data-p="nutA" cx="205.68" cy="-41.16" r="0.62"/>
+    <circle class="ds-dot ds-dot--soft" data-part="palm1" data-p="nutB" cx="205.04" cy="-39.4" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f0l" cx="207.58" cy="-39.12" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f0r" cx="213.05" cy="-41.13" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f0t" cx="217.03" cy="-30.29" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f1l" cx="197.37" cy="-39.66" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f1r" cx="203.92" cy="-38.78" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f1t" cx="197.68" cy="-28.48" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f2l" cx="191.87" cy="-44" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f2r" cx="194.55" cy="-40.89" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f2t" cx="182.81" cy="-34.93" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f3l" cx="195.25" cy="-48.86" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f3r" cx="192.03" cy="-45.87" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f3t" cx="183.68" cy="-44.76" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f4l" cx="204.95" cy="-50.55" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f4r" cx="198.27" cy="-49.95" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f4t" cx="199.62" cy="-50.54" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f5l" cx="213.63" cy="-47.8" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f5r" cx="208.54" cy="-50.04" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f5t" cx="218.57" cy="-47.88" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f6l" cx="214.72" cy="-42.69" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f6r" cx="215.08" cy="-46.08" r="0.62"/>
+    <circle class="ds-dot ds-dot--frond" data-part="palm1" data-p="f6t" cx="226.2" cy="-38.81" r="0.62"/>
     </g>
     <g data-part="palm5">
     <polygon class="ds-face ds-face--foliage" data-part="palm5" data-face="crown f4l f4t f4r" points="127.08,-31.66 128.09,-37.74 124.09,-36.41 123.08,-37.29"/>
