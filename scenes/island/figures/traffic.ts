@@ -14,6 +14,7 @@
 import { defineFigure, ring, type EdgeSpec, type Figure, type PointMap, type PoseOverride, type Vec2, type Vec3 } from 'dotscene'
 import { at, box, edge, pad } from '../../edi/projection.ts'
 import { merge, tag, tone, type Shape } from '../../iso.ts'
+import { label } from '../../edi/figures/tokens.ts'
 
 type Axis = 'x' | 'y'
 type Dir = 1 | -1
@@ -190,8 +191,15 @@ export const plane = figureWith('plane', 'A biplane that never lands', planeX, {
 // ---------------------------------------------------------------------------------------------
 // The banner it tows
 
-const BANNER_W = 22
-const BANNER_H = 5
+export const BANNER_W = 26
+const BANNER_H = 7
+
+/** What the banner says. Digits only; `404` is the pilot's whole message. */
+const TEXT = label('banner404', '404', 1.1)
+const TEXT_SCALE = 1.45
+const textPoints: Record<string, Vec2> = Object.fromEntries(
+  Object.entries(TEXT.points).map(([name, [x, y]]) => [name, [round2(BANNER_W / 2 + x * TEXT_SCALE), round2(y * TEXT_SCALE)] as Vec2]),
+)
 
 const bannerPoints = (flap: number): Record<string, Vec2> => ({
   tl: [0, -BANNER_H / 2],
@@ -199,12 +207,7 @@ const bannerPoints = (flap: number): Record<string, Vec2> => ({
   tr: [BANNER_W, -BANNER_H / 2 + flap],
   mr: [BANNER_W + 0.6, -flap],
   br: [BANNER_W, BANNER_H / 2 + flap],
-  ruleA1: [3, -1.3],
-  ruleA2: [15, -1.3],
-  ruleB1: [3, 0],
-  ruleB2: [17, 0],
-  ruleC1: [3, 1.3],
-  ruleC2: [13, 1.3],
+  ...textPoints,
 })
 
 const trailing = (flap: number): PoseOverride => {
@@ -214,7 +217,7 @@ const trailing = (flap: number): PoseOverride => {
 
 const bannerRest = bannerPoints(0)
 
-/** A towed banner, its left edge at the origin so it hangs off a tail. Three rules as if text. */
+/** A towed banner, its left edge at the origin so it hangs off a tail, reading 404. */
 export const banner = defineFigure('banner', {
   title: 'A banner towed behind the plane',
   points: bannerRest,
@@ -226,15 +229,13 @@ export const banner = defineFigure('banner', {
         ['mr', 'br'],
         ['br', 'bl'],
         ['bl', 'tl'],
-        ['ruleA1', 'ruleA2'],
-        ['ruleB1', 'ruleB2'],
-        ['ruleC1', 'ruleC2'],
       ],
       'soft',
     ),
+    ...TEXT.edges,
   ],
   faces: [{ points: ['tl', 'tr', 'mr', 'br', 'bl'], kind: 'banner' }],
-  pointKinds: allKinds(bannerRest, 'soft'),
+  pointKinds: { ...allKinds(bannerRest, 'soft'), ...allKinds(textPoints, 'glyph') },
   poses: {
     a: trailing(0.8),
     b: trailing(-0.8),
@@ -426,41 +427,66 @@ export const stars = defineFigure('stars', {
 // Creatures
 
 /** A beach crab, scuttling along x. Front is +y. */
+/**
+ * A crab: a wide shell, eyes on stalks, two big pincers held out front — a palm and two
+ * fingers each — and two jointed legs a side. `b` swings the legs and snaps the pincers.
+ */
 const crabPoints = (step: 0 | 1): Record<string, Vec2> => {
   const out: Record<string, Vec2> = {}
   for (let i = 0; i < 6; i++) {
     const a = (i / 6) * Math.PI * 2
-    out[`shell${i}`] = at([Math.cos(a) * 0.18, Math.sin(a) * 0.18, 0.15])
+    out[`shell${i}`] = at([Math.cos(a) * 0.26, Math.sin(a) * 0.17, 0.14])
   }
-  const open = step === 0 ? 0.08 : 0
-  out.clawLBase = at([-0.15, 0.2, 0.15])
-  out.clawLTip = at([-0.22 - open, 0.46, 0.2])
-  out.clawRBase = at([0.15, 0.2, 0.15])
-  out.clawRTip = at([0.22 + open, 0.46, 0.2])
-  ;[-0.14, 0, 0.14].forEach((y, i) => {
-    const swing = (i % 2 === 0 ? 1 : -1) * (step === 0 ? 0.06 : -0.06)
-    out[`legL${i}Base`] = at([-0.16, y, 0.12])
-    out[`legL${i}Tip`] = at([-0.42, y + swing, 0])
-    out[`legR${i}Base`] = at([0.16, y, 0.12])
-    out[`legR${i}Tip`] = at([0.42, y - swing, 0])
+  out.eyeLBase = at([-0.09, 0.15, 0.2])
+  out.eyeL = at([-0.11, 0.2, 0.36])
+  out.eyeRBase = at([0.09, 0.15, 0.2])
+  out.eyeR = at([0.11, 0.2, 0.36])
+  const gap = step === 0 ? 0.16 : 0.05
+  for (const [side, s] of [['L', -1], ['R', 1]] as const) {
+    out[`arm${side}`] = at([s * 0.22, 0.1, 0.16])
+    out[`wrist${side}`] = at([s * 0.4, 0.3, 0.22])
+    out[`palmA${side}`] = at([s * 0.56, 0.36, 0.26])
+    out[`palmB${side}`] = at([s * 0.34, 0.5, 0.24])
+    out[`fingerA${side}`] = at([s * (0.62 + gap * 0.3), 0.56 + gap * 0.6, 0.3])
+    out[`fingerB${side}`] = at([s * (0.36 - gap * 0.4), 0.7 - gap * 0.2, 0.28])
+  }
+  ;[-0.08, 0.1].forEach((y, i) => {
+    const swing = (i % 2 === 0 ? 1 : -1) * (step === 0 ? 0.07 : -0.07)
+    for (const [side, s] of [['L', -1], ['R', 1]] as const) {
+      out[`leg${side}${i}Base`] = at([s * 0.22, y, 0.12])
+      out[`leg${side}${i}Knee`] = at([s * 0.4, y + swing, 0.28])
+      out[`leg${side}${i}Tip`] = at([s * 0.52, y + swing * 1.6, 0])
+    }
   })
   return out
 }
 
 const crabRest = crabPoints(0)
+
 export const crab = defineFigure('crab', {
   title: 'A crab',
   points: crabRest,
   edges: kinded(
     [
       ...Array.from({ length: 6 }, (_u, i) => [`shell${i}`, `shell${(i + 1) % 6}`] as const),
-      ['clawLBase', 'clawLTip'],
-      ['clawRBase', 'clawRTip'],
-      ...[0, 1, 2].flatMap((i) => [[`legL${i}Base`, `legL${i}Tip`] as const, [`legR${i}Base`, `legR${i}Tip`] as const]),
+      ['eyeLBase', 'eyeL'],
+      ['eyeRBase', 'eyeR'],
+      ...(['L', 'R'] as const).flatMap((s) => [
+        [`arm${s}`, `wrist${s}`] as const,
+        [`wrist${s}`, `palmA${s}`] as const,
+        [`wrist${s}`, `palmB${s}`] as const,
+        [`palmA${s}`, `fingerA${s}`] as const,
+        [`palmB${s}`, `fingerB${s}`] as const,
+      ]),
+      ...[0, 1].flatMap((i) => (['L', 'R'] as const).flatMap((s) => [[`leg${s}${i}Base`, `leg${s}${i}Knee`] as const, [`leg${s}${i}Knee`, `leg${s}${i}Tip`] as const])),
     ],
     'soft',
   ),
-  faces: [{ points: Array.from({ length: 6 }, (_u, i) => `shell${i}`), kind: 'shell' }],
+  faces: [
+    { points: Array.from({ length: 6 }, (_u, i) => `shell${i}`), kind: 'shell' },
+    { points: ['wristL', 'palmAL', 'fingerAL', 'fingerBL', 'palmBL'], kind: 'shell' },
+    { points: ['wristR', 'palmAR', 'fingerAR', 'fingerBR', 'palmBR'], kind: 'shell' },
+  ],
   pointKinds: allKinds(crabRest, 'soft'),
   poses: { a: {}, b: crabPoints(1) },
 })
@@ -500,43 +526,61 @@ export const splash = defineFigure('splash', {
   pointKinds: allKinds(splashPoints, 'sea'),
 })
 
-/** A sea turtle from above, head to +x. Flippers sweep between `a` and `b`. */
+/**
+ * A sea turtle from above, head to +x: an oval shell with a domed plate on top, a head on a
+ * neck, two paddle-shaped front flippers and two small rear ones. Flippers sweep between
+ * `a` and `b`.
+ */
 const turtlePoints = (sweep: boolean): Record<string, Vec2> => {
   const out: Record<string, Vec2> = {}
-  for (let i = 0; i < 6; i++) {
-    const a = (i / 6) * Math.PI * 2
-    out[`carapace${i}`] = at([Math.cos(a) * 0.3, Math.sin(a) * 0.3, 0.05])
+  for (let i = 0; i < 8; i++) {
+    const a = (i / 8) * Math.PI * 2
+    out[`carapace${i}`] = at([Math.cos(a) * 0.42, Math.sin(a) * 0.3, 0.06])
   }
-  out.head = at([0.44, 0, 0.05])
-  const front = sweep ? [0.12, 0.34] : [0.46, 0.5]
-  const rear = sweep ? [-0.32, 0.42] : [-0.45, 0.36]
-  out.flipFLBase = at([0.18, -0.26, 0.05])
-  out.flipFLTip = at([front[0]!, -front[1]!, 0.05])
-  out.flipFRBase = at([0.18, 0.26, 0.05])
-  out.flipFRTip = at([front[0]!, front[1]!, 0.05])
-  out.flipRLBase = at([-0.2, -0.24, 0.05])
-  out.flipRLTip = at([rear[0]!, -rear[1]!, 0.05])
-  out.flipRRBase = at([-0.2, 0.24, 0.05])
-  out.flipRRTip = at([rear[0]!, rear[1]!, 0.05])
+  for (let i = 0; i < 5; i++) {
+    const a = (i / 5) * Math.PI * 2 + 0.3
+    out[`dome${i}`] = at([Math.cos(a) * 0.2, Math.sin(a) * 0.14, 0.24])
+  }
+  out.neck = at([0.5, 0, 0.1])
+  out.head = at([0.64, 0, 0.14])
+  const front = sweep ? [0.2, 0.62] : [0.52, 0.56]
+  const back = sweep ? [-0.05, 0.5] : [0.24, 0.62]
+  const rear = sweep ? [-0.4, 0.5] : [-0.56, 0.42]
+  for (const [side, s] of [['L', -1], ['R', 1]] as const) {
+    out[`flipF${side}Base`] = at([0.22, s * 0.28, 0.08])
+    out[`flipF${side}Tip`] = at([front[0]!, s * front[1]!, 0.08])
+    out[`flipF${side}Back`] = at([back[0]!, s * back[1]!, 0.08])
+    out[`flipR${side}Base`] = at([-0.24, s * 0.26, 0.08])
+    out[`flipR${side}Tip`] = at([rear[0]!, s * rear[1]!, 0.08])
+  }
   return out
 }
 
 const turtleRest = turtlePoints(false)
+
 export const turtle = defineFigure('turtle', {
   title: 'A turtle',
   points: turtleRest,
   edges: kinded(
     [
-      ...Array.from({ length: 6 }, (_u, i) => [`carapace${i}`, `carapace${(i + 1) % 6}`] as const),
-      ['carapace0', 'head'],
-      ['flipFLBase', 'flipFLTip'],
-      ['flipFRBase', 'flipFRTip'],
-      ['flipRLBase', 'flipRLTip'],
-      ['flipRRBase', 'flipRRTip'],
+      ...Array.from({ length: 8 }, (_u, i) => [`carapace${i}`, `carapace${(i + 1) % 8}`] as const),
+      ...Array.from({ length: 5 }, (_u, i) => [`dome${i}`, `dome${(i + 1) % 5}`] as const),
+      ['carapace0', 'neck'],
+      ['neck', 'head'],
+      ...(['L', 'R'] as const).flatMap((s) => [
+        [`flipF${s}Base`, `flipF${s}Tip`] as const,
+        [`flipF${s}Tip`, `flipF${s}Back`] as const,
+        [`flipR${s}Base`, `flipR${s}Tip`] as const,
+      ]),
     ],
     'soft',
   ),
-  faces: [{ points: Array.from({ length: 6 }, (_u, i) => `carapace${i}`), kind: 'shell' }],
+  faces: [
+    { points: Array.from({ length: 8 }, (_u, i) => `carapace${i}`), kind: 'shell' },
+    { points: Array.from({ length: 5 }, (_u, i) => `dome${i}`), kind: 'rock' },
+    { points: ['flipFLBase', 'flipFLTip', 'flipFLBack'], kind: 'shell' },
+    { points: ['flipFRBase', 'flipFRTip', 'flipFRBack'], kind: 'shell' },
+  ],
   pointKinds: allKinds(turtleRest, 'soft'),
   poses: { a: {}, b: turtlePoints(true) },
 })

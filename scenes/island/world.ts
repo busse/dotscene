@@ -13,9 +13,9 @@ import { at as project, cell } from '../edi/projection.ts'
 import { keeper, mug, steam } from './figures/keeper.ts'
 import { ripples } from '../edi/figures/sky.ts'
 import { BEACH, HAMMOCK_SPOT, POINT, bush, flowers, island, palm, palmSmall, rocks } from './figures/terrain.ts'
-import { DOCK_END, HAMMOCK_LIE, HUT_CHIMNEY, HUT_DOOR, LAMP as LAMP_LOCAL, LIGHTHOUSE_DOOR, beam, dock, hammock, hammockRim, hut, lamp, lighthouse, signpost } from './figures/structures.ts'
+import { DOCK_END, HAMMOCK_LIE, HUT_CHIMNEY, HUT_DOOR, LAMP as LAMP_LOCAL, LIGHTHOUSE_DOOR, STUMP_TOP, beam, dock, hammock, hammockRim, hut, lamp, lighthouse, signpost, stump } from './figures/structures.ts'
 import { CHATBOT_MOUTH, CHATBOT_PORT, CRON_BADGE, FAX_SLOT, MAINFRAME_PORT, chatbot, cron, drum, fax, mainframe, spreadsheet } from './figures/misfits.ts'
-import { BOAT_LANTERN, PLANE_TAIL, banner, boat, crab, moon, plane, stars, sun, turtle, wake } from './figures/traffic.ts'
+import { BANNER_W, BOAT_LANTERN, PLANE_TAIL, banner, boat, crab, moon, plane, stars, sun, turtle, wake } from './figures/traffic.ts'
 import { nightfall } from './figures/fixtures.ts'
 import { depthOf, KEEPER_SCALE, MUG_SCALE, feetAt, lyingAt, SKY, type Cell } from './acts/kit.ts'
 
@@ -44,7 +44,8 @@ export const isl = (u: number, v: number): Cell => add(ORIGIN, cell(u, v))
 const HUT_AT = isl(5, -4)
 const LIGHTHOUSE_AT = isl(POINT[0], POINT[1])
 const HAMMOCK_AT = isl(HAMMOCK_SPOT[0], HAMMOCK_SPOT[1])
-const DOCK_AT = isl(5, 9.5)
+/** The root a cell inside the beach's rim, so the jetty starts on sand and ends over water. */
+const DOCK_AT = isl(5, 7.6)
 /** The dock lies along +y here, so its seaward end is that far down the y axis. */
 export const DOCK_TIP = add(DOCK_AT, [0, DOCK_END[0]])
 
@@ -53,6 +54,20 @@ export const HAMMOCK = {
   z: HAMMOCK_LIE[2],
   /** Beside it, on the grass. */
   stand: add(HAMMOCK_AT, [0.2, 1.3]),
+}
+
+/** The stump at the hammock's head end, on the near side, where the mug lives overnight. */
+const STUMP_AT = add(HAMMOCK_AT, [-0.35, 0.6])
+export const STUMP = {
+  cell: STUMP_AT,
+  /** Where the keeper stands to set the mug down. */
+  stand: add(HAMMOCK_AT, [-0.35, 1.5]),
+  top: project([STUMP_AT[0], STUMP_AT[1], STUMP_TOP[2]]) as Vec2,
+}
+/** The mug resting on the stump: its handle origin offset so the cup sits centred on the top. */
+export const MUG_ON_STUMP = {
+  at: [STUMP.top[0] + 8 * MUG_SCALE, STUMP.top[1] - 6 * MUG_SCALE] as Vec2,
+  depth: depthOf(STUMP_AT) + 0.3,
 }
 
 export const HUT = {
@@ -108,10 +123,10 @@ export const CHATBOT = {
 /** Where the keeper stands to work on each of them. */
 export const WORK = {
   /** Beside the mainframe on its near side, so the keeper stands in front of it. */
-  mainframe: add(DOCK_AT, [1.7, -0.9]),
+  mainframe: add(DOCK_AT, [1.2, -1.6]),
   spreadsheet: isl(6.3, 2.4),
   fax: isl(8.6, 6.8),
-  cron: isl(5, 8.6),
+  cron: isl(4.6, 7.7),
   chatbot: isl(11, 3.6),
 }
 
@@ -124,7 +139,7 @@ export const PLANE = {
   roll: add(ORIGIN, [1.6, RUNWAY_Y]),
   park: add(ORIGIN, [3.4, RUNWAY_Y]),
   /** The banner's left edge sits at the tail; trailing means to the left of a +x plane. */
-  bannerOffset: [project(PLANE_TAIL)[0] - project([0, 0, 0])[0] - 22, project(PLANE_TAIL)[1] - project([0, 0, 0])[1]] as Vec2,
+  bannerOffset: [project(PLANE_TAIL)[0] - project([0, 0, 0])[0] - BANNER_W, project(PLANE_TAIL)[1] - project([0, 0, 0])[1]] as Vec2,
   bannerOffsetBack: [project([-PLANE_TAIL[0], PLANE_TAIL[1], PLANE_TAIL[2]])[0] - project([0, 0, 0])[0], project([-PLANE_TAIL[0], PLANE_TAIL[1], PLANE_TAIL[2]])[1] - project([0, 0, 0])[1]] as Vec2,
 }
 
@@ -171,6 +186,7 @@ export const stageParts: readonly Part[] = [
   placed('hammock', hammock, HAMMOCK_AT, { depth: depthOf(HAMMOCK_AT) + 0.2 }),
   // In front of the keeper (+0.42) and the mug (+0.47), so a body lies in it, not on it.
   placed('hammockRim', hammockRim, HAMMOCK_AT, { depth: depthOf(HAMMOCK_AT) + 0.6 }),
+  placed('stump', stump, STUMP_AT, { depth: depthOf(STUMP_AT) + 0.2 }),
   placed('dock', dock, DOCK_AT, { pose: 'south', depth: depthOf(DOCK_AT) - 0.3 }),
   placed('signpost', signpost, isl(11.5, 6.6)),
   ...PALMS.map(([c, small], i) => placed(`palm${i}`, small ? palmSmall : palm, c, { pose: 'rest' })),
@@ -186,8 +202,8 @@ export const stageParts: readonly Part[] = [
 export const cast = (): Part[] => [
   { id: 'nightfall', figure: nightfall, depth: SKY + 500, opacity: 0 },
   { id: 'keeper', figure: keeper, ...lyingAt(HAMMOCK.cell, HAMMOCK.z).keeper, scale: KEEPER_SCALE },
-  { id: 'mug', figure: mug, ...lyingAt(HAMMOCK.cell, HAMMOCK.z).mug, scale: MUG_SCALE, opacity: 0 },
-  { id: 'steam', figure: steam, at: lyingAt(HAMMOCK.cell, HAMMOCK.z).mug!.at, scale: MUG_SCALE, pose: 'a', opacity: 0, depth: (lyingAt(HAMMOCK.cell, HAMMOCK.z).mug!.depth ?? 0) + 0.01 },
+  { id: 'mug', figure: mug, ...MUG_ON_STUMP, scale: MUG_SCALE },
+  { id: 'steam', figure: steam, at: MUG_ON_STUMP.at, scale: MUG_SCALE, pose: 'a', opacity: 0, depth: MUG_ON_STUMP.depth + 0.01 },
   placed('mainframe', mainframe, MAINFRAME_HOME, { pose: 'square', depth: depthOf(MAINFRAME_HOME) + 0.5, z: 0.35 }),
   placed('spreadsheet', spreadsheet, SPREADSHEET.home, { pose: 'rest', depth: depthOf(SPREADSHEET.home) + 0.6 }),
   placed('drum', drum, SPREADSHEET.drumFrom, { opacity: 0, depth: depthOf(SPREADSHEET.drumFrom) + 0.5 }),
@@ -204,8 +220,8 @@ export const cast = (): Part[] => [
   { id: 'sun', figure: sun, at: SUN.rise, opacity: 0, depth: SKY - 100 },
   { id: 'moon', figure: moon, at: MOON.rise, opacity: 0, depth: SKY + 610 },
   { id: 'stars', figure: stars, at: STARS_AT, pose: 'a', opacity: 0, depth: SKY + 605 },
-  placed('crab', crab, isl(4.5, 6.4), { pose: 'a', scale: 0.6, depth: depthOf(isl(4.5, 6.4)) + 0.2 }),
-  placed('turtle', turtle, isl(9, 12), { pose: 'a', depth: FAR + 6 }),
+  placed('crab', crab, isl(4.5, 6.4), { pose: 'a', scale: 0.75, depth: depthOf(isl(4.5, 6.4)) + 0.2 }),
+  placed('turtle', turtle, isl(9, 12), { pose: 'a', scale: 1.2, depth: FAR + 6 }),
   ...[isl(-13, 6), isl(-4, 11), isl(16.5, 4), isl(10, -12)].map((c, i) => ({ id: `waves${i}`, figure: ripples, at: project(v3(c)), pose: 'a', scale: 0.8, opacity: 0, depth: FAR + 2 + i * 0.01 })),
 ]
 

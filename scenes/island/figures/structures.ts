@@ -323,6 +323,10 @@ export const hammockRim = figureOf(
 /** Where a lying figure's hip goes. */
 export const HAMMOCK_LIE: Vec3 = [0, 0.12, 1.02]
 
+/** A stump beside the hammock, at coffee height. */
+export const stump = figureOf('stump', tone(box('stump', [-0.2, -0.2], [0.2, 0.2], 0.55, 0), 'kraft'), 'A stump')
+export const STUMP_TOP: Vec3 = [0, 0, 0.55]
+
 // ---------------------------------------------------------------------------------------------
 // The signboard nobody reads
 

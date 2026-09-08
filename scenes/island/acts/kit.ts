@@ -56,9 +56,9 @@ export const mugAt = (state: PartKeyframe, pose: string | Pose): PartKeyframe =>
 }
 
 /** Standing on a cell. The keeper's mug comes along; anything else stands alone. */
-export const standAt = (part: string, cell: Cell, pose: string, flipX = false, z = 0): Record<string, PartKeyframe> => {
+export const standAt = (part: string, cell: Cell, pose: string, flipX = false, z = 0, carry = true): Record<string, PartKeyframe> => {
   const state: PartKeyframe = { at: feetAt(cell, z), pose, flipX, rotate: 0, depth: roundTo(depthOf(cell) + 0.4, 3) }
-  return part === 'keeper' ? { [part]: state, mug: mugAt(state, pose) } : { [part]: state }
+  return part === 'keeper' && carry ? { [part]: state, mug: mugAt(state, pose) } : { [part]: state }
 }
 
 const HIP_LIE = keeper.poses.lie!.hip as Vec2
@@ -67,7 +67,7 @@ const HIP_LIE = keeper.poses.lie!.hip as Vec2
  * In the hammock: lying, sitting up, or sipping — all anchored at the hip on the cell, so
  * the tween between them is a body sitting up rather than a figure swinging round.
  */
-export const restAt = (cell: Cell, z: number, pose: 'lie' | 'sitUp' | 'sipSit'): Record<string, PartKeyframe> => {
+export const restAt = (cell: Cell, z: number, pose: 'lie' | 'sitUp' | 'reachSit' | 'sipSit', carry = true): Record<string, PartKeyframe> => {
   const [x, y] = project([cell[0], cell[1], z])
   const state: PartKeyframe = {
     at: [roundTo(x - HIP_LIE[0] * KEEPER_SCALE, 2), roundTo(y - HIP_LIE[1] * KEEPER_SCALE, 2)],
@@ -76,10 +76,11 @@ export const restAt = (cell: Cell, z: number, pose: 'lie' | 'sitUp' | 'sipSit'):
     rotate: 0,
     depth: roundTo(depthOf(cell) + 0.3, 3),
   }
-  return { keeper: state, mug: mugAt(state, pose) }
+  return carry ? { keeper: state, mug: mugAt(state, pose) } : { keeper: state }
 }
 
-export const lyingAt = (cell: Cell, z: number): Record<string, PartKeyframe> => restAt(cell, z, 'lie')
+/** Lying in the hammock, mug on its stump. */
+export const lyingAt = (cell: Cell, z: number): Record<string, PartKeyframe> => restAt(cell, z, 'lie', false)
 
 /** Steam over the mug in `state`, which must carry a mug. */
 export const steamOver = (state: Record<string, PartKeyframe>, pose: 'a' | 'b', opacity: number): PartKeyframe => ({
@@ -117,7 +118,7 @@ const gaitPose = (phase: number) => {
 }
 
 /** The keeper walking from one cell to another, planting every step; ends standing. */
-export const walk = (part: string, from: Cell, to: Cell, at: number, duration: number, endPose = 'idle'): Beat[] => {
+export const walk = (part: string, from: Cell, to: Cell, at: number, duration: number, endPose = 'idle', carry = true): Beat[] => {
   const a = feetAt(from)
   const b = feetAt(to)
   const distance = Math.hypot(b[0] - a[0], b[1] - a[1])
@@ -127,7 +128,7 @@ export const walk = (part: string, from: Cell, to: Cell, at: number, duration: n
   // The steps take all but the last 180 ms; the settle into `endPose` lands exactly at
   // `at + duration`, so an act that hands the keeper on at that instant does not overlap.
   const stepping = Math.max(240, duration - 180)
-  const beats: Beat[] = [{ at, parts: standAt(part, from, 'idle', false) }]
+  const beats: Beat[] = [{ at, parts: standAt(part, from, 'idle', false, 0, carry) }]
   for (let i = 1; i <= halfSteps; i++) {
     const t = i / halfSteps
     const cell: Cell = [from[0] + (to[0] - from[0]) * t, from[1] + (to[1] - from[1]) * t]
@@ -135,10 +136,10 @@ export const walk = (part: string, from: Cell, to: Cell, at: number, duration: n
     const state: PartKeyframe = { at: vec([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]), pose, flipX, rotate: 0, depth: roundTo(depthOf(cell) + 0.4, 3) }
     beats.push({
       at: at + Math.round((stepping * i) / halfSteps),
-      parts: part === 'keeper' ? { [part]: state, mug: mugAt(state, pose) } : { [part]: state },
+      parts: part === 'keeper' && carry ? { [part]: state, mug: mugAt(state, pose) } : { [part]: state },
     })
   }
-  beats.push({ at: at + stepping + 180, parts: standAt(part, to, endPose, false) })
+  beats.push({ at: at + stepping + 180, parts: standAt(part, to, endPose, false, 0, carry) })
   return beats
 }
 

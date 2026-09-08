@@ -10,7 +10,7 @@ import { smokePuff } from '../../edi/figures/places.ts'
 import { glow } from '../figures/fixtures.ts'
 import { defineAct } from './act.ts'
 import { SKY, standAt, walk, walkTime, vec } from './kit.ts'
-import { HUT, LAMP } from '../world.ts'
+import { HUT, LAMP, MUG_ON_STUMP, STUMP } from '../world.ts'
 import { NIGHT, START } from '../timing.ts'
 
 const K = 'keeper'
@@ -46,14 +46,21 @@ for (let t = LIT + 900, a = SWEEP.from + SWEEP.step, dir = 1; t < NIGHT.lift - 6
 beats.push({ at: NIGHT.lift, parts: { beam: { at: LAMP.at, rotate: 0, opacity: 0 } }, easing: 'easeIn' })
 beats.push({ at: NIGHT.lift + 1, parts: { lamp: { opacity: 0 } } })
 
-// Home to the hut, and in.
+// Home by way of the hammock: the mug goes back on its stump, then in to the hut.
 const HOME = LIT + 1800
-const homeMs = Math.max(walkTime(HUT.lighthouseDoor, HUT.door), 3200)
-beats.push(...walk(K, HUT.lighthouseDoor, HUT.door, HOME, homeMs))
-beats.push({ at: HOME + homeMs + 600, parts: { [K]: { opacity: 1 }, mug: { opacity: 1 } } })
-beats.push({ at: HOME + homeMs + 1100, parts: { [K]: { opacity: 0 }, mug: { opacity: 0 } }, easing: 'easeIn' })
-beats.push({ at: HOME + homeMs + 1300, parts: { hutGlow: { opacity: 0 } } })
-beats.push({ at: HOME + homeMs + 1900, parts: { hutGlow: { opacity: 1 } }, easing: 'easeOut' })
+const toStump = walkTime(HUT.lighthouseDoor, STUMP.stand)
+beats.push(...walk(K, HUT.lighthouseDoor, STUMP.stand, HOME, toStump))
+const AT_STUMP = HOME + toStump
+beats.push({ at: AT_STUMP + 250, parts: standAt(K, STUMP.stand, 'offerL', true), easing: 'easeInOut' })
+beats.push({ at: AT_STUMP + 550, parts: { mug: { ...MUG_ON_STUMP } }, easing: 'easeOut' })
+beats.push({ at: AT_STUMP + 800, parts: standAt(K, STUMP.stand, 'idle', true, 0, false), easing: 'easeInOut' })
+const toHut = Math.max(walkTime(STUMP.stand, HUT.door), 1200)
+const IN = AT_STUMP + 900 + toHut
+beats.push(...walk(K, STUMP.stand, HUT.door, AT_STUMP + 900, toHut, 'idle', false))
+beats.push({ at: IN + 400, parts: { [K]: { opacity: 1 } } })
+beats.push({ at: IN + 900, parts: { [K]: { opacity: 0 } }, easing: 'easeIn' })
+beats.push({ at: IN + 1100, parts: { hutGlow: { opacity: 0 } } })
+beats.push({ at: IN + 1700, parts: { hutGlow: { opacity: 1 } }, easing: 'easeOut' })
 beats.push({ at: NIGHT.lift - 1500, parts: { hutGlow: { opacity: 1 } } })
 beats.push({ at: NIGHT.lift, parts: { hutGlow: { opacity: 0 } }, easing: 'easeIn' })
 
@@ -67,8 +74,8 @@ const puff = (id: string, start: number, until: number): void => {
     beats.push({ at: t0 + 3000, parts: { [id]: { at: rise(1), scale: 1.9, opacity: 0 } } })
   }
 }
-puff('hutSmoke0', HOME + homeMs + 1500, NIGHT.lift - 3000)
-puff('hutSmoke1', HOME + homeMs + 2700, NIGHT.lift - 3000)
-puff('hutSmoke2', HOME + homeMs + 3900, NIGHT.lift - 3000)
+puff('hutSmoke0', IN + 1300, NIGHT.lift - 3000)
+puff('hutSmoke1', IN + 2500, NIGHT.lift - 3000)
+puff('hutSmoke2', IN + 3700, NIGHT.lift - 3000)
 
 export const act = defineAct('islandDusk', 'Dusk, and the light', beats, parts)

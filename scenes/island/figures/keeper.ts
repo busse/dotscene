@@ -48,6 +48,13 @@ const sitUp = ((): PoseOverride => {
   }
 })()
 
+/** The same, reaching out with the left hand for the mug on its stump. */
+const reachSit: PoseOverride = {
+  ...sitUp,
+  elbowL: add(sitUp.shoulderL as Vec2, [-11, 8]),
+  handL: add(sitUp.shoulderL as Vec2, [-21, 17]),
+}
+
 /** The same, with the mug up to the mouth. */
 const sipSit: PoseOverride = {
   ...sitUp,
@@ -63,6 +70,7 @@ export const keeper = defineFigure('keeper', {
     ...person.poses,
     lie,
     sitUp,
+    reachSit,
     sipSit,
     /** Standing, mug to the mouth. */
     sip: { elbowL: [-11, 20], handL: [-3, 11], head: [0, 2] },
@@ -71,10 +79,10 @@ export const keeper = defineFigure('keeper', {
   },
 })
 
-/** A mug, held from the top: the hand is at the origin and the cup hangs below it. */
+/** A mug, held by its handle: the hand is at the origin, inside the handle's loop, and the cup is to the left. */
 export const mug = defineFigure('mug', {
   title: 'A mug of coffee',
-  points: { tl: [-5, -2], tr: [5, -2], br: [4, 8], bl: [-4, 8], hA: [5, 0], hB: [9, 1], hC: [9, 6], hD: [4, 7] },
+  points: { tl: [-13, -5], tr: [-3, -5], br: [-4, 6], bl: [-12, 6], hA: [-3, -2], hB: [1.5, -1], hC: [1.5, 4], hD: [-4, 5] },
   edges: [
     { from: 'tl', to: 'tr', kind: 'mug' },
     { from: 'tr', to: 'br', kind: 'mug' },
@@ -91,7 +99,7 @@ export const mug = defineFigure('mug', {
 /** Two wisps rising from the mug; `a` and `b` alternate to make them waver. */
 export const steam = defineFigure('steam', {
   title: 'Steam',
-  points: { s0: [-2, -4], s1: [-3.5, -9], s2: [-1.5, -14], t0: [2, -4], t1: [3.5, -9], t2: [1.5, -14] },
+  points: { s0: [-10, -7], s1: [-11.5, -12], s2: [-9.5, -17], t0: [-6, -7], t1: [-4.5, -12], t2: [-6.5, -17] },
   edges: [
     { from: 's0', to: 's1', kind: 'steam' },
     { from: 's1', to: 's2', kind: 'steam' },
@@ -99,5 +107,5 @@ export const steam = defineFigure('steam', {
     { from: 't1', to: 't2', kind: 'steam' },
   ],
   pointKinds: { s0: 'steam', s1: 'steam', s2: 'steam', t0: 'steam', t1: 'steam', t2: 'steam' },
-  poses: { a: {}, b: { s1: [-1, -9], s2: [-3.5, -14], t1: [1, -9], t2: [3.5, -14] } },
+  poses: { a: {}, b: { s1: [-9, -12], s2: [-11.5, -17], t1: [-7, -12], t2: [-4.5, -17] } },
 })

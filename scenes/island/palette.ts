@@ -204,6 +204,7 @@ export const css = (p: Roles): string =>
     stroke('foliage', p.foliage, 0.4, 0.45),
     stroke('frond', p.foliage, 0.32, 0.22, 0.9),
     `.ds-face--mug{fill:${p.faces.paper ?? p.bg}}`,
+    `.ds-face--beard{fill:${p.soft};fill-opacity:.32}`,
     stroke('mug', p.ink, 0.42, 0.36),
     stroke('steam', p.soft, 0.32, 0.26, 0.75),
     stroke('canvas', p.soft, 0.3, 0.4, 0.7),

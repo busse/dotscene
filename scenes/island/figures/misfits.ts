@@ -139,22 +139,48 @@ export const mainframe = figureFrom('mainframe', 'The mainframe, on square wheel
 const SHEETS = 5
 const SHEET_STEP = 0.4
 
-/** The stack, each sheet slid by `lean` times its index. */
+/**
+ * The stack, each sheet slid by `lean` times its index. Every sheet has a grid; the top one
+ * has figures in its cells and one cell selected, so it reads as a spreadsheet and not a pile
+ * of paper.
+ */
 const spreadsheetShape = (lean: number): Shape =>
   merge(
     ...Array.from({ length: SHEETS }, (_u, i) => {
       const dx = round2(-0.12 * i * lean)
       const dy = round2(0.06 * i * lean)
       const z = 0.05 + i * SHEET_STEP
+      const top = i === SHEETS - 1
       const sheet = facesAs(pad(`s${i}`, [dx - 0.6, dy - 0.5], [dx + 0.6, dy + 0.5], z), 'paper')
+      const columns = top ? [-0.2, 0.2] : [-0.2]
+      const rows = top ? [-0.17, 0.17] : [0.15]
       const rules = tag(
         merge(
-          edge(`s${i}g`, [dx - 0.2, dy - 0.5, z], [dx - 0.2, dy + 0.5, z]),
-          edge(`s${i}h`, [dx - 0.6, dy + 0.15, z], [dx + 0.6, dy + 0.15, z]),
+          ...columns.map((x, k) => edge(`s${i}g${k}`, [dx + x, dy - 0.5, z], [dx + x, dy + 0.5, z])),
+          ...rows.map((y, k) => edge(`s${i}h${k}`, [dx - 0.6, dy + y, z], [dx + 0.6, dy + y, z])),
         ),
         'soft',
       )
-      return merge(tag(sheet, 'soft'), rules)
+      if (!top) return merge(tag(sheet, 'soft'), rules)
+      // Figures: a dash in a cell, longer for a bigger number; one cell selected.
+      const cellX = [-0.4, 0, 0.4]
+      const cellY = [-0.33, 0, 0.33]
+      const figures = [
+        [0, 0, 0.22],
+        [1, 0, 0.14],
+        [2, 0, 0.26],
+        [0, 1, 0.18],
+        [2, 1, 0.12],
+        [0, 2, 0.24],
+        [1, 2, 0.2],
+        [2, 2, 0.16],
+      ] as const
+      const numbers = tag(
+        merge(...figures.map(([c, r, len], k) => edge(`s${i}n${k}`, [dx + cellX[c]! - len / 2, dy + cellY[r]!, z + 0.01], [dx + cellX[c]! + len / 2, dy + cellY[r]!, z + 0.01]))),
+        'blue',
+      )
+      const selected = tag(facesAs(pad(`s${i}sel`, [dx + 0.02, dy - 0.15], [dx + 0.38, dy + 0.15], z + 0.005), 'screen'), 'blue')
+      return merge(tag(sheet, 'soft'), rules, selected, numbers)
     }),
   )
 
@@ -266,35 +292,47 @@ interface CronPose {
 }
 
 const cronShape = ({ seat, legs, beard }: CronPose): Shape => {
-  const top = seat + 0.9
-  const legX: readonly [number, number] = legs === 'together' ? [-0.03, 0.03] : [-0.27, 0.27]
+  // A tall cabinet on two legs with feet, a clock for a face, and a beard hanging from it.
+  const top = seat + 1.45
+  const legX: readonly [number, number] = legs === 'together' ? [-0.06, 0.06] : [-0.26, 0.26]
   const leg = (name: string, x: number): Shape =>
     legs === 'folded'
-      ? edge(name, [x, 0.25, seat], [x, 0.55, 0.05])
-      : edge(name, [x, 0.1, 0], [x, 0.1, seat])
-  const tipZ = beard === 'long' ? seat - 0.95 : seat - 0.15
-  const strands = merge(
-    ...[-0.28, -0.14, 0, 0.14, 0.28].map((x, i) => {
-      const kink = (i % 2 === 0 ? 1 : -1) * 0.06
-      const mid: Vec3 = [x + kink, 0.25, (seat + tipZ) / 2]
-      return merge(edge(`beard${i}a`, [x, 0.25, seat], mid), edge(`beard${i}b`, mid, [x, 0.25, tipZ]))
-    }),
-  )
+      ? merge(edge(name, [x, 0.2, seat], [x, 0.5, 0.06]), edge(`${name}Foot`, [x, 0.5, 0.06], [x, 0.72, 0.02]))
+      : merge(edge(name, [x, 0.1, 0], [x, 0.1, seat]), edge(`${name}Foot`, [x, 0.1, 0], [x, 0.38, 0]))
+  const clockZ = seat + 1.0
   const clock = merge(
-    ringXZ('clock', [0, 0.25, seat + 0.55], 0.24),
-    edge('handH', [0, 0.25, seat + 0.55], [0.14, 0.25, seat + 0.55]),
-    edge('handM', [0, 0.25, seat + 0.55], [0, 0.25, seat + 0.73]),
+    ringXZ('clock', [0, 0.26, clockZ], 0.27),
+    edge('handH', [0, 0.26, clockZ], [0.16, 0.26, clockZ]),
+    edge('handM', [0, 0.26, clockZ], [0, 0.26, clockZ + 0.2]),
   )
+  const chin = clockZ - 0.22
+  const tipZ = beard === 'long' ? seat - 0.42 : chin - 0.28
+  const beardShape: Shape = {
+    points: {
+      beardL: at([-0.22, 0.27, chin]),
+      beardR: at([0.22, 0.27, chin]),
+      beardTip: at([0, 0.3, tipZ]),
+      beardA: at([-0.1, 0.28, (chin + tipZ) / 2]),
+      beardB: at([0.1, 0.28, (chin + tipZ) / 2]),
+    },
+    edges: [
+      ['beardL', 'beardTip'],
+      ['beardTip', 'beardR'],
+      ['beardA', 'beardTip'],
+      ['beardB', 'beardTip'],
+    ],
+    faces: [{ points: ['beardL', 'beardR', 'beardTip'], kind: 'beard' }],
+  }
   return merge(
     tag(merge(leg('legL', legX[0]), leg('legR', legX[1])), 'metal'),
-    tone(box('job', [-0.35, -0.25], [0.35, 0.25], top, seat), 'warm'),
+    tone(box('job', [-0.4, -0.25], [0.4, 0.25], top, seat), 'warm'),
     tag(clock, 'soft'),
-    tag(strands, 'soft'),
+    tag(beardShape, 'soft'),
   )
 }
 
 /** Where an owner's badge pins on, on the +x wall. */
-export const CRON_BADGE: Vec3 = [0.35, 0, 1.15]
+export const CRON_BADGE: Vec3 = [0.4, 0, 1.35]
 
 const cronRest: CronPose = { seat: 0.45, legs: 'apart', beard: 'long' }
 
@@ -313,16 +351,17 @@ type Mouth = 'flat' | 'open' | 'smile'
 
 const chatbotShape = (mouth: Mouth): Shape => {
   const [zL, zM, zR]: [number, number, number] =
-    mouth === 'open' ? [1.62, 1.5, 1.62] : mouth === 'smile' ? [1.67, 1.56, 1.67] : [1.62, 1.62, 1.62]
-  const screen = box('scr', [-0.5, -0.04], [0.5, 0.04], 2.1, 1.4)
+    mouth === 'open' ? [1.6, 1.46, 1.6] : mouth === 'smile' ? [1.66, 1.52, 1.66] : [1.6, 1.6, 1.6]
+  // A portrait screen, taller than it is wide, so the face has room to be a face.
+  const screen = box('scr', [-0.42, -0.04], [0.42, 0.04], 2.4, 1.2)
   const lit: Shape = { ...screen, faces: (screen.faces ?? []).map((f) => (f.kind === 'south' ? { ...f, kind: 'screen' } : f)) }
   const face: Shape = {
     points: {
-      eyeL: at([-0.2, 0.04, 1.85]),
-      eyeR: at([0.2, 0.04, 1.85]),
-      mouthL: at([-0.2, 0.04, zL]),
+      eyeL: at([-0.17, 0.04, 2.05]),
+      eyeR: at([0.17, 0.04, 2.05]),
+      mouthL: at([-0.18, 0.04, zL]),
       mouthM: at([0, 0.04, zM]),
-      mouthR: at([0.2, 0.04, zR]),
+      mouthR: at([0.18, 0.04, zR]),
     },
     edges: [
       ['mouthL', 'mouthM'],
@@ -330,15 +369,15 @@ const chatbotShape = (mouth: Mouth): Shape => {
     ],
   }
   return merge(
-    tag(edge('pole', [0, 0, 0], [0, 0, 1.4]), 'metal'),
+    tag(edge('pole', [0, 0, 0], [0, 0, 1.2]), 'metal'),
     tag(lit, 'soft'),
-    tag(edge('aerial', [0.4, 0, 2.1], [0.4, 0, 2.38]), 'blue'),
+    tag(edge('aerial', [0.34, 0, 2.4], [0.34, 0, 2.7]), 'blue'),
     tag(face, 'blue'),
   )
 }
 
 /** Where a speech bubble's tail starts. */
-export const CHATBOT_MOUTH: Vec3 = [0, 0.04, 1.62]
+export const CHATBOT_MOUTH: Vec3 = [0, 0.04, 1.6]
 /** Where a cable plugs in: low on the pole. */
 export const CHATBOT_PORT: Vec3 = [0, 0, 0.35]
 
