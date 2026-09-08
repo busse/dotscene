@@ -90,6 +90,7 @@ export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): strin
     ['data-dotscene', scene.name],
     ['data-version', scene.version],
     ['viewBox', `${x} ${y} ${width} ${height}`],
+    ['preserveAspectRatio', scene.fit === 'slice' ? 'xMidYMid slice' : undefined],
     ['role', titled ? 'img' : undefined],
     ['aria-hidden', titled ? undefined : 'true'],
   ])}>`

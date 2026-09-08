@@ -231,6 +231,12 @@ export interface SceneSpec {
   readonly camera?: CameraSpec & { readonly aspect?: number }
   /** Scene units of breathing room around the content bounds. Default 6. */
   readonly padding?: number
+  /**
+   * How the drawing sits in a box of a different shape. `meet` (the default) letterboxes
+   * so the whole frame is always visible; `slice` covers the box and crops the frame, which
+   * is what a background wants.
+   */
+  readonly fit?: 'meet' | 'slice'
   /** Dot radius in scene units. Defaults to a proportion of the viewBox — see `resolve`. */
   readonly dotRadius?: number
   /** Stroke width in scene units. Defaults to a proportion of the dot radius. */
@@ -263,6 +269,7 @@ export interface Scene {
   readonly title?: string
   readonly viewBox?: readonly [number, number, number, number]
   readonly version?: number
+  readonly fit?: 'meet' | 'slice'
   readonly camera?: CameraSpec & { readonly aspect?: number }
   readonly dotRadius?: number
   readonly lineWidth?: number
@@ -306,6 +313,7 @@ export const defineScene = (name: string, spec: SceneSpec): Scene => ({
   ...(spec.title === undefined ? {} : { title: spec.title }),
   ...(spec.viewBox === undefined ? {} : { viewBox: spec.viewBox }),
   ...(spec.version === undefined ? {} : { version: spec.version }),
+  ...(spec.fit === undefined ? {} : { fit: spec.fit }),
   ...(spec.camera === undefined ? {} : { camera: spec.camera }),
   ...(spec.dotRadius === undefined ? {} : { dotRadius: spec.dotRadius }),
   ...(spec.lineWidth === undefined ? {} : { lineWidth: spec.lineWidth }),

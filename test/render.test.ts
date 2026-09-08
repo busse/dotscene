@@ -119,6 +119,12 @@ describe('renderSvg', () => {
     expect(block).toContain('&{')
   })
 
+  it('covers its box when asked to, the way a background must', () => {
+    const cover = renderSvg(resolve(defineScene('bg', { parts: [{ figure: bar }], fit: 'slice' })))
+    expect(cover).toContain('preserveAspectRatio="xMidYMid slice"')
+    expect(renderSvg(resolve(defineScene('bg', { parts: [{ figure: bar }] })))).not.toContain('preserveAspectRatio')
+  })
+
   it('names the clip after the scene so two scenes on one page do not collide', () => {
     const a = renderSvg(resolve(defineScene('one', { parts: [{ figure: bar }] })))
     const b = renderSvg(resolve(defineScene('two', { parts: [{ figure: bar }] })))

@@ -3,6 +3,7 @@ import { compile, loopGaps, resolve, resolveAt } from '../src/index.ts'
 import { scene as singlestone } from '../scenes/cbdot/singlestone.ts'
 import { scene as eszett } from '../scenes/cbdot/eszett.ts'
 import { scene as bussetech } from '../scenes/cbdot/bussetech.ts'
+import { scene as hero } from '../scenes/cbdot/hero.ts'
 import { VIEWBOX } from '../scenes/cbdot/palette.ts'
 
 const art = [singlestone, eszett, bussetech]
@@ -44,6 +45,14 @@ describe('card art', () => {
     const stem = letter.dots.filter((d) => d.part === 'letter').map((d) => d.at[1])
     expect(Math.max(...stem) - Math.min(...stem)).toBeGreaterThan(60)
     expect(resolve(bussetech).partOrder).toContain('human')
+  })
+
+  it('covers the intro block with the meadow, in both themes, with the ground painted', () => {
+    const svg = compile(hero).inline
+    expect(svg).toContain('preserveAspectRatio="xMidYMid slice"')
+    expect(svg).toContain('class="ds-bg"')
+    expect(svg).toContain(':root[data-theme="dark"] &')
+    expect(resolve(hero).animation?.camera).toBeDefined()
   })
 
   it('draws the letter out of the pencil, never ahead of it', () => {

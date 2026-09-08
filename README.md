@@ -230,7 +230,7 @@ Size it with CSS — the SVG is `width: 100%; height: auto` at a 2.4:1 aspect, a
 
 ## Card art for the site
 
-`scenes/cbdot/` holds the art for the cards on the personal site next door, one scene per card at the slot's own aspect, ink as `currentColor` and the site's tokens for everything else. `node scripts/sync-cbdot.mjs` writes each `art<Thing>` scene into `../cbdot/_includes/art/<thing>.html` — the block without its runtime tag, since the site's layout loads the runtime once — and copies the runtime to `../cbdot/assets/js/`. The site never hand-edits those files; change the scene here and sync.
+`scenes/cbdot/` holds the art for the personal site next door: one scene per card at the slot's own aspect, ink as `currentColor` and the site's tokens for everything else, and `artHero`, the EDI meadow with `fit: 'slice'` so it covers the intro block from rule to rule while the page washes paper over the copy. `node scripts/sync-cbdot.mjs` writes each `art<Thing>` scene into `../cbdot/_includes/art/<thing>.html` — the block without its runtime tag, since the site's layout loads the runtime once — and copies the runtime to `../cbdot/assets/js/`. The site never hand-edits those files; change the scene here and sync.
 
 ## Isometric scenes
 
