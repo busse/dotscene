@@ -228,6 +228,10 @@ Size it with CSS — the SVG is `width: 100%; height: auto` at a 2.4:1 aspect, a
 
 `docs/ediHeroNight.html` is a fixed-dark twin, for a standalone `.svg` or an `<img>` where no page CSS can reach in. `docs/ediHeroMeadow.html` is the same animation on a green ground with grass and bare earth for texture, with its own dark twin. See `scenes/edi/README.md` for what to edit to change what.
 
+## Card art for the site
+
+`scenes/cbdot/` holds the art for the cards on the personal site next door, one scene per card at the slot's own aspect, ink as `currentColor` and the site's tokens for everything else. `node scripts/sync-cbdot.mjs` writes each `art<Thing>` scene into `../cbdot/_includes/art/<thing>.html` — the block without its runtime tag, since the site's layout loads the runtime once — and copies the runtime to `../cbdot/assets/js/`. The site never hand-edits those files; change the scene here and sync.
+
 ## Isometric scenes
 
 `isometric({ tile, squash, rise, origin })` returns a function projecting grid coordinates — tiles across, tiles down, storeys up — onto the drawing plane. Grid +x runs down-right, +y down-left, +z straight up.
