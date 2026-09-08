@@ -44,8 +44,8 @@ const shots: Shot[] = [
   shot(FIXED.fax + 1200, between(faxSide, tower, 0.45), 260),
   shot(FIXED.fax + 3400, between(faxSide, tower, 0.55), 250),
   // Along the beach with the cron job, then into the shade.
-  shot(START.cron + 2600, beach, 200, -6),
-  shot(FIXED.cron + 2600, between(beach, shade, 0.6), 190, -6),
+  shot(START.cron + 2600, beach, 200, 10),
+  shot(FIXED.cron + 2600, between(beach, shade, 0.6), 190, 8),
   // Close on the chatbot's screen, with room above for what it says.
   shot(START.chatbot + 2200, screen, 160, -12),
   shot(FIXED.chatbot + 1800, screen, 175, -14),
@@ -55,9 +55,9 @@ const shots: Shot[] = [
   // The landing: open up on the runway, the tower and its beam.
   shot(START.landing + 2400, between(runway, tower, 0.3), 340, 4),
   // The boat: the harbour under the lamp, then a slow push while it ties up.
-  shot(START.boat + 6000, harbour, 380, 2),
+  shot(START.boat + 6000, harbour, 400, 20),
   // A slow push while it ties up and the keeper goes to bed, then a quick tilt up to the lamp.
-  shot(START.reset - 700, harbour, 340, 0),
+  shot(START.reset - 700, harbour, 380, 16),
   // Stay with the beam while the island is put back below, out of frame or under a fade.
   shot(START.reset - 100, tower, 200, -14),
   shot(START.reset + 1500, tower, 220, -14),

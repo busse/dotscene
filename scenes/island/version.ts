@@ -16,5 +16,7 @@
  *   along the far sea; the mug and its stump paint in front of the hammock; the keeper comes
  *   back out of the hut, sets the mug down and sleeps in the hammock on camera, so the reset
  *   moves only the misfits; the sun and moon pass behind the island.
+ * - v5 — v4 moved the wrong thing. The jetty and the mainframe are back on the front shore as
+ *   in v3; it is the cron job that paces the far shore now, between the hut and the tower.
  */
-export const ISLAND_VERSION = 4
+export const ISLAND_VERSION = 5
