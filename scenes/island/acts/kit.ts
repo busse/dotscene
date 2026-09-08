@@ -1,0 +1,198 @@
+/**
+ * Staging helpers for the island, on top of the EDI kit's generic ones.
+ *
+ * What is generic — a message flying an arc, a camera shot, a pose cycle — comes from the
+ * EDI kit unchanged. What is the island's own is here: the keeper at the island's scale, a
+ * plane crossing at altitude, a wire strung to a socket, a bubble said by the chatbot, the
+ * sun's arc, and nightfall.
+ */
+
+import { definePose, easings, lerpPoints, posePoints, type Beat, type PartKeyframe, type Vec2 } from 'dotscene'
+import { at as project } from '../../edi/projection.ts'
+import { person } from '../../person.ts'
+import { strung, wire } from '../figures/fixtures.ts'
+import { NIGHT } from '../timing.ts'
+
+export { between, camera, cycle, flight, flightSpan, look, report, type Shot } from '../../edi/acts/kit.ts'
+
+export type Cell = readonly [number, number]
+
+const roundTo = (n: number, places = 2): number => Math.round(n * 10 ** places) / 10 ** places
+export const vec = (v: Vec2): Vec2 => [roundTo(v[0]), roundTo(v[1])]
+
+/** Paint order for something standing at a cell: `x + y`, larger nearer. */
+export const depthOf = (cell: Cell): number => cell[0] + cell[1]
+
+/** Depth for anything in the air, over every solid. */
+export const SKY = 1000
+
+// ---------------------------------------------------------------------------------------------
+// The keeper
+
+/** The person figure is 64 tall; the keeper stands about seven and a half units. */
+export const KEEPER_SCALE = 0.2
+const FEET = 64 * KEEPER_SCALE
+
+/** The part position that puts the keeper's feet on a cell. */
+export const feetAt = (cell: Cell, z = 0): Vec2 => {
+  const [x, y] = project([cell[0], cell[1], z])
+  return [x, y - FEET]
+}
+
+export const standAt = (part: string, cell: Cell, pose: string, flipX = false, z = 0): Record<string, PartKeyframe> => ({
+  [part]: { at: feetAt(cell, z), pose, flipX, rotate: 0, depth: roundTo(depthOf(cell) + 0.4, 3) },
+})
+
+/** Lying in the hammock: the standing figure tipped over onto its back. */
+export const lyingAt = (part: string, cell: Cell, z: number): Record<string, PartKeyframe> => {
+  const [x, y] = project([cell[0], cell[1], z])
+  // Rotated about the head, so the body swings out along the hammock's length.
+  return { [part]: { at: [x - 4, y - 1], pose: 'idle', flipX: false, rotate: -78, depth: roundTo(depthOf(cell) + 0.3, 3) } }
+}
+
+const GAIT = ['stepA', 'passA', 'stepB', 'passB'] as const
+const HALF_STRIDE = 10
+const gaitCache = new Map<string, ReturnType<typeof definePose>>()
+const gaitPose = (phase: number) => {
+  const wrapped = ((phase % 4) + 4) % 4
+  const key = wrapped.toFixed(2)
+  const cached = gaitCache.get(key)
+  if (cached !== undefined) return cached
+  const index = Math.floor(wrapped)
+  const pose = definePose(person, `gait${key}`, lerpPoints(posePoints(person, GAIT[index]!), posePoints(person, GAIT[(index + 1) % 4]!), wrapped - index))
+  gaitCache.set(key, pose)
+  return pose
+}
+
+/** The keeper walking from one cell to another, planting every step; ends standing. */
+export const walk = (part: string, from: Cell, to: Cell, at: number, duration: number, endPose = 'idle'): Beat[] => {
+  const a = feetAt(from)
+  const b = feetAt(to)
+  const distance = Math.hypot(b[0] - a[0], b[1] - a[1])
+  const stride = HALF_STRIDE * KEEPER_SCALE
+  const halfSteps = Math.max(2, Math.round(distance / stride))
+  const flipX = b[0] < a[0]
+  // The steps take all but the last 180 ms; the settle into `endPose` lands exactly at
+  // `at + duration`, so an act that hands the keeper on at that instant does not overlap.
+  const stepping = Math.max(240, duration - 180)
+  const beats: Beat[] = [{ at, parts: { [part]: { at: a, pose: 'idle', flipX: false, rotate: 0, depth: roundTo(depthOf(from) + 0.4, 3) } } }]
+  for (let i = 1; i <= halfSteps; i++) {
+    const t = i / halfSteps
+    const cell: Cell = [from[0] + (to[0] - from[0]) * t, from[1] + (to[1] - from[1]) * t]
+    beats.push({
+      at: at + Math.round((stepping * i) / halfSteps),
+      parts: { [part]: { at: vec([a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t]), pose: gaitPose(i), flipX, rotate: 0, depth: roundTo(depthOf(cell) + 0.4, 3) } },
+    })
+  }
+  beats.push({ at: at + stepping + 180, parts: standAt(part, to, endPose, false) })
+  return beats
+}
+
+/** How long a walk between two cells takes at the keeper's pace. */
+export const walkTime = (from: Cell, to: Cell, pace = 2.2): number =>
+  Math.max(500, Math.round((Math.hypot(to[0] - from[0], to[1] - from[1]) / pace) * 1000))
+
+// ---------------------------------------------------------------------------------------------
+// Things in the air
+
+/**
+ * A straight pass at altitude with a gentle bob, for the plane: beats along the line with a
+ * heading pose held throughout, propeller alternating, and anything trailing it — a banner —
+ * riding a fixed screen offset behind.
+ */
+export const fly = (spec: {
+  readonly part: string
+  readonly from: Cell
+  readonly to: Cell
+  readonly z: number
+  readonly zTo?: number
+  readonly at: number
+  readonly duration: number
+  readonly pose: string
+  readonly propPoses?: readonly [string, string]
+  readonly trail?: { readonly part: string; readonly offset: Vec2; readonly poses?: readonly string[] }
+  readonly opacity?: readonly [number, number]
+  readonly steps?: number
+  readonly bob?: number
+}): Beat[] => {
+  const steps = spec.steps ?? Math.max(4, Math.round(spec.duration / 450))
+  const beats: Beat[] = []
+  const [o0, o1] = spec.opacity ?? [1, 1]
+  for (let i = 0; i <= steps; i++) {
+    const f = i / steps
+    const cell: Cell = [spec.from[0] + (spec.to[0] - spec.from[0]) * f, spec.from[1] + (spec.to[1] - spec.from[1]) * f]
+    const z = spec.z + ((spec.zTo ?? spec.z) - spec.z) * easings.easeInOut(f) + (spec.bob ?? 0.25) * Math.sin(f * Math.PI * 4)
+    const p = project([cell[0], cell[1], z])
+    const pose = spec.propPoses === undefined ? spec.pose : spec.propPoses[i % 2]!
+    const parts: Record<string, PartKeyframe> = {
+      [spec.part]: { at: vec(p), pose, opacity: i === 0 ? o0 : i === steps ? o1 : 1, depth: SKY + 2 },
+    }
+    if (spec.trail !== undefined) {
+      parts[spec.trail.part] = {
+        at: vec([p[0] + spec.trail.offset[0], p[1] + spec.trail.offset[1]]),
+        opacity: i === 0 ? o0 : i === steps ? o1 : 1,
+        depth: SKY + 1,
+        ...(spec.trail.poses === undefined ? {} : { pose: spec.trail.poses[i % spec.trail.poses.length]! }),
+      }
+    }
+    beats.push({ at: spec.at + Math.round(spec.duration * f), parts })
+  }
+  return beats
+}
+
+/** The sun or moon along a half-ellipse from one horizon point to another, in scene units. */
+export const arcAcross = (part: string, from: Vec2, to: Vec2, rise: number, at: number, duration: number, opacity: readonly [number, number, number] = [0, 1, 0]): Beat[] => {
+  const steps = 10
+  const beats: Beat[] = []
+  for (let i = 0; i <= steps; i++) {
+    const f = i / steps
+    const x = from[0] + (to[0] - from[0]) * f
+    const y = from[1] + (to[1] - from[1]) * f - Math.sin(f * Math.PI) * rise
+    const o = i === 0 ? opacity[0] : i === steps ? opacity[2] : opacity[1]
+    beats.push({ at: at + Math.round(duration * f), parts: { [part]: { at: vec([x, y]), opacity: o, depth: SKY - 100 } } })
+  }
+  return beats
+}
+
+// ---------------------------------------------------------------------------------------------
+// Wires, bubbles, nightfall
+
+/** String a wire from its socket to a point over `duration`, or drop it slack. */
+export const stringWire = (part: string, socket: Vec2, to: Vec2, at: number, duration: number): Beat[] => [
+  { at, parts: { [part]: { at: socket, pose: 'slack', opacity: 1 } } },
+  { at: at + duration, parts: { [part]: { at: socket, pose: strung([to[0] - socket[0], to[1] - socket[1]]), opacity: 1 } }, easing: 'easeInOut' },
+]
+
+export const slackWire = (part: string, socket: Vec2, at: number): Beat[] => [
+  { at, parts: { [part]: { at: socket, pose: 'slack', opacity: 0 } } },
+]
+
+/** The wire figure, exported here so acts and the world agree on one. */
+export { wire }
+
+/**
+ * A speech bubble with something in it: pops up over the mouth, holds, and shrinks away.
+ * The bubble and its contents are separate parts riding one position.
+ */
+export const speak = (bubble: string, glyph: string | undefined, mouth: Vec2, at: number, hold = 1100): Beat[] => {
+  const up: Vec2 = vec([mouth[0] + 7, mouth[1] - 9])
+  const state = (o: number, s: number): Record<string, PartKeyframe> => ({
+    [bubble]: { at: up, opacity: o, scale: s, depth: SKY + 20 },
+    ...(glyph === undefined ? {} : { [glyph]: { at: vec([up[0] + 0.6, up[1] - 0.4]), opacity: o, scale: s, depth: SKY + 21 } }),
+  })
+  return [
+    { at, parts: state(0, 0.3) },
+    { at: at + 220, parts: state(1, 1), easing: 'easeOut' },
+    { at: at + 220 + hold, parts: state(1, 1) },
+    { at: at + 220 + hold + 200, parts: state(0, 0.5), easing: 'easeIn' },
+  ]
+}
+
+/** Nightfall: the overlay darkens from dusk, holds through the night, and lifts before the cut. */
+export const nightBeats = (part: string, loop: number): Beat[] => [
+  { at: 0, parts: { [part]: { opacity: 0 } } },
+  { at: NIGHT.from, parts: { [part]: { opacity: 0 } } },
+  { at: NIGHT.deep, parts: { [part]: { opacity: NIGHT.opacity } }, easing: 'easeInOut' },
+  { at: NIGHT.lift, parts: { [part]: { opacity: NIGHT.opacity } } },
+  { at: loop, parts: { [part]: { opacity: 0 } }, easing: 'easeInOut' },
+]

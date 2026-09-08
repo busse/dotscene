@@ -77,6 +77,26 @@ before touching anything in that folder. Figures live in `scenes/edi/figures/`, 
 - **A gallery of everything cannot also play everything.** Scenes over about 90 kB are shown as
   images linking to their own page; under that they embed and animate in place.
 
+## The island hero
+
+`scenes/island/` is a second hero on the same kit — the Island of Misfit Applications. Its
+README is the map. Lessons it added, which apply to any staged scene:
+
+- **A reset needs a hold.** A jump back is a keyframe like any other; without a beat restating
+  the current state an instant before it, the part slides toward the reset for as long as it has
+  been still — forty seconds, in the mainframe's case. `stateBefore` / `holdAt` in
+  `scenes/island/acts/act.ts`, and a drift test in `test/island.test.ts`.
+- **Frame for the page, not the scene.** If a page washes the left of the block for its copy, a
+  centred subject lands under the wash at every push-in. The island's shots put the subject about
+  seven tenths across (`framed` in `acts/camera.ts`).
+- **Headless Chrome's virtual-time budget is not the animation clock.** Load time eats an
+  unpredictable share of it. To see an exact instant, append a script to a copy of the built page
+  that polls `dotscene.scenes.get(name)`, then `pause()` and `seek(t)`, and screenshot that.
+  Built pages have no `</body>` — append, do not splice. One Chrome at a time; parallel runs
+  with separate profiles time out.
+- **A hand-off is `at + duration`, not `+ 180`.** A walk that settles after its stated end
+  overlaps the next act's first beat by exactly that much, and the compositor rightly refuses.
+
 ## Gotchas
 
 - The viewBox spans **every pose in the animation cycle**, not just the resting one. A pose that reaches outside the rest bounds is fine; it will not clip.
