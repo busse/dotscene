@@ -42,6 +42,7 @@ import {
 import { FORK_CENTRE, forklift, pallet, rig, van } from './figures/vehicles.ts'
 import { coinStack } from './figures/tokens.ts'
 import { birds, cloud, ripples } from './figures/sky.ts'
+import { bare, patch as grassPatch, scatter, tuft } from './figures/ground.ts'
 import { person } from '../person.ts'
 
 export type Cell = readonly [number, number]
@@ -171,11 +172,11 @@ export const cornersBetween = (from: number, to: number): readonly number[] => {
  * point is the vertex pushed out along both runs' normals at once, which is what stops the
  * old H-shaped gaps at every turn.
  */
-const kerbPolyline = (side: 1 | -1): readonly Cell[] => {
+const kerbPolyline = (side: 1 | -1, half = HALF_ROAD): readonly Cell[] => {
   const normal = (seg: Segment): Cell => {
     // Left of the direction of travel, then flipped for the other side.
     const n: Cell = seg.axis === 'x' ? [0, -seg.dir] : [seg.dir, 0]
-    return [n[0] * side * HALF_ROAD, n[1] * side * HALF_ROAD]
+    return [n[0] * side * half, n[1] * side * half]
   }
   const points: Cell[] = []
   points.push(add(ROAD[0]!, normal(segments[0]!)))
@@ -208,6 +209,24 @@ const roadShape: Shape = (() => {
 
 export const road = figureOf('road', roadShape, 'The road')
 
+/** A band between two offset polylines, for a verge or a bank. */
+const band = (prefix: string, inner: readonly Cell[], outer: readonly Cell[], kind: string, face: string): Shape => {
+  const shape = merge(polyline(`${prefix}In`, inner, kind), polyline(`${prefix}Out`, outer, kind))
+  const rim = [...inner.map((_c, i) => `${prefix}In${i}`), ...outer.map((_c, i) => `${prefix}Out${outer.length - 1 - i}`)]
+  return { ...shape, faces: [{ points: rim, kind: face }] }
+}
+
+/** Bare earth along both sides of the road: the shoulder a road wears into a meadow. */
+const VERGE = 0.55
+export const verges = figureOf(
+  'verges',
+  merge(
+    band('vergeL', kerbPolyline(1), kerbPolyline(1, HALF_ROAD + VERGE), 'dirt', 'dirt'),
+    band('vergeR', kerbPolyline(-1), kerbPolyline(-1, HALF_ROAD + VERGE), 'dirt', 'dirt'),
+  ),
+  'The road\'s shoulders',
+)
+
 // ---------------------------------------------------------------------------------------------
 // The river and the bridge
 
@@ -228,14 +247,14 @@ const RIVER: readonly Cell[] = [
 
 const RIVER_HALF = 0.85
 
-const riverBank = (side: 1 | -1): readonly Cell[] =>
+const riverBank = (side: 1 | -1, half = RIVER_HALF): readonly Cell[] =>
   RIVER.map((cell, i) => {
     const prev = RIVER[Math.max(0, i - 1)]!
     const next = RIVER[Math.min(RIVER.length - 1, i + 1)]!
     const dx = next[0] - prev[0]
     const dy = next[1] - prev[1]
     const length = Math.hypot(dx, dy) || 1
-    return [cell[0] + (-dy / length) * RIVER_HALF * side, cell[1] + (dx / length) * RIVER_HALF * side]
+    return [cell[0] + (-dy / length) * half * side, cell[1] + (dx / length) * half * side]
   })
 
 const riverShape: Shape = (() => {
@@ -247,6 +266,16 @@ const riverShape: Shape = (() => {
 })()
 
 export const river = figureOf('river', riverShape, 'The river')
+
+/** Sand either side of the water. */
+export const shores = figureOf(
+  'shores',
+  merge(
+    band('shoreL', riverBank(1), riverBank(1, RIVER_HALF + 0.5), 'dirt', 'dirt'),
+    band('shoreR', riverBank(-1), riverBank(-1, RIVER_HALF + 0.5), 'dirt', 'dirt'),
+  ),
+  'The river\'s shores',
+)
 
 /** Where the road crosses the river: on the first −y run, at the river's own crossing point. */
 export const BRIDGE_CELL: Cell = [-10, 1]
@@ -475,6 +504,20 @@ export const stageParts: readonly Part[] = [
 
   // The network, drawn over the ground but under everything in the air.
   { id: 'links', figure: links, depth: 900 },
+]
+
+// ---------------------------------------------------------------------------------------------
+// The meadow: ground texture for the green variant, all of it flat and painted first
+
+/** The plate the establishing shot sees, in (u, v), with room for every camera move. */
+const PLATE = { u: [-34, 42] as [number, number], v: [-50, 16] as [number, number] }
+
+export const meadowParts: readonly Part[] = [
+  { id: 'patches', figure: figureOf('patches', scatter('patch', 22, PLATE, 11, (n, u, v, s) => grassPatch(n, u, v, 2.6, s)), 'Longer grass'), depth: FAR - 8 },
+  { id: 'bare', figure: figureOf('bare', scatter('bare', 9, PLATE, 23, (n, u, v, s) => bare(n, u, v, 1.6, s)), 'Bare earth'), depth: FAR - 7 },
+  { id: 'shores', figure: shores, depth: FAR - 6 },
+  { id: 'verges', figure: verges, depth: FAR - 5 },
+  { id: 'tufts', figure: figureOf('tufts', scatter('tuft', 70, PLATE, 37, tuft), 'Grass'), depth: FAR - 4 },
 ]
 
 // ---------------------------------------------------------------------------------------------

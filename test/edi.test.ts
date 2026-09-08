@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { animationPayload, resolve, resolveAt } from '../src/index.ts'
 import { acts } from '../scenes/edi/acts/index.ts'
 import { cameraScript } from '../scenes/edi/acts/camera.ts'
-import { cast, composed, heroNight, placements, scene, seam } from '../scenes/edi/hero.ts'
+import { cast, composed, heroMeadow, heroMeadowNight, heroNight, placements, scene, seam } from '../scenes/edi/hero.ts'
 import { along, ROAD, routeAt, segments, sites } from '../scenes/edi/world.ts'
 import { LOOP, START } from '../scenes/edi/timing.ts'
 
@@ -158,6 +158,21 @@ describe('the hero', () => {
     const dark = resolve(heroNight)
     expect(dark.animation?.cycle).toEqual(light.animation?.cycle)
     expect(dark.partOrder).toEqual(light.partOrder)
+  })
+
+  it('puts the meadow under the same animation, with its texture painted first', () => {
+    const paper = resolve(scene)
+    for (const variant of [heroMeadow, heroMeadowNight]) {
+      const green = resolve(variant)
+      expect(green.animation?.cycle).toEqual(paper.animation?.cycle)
+      expect(green.animation?.frames).toEqual(paper.animation?.frames)
+      // Texture first, then everything the paper version has, in the same order.
+      const texture = ['patches', 'bare', 'shores', 'verges', 'tufts']
+      expect(green.partOrder.slice(0, texture.length)).toEqual(texture)
+      expect(green.partOrder.slice(texture.length)).toEqual(paper.partOrder)
+      expect(green.background).not.toBe(paper.background)
+      expect(green.css).toContain('.ds-face--patch')
+    }
   })
 
   it('only ever moves a vehicle along the axis of the heading it holds', () => {

@@ -20,7 +20,17 @@ export interface Tone {
   readonly south: string
 }
 
+/** The ground texture of the meadow variant. Outside the recorded ramps — see below. */
+export interface Meadow {
+  readonly patch: string
+  readonly tuft: string
+  readonly dirt: string
+  readonly dirtEdge: string
+}
+
 export interface Roles {
+  /** What the ground is painted. */
+  readonly bg: string
   readonly ink: string
   readonly soft: string
   readonly lot: string
@@ -51,6 +61,7 @@ export interface Roles {
     readonly paper: string
     readonly coin: string
   }
+  readonly meadow?: Meadow
 }
 
 // The ramp, by name.
@@ -73,8 +84,31 @@ const npb500 = '#3d9fbf'
 const npb600 = '#1b7f9f'
 const npb700 = '#0b6580'
 
+/**
+ * Not from the ramps. The meadow variant asks for a ground the palette does not name: a
+ * light green, and a tan for the bare earth beside the road and the water. These are chosen
+ * to sit between the warm grays and the blues, and are the values to swap out if the site's
+ * palette gains a green of its own.
+ */
+const grass100 = '#e3ecd6'
+const grass200 = '#d3e0c1'
+const grass300 = '#a9c091'
+const dirt100 = '#eadfc9'
+const dirt200 = '#c9b797'
+const grassNight = '#1a2320'
+const grassNight200 = '#212c25'
+const grassNight300 = '#3c4d3c'
+const dirtNight = '#2a2521'
+const dirtNight200 = '#4a4034'
+
+export const GROUND_PAPER = gray050
+export const GROUND_NIGHT = gray950
+export const GROUND_MEADOW = grass100
+export const GROUND_MEADOW_NIGHT = grassNight
+
 /** gray-050 paper, gray-900 ink, blues stepped darker as they take on meaning. */
 export const paper: Roles = {
+  bg: GROUND_PAPER,
   ink: gray900,
   soft: gray700,
   lot: npb300,
@@ -108,6 +142,7 @@ export const paper: Roles = {
 
 /** Roles invert on dark: npb-300 is the legible blue at 11.99:1, and ink turns pale. */
 export const night: Roles = {
+  bg: GROUND_NIGHT,
   ink: '#edebe6',
   soft: '#9a9a93',
   lot: gray750,
@@ -139,10 +174,24 @@ export const night: Roles = {
   },
 }
 
-export const GROUND_PAPER = gray050
-export const GROUND_NIGHT = gray950
+/**
+ * The meadow variant: the same roles on a green ground, with grass and bare earth for
+ * texture. Paved yards, the road and the water keep their colours, which is what gives every
+ * object an edge against the ground the paper version lacked.
+ */
+export const meadow: Roles = {
+  ...paper,
+  bg: GROUND_MEADOW,
+  meadow: { patch: grass200, tuft: grass300, dirt: dirt100, dirtEdge: dirt200 },
+}
 
-const groundOf = (r: Roles): string => (r === night ? GROUND_NIGHT : GROUND_PAPER)
+export const meadowNight: Roles = {
+  ...night,
+  bg: GROUND_MEADOW_NIGHT,
+  meadow: { patch: grassNight200, tuft: grassNight300, dirt: dirtNight, dirtEdge: dirtNight200 },
+}
+
+const groundOf = (r: Roles): string => r.bg
 
 /**
  * Sizes are written relative to the camera's zoom, so a push-in never fattens a stroke: the
@@ -215,6 +264,17 @@ export const css = (p: Roles): string =>
     `.ds-dot--pulse{fill:${p.net};${r(0.55)}}`,
     `.ds-line--bird{stroke:${p.ink};${w(0.45)}}`,
     `.ds-dot--bird{fill:${p.ink};${r(0.45)}}`,
+    // The ground's own texture, where a variant has one: faint, and under everything.
+    ...(p.meadow === undefined
+      ? []
+      : [
+          `.ds-face--patch{fill:${p.meadow.patch}}`,
+          `.ds-face--dirt{fill:${p.meadow.dirt}}`,
+          `.ds-line--grass{stroke:${p.meadow.tuft};${w(0.32)};stroke-opacity:.8}`,
+          `.ds-dot--grass{fill:${p.meadow.tuft};${r(0.3)};fill-opacity:.7}`,
+          `.ds-line--dirt{stroke:${p.meadow.dirtEdge};${w(0.3)};stroke-opacity:.55}`,
+          `.ds-dot--dirt{fill:${p.meadow.dirtEdge};${r(0.32)};fill-opacity:.55}`,
+        ]),
   ].join('')
 
 /**

@@ -52,6 +52,15 @@ Around all of it: a pennant, smoke from the plant's stack, trees in the wind, tw
 birds, ripples under the bridge, a van going the other way, and the crossdock's own forklift
 working a door all day. Something is always moving.
 
+## Variants
+
+`ediHero` is the paper version and `ediHeroNight` its fixed-dark twin. `ediHeroMeadow` and
+`ediHeroMeadowNight` are the same animation on a green ground with grass and bare earth for
+texture (`meadowParts` in `world.ts`, colours in `palette.ts`), so every object has an edge
+against the ground. The greens and tans are not from the site's ramps — they are marked as
+such in `palette.ts` and are the values to swap if the palette gains a green. `ediStageMeadow`
+is the still, for judging the texture on its own.
+
 ## Versions
 
 `version.ts` carries the version every EDI scene reports, with a changelog. `build` archives

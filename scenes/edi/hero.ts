@@ -13,9 +13,9 @@ import { ambient } from './acts/ambient.ts'
 import { cameraScript } from './acts/camera.ts'
 import { reset } from './acts/reset.ts'
 import { standingCast } from './acts/act.ts'
-import { ASPECT, stageParts, WIDE } from './world.ts'
+import { ASPECT, meadowParts, stageParts, WIDE } from './world.ts'
 import { LOOP, START } from './timing.ts'
-import { css, night, paper, themedCss, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
+import { css, meadow, meadowNight, night, paper, themedCss, GROUND_MEADOW, GROUND_MEADOW_NIGHT, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
 import { DOT_RADIUS, LINE_WIDTH } from './stage.ts'
 import { EDI_VERSION } from './version.ts'
 
@@ -79,4 +79,25 @@ export const heroNight = defineScene('ediHeroNight', {
   ...layout,
   background: GROUND_NIGHT,
   css: css(night),
+})
+
+/**
+ * The meadow variant: the same animation on a green ground, with grass and bare earth for
+ * texture, so every object has an edge against the ground. The texture is static and painted
+ * first, so the timeline is the hero's own.
+ */
+const meadowLayout = { ...layout, parts: [...meadowParts, ...cast] } as const
+
+export const heroMeadow = defineScene('ediHeroMeadow', {
+  title: 'An EDI lifecycle, end to end — on a meadow',
+  ...meadowLayout,
+  background: GROUND_MEADOW,
+  css: themedCss(meadow, meadowNight),
+})
+
+export const heroMeadowNight = defineScene('ediHeroMeadowNight', {
+  title: 'An EDI lifecycle, end to end — on a meadow, dark',
+  ...meadowLayout,
+  background: GROUND_MEADOW_NIGHT,
+  css: css(meadowNight),
 })

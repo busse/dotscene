@@ -226,7 +226,7 @@ The block ships with a `<script src="./dotscene.min.js">` tag pointing at its ow
 
 Size it with CSS — the SVG is `width: 100%; height: auto` at a 2.4:1 aspect, and its own ground colour comes with it. `prefers-reduced-motion: reduce` holds the establishing shot and never starts the loop. The lower right of the frame is quiet by design; that is where the copy goes.
 
-`docs/ediHeroNight.html` is a fixed-dark twin, for a standalone `.svg` or an `<img>` where no page CSS can reach in. See `scenes/edi/README.md` for what to edit to change what.
+`docs/ediHeroNight.html` is a fixed-dark twin, for a standalone `.svg` or an `<img>` where no page CSS can reach in. `docs/ediHeroMeadow.html` is the same animation on a green ground with grass and bare earth for texture, with its own dark twin. See `scenes/edi/README.md` for what to edit to change what.
 
 ## Isometric scenes
 

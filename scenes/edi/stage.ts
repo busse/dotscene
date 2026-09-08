@@ -6,8 +6,8 @@
  */
 
 import { defineScene } from 'dotscene'
-import { ASPECT, RIPPLE_CELLS, WIDE, cast, stageParts } from './world.ts'
-import { css, night, paper, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
+import { ASPECT, RIPPLE_CELLS, WIDE, cast, meadowParts, stageParts } from './world.ts'
+import { css, meadow, night, paper, GROUND_MEADOW, GROUND_NIGHT, GROUND_PAPER } from './palette.ts'
 import { EDI_VERSION } from './version.ts'
 
 export const DOT_RADIUS = 0.62
@@ -45,4 +45,13 @@ export const stageNight = defineScene('ediStageNight', {
   ...layout,
   background: GROUND_NIGHT,
   css: css(night),
+})
+
+/** The meadow ground, still, so its texture can be judged without the animation. */
+export const stageMeadow = defineScene('ediStageMeadow', {
+  title: 'A carrier network, before anything moves — on a meadow',
+  ...layout,
+  parts: [...meadowParts, ...layout.parts],
+  background: GROUND_MEADOW,
+  css: css(meadow),
 })
