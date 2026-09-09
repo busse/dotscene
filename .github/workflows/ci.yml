@@ -1,0 +1,38 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # The CLI and tests import .ts sources directly; type stripping is on by default
+        # from Node 22.18. Anything older cannot run this repo.
+        node: ['22', '24']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run typecheck
+      - run: node bin/dotscene.js check
+
+      # docs/ is committed build output that GitHub Pages serves. Rebuilding it must leave
+      # the tree clean, or the published gallery has drifted from the scenes that produce it.
+      - run: npm run build
+      - name: docs/ is current
+        run: |
+          if [ -n "$(git status --porcelain docs/)" ]; then
+            echo "docs/ is stale — run 'npm run build' and commit the result:"
+            git status --short docs/
+            git diff --stat docs/
+            exit 1
+          fi
