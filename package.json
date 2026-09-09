@@ -5,6 +5,22 @@
   "type": "module",
   "license": "MIT",
   "author": "busse <chrisbusse@gmail.com>",
+  "homepage": "https://busse.github.io/dotscene/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/busse/dotscene.git"
+  },
+  "bugs": {
+    "url": "https://github.com/busse/dotscene/issues"
+  },
+  "keywords": [
+    "svg",
+    "animation",
+    "illustration",
+    "generative",
+    "dataviz",
+    "typescript"
+  ],
   "exports": {
     ".": "./src/index.ts",
     "./runtime": "./src/runtime/index.ts"
@@ -25,11 +41,11 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.28.2",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
+    "vitest": "^4.1.11"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22.18"
   }
 }
