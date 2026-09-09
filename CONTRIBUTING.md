@@ -22,6 +22,7 @@ Never guess at coordinates. `dotscene preview <scene>` renders to the terminal o
 GitHub Pages serves the gallery straight from `docs/` on `main`, and `GALLERY.md` renders the self-playing SVGs in it. So:
 
 - **Never hand-edit a file in `docs/`.** Run `npm run build` and commit what it writes.
+- A file the page needs that no scene produces — the social card's `og.png` — belongs in `site/`, which the build copies in verbatim. Regenerate it with `npm run og`.
 - **Rebuild in the same commit as any scene change.** CI rebuilds and fails if the tree is not clean afterwards — a stale gallery is a drift between what the site shows and what the source produces.
 - Output is byte-stable by design (2-decimal rounding, fixed ordering). A noisy `git diff` after a rebuild means something actually changed; go find out what.
 

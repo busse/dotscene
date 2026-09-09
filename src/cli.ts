@@ -8,7 +8,7 @@
  */
 
 import { parseArgs } from 'node:util'
-import { mkdir, readdir, writeFile } from 'node:fs/promises'
+import { cp, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, relative, resolve as resolvePath } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { compile } from './compile.ts'
@@ -41,6 +41,8 @@ Options
   --width <n>       preview width in characters (default: 44)
   --labels          annotate preview dots with their point names
   --out <path>      build output directory (default: docs, served by GitHub Pages)
+  --assets <path>   static files copied into the build verbatim (default: site)
+  --base-url <url>  absolute address the build is served from, for the social card
   --help            this message
 `
 
@@ -54,6 +56,8 @@ interface Options {
   readonly width: number
   readonly labels: boolean
   readonly out: string
+  readonly assets: string
+  readonly baseUrl?: string
 }
 
 /** Non-zero exit with structured issues, rendered as JSON or as text depending on the flag. */
@@ -326,6 +330,24 @@ const archivedVersions = async (dir: string): Promise<Record<string, number[]>> 
   return found
 }
 
+/**
+ * The address the build will be served from, for the social card.
+ *
+ * A crawler resolves `og:image` against nothing, so the card needs an absolute URL and the
+ * build has no other way to know one. `--base-url` wins; otherwise the `homepage` of the
+ * project being built, which is where a site already records this. Neither means no card.
+ */
+const siteBaseUrl = async (options: Options): Promise<string | undefined> => {
+  if (options.baseUrl !== undefined) return options.baseUrl.replace(/\/+$/, '')
+  try {
+    const pkg: unknown = JSON.parse(await readFile(resolvePath('package.json'), 'utf8'))
+    const homepage = (pkg as { homepage?: unknown }).homepage
+    return typeof homepage === 'string' && homepage !== '' ? homepage.replace(/\/+$/, '') : undefined
+  } catch {
+    return undefined
+  }
+}
+
 /** Above this an image proxy is likely to refuse the file, and a browser to labour over it. */
 const SMIL_LIMIT = 8 * 1024 * 1024
 
@@ -383,8 +405,25 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
   await writeFile(cssFile, `${DEFAULT_CSS}\n`)
   written.push(relative(process.cwd(), cssFile))
 
+  // Files the page needs that no scene produces — the social card's PNG, above all. Copied
+  // verbatim so `docs/` stays entirely build output and nothing in it is hand-placed.
+  try {
+    await cp(options.assets, options.out, { recursive: true })
+    for (const file of await readdir(options.assets)) {
+      written.push(relative(process.cwd(), resolvePath(options.out, file)))
+    }
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
+  }
+
+  const baseUrl = await siteBaseUrl(options)
   const galleryFile = resolvePath(options.out, 'index.html')
-  await writeFile(galleryFile, renderGallery(compiled, './dotscene.min.js', archives))
+  await writeFile(
+    galleryFile,
+    renderGallery(compiled, './dotscene.min.js', archives, {
+      ...(baseUrl === undefined ? {} : { baseUrl }),
+    }),
+  )
   written.push(relative(process.cwd(), galleryFile))
 
   let runtimeBytes = 0
@@ -418,6 +457,8 @@ export const run = async (argv: readonly string[]): Promise<void> => {
       width: { type: 'string', default: '44' },
       labels: { type: 'boolean', default: false },
       out: { type: 'string', default: 'docs' },
+      assets: { type: 'string', default: 'site' },
+      'base-url': { type: 'string' },
       help: { type: 'boolean', default: false },
     },
   })
@@ -432,6 +473,8 @@ export const run = async (argv: readonly string[]): Promise<void> => {
     width: Number.parseInt(values.width!, 10) || 44,
     labels: values.labels!,
     out: values.out!,
+    assets: values.assets!,
+    ...(values['base-url'] === undefined ? {} : { baseUrl: values['base-url'] }),
   }
 
   const [command, target] = positionals

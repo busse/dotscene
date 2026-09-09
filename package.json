@@ -37,6 +37,7 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "build": "node bin/dotscene.js build",
+    "og": "node scripts/og-image.mjs",
     "check": "node bin/dotscene.js check"
   },
   "devDependencies": {

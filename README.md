@@ -89,7 +89,15 @@ Useful flags: `--pose <name>`, `--poses`, `--at <ms>`, `--every <ms>`, `--width 
 
 A looping scene also gets a self-playing copy, `docs/<name>.anim.svg`: the timeline baked into the SVG as SMIL `<animate>` elements, so it plays wherever an SVG image renders and no script can run — a GitHub README, an `<img>`, a Markdown preview. It matches the runtime at every keyframe. It cannot re-stack parts as they pass one another, keep dots and strokes a constant size as the camera zooms, or respond to hover and click; those need the runtime. [GALLERY.md](GALLERY.md) shows every scene this way.
 
-`dotscene build` writes to `docs/`: one `.svg` and one `.html` per scene, a `dotscene.css`, the gallery at `index.html`, and `dotscene.min.js` when any scene animates. That path is committed rather than ignored, because GitHub Pages serves the gallery straight from it — point Pages at the `main` branch, `/docs` folder. Use `--out` for somewhere else.
+`dotscene build` writes to `docs/`: one `.svg` and one `.html` per scene, a `dotscene.css`, the gallery at `index.html`, and `dotscene.min.js` when any scene animates. Anything in `site/` is copied in verbatim, which is how a file the page needs but no scene produces — the social card's PNG — reaches the build without being hand-placed in output. That path is committed rather than ignored, because GitHub Pages serves the gallery straight from it — point Pages at the `main` branch, `/docs` folder. Use `--out` for somewhere else, and `--assets` for a different source of static files.
+
+The gallery opens on one scene playing at full width, whatever it weighs — `ediHeroMeadow`, by default. Its own section further down shows a still linking to its page instead, since two live elements cannot share a scene name. Link previews need a raster and an absolute URL: `--base-url`, or the `homepage` in `package.json`, supplies the address, and `npm run og` renders the card from a chosen instant of the hero into `site/og.png`:
+
+```sh
+npm run og                                  # the default scene and instant
+node scripts/og-image.mjs --at 12500        # a different moment
+node scripts/og-image.mjs --scene islandHero --at 8000 --out /tmp/try.png
+```
 
 ### Versions
 
