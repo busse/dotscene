@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 /**
- * Write the card art into the site.
+ * Write the card art into a site next door.
  *
- * Every scene named `art<Thing>` becomes `_includes/art/<thing>.html` in ../cbdot — the
+ * Every scene named `art<Thing>` becomes `_includes/art/<thing>.html` under the site root — the
  * pasteable block without its own runtime tag, since the site loads the runtime once from
  * its layout — and the runtime itself goes to `assets/js/dotscene.min.js`. The art is
  * generated here and applied there; the site never hand-edits a file in `_includes/art/`.
  *
- *   node scripts/sync-cbdot.mjs [path-to-cbdot]
+ * The layout is a Jekyll one; point it at whatever site consumes the art.
+ *
+ *   node scripts/sync-site.mjs <path-to-site>
  */
 
 import { mkdir, writeFile } from 'node:fs/promises'
@@ -16,7 +18,13 @@ import { build } from 'esbuild'
 import { compile } from '../src/compile.ts'
 import { loadScenes } from '../src/load.ts'
 
-const site = resolve(process.argv[2] ?? '../cbdot')
+const target = process.argv[2]
+if (target === undefined) {
+  process.stderr.write('usage: node scripts/sync-site.mjs <path-to-site>\n')
+  process.exit(1)
+}
+
+const site = resolve(target)
 const artDir = resolve(site, '_includes/art')
 const jsDir = resolve(site, 'assets/js')
 await mkdir(artDir, { recursive: true })

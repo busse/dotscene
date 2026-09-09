@@ -28,6 +28,8 @@ person · wave
 
 Scenes compile to a self-contained block you paste onto a page. Static scenes are plain SVG with **zero JavaScript**. Animated ones add a 9 kB runtime that plays a timeline: every moving part, the paint order, each part's opacity, and the camera.
 
+**[See every scene in the gallery →](https://busse.github.io/dotscene/)** — each one beside the block that produces it. [GALLERY.md](GALLERY.md) is the same thing rendered on GitHub, no page needed.
+
 ## The idea
 
 A **figure** is named points and the edges between them. A **pose** is a partial override of those same names:
@@ -234,7 +236,7 @@ Size it with CSS — the SVG is `width: 100%; height: auto` at a 2.4:1 aspect, a
 
 ## Card art for the site
 
-`scenes/cbdot/` holds the art for the personal site next door: one scene per card at the slot's own aspect, ink as `currentColor` and the site's tokens for everything else, and `artHero`, the EDI meadow with `fit: 'slice'` so it covers the intro block from rule to rule while the page washes paper over the copy. `node scripts/sync-cbdot.mjs` writes each `art<Thing>` scene into `../cbdot/_includes/art/<thing>.html` — the block without its runtime tag, since the site's layout loads the runtime once — and copies the runtime to `../cbdot/assets/js/`. The site never hand-edits those files; change the scene here and sync.
+`scenes/site/` holds the art for a site next door: one scene per card at the slot's own aspect, ink as `currentColor` and the site's tokens for everything else, and `artHero`, the EDI meadow with `fit: 'slice'` so it covers the intro block from rule to rule while the page washes paper over the copy. `node scripts/sync-site.mjs <path-to-site>` writes each `art<Thing>` scene into `<site>/_includes/art/<thing>.html` — the block without its runtime tag, since the site's layout loads the runtime once — and copies the runtime to `<site>/assets/js/`. The site never hand-edits those files; change the scene here and sync. It is written against a Jekyll layout; the shape is worth copying even if yours differs.
 
 ## Isometric scenes
 
@@ -276,6 +278,8 @@ Poses interpolate point *positions*, not joint *angles*, so an edge does not kee
 Scenes live in `scenes/` as either TypeScript (typed, with helpers like `mirrorX` and `ring`) or JSON (no compile step). Both produce the same `Scene`; see `src/serialize.ts` for the JSON shape.
 
 ## Development
+
+Node 22.18 or newer. The CLI, the scripts and the tests import the TypeScript sources directly and rely on Node stripping the types; there is no build step.
 
 ```sh
 npm install

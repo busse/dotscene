@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { compile, renderSmil, resolve, resolveAt } from '../src/index.ts'
 import { scene as island } from '../scenes/island/hero.ts'
-import { scene as eszett } from '../scenes/cbdot/eszett.ts'
-import { scene as singlestone } from '../scenes/cbdot/singlestone.ts'
+import { scene as eszett } from '../scenes/site/eszett.ts'
+import { scene as singlestone } from '../scenes/site/singlestone.ts'
 
 /** Every `<animate>` in a document, as its attributes. */
 const animations = (svg: string): Record<string, string>[] =>

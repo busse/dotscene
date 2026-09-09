@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { animationPayload, compile, resolve, resolveAt } from '../src/index.ts'
 import { acts, composed, heroNight, players, scene, seam } from '../scenes/island/hero.ts'
-import { scene as art } from '../scenes/cbdot/island.ts'
+import { scene as art } from '../scenes/site/island.ts'
 import { WIDE } from '../scenes/island/world.ts'
 import { LOOP, START, FIXED, NIGHT } from '../scenes/island/timing.ts'
 import { cameraScript } from '../scenes/island/acts/camera.ts'

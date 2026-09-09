@@ -2,7 +2,7 @@
  * The site's colour system, for card art.
  *
  * Card art sits inline in a themed page, so ink is `currentColor` and follows the card. The
- * blue and the fills are literal tokens from `../cbdot/_sass/_tokens.scss`, with the dark
+ * blue and the fills are literal tokens from the site's `_sass/_tokens.scss`, with the dark
  * theme's values riding along as nested overrides in the three states a themed page has.
  *
  * The rules that matter here: npb-300 is never a meaningful stroke on paper, so a stroke that

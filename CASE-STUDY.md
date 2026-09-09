@@ -15,7 +15,7 @@ author reviewing the result in a browser and sending back notes.
   `islandStage` the still)
 - Every reviewed version, frozen: `docs/versions/islandHero-v1.html` … `-v6.html`
 - The source: `scenes/island/`, with its own [README](scenes/island/README.md) as the map
-- The site adapter: `scenes/cbdot/island.ts`
+- The site adapter: `scenes/site/island.ts`
 
 ## Why this scene
 
@@ -236,8 +236,8 @@ For a close look at one figure, render at 2880×1200 and crop around it; `resolv
 gives any part's dots, so the crop can be centred on the keeper wherever the camera is. One
 Chrome at a time — parallel runs with separate profiles time out.
 
-**The site.** `scenes/cbdot/island.ts` is the same animation told to cover its box
-(`fit: 'slice'`). `scripts/sync-cbdot.mjs` compiles every `art*` scene into the site's
+**The site.** `scenes/site/island.ts` is the same animation told to cover its box
+(`fit: 'slice'`). `scripts/sync-site.mjs` compiles every `art*` scene into the site's
 `_includes/art/` and drops the runtime in `assets/js/`. The site picks its hero with one line
 in `_data/profile.yml`. A Jekyll build and a screenshot of the page closed each round.
 

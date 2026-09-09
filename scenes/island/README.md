@@ -56,7 +56,7 @@ in the shallows, and stars when it is dark.
 
 `islandHero` is the paper version with both themes in one block; `islandHeroNight` is its
 fixed-dark twin. `islandStage` is the still, for judging the layout. `artIsland` in
-`scenes/cbdot/island.ts` is the same animation told to cover its box, for the site.
+`scenes/site/island.ts` is the same animation told to cover its box, for the site.
 
 ## Working on it
 

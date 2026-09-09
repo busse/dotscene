@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { compile, loopGaps, resolve, resolveAt } from '../src/index.ts'
-import { scene as singlestone } from '../scenes/cbdot/singlestone.ts'
-import { scene as eszett } from '../scenes/cbdot/eszett.ts'
-import { scene as bussetech } from '../scenes/cbdot/bussetech.ts'
-import { scene as hero } from '../scenes/cbdot/hero.ts'
-import { VIEWBOX } from '../scenes/cbdot/palette.ts'
+import { scene as singlestone } from '../scenes/site/singlestone.ts'
+import { scene as eszett } from '../scenes/site/eszett.ts'
+import { scene as bussetech } from '../scenes/site/bussetech.ts'
+import { scene as hero } from '../scenes/site/hero.ts'
+import { VIEWBOX } from '../scenes/site/palette.ts'
 
 const art = [singlestone, eszett, bussetech]
 
