@@ -130,7 +130,7 @@ Dots and lines default to `currentColor`, so a scene inherits the surrounding te
 
 ### Styling
 
-Per-scene defaults ship inside the block, and every one of them is wrapped in `:where()` so it weighs a single class: a scene's own rule for `.ds-line--road` is (0,1,0), and so is the scope that confines it to that scene. A host stylesheet overrides any of it with two classes — no element selectors, no `!important`:
+Styles ship inside the block. The library's defaults are wrapped whole in `:where()`, so they weigh nothing and any other rule beats them — which matters when a page shows several scenes, since each block carries its own copy of the defaults. A scene's own rule for `.ds-line--road` is (0,1,0); the scope that confines it to that scene adds nothing. A host stylesheet overrides any of it with two classes — no element selectors, no `!important`:
 
 ```css
 .masthead__scene .ds-dot  { r: 2; fill: #6f9; }

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="exchange" viewBox="-110 -6 220 76" role="img">
   <title>Two people trade a bag of money for a briefcase</title>
-  <style>:where(.dotscene){--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}:where(.dotscene) .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}:where(.dotscene) .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}:where(.dotscene) .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="exchange"]){--ds-dot-r:1.51;--ds-line-w:0.68}</style>
+  <style>:where(.dotscene){--ds-zoom:1}:where(.dotscene .ds-line){stroke:var(--ds-line-stroke,currentColor);stroke-width:calc(var(--ds-line-w,0.55) * var(--ds-zoom,1));stroke-linecap:round;fill:none}:where(.dotscene .ds-dot){fill:var(--ds-dot-fill,currentColor);r:calc(var(--ds-dot-r,1.2) * var(--ds-zoom,1))}:where(.dotscene .ds-face){fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="exchange"]){--ds-dot-r:1.51;--ds-line-w:0.68}</style>
   <defs><clipPath id="ds-clip-exchange"><rect class="ds-clip" x="-110" y="-6" width="220" height="76"/></clipPath></defs>
   <g clip-path="url(#ds-clip-exchange)">
     <g data-part="floor">

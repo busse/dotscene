@@ -30,17 +30,24 @@ export interface SvgOptions {
 }
 
 /**
- * Default look. The scene class sits in `:where()` so it adds no specificity: every default
- * weighs one class, and a host stylesheet overrides it with any two.
+ * Default look, weighing nothing.
+ *
+ * Every compiled block carries its own copy of these rules, so a page showing two scenes has
+ * two copies — and the second lands later in the document than the first scene's own rules.
+ * Whole selectors sit inside `:where()` so the defaults have zero specificity and any rule of
+ * a scene's beats them wherever they appear. For the same reason the defaults declare none of
+ * the variables a scene sets: those live as `var()` fallbacks, leaving each scene's sizing rule
+ * nothing to tie with. `--ds-zoom` is the exception — no scene sets it, and scene css is
+ * written against it, so it needs a value to exist.
  */
 export const DEFAULT_CSS = [
   // `--ds-zoom` is written by the runtime as the camera moves, for scenes sized to the
   // screen: a push-in shrinks it, so dots and strokes keep their size on the page.
-  ':where(.dotscene){--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}',
-  ':where(.dotscene) .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}',
-  ':where(.dotscene) .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}',
+  ':where(.dotscene){--ds-zoom:1}',
+  ':where(.dotscene .ds-line){stroke:var(--ds-line-stroke,currentColor);stroke-width:calc(var(--ds-line-w,0.55) * var(--ds-zoom,1));stroke-linecap:round;fill:none}',
+  ':where(.dotscene .ds-dot){fill:var(--ds-dot-fill,currentColor);r:calc(var(--ds-dot-r,1.2) * var(--ds-zoom,1))}',
   // A face exists to hide what is behind it, so it defaults to the scene's own ground.
-  ':where(.dotscene) .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}',
+  ':where(.dotscene .ds-face){fill:var(--ds-face-fill,#ffffff);stroke:none}',
 ].join('')
 
 /**
