@@ -112,8 +112,12 @@ README is the map. Lessons it added, which apply to any staged scene:
   constant size as the camera zooms (`sizing: 'screen'`), and cannot do hover or click. It is per
   element rather than per part, so it is several times the runtime payload — six megabytes for the
   island. `node scripts/gallery-md.mjs` writes `GALLERY.md` from these files.
-- **The block is built to be overridden.** Every default and every scope selector is wrapped in
-  `:where()`, so a scene's rules weigh one class and a host beats them with two. `--css external`
+- **The block is built to be overridden.** The defaults are wrapped whole in `:where()` and weigh
+  nothing, and every scope selector is wrapped too, so a scene's rules weigh one class and a host
+  beats them with two. Keep the defaults at zero and keep scene-set variables (`--ds-dot-r`,
+  `--ds-line-w`, `--ds-face-fill`) out of them as `var()` fallbacks instead: each block repeats
+  the defaults, and on a page with two scenes the second copy lands after the first scene's
+  rules — at equal weight it would win. `--css external`
   and `--timeline external` (build and `sync-site`) take the stylesheet and the timeline out of
   the block into files the page links and the runtime fetches; the versioned archive stays
   self-contained. `decorative: true` on a scene emits `aria-hidden` and no title. The runtime

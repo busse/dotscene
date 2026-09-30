@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { defineFigure, defineScene, resolve, renderAscii, renderSvg } from '../src/index.ts'
+import { DEFAULT_CSS, compile, defineFigure, defineScene, resolve, renderAscii, renderSvg } from '../src/index.ts'
 import { sceneFromJson, sceneToJson } from '../src/serialize.ts'
 
 const bar = defineFigure('bar', {
@@ -65,7 +65,7 @@ describe('renderSvg', () => {
     expect(svg).toMatchInlineSnapshot(`
       "<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="bar" viewBox="-1 -1 2 12" role="img">
         <title>A bar</title>
-        <style>:where(.dotscene){--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}:where(.dotscene) .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}:where(.dotscene) .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}:where(.dotscene) .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="bar"]){--ds-dot-r:1.6;--ds-line-w:0.72}</style>
+        <style>:where(.dotscene){--ds-zoom:1}:where(.dotscene .ds-line){stroke:var(--ds-line-stroke,currentColor);stroke-width:calc(var(--ds-line-w,0.55) * var(--ds-zoom,1));stroke-linecap:round;fill:none}:where(.dotscene .ds-dot){fill:var(--ds-dot-fill,currentColor);r:calc(var(--ds-dot-r,1.2) * var(--ds-zoom,1))}:where(.dotscene .ds-face){fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="bar"]){--ds-dot-r:1.6;--ds-line-w:0.72}</style>
         <defs><clipPath id="ds-clip-bar"><rect class="ds-clip" x="-1" y="-1" width="2" height="12"/></clipPath></defs>
         <g clip-path="url(#ds-clip-bar)">
           <g data-part="bar">
@@ -305,5 +305,24 @@ describe('faces and paint order', () => {
     const issue = (caught as { issues: readonly { code: string; didYouMean?: string }[] }).issues[0]
     expect(issue?.code).toBe('UNKNOWN_POINT')
     expect(issue?.didYouMean).toBe('base')
+  })
+})
+
+describe('default css on a page with several scenes', () => {
+  // Each block carries its own copy of the defaults, so on a page with two scenes the second
+  // copy comes after the first scene's rules. Anything the defaults tie with, they beat.
+  const rules = [...DEFAULT_CSS.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(([, selector, body]) => ({ selector: selector!, body: body! }))
+
+  it('weighs nothing, so any rule of a scene beats it whatever the order', () => {
+    expect(rules.length).toBeGreaterThan(0)
+    for (const { selector } of rules) expect(selector).toMatch(/^:where\([^()]*\)$/)
+  })
+
+  it('declares none of the variables a scene sets', () => {
+    const declared = (css: string): Set<string> => new Set([...css.matchAll(/(--ds-[a-z-]+)\s*:/g)].map((m) => m[1]!))
+    const scene = compile(defineScene('ground', { parts: [{ figure: bar }], background: '#fbfaf7', css: '.ds-line{stroke:red}' }))
+    const setByScene = declared(scene.css.replace(DEFAULT_CSS, ''))
+    expect(setByScene.size).toBeGreaterThan(0)
+    for (const name of declared(DEFAULT_CSS)) expect(setByScene.has(name)).toBe(false)
   })
 })

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="header" data-animation="smil" viewBox="-24 -3 48 73" role="img">
   <title>A person cycling through poses</title>
-  <style>:where(.dotscene){--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}:where(.dotscene) .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}:where(.dotscene) .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}:where(.dotscene) .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="header"]){--ds-dot-r:1.6;--ds-line-w:0.72}</style>
+  <style>:where(.dotscene){--ds-zoom:1}:where(.dotscene .ds-line){stroke:var(--ds-line-stroke,currentColor);stroke-width:calc(var(--ds-line-w,0.55) * var(--ds-zoom,1));stroke-linecap:round;fill:none}:where(.dotscene .ds-dot){fill:var(--ds-dot-fill,currentColor);r:calc(var(--ds-dot-r,1.2) * var(--ds-zoom,1))}:where(.dotscene .ds-face){fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="header"]){--ds-dot-r:1.6;--ds-line-w:0.72}</style>
   <g data-part="person">
   <line class="ds-line" data-part="person" x1="0" y1="3" x2="0" y2="13">
     <animate attributeName="x1" dur="4.8s" repeatCount="indefinite" calcMode="spline" keyTimes="0;0.1875;0.33333;0.52083;0.66667;0.85417;1" keySplines="0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1;0 0 1 1;0.45 0 0.55 1" values="0;0;1;1;-3;-3;0"/>
