@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="ditch" viewBox="-40 -59 92 77" role="img">
   <title>A person digging a ditch</title>
-  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="ditch"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
+  <style>:where(.dotscene){--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}:where(.dotscene) .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}:where(.dotscene) .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}:where(.dotscene) .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="ditch"]){--ds-dot-r:1.6;--ds-line-w:0.72}</style>
   <defs><clipPath id="ds-clip-ditch"><rect class="ds-clip" x="-40" y="-59" width="92" height="77"/></clipPath></defs>
   <g clip-path="url(#ds-clip-ditch)">
     <g data-part="ground">

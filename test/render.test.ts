@@ -65,7 +65,7 @@ describe('renderSvg', () => {
     expect(svg).toMatchInlineSnapshot(`
       "<svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="bar" viewBox="-1 -1 2 12" role="img">
         <title>A bar</title>
-        <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="bar"]{--ds-dot-r:1.6;--ds-line-w:0.72}</style>
+        <style>:where(.dotscene){--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}:where(.dotscene) .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}:where(.dotscene) .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}:where(.dotscene) .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="bar"]){--ds-dot-r:1.6;--ds-line-w:0.72}</style>
         <defs><clipPath id="ds-clip-bar"><rect class="ds-clip" x="-1" y="-1" width="2" height="12"/></clipPath></defs>
         <g clip-path="url(#ds-clip-bar)">
           <g data-part="bar">
@@ -198,12 +198,12 @@ describe('scene css', () => {
     const svg = renderSvg(
       resolve(defineScene('town', { parts: [{ figure: kinded }], css: '.ds-line--road{stroke-width:2}' })),
     )
-    expect(svg).toContain('svg[data-dotscene="town"]{.ds-line--road{stroke-width:2}}')
+    expect(svg).toContain(':where(svg[data-dotscene="town"]){.ds-line--road{stroke-width:2}}')
   })
 
   it('emits nothing extra when a scene sets no css', () => {
     const svg = renderSvg(resolve(defineScene('town', { parts: [{ figure: kinded }] })))
-    expect(svg).not.toContain('svg[data-dotscene="town"]{.')
+    expect(svg).not.toContain(':where(svg[data-dotscene="town"]){.')
   })
 
   it('gives a kinded edge a class the scene css can reach', () => {

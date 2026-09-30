@@ -22,17 +22,25 @@ export interface SvgOptions {
    * pasteable block differ in exactly this.
    */
   readonly xml?: boolean
+  /**
+   * Where the animation payload lives when it is not inline: the svg carries this as
+   * `data-dotscene-src` and the runtime fetches it. Absent for an inline block.
+   */
+  readonly posesSrc?: string
 }
 
-/** Default look, kept at low specificity so page CSS can override any of it. */
+/**
+ * Default look. The scene class sits in `:where()` so it adds no specificity: every default
+ * weighs one class, and a host stylesheet overrides it with any two.
+ */
 export const DEFAULT_CSS = [
   // `--ds-zoom` is written by the runtime as the camera moves, for scenes sized to the
   // screen: a push-in shrinks it, so dots and strokes keep their size on the page.
-  '.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}',
-  '.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}',
-  '.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}',
+  ':where(.dotscene){--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}',
+  ':where(.dotscene) .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}',
+  ':where(.dotscene) .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}',
   // A face exists to hide what is behind it, so it defaults to the scene's own ground.
-  '.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}',
+  ':where(.dotscene) .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}',
 ].join('')
 
 /**
@@ -42,7 +50,8 @@ export const DEFAULT_CSS = [
  * rather than by redefining the custom property, which this rule would win.
  */
 export const sceneCss = (scene: ResolvedScene): string => {
-  const selector = `svg[data-dotscene="${scene.name}"]`
+  // `:where()` so the scope adds nothing: a scene's own rule weighs one class, no more.
+  const selector = `:where(svg[data-dotscene="${scene.name}"])`
   const ground = scene.background === undefined ? '' : `;--ds-face-fill:${scene.background}`
   const sizing = `${selector}{--ds-dot-r:${scene.dotRadius};--ds-line-w:${scene.lineWidth}${ground}}`
   // The scene's own rules go inside a nested block, so bare selectors it writes cannot
@@ -82,17 +91,19 @@ export const attrs = (pairs: readonly (readonly [string, string | number | undef
 export const renderSvg = (scene: ResolvedScene, options: SvgOptions = {}): string => {
   const indent = options.indent ?? '  '
   const [x, y, width, height] = scene.viewBox
-  const titled = scene.title !== undefined
+  const titled = scene.title !== undefined && scene.decorative !== true
 
   const open = `<svg ${attrs([
     ['xmlns', 'http://www.w3.org/2000/svg'],
     ['class', 'dotscene'],
     ['data-dotscene', scene.name],
     ['data-version', scene.version],
+    ['data-dotscene-src', options.posesSrc],
     ['viewBox', `${x} ${y} ${width} ${height}`],
     ['preserveAspectRatio', scene.fit === 'slice' ? 'xMidYMid slice' : undefined],
     ['role', titled ? 'img' : undefined],
     ['aria-hidden', titled ? undefined : 'true'],
+    ['focusable', titled ? undefined : 'false'],
   ])}>`
 
   const body: string[] = []

@@ -125,6 +125,8 @@ export interface GalleryOptions {
   readonly baseUrl?: string
   /** Scene to play at the top of the page. Defaults to the EDI meadow; absent means no hero. */
   readonly hero?: string
+  /** Stylesheets to link, for a build whose blocks carry no `<style>` of their own. */
+  readonly styles?: readonly string[]
 }
 
 export const renderGallery = (
@@ -230,6 +232,7 @@ ${hero.inline
     <meta name="twitter:title" content="${escapeAttr(`${SITE.name} — ${SITE.tagline.toLowerCase()}`)}">
     <meta name="twitter:description" content="${escapeAttr(SITE.description)}">${card}
     <style>${DEFAULT_CSS}${PAGE_CSS}</style>
+${(options.styles ?? []).map((href) => `    <link rel="stylesheet" href="${escapeAttr(href)}">`).join('\n')}
   </head>
   <body>
     <main>

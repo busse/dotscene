@@ -112,6 +112,13 @@ README is the map. Lessons it added, which apply to any staged scene:
   constant size as the camera zooms (`sizing: 'screen'`), and cannot do hover or click. It is per
   element rather than per part, so it is several times the runtime payload — six megabytes for the
   island. `node scripts/gallery-md.mjs` writes `GALLERY.md` from these files.
+- **The block is built to be overridden.** Every default and every scope selector is wrapped in
+  `:where()`, so a scene's rules weigh one class and a host beats them with two. `--css external`
+  and `--timeline external` (build and `sync-site`) take the stylesheet and the timeline out of
+  the block into files the page links and the runtime fetches; the versioned archive stays
+  self-contained. `decorative: true` on a scene emits `aria-hidden` and no title. The runtime
+  files a child with no `data-part` under the nearest `<g data-part>`; `play()` starts the loop
+  whatever mount installed, and `playing()` says whether it is running.
 - **A standalone `.svg` is XML.** The compiler escapes the stylesheet in the `.svg` file and leaves it raw in the block, because a nesting `&` is fatal in one and required in the other. Validate with `xmllint --noout docs/<scene>.svg` after touching the renderer's CSS.
 - **Match a palette with literal hex, not `currentColor`.** A standalone `.svg`, an `<img src>` or a rasterised PNG inherits nothing from a page. Set the scene's `background` too — assuming white is how a chosen paper colour gets lost. When a palette's roles invert on dark, emit a second scene over the same figure rather than one file for both.
 - **Colour by role, not by name.** Give edges a `kind` and points a `pointKinds` entry, then style the `ds-line--x` / `ds-dot--x` classes. Matching point-name prefixes works but breaks silently on a rename.

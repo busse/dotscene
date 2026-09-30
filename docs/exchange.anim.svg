@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" class="dotscene" data-dotscene="exchange" data-animation="smil" viewBox="-110 -6 220 76" role="img">
   <title>Two people trade a bag of money for a briefcase</title>
-  <style>.dotscene{--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}.dotscene .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}.dotscene .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}.dotscene .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}svg[data-dotscene="exchange"]{--ds-dot-r:1.51;--ds-line-w:0.68}</style>
+  <style>:where(.dotscene){--ds-dot-r:1.2;--ds-line-w:0.55;--ds-zoom:1;--ds-dot-fill:currentColor;--ds-line-stroke:currentColor}:where(.dotscene) .ds-line{stroke:var(--ds-line-stroke);stroke-width:calc(var(--ds-line-w) * var(--ds-zoom));stroke-linecap:round;fill:none}:where(.dotscene) .ds-dot{fill:var(--ds-dot-fill);r:calc(var(--ds-dot-r) * var(--ds-zoom))}:where(.dotscene) .ds-face{fill:var(--ds-face-fill,#ffffff);stroke:none}:where(svg[data-dotscene="exchange"]){--ds-dot-r:1.51;--ds-line-w:0.68}</style>
   <g data-part="floor">
   <line class="ds-line" data-part="floor" x1="-108" y1="64" x2="108" y2="64"/>
   <circle class="ds-dot" data-part="floor" data-p="floorL" cx="-108" cy="64" r="1.51"/>

@@ -258,6 +258,12 @@ export interface SceneSpec {
    * carefully chosen paper colour gets lost.
    */
   readonly background?: string
+  /**
+   * Purely decorative: the block is hidden from assistive technology (`aria-hidden`) and
+   * carries no `role` or `<title>`, for a scene the surrounding text already names or a
+   * background nothing needs to read. Otherwise a titled scene is an image with that title.
+   */
+  readonly decorative?: boolean
   readonly animate?: AnimateSpec
 }
 
@@ -275,6 +281,12 @@ export interface Scene {
   readonly lineWidth?: number
   readonly css?: string
   readonly background?: string
+  /**
+   * Purely decorative: the block is hidden from assistive technology (`aria-hidden`) and
+   * carries no `role` or `<title>`, for a scene the surrounding text already names or a
+   * background nothing needs to read. Otherwise a titled scene is an image with that title.
+   */
+  readonly decorative?: boolean
   readonly animate?: AnimateSpec
 }
 

@@ -43,6 +43,10 @@ Options
   --out <path>      build output directory (default: docs, served by GitHub Pages)
   --assets <path>   static files copied into the build verbatim (default: site)
   --base-url <url>  absolute address the build is served from, for the social card
+  --css <mode>      inline (default) puts each scene's stylesheet in its block;
+                    external writes <name>.css beside it and links it from the gallery
+  --timeline <mode> inline (default) puts the animation in each block;
+                    external writes <name>.poses.json and the runtime fetches it, cached
   --help            this message
 `
 
@@ -58,6 +62,8 @@ interface Options {
   readonly out: string
   readonly assets: string
   readonly baseUrl?: string
+  readonly css: 'inline' | 'external'
+  readonly timeline: 'inline' | 'external'
 }
 
 /** Non-zero exit with structured issues, rendered as JSON or as text depending on the flag. */
@@ -354,7 +360,11 @@ const SMIL_LIMIT = 8 * 1024 * 1024
 const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Promise<void> => {
   await mkdir(options.out, { recursive: true })
 
-  const compiled = [...scenes.values()].map(({ scene }) => compile(scene))
+  const externalCss = options.css === 'external'
+  const externalPoses = options.timeline === 'external'
+  const compiled = [...scenes.values()].map(({ scene }) =>
+    compile(scene, { ...(externalCss ? { styles: false } : {}), ...(externalPoses ? { poses: 'external' } : {}) }),
+  )
   const written: string[] = []
   const runtime = compiled.some((entry) => entry.animated) ? await bundleRuntime() : ''
 
@@ -364,6 +374,16 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
     await writeFile(svgFile, `${entry.svg}\n`)
     await writeFile(htmlFile, `${entry.html}\n`)
     written.push(relative(process.cwd(), svgFile), relative(process.cwd(), htmlFile))
+    if (externalCss) {
+      const cssFile = resolvePath(options.out, `${entry.name}.css`)
+      await writeFile(cssFile, `${entry.css}\n`)
+      written.push(relative(process.cwd(), cssFile))
+    }
+    if (externalPoses && entry.poses !== undefined) {
+      const posesFile = resolvePath(options.out, `${entry.name}.poses.json`)
+      await writeFile(posesFile, `${entry.poses}\n`)
+      written.push(relative(process.cwd(), posesFile))
+    }
     // A self-playing copy for places no script runs, unless it would be too heavy to serve.
     if (entry.smil !== undefined && entry.smil.length <= SMIL_LIMIT) {
       const animFile = resolvePath(options.out, `${entry.name}.anim.svg`)
@@ -375,9 +395,11 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
   // Versioned scenes are archived once, self-contained — the runtime inlined, so a frozen
   // copy keeps playing however the runtime changes later — and never overwritten.
   const versionsDir = resolvePath(options.out, 'versions')
-  for (const entry of compiled) {
-    const version = entry.resolved.version
+  for (const [name, { scene }] of scenes) {
+    const version = scene.version
     if (version === undefined) continue
+    // Self-contained whatever the build's flags: styles and timeline inline, runtime inlined.
+    const entry = externalCss || externalPoses ? compile(scene) : compiled.find((candidate) => candidate.name === name)!
     await mkdir(versionsDir, { recursive: true })
     const stem = resolvePath(versionsDir, `${entry.name}-v${version}`)
     const frozen = entry.html.replace(/<script src="[^"]*dotscene\.min\.js" defer><\/script>/, () => `<script>${runtime}</script>`)
@@ -422,6 +444,7 @@ const cmdBuild = async (scenes: Map<string, LoadedScene>, options: Options): Pro
     galleryFile,
     renderGallery(compiled, './dotscene.min.js', archives, {
       ...(baseUrl === undefined ? {} : { baseUrl }),
+      ...(externalCss ? { styles: compiled.map((entry) => `./${entry.name}.css`) } : {}),
     }),
   )
   written.push(relative(process.cwd(), galleryFile))
@@ -459,6 +482,8 @@ export const run = async (argv: readonly string[]): Promise<void> => {
       out: { type: 'string', default: 'docs' },
       assets: { type: 'string', default: 'site' },
       'base-url': { type: 'string' },
+      css: { type: 'string', default: 'inline' },
+      timeline: { type: 'string', default: 'inline' },
       help: { type: 'boolean', default: false },
     },
   })
@@ -474,6 +499,8 @@ export const run = async (argv: readonly string[]): Promise<void> => {
     labels: values.labels!,
     out: values.out!,
     assets: values.assets!,
+    css: values.css === 'external' ? 'external' : 'inline',
+    timeline: values.timeline === 'external' ? 'external' : 'inline',
     ...(values['base-url'] === undefined ? {} : { baseUrl: values['base-url'] }),
   }
 

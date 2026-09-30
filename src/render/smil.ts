@@ -137,7 +137,7 @@ export const renderSmil = (scene: ResolvedScene, options: SmilOptions = {}): str
   const inner = `${indent}${indent}`
 
   const [x, y, width, height] = scene.viewBox
-  const titled = scene.title !== undefined
+  const titled = scene.title !== undefined && scene.decorative !== true
   const open = `<svg ${attrs([
     ['xmlns', 'http://www.w3.org/2000/svg'],
     ['class', 'dotscene'],
@@ -148,6 +148,7 @@ export const renderSmil = (scene: ResolvedScene, options: SmilOptions = {}): str
     ['preserveAspectRatio', scene.fit === 'slice' ? 'xMidYMid slice' : undefined],
     ['role', titled ? 'img' : undefined],
     ['aria-hidden', titled ? undefined : 'true'],
+    ['focusable', titled ? undefined : 'false'],
   ])}>`
 
   const body: string[] = []

@@ -87,6 +87,13 @@ export interface IsoKit {
   readonly line: (name: string, from: Vec2, to: Vec2) => Shape
   /** A flat rectangle lying on the ground — a yard, an apron, a dock pad. */
   readonly pad: (prefix: string, from: Vec2, to: Vec2, z?: number) => Shape
+  /**
+   * A blade: one filled quad from `base` out to `tip`, widest at `half` either side of the
+   * midpoint, the midpoint lifted `lift` above the straight line so the blade arches. The
+   * island's palm fronds are this; so are leaves, petals, fins and flames. Points are
+   * `<prefix>Base`, `<prefix>L`, `<prefix>R`, `<prefix>Tip`; the face's kind is `kind`.
+   */
+  readonly blade: (prefix: string, base: Vec3, tip: Vec3, half: number, lift?: number, kind?: string) => Shape
 }
 
 export const isoKit = (project: (cell: Vec3) => Vec2): IsoKit => {
@@ -99,6 +106,31 @@ export const isoKit = (project: (cell: Vec3) => Vec2): IsoKit => {
     at: project,
     edge,
     line: (name, from, to) => edge(name, [from[0], from[1], 0], [to[0], to[1], 0]),
+
+    blade: (prefix, base, tip, half, lift = 0, kind = 'blade') => {
+      const dx = tip[0] - base[0]
+      const dy = tip[1] - base[1]
+      const length = Math.hypot(dx, dy) || 1
+      // Across the blade, in the ground plane.
+      const px = (-dy / length) * half
+      const py = (dx / length) * half
+      const mid: Vec3 = [(base[0] + tip[0]) / 2, (base[1] + tip[1]) / 2, (base[2] + tip[2]) / 2 + lift]
+      return {
+        points: {
+          [`${prefix}Base`]: project(base),
+          [`${prefix}L`]: project([mid[0] + px, mid[1] + py, mid[2]]),
+          [`${prefix}Tip`]: project(tip),
+          [`${prefix}R`]: project([mid[0] - px, mid[1] - py, mid[2]]),
+        },
+        edges: [
+          [`${prefix}Base`, `${prefix}L`],
+          [`${prefix}L`, `${prefix}Tip`],
+          [`${prefix}Tip`, `${prefix}R`],
+          [`${prefix}R`, `${prefix}Base`],
+        ],
+        faces: [{ points: [`${prefix}Base`, `${prefix}L`, `${prefix}Tip`, `${prefix}R`], kind }],
+      }
+    },
 
     /**
      * A rectangular solid, from one grid corner to another, `height` tall.

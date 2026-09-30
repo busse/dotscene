@@ -77,6 +77,8 @@ export interface ResolvedScene {
   readonly css?: string
   /** Fill for a rect covering the viewBox, for scenes used outside a styled page. */
   readonly background?: string
+  /** Hidden from assistive technology; no role, no title. */
+  readonly decorative?: boolean
   readonly dots: readonly ResolvedDot[]
   readonly lines: readonly ResolvedLine[]
   readonly faces: readonly ResolvedFace[]
@@ -376,6 +378,7 @@ export const resolve = (scene: Scene): ResolvedScene => {
     lineWidth: scene.lineWidth ?? round(Math.max(0.2, dotRadius * 0.45), 2),
     ...(scene.css === undefined ? {} : { css: scene.css }),
     ...(scene.background === undefined ? {} : { background: scene.background }),
+    ...(scene.decorative === true ? { decorative: true } : {}),
     dots,
     lines,
     faces,

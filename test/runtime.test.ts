@@ -478,3 +478,64 @@ describe('camera and fades', () => {
     expect(handle.time()).toBeGreaterThan(frozen)
   })
 })
+
+describe('what a host can rely on', () => {
+  it('play() starts the loop even when reduced motion held it at mount', () => {
+    vi.stubGlobal('matchMedia', () => ({ matches: true }))
+    const svg = fakeSvg()
+    const handle = mountScene(svg, config())
+    run(200)
+    expect(handle.time()).toBe(0)
+    expect(handle.playing()).toBe(false)
+    handle.play()
+    run(160)
+    expect(handle.playing()).toBe(true)
+    expect(handle.time()).toBeGreaterThan(0)
+  })
+
+  it('play() starts a scene the observer never saw come into view', () => {
+    const svg = fakeSvg()
+    const handle = mountScene(svg, config())
+    run(200)
+    expect(handle.playing()).toBe(false)
+    handle.play()
+    run(160)
+    expect(handle.playing()).toBe(true)
+  })
+
+  it('reports paused as paused, not as never started', () => {
+    const svg = fakeSvg()
+    const handle = mountScene(svg, config())
+    observed[0]!.fire(true)
+    run(64)
+    expect(handle.playing()).toBe(true)
+    handle.pause()
+    expect(handle.playing()).toBe(false)
+    const at = handle.time()
+    run(64)
+    expect(handle.time()).toBe(at)
+  })
+
+  it('moves children that carry no data-part of their own, by the group they sit in', () => {
+    const group = { getAttribute: (name: string) => (name === 'data-part' ? 'bar' : null) }
+    const dots = {
+      top: { ...element({ 'data-p': 'top', cx: '0', cy: '0' }), closest: () => group },
+      base: { ...element({ 'data-p': 'base', cx: '0', cy: '10' }), closest: () => group },
+    }
+    const line = { ...element({ 'data-a': 'top', 'data-b': 'base' }), closest: () => group }
+    const svg = {
+      querySelectorAll: (selector: string) =>
+        selector.startsWith('circle') ? Object.values(dots) : selector.startsWith('polygon') ? [] : selector.startsWith('g') ? [] : [line],
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      hasAttribute: () => false,
+      setAttribute: () => {},
+      getAttribute: () => null,
+    }
+    const handle = mountScene(svg, config())
+    handle.play()
+    run(160)
+    expect(Number(dots.top.attrs.cx)).toBeGreaterThan(0)
+    expect(Number(line.attrs.x1)).toBeGreaterThan(0)
+  })
+})

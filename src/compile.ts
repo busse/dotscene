@@ -8,12 +8,21 @@
 
 import type { Scene } from './model.ts'
 import { resolve, timelineOf, type ResolvedScene } from './layout.ts'
-import { renderSvg, type SvgOptions } from './render/svg.ts'
+import { DEFAULT_CSS, renderSvg, sceneCss, type SvgOptions } from './render/svg.ts'
 import { renderSmil } from './render/smil.ts'
 
 export interface CompileOptions extends SvgOptions {
   /** `src` for the runtime script tag on animated scenes. Default './dotscene.min.js'. */
   readonly runtimeSrc?: string
+  /**
+   * `inline` (the default) puts the animation payload in a `<script type="application/json">`
+   * after the svg. `external` leaves it out: the svg names `posesSrc` in `data-dotscene-src`,
+   * the runtime fetches it, and a page that shows the scene twice loads it once. `poses` on
+   * the result carries the payload either way, for writing to that file.
+   */
+  readonly poses?: 'inline' | 'external'
+  /** Where the external payload will be served from. Default `./<name>.poses.json`. */
+  readonly posesSrc?: string
 }
 
 export interface CompiledScene {
@@ -26,6 +35,14 @@ export interface CompiledScene {
   /** The pasteable block: the SVG, plus pose data and the runtime tag when animated. */
   readonly html: string
   readonly animated: boolean
+  /** The animation payload as JSON, when animated — what `<name>.poses.json` holds. */
+  readonly poses?: string
+  /**
+   * The scene's stylesheet on its own: the defaults and its scoped rules, the same text the
+   * inline `<style>` carries. For a page that links one sheet per scene and emits the blocks
+   * with `styles: false`, so a host can theme them from its own tokens.
+   */
+  readonly css: string
   /**
    * The animation as a self-playing SVG document (SMIL), for an `<img>` or a README where no
    * script runs. Absent for static scenes and for the hover and click modes.
@@ -41,19 +58,30 @@ export const animationPayload = (resolved: ResolvedScene): string | undefined =>
 
 export const compile = (scene: Scene, options: CompileOptions = {}): CompiledScene => {
   const resolved = resolve(scene)
-  const svg = renderSvg(resolved, { ...options, xml: true })
-  const inline = renderSvg(resolved, options)
   const payload = animationPayload(resolved)
+  const external = payload !== undefined && options.poses === 'external'
+  const posesSrc = external ? (options.posesSrc ?? `./${resolved.name}.poses.json`) : undefined
+  const svg = renderSvg(resolved, { ...options, xml: true })
+  const inline = renderSvg(resolved, { ...options, ...(posesSrc === undefined ? {} : { posesSrc }) })
+  const runtimeTag = `<script src="${options.runtimeSrc ?? './dotscene.min.js'}" defer></script>`
 
   const html =
     payload === undefined
       ? inline
-      : [
-          inline,
-          `<script type="application/json" data-dotscene-poses="${resolved.name}">${payload}</script>`,
-          `<script src="${options.runtimeSrc ?? './dotscene.min.js'}" defer></script>`,
-        ].join('\n')
+      : external
+        ? [inline, runtimeTag].join('\n')
+        : [inline, `<script type="application/json" data-dotscene-poses="${resolved.name}">${payload}</script>`, runtimeTag].join('\n')
 
   const smil = payload === undefined ? undefined : renderSmil(resolved, { indent: options.indent })
-  return { name: resolved.name, resolved, svg, inline, html, animated: payload !== undefined, ...(smil === undefined ? {} : { smil }) }
+  return {
+    name: resolved.name,
+    resolved,
+    svg,
+    inline,
+    html,
+    animated: payload !== undefined,
+    ...(payload === undefined ? {} : { poses: payload }),
+    css: `${DEFAULT_CSS}${sceneCss(resolved)}`,
+    ...(smil === undefined ? {} : { smil }),
+  }
 }

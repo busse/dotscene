@@ -41,8 +41,14 @@ export interface SceneHandle {
   readonly seek: (ms: number) => void
   /** Freeze where it is. */
   readonly pause: () => void
-  /** Resume from where it froze. */
+  /**
+   * Start or resume, from where the clock is. Starts the loop outright, whatever trigger
+   * mount installed or did not — a scene that never scrolled into view, or one held still
+   * for `prefers-reduced-motion`, plays when a page asks it to.
+   */
   readonly play: () => void
+  /** Whether the clock is advancing right now. `time()` alone cannot tell paused from never started. */
+  readonly playing: () => boolean
   /** The clock position, in milliseconds. */
   readonly time: () => number
   /** Length of one lap of the clock, in milliseconds. */
@@ -99,17 +105,29 @@ interface Wired {
  * older single-part build looks like — those still animate as long as the frame is keyed to
  * match.
  */
+/**
+ * The part an element belongs to: its own `data-part`, else that of the nearest `<g
+ * data-part>` above it — so hand-written markup that labels only the group still animates —
+ * else `''`, the single-part case.
+ */
+const partOf = (element: Element): string => {
+  const own = element.getAttribute('data-part')
+  if (own !== null) return own
+  const group = typeof element.closest === 'function' ? element.closest('g[data-part]') : null
+  return group?.getAttribute('data-part') ?? ''
+}
+
 const bindAll = (svg: SVGSVGElement): Map<string, Bindings> => {
   const dots = new Map<string, (readonly [string, SVGCircleElement])[]>()
   const lines = new Map<string, (readonly [string, string, SVGLineElement])[]>()
   const faces = new Map<string, (readonly [readonly string[], SVGPolygonElement])[]>()
 
   for (const element of svg.querySelectorAll<SVGCircleElement>('circle[data-p]')) {
-    const part = element.getAttribute('data-part') ?? ''
+    const part = partOf(element)
     ;(dots.get(part) ?? dots.set(part, []).get(part)!).push([element.getAttribute('data-p')!, element])
   }
   for (const element of svg.querySelectorAll<SVGLineElement>('line[data-a][data-b]')) {
-    const part = element.getAttribute('data-part') ?? ''
+    const part = partOf(element)
     ;(lines.get(part) ?? lines.set(part, []).get(part)!).push([
       element.getAttribute('data-a')!,
       element.getAttribute('data-b')!,
@@ -117,7 +135,7 @@ const bindAll = (svg: SVGSVGElement): Map<string, Bindings> => {
     ])
   }
   for (const element of svg.querySelectorAll<SVGPolygonElement>('polygon[data-face]')) {
-    const part = element.getAttribute('data-part') ?? ''
+    const part = partOf(element)
     ;(faces.get(part) ?? faces.set(part, []).get(part)!).push([element.getAttribute('data-face')!.split(' '), element])
   }
 
@@ -439,8 +457,10 @@ export const mount = (svg: SVGSVGElement, config: SceneConfig): SceneHandle => {
     },
     play: () => {
       held = false
-      if (mode === 'loop' || mode === 'pingpong') resume()
+      target = undefined
+      resume()
     },
+    playing: () => playing,
     time: () => t,
   }
 }
@@ -469,6 +489,21 @@ export const mountAll = (root: ParentNode = document): readonly SceneHandle[] =>
     } catch {
       // A malformed payload should cost one scene its animation, not the whole page.
     }
+  }
+  // A scene whose timeline lives in its own file: fetched once, cached by the browser, and
+  // mounted when it arrives. Its handle joins `scenes` then.
+  for (const svg of root.querySelectorAll<SVGSVGElement>('svg[data-dotscene][data-dotscene-src]')) {
+    if (svg.hasAttribute('data-dotscene-mounted') || typeof fetch !== 'function') continue
+    const name = svg.getAttribute('data-dotscene')!
+    svg.setAttribute('data-dotscene-mounted', '')
+    fetch(svg.getAttribute('data-dotscene-src')!)
+      .then((response) => (response.ok ? (response.json() as Promise<SceneConfig>) : Promise.reject(new Error(String(response.status)))))
+      .then((config) => {
+        scenes.set(name, mount(svg, config))
+      })
+      .catch(() => {
+        // The scene stays as drawn; one missing file should not cost the page anything else.
+      })
   }
   return handles
 }

@@ -87,7 +87,9 @@ Useful flags: `--pose <name>`, `--poses`, `--at <ms>`, `--every <ms>`, `--width 
 
 ## Output
 
-A looping scene also gets a self-playing copy, `docs/<name>.anim.svg`: the timeline baked into the SVG as SMIL `<animate>` elements, so it plays wherever an SVG image renders and no script can run — a GitHub README, an `<img>`, a Markdown preview. It matches the runtime at every keyframe. It cannot re-stack parts as they pass one another, keep dots and strokes a constant size as the camera zooms, or respond to hover and click; those need the runtime. [GALLERY.md](GALLERY.md) shows every scene this way.
+A looping scene also gets a self-playing copy, `docs/<name>.anim.svg`: the timeline baked into the SVG as SMIL `<animate>` elements, so it plays wherever an SVG image renders and no script can run — a GitHub README, an `<img>`, a Markdown preview. It matches the runtime at every keyframe. It cannot re-stack parts as they pass one another, keep dots and strokes a constant size as the camera zooms, or respond to hover and click; those need the runtime. [GALLERY.md](GALLERY.md) shows every scene this way. For a heavy scene used as decoration it is also the cheapest way onto a page: one cacheable file, no script, no inline data.
+
+Two flags change what a block carries. `--timeline external` leaves the animation out of each block and writes it to `<name>.poses.json`; the svg names that file in `data-dotscene-src`, the runtime fetches it, and a page that shows the scene twice loads it once and caches it — the island's block drops from a megabyte to the size of its drawing. `--css external` leaves the `<style>` out and writes `<name>.css` beside it, for a host that links one sheet per scene and themes the blocks from its own tokens. The versioned archive stays self-contained whatever the flags. `scripts/sync-site.mjs` takes the same two.
 
 `dotscene build` writes to `docs/`: one `.svg` and one `.html` per scene, a `dotscene.css`, the gallery at `index.html`, and `dotscene.min.js` when any scene animates. Anything in `site/` is copied in verbatim, which is how a file the page needs but no scene produces — the social card's PNG — reaches the build without being hand-placed in output. That path is committed rather than ignored, because GitHub Pages serves the gallery straight from it — point Pages at the `main` branch, `/docs` folder. Use `--out` for somewhere else, and `--assets` for a different source of static files.
 
@@ -110,13 +112,17 @@ The emitted block carries its own point labels, which is how the runtime moves t
   <title>A person cycling through poses</title>
   <style>/* defaults, overridable */</style>
   <g data-part="person">
-    <line class="ds-line" data-a="neck" data-b="hip" x1="0" y1="13" x2="0" y2="34"/>
-    <circle class="ds-dot" data-p="head" cx="0" cy="3" r="1.6"/>
+    <line class="ds-line" data-part="person" data-a="neck" data-b="hip" x1="0" y1="13" x2="0" y2="34"/>
+    <circle class="ds-dot" data-part="person" data-p="head" cx="0" cy="3" r="1.6"/>
   </g>
 </svg>
 <script type="application/json" data-dotscene-poses="header">{"cycle":["idle","wave"],…}</script>
 <script src="./dotscene.min.js" defer></script>
 ```
+
+The contract for hand-written markup: every dot has `data-p`, every line `data-a` and `data-b`, every face `data-face`, and each belongs to a part — its own `data-part`, or failing that the nearest `<g data-part>` above it. The poses script must be a sibling of the svg, not a child of a heading or a link the svg sits in: it is text as far as the document is concerned, and inside an `h1` it becomes the heading. A scene that is pure decoration takes `decorative: true` and is emitted with `aria-hidden` and no role or title, so a name the surrounding text already gives is not announced twice.
+
+The runtime handle — `dotscene.scenes.get(name)` — has `play()`, `pause()`, `seek(ms)`, `time()` and `playing()`. `play()` starts the loop outright, whatever mount installed: a scene held still for `prefers-reduced-motion`, or one that never scrolled into view, plays when the page asks it to. `pause()` is sticky against scrolling. `playing()` is how to tell paused from never started, which `time()` alone cannot.
 
 The `.svg` file and the block differ in one thing: the file's stylesheet is XML-escaped, because a standalone SVG is parsed as XML and a themed scene's nesting `&` would be a fatal error there, while inside an HTML page a `<style>` is raw text and the same `&` must stay literal.
 
@@ -124,11 +130,11 @@ Dots and lines default to `currentColor`, so a scene inherits the surrounding te
 
 ### Styling
 
-Per-scene defaults ship inside the block. Override them from a page with a more specific selector:
+Per-scene defaults ship inside the block, and every one of them is wrapped in `:where()` so it weighs a single class: a scene's own rule for `.ds-line--road` is (0,1,0), and so is the scope that confines it to that scene. A host stylesheet overrides any of it with two classes — no element selectors, no `!important`:
 
 ```css
-svg.dotscene .ds-dot  { r: 2; fill: #6f9; }
-svg.dotscene .ds-line { stroke-width: 0.4; }
+.masthead__scene .ds-dot  { r: 2; fill: #6f9; }
+.masthead__scene .ds-line { stroke-width: 0.4; }
 ```
 
 Give an edge a `kind`, or a point a role in `pointKinds`, and it gains a modifier class — `ds-line--soft`, `ds-dot--soft` — to target. A scene's own `css` is the place to write those rules, and it travels inside the emitted block:
@@ -173,6 +179,8 @@ animate: {
 **Keyframes are sparse.** A part that a keyframe leaves out is not frozen there; it is interpolated between the keyframes that *do* mention it, eased by the keyframe it is heading into. So a keyframe only has to name what it changes, and a scene with forty moving parts costs what actually happens rather than forty parts times every instant. Before its first keyframe a part holds where the scene declared it, and travels from there during the transition into that keyframe; after its last it holds; and in a loop the wrap carries it back to its opening state over the first keyframe's `duration` — set that to `0` and the wrap is a cut.
 
 A part's state is `at`, `scale`, `rotate`, `flipX`, `pose`, `depth` (paint order, interpolated, so a truck crosses behind a building where the numbers cross) and `opacity` (interpolated, so a thing appears and vanishes by fading rather than by teleporting off-frame). A keyframe's `pose` can be a computed `Pose` rather than a name — build one with `lerpPoints` to catch a figure at any point between two poses, which is how two walkers on one timeline keep different cadences.
+
+Parts that want different rhythms — steam that flickers against palms that sway slowly — are a `keyframes` scene, not a `cycle`: each part is mentioned only at its own beats, so each keeps its own period and phase, and `compose` lays several such acts on one clock. A `cycle` is one part, one clock.
 
 A keyframe's `easing` applies to every part arriving at it; a part that wants a different one carries its own `easing` on its state. Continuous travel wants `linear` on every step, easing only where the motion genuinely starts and stops: an ease brings velocity to zero at *every* keyframe it passes through, which is what makes a run of steps pulse instead of flow.
 
@@ -255,7 +263,7 @@ const grid = isometric({ tile: 8, squash: 0.5, rise: 5 })
 const corner = grid([3, 1, 6])   // three tiles across, one down, six storeys up
 ```
 
-Scenes stay two-dimensional. This is an authoring transform applied once, when a figure is written, so depth costs nothing at runtime and every other feature — poses, keyframes, the ASCII preview — works unchanged. See `scenes/city.ts`, and `scenes/iso.ts` for the shared kit.
+Scenes stay two-dimensional. This is an authoring transform applied once, when a figure is written, so depth costs nothing at runtime and every other feature — poses, keyframes, the ASCII preview — works unchanged. See `scenes/city.ts`, and `scenes/iso.ts` for the shared kit: `box`, `pad`, `edge`, `line`, and `blade(prefix, base, tip, half, lift, kind)` — one filled quad from a base to a drooping tip, widest at the middle and arched by `lift`, which is the island's palm frond and any leaf, petal, fin or flame.
 
 The default `squash` of 0.5 makes a cell twice as wide as it is tall: dimetric rather than strictly isometric, but it is what the word has meant in games for decades and it keeps every edge on a clean 2:1 slope. Pass `squash: Math.tan(Math.PI / 6)` for true 30-degree isometric.
 
